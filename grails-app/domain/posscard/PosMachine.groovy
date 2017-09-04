@@ -1,11 +1,8 @@
 package posscard
 
-class User {
-    String username
-    String password
-    String phone
+class PosMachine {
     Integer supplierId
-    Integer accountType
+    Integer userId
     Integer createTime //创建时间
 
     static constraints = {
