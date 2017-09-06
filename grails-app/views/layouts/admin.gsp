@@ -29,6 +29,7 @@
 	<link href="${resource(dir: 'css',file: 'style.css')}" rel="stylesheet" />
 
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+    <g:layoutHead/>
 </head>
 	<body>
 		<g:render template="/common/head-nav" />
