@@ -3,16 +3,15 @@ package posscard
 class User {
     String username
     String password
-    String phone
-    String accountType
+    String phone = ''
+    Integer accountType
     Integer createTime //创建时间
 
     static constraints = {
-        username(blank: false,size: 2..10)
-        password(password:true,size: 6..20,blank: false)
-        phone(matches: /\d{7,11}/,blank: false)
-        supplierId(blank:false)
-        accountType(blank:false,inList: ["1","2","3","4"])
+        username(blank:false, size: 4..10, nullable: false, unique: true)
+        password(password: true, blank:false, size: 6..20, nullable: false)
+        phone(nullable: false, matches: "0?(13|14|15|18)[0-9]{9}", minSize: 11)
+        accountType(nullable: false, inList: ["1","2","3","4"])
     }
 
     static belongsTo = [supplierId: Supplier]

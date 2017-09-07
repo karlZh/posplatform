@@ -8,7 +8,7 @@ class Supplier {
     String phone //电话
     String remark //备注
     Integer parentId //父供应商id
-    Integer createTime //创建时间
+    Integer createTime
 
     static constraints = {
         name(size: 2..10,blank: false)
