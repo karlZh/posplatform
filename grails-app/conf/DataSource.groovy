@@ -1,8 +1,10 @@
 dataSource {
     pooled = true
     driverClassName = "com.mysql.jdbc.Driver"
-    username = "pos"
-    password = "123456"
+//    username = "pos"
+//    password = "123456"
+    username = "root"
+    password = "root"
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -14,8 +16,8 @@ environments {
     development {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-//            url = "jdbc:mysql://localhost:3306/poscard"
-            url = "jdbc:mysql://59.110.105.141:3306/pos_platform?useUnicode=true&characterEncoding=UTF-8"
+            url = "jdbc:mysql://localhost:3306/poscard"
+//            url = "jdbc:mysql://59.110.105.141:3306/pos_platform?useUnicode=true&characterEncoding=UTF-8"
         }
     }
     test {
