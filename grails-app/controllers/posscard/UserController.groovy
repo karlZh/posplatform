@@ -21,6 +21,7 @@ class UserController {
 
     def save() {
         def userInstance = new User(params)
+        userInstance.createTime = new Date().getTime()
         if (!userInstance.save(flush: true)) {
             render(view: "create", model: [userInstance: userInstance])
             return
@@ -63,8 +64,8 @@ class UserController {
         if (version != null) {
             if (userInstance.version > version) {
                 userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'user.label', default: 'User')] as Object[],
-                          "Another user has updated this User while you were editing")
+                        [message(code: 'user.label', default: 'User')] as Object[],
+                        "Another user has updated this User while you were editing")
                 render(view: "edit", model: [userInstance: userInstance])
                 return
             }

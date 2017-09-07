@@ -21,6 +21,7 @@ class SupplierController {
 
     def save() {
         def supplierInstance = new Supplier(params)
+        supplierInstance.createTime = new Date().getTime()
         if (!supplierInstance.save(flush: true)) {
             render(view: "create", model: [supplierInstance: supplierInstance])
             return
@@ -63,8 +64,8 @@ class SupplierController {
         if (version != null) {
             if (supplierInstance.version > version) {
                 supplierInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'supplier.label', default: 'Supplier')] as Object[],
-                          "Another user has updated this Supplier while you were editing")
+                        [message(code: 'supplier.label', default: 'Supplier')] as Object[],
+                        "Another user has updated this Supplier while you were editing")
                 render(view: "edit", model: [supplierInstance: supplierInstance])
                 return
             }

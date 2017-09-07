@@ -21,6 +21,7 @@ class TicketTypeController {
 
     def save() {
         def ticketTypeInstance = new TicketType(params)
+        ticketTypeInstance.createTime = new Date().getTime()
         if (!ticketTypeInstance.save(flush: true)) {
             render(view: "create", model: [ticketTypeInstance: ticketTypeInstance])
             return
@@ -63,8 +64,8 @@ class TicketTypeController {
         if (version != null) {
             if (ticketTypeInstance.version > version) {
                 ticketTypeInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'ticketType.label', default: 'TicketType')] as Object[],
-                          "Another user has updated this TicketType while you were editing")
+                        [message(code: 'ticketType.label', default: 'TicketType')] as Object[],
+                        "Another user has updated this TicketType while you were editing")
                 render(view: "edit", model: [ticketTypeInstance: ticketTypeInstance])
                 return
             }
