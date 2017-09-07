@@ -1,10 +1,10 @@
 
-<%@ page import="posscard.CardBin" %>
+<%@ page import="posscard.PosMachine" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="admin">
-		<g:set var="entityName" value="${message(code: 'cardBin.label', default: 'CardBin')}" />
+		<g:set var="entityName" value="${message(code: 'posMachine.label', default: 'PosMachine')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -29,29 +29,33 @@
 									<thead>
 									<tr>
 										
-										<g:sortableColumn property="cardPlatformId" title="${message(code: 'cardBin.cardPlatformId.label', default: 'Card Platform Id')}" />
+										<th><g:message code="posMachine.supplierId.label" default="Supplier Id" /></th>
 										
-										<g:sortableColumn property="createTime" title="${message(code: 'cardBin.createTime.label', default: 'Create Time')}" />
+										<g:sortableColumn property="userId" title="${message(code: 'posMachine.userId.label', default: 'User Id')}" />
+										
+										<g:sortableColumn property="createTime" title="${message(code: 'posMachine.createTime.label', default: 'Create Time')}" />
 										
 										<th>操作</th>
 									</tr>
 									</thead>
 									<tbody>
-									<g:each in="${cardBinInstanceList}" status="i" var="cardBinInstance">
+									<g:each in="${posMachineInstanceList}" status="i" var="posMachineInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 											
-											<td><g:link action="show" id="${cardBinInstance.id}">${fieldValue(bean: cardBinInstance, field: "cardPlatformId")}</g:link></td>
+											<td><g:link action="show" id="${posMachineInstance.id}">${fieldValue(bean: posMachineInstance, field: "supplierId")}</g:link></td>
 											
-											<td>${fieldValue(bean: cardBinInstance, field: "createTime")}</td>
+											<td>${fieldValue(bean: posMachineInstance, field: "userId")}</td>
+											
+											<td>${fieldValue(bean: posMachineInstance, field: "createTime")}</td>
 											
 											<td class="center ">
-												<g:link action="show" id="${cardBinInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
+												<g:link action="show" id="${posMachineInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
 													<i class="fa fa-file"></i>
 												</g:link>
-												<g:link action="edit" id="${cardBinInstance.id}" class="btn btn-primary btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip">
+												<g:link action="edit" id="${posMachineInstance.id}" class="btn btn-primary btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip">
 													<i class="fa fa-pencil"></i>
 												</g:link>
-												<g:link action="delete" id="${cardBinInstance.id}" class="btn btn-danger btn-xs" href="#" data-original-title="Remove" data-toggle="tooltip" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+												<g:link action="delete" id="${posMachineInstance.id}" class="btn btn-danger btn-xs" href="#" data-original-title="Remove" data-toggle="tooltip" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
 													<i class="fa fa-times"></i>
 												</g:link>
 											</td>
@@ -60,7 +64,7 @@
 									</tbody>
 								</table>
 								<div class="pagination">
-									<g:paginate total="${cardBinInstanceTotal}" />
+									<g:paginate total="${posMachineInstanceTotal}" />
 								</div>
 							</div>
 						</div>

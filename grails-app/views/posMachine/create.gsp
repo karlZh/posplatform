@@ -1,9 +1,9 @@
-<%@ page import="posscard.CardBin" %>
+<%@ page import="posscard.PosMachine" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="admin">
-		<g:set var="entityName" value="${message(code: 'cardBin.label', default: 'CardBin')}" />
+		<g:set var="entityName" value="${message(code: 'posMachine.label', default: 'PosMachine')}" />
 		<title><g:message code="default.create.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -27,9 +27,9 @@
 							<g:if test="${flash.message}">
 								<div class="message" role="status">${flash.message}</div>
 							</g:if>
-							<g:hasErrors bean="${cardBinInstance}">
+							<g:hasErrors bean="${posMachineInstance}">
 								<ul class="errors" role="alert">
-									<g:eachError bean="${cardBinInstance}" var="error">
+									<g:eachError bean="${posMachineInstance}" var="error">
 										<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 									</g:eachError>
 								</ul>

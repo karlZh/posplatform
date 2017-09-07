@@ -19,6 +19,7 @@ class Supplier {
         remark(maxSize: 50,blank: false) //备注
         parentId() //父供应商id
         createTime() //创建时间
-
     }
+
+    static hasMany = [user: User, posmachine: PosMachine, tickettype: TicketType]
 }

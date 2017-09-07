@@ -16,7 +16,7 @@ class Orders {
     String serialNum //流水号D
     static constraints = {
          cardNum()
-         password(password:password)
+         password(password:true)
          amount() //应扣订单总金额
          actualAmount() //实扣总金额
          cardPlatformId() //商户id
