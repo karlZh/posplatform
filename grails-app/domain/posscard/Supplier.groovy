@@ -8,8 +8,9 @@ class Supplier {
     String phone //电话
     String remark //备注
     Integer parentId //父供应商id
-    Integer createTime //创建时间
 
     static constraints = {
     }
+
+    static hasMany = [posmachine: PosMachine]
 }

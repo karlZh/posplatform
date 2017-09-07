@@ -6,6 +6,13 @@ class TestController {
 
     static allowedMethods = [save: "POST", update: "POST"]
 
+    def beforeInterceptor = [action:this.&debug, except:['list']]
+
+    def debug(){
+        println "DEBUG:${actionUri} called"
+        println "DEBUG:${params}"
+    }
+
     def index() {
         redirect(action: "list", params: params)
     }

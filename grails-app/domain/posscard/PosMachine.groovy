@@ -7,4 +7,6 @@ class PosMachine {
 
     static constraints = {
     }
+
+    static belongsTo = [supplierId: Supplier]
 }
