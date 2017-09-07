@@ -2,43 +2,33 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountType', 'error')} required form-group">
-	<label for="accountType" class="col-sm-2 control-label">
-		<g:message code="user.accountType.label" default="Account Type" />
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')} required form-group">
+	<label for="username" class="col-sm-2 control-label">
+		<g:message code="user.username.label" default="Username" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-	<g:field name="accountType" type="number" value="${userInstance.accountType}" required=""/>
+	<g:textField class="form-control" name="username" maxlength="10" required="" value="${userInstance?.username}"/>
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'createTime', 'error')} required form-group">
-	<label for="createTime" class="col-sm-2 control-label">
-		<g:message code="user.createTime.label" default="Create Time" />
-		<span class="required-indicator">*</span>
-	</label>
-	<div class="col-sm-10">
-	<g:field name="createTime" type="number" value="${userInstance.createTime}" required=""/>
-	</div>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')}  form-group">
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required form-group">
 	<label for="password" class="col-sm-2 control-label">
 		<g:message code="user.password.label" default="Password" />
-		
+		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-	<g:textField class="form-control" name="password" value="${userInstance?.password}"/>
+	<g:field type="password" class="form-control" name="password" maxlength="20" required="" value="${userInstance?.password}"/>
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'phone', 'error')}  form-group">
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'phone', 'error')} required form-group">
 	<label for="phone" class="col-sm-2 control-label">
 		<g:message code="user.phone.label" default="Phone" />
-		
+		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-	<g:textField class="form-control" name="phone" value="${userInstance?.phone}"/>
+	<g:textField class="form-control" name="phone" pattern="${userInstance.constraints.phone.matches}" required="" value="${userInstance?.phone}"/>
 	</div>
 </div>
 
@@ -48,17 +38,17 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-	<g:field name="supplierId" type="number" value="${userInstance.supplierId}" required=""/>
+	<g:textField class="form-control" name="supplierId" required="" value="${userInstance?.supplierId}"/>
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')}  form-group">
-	<label for="username" class="col-sm-2 control-label">
-		<g:message code="user.username.label" default="Username" />
-		
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountType', 'error')} required form-group">
+	<label for="accountType" class="col-sm-2 control-label">
+		<g:message code="user.accountType.label" default="Account Type" />
+		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-	<g:textField class="form-control" name="username" value="${userInstance?.username}"/>
+	<g:select name="accountType" from="${userInstance.constraints.accountType.inList}" required="" value="${userInstance?.accountType}" valueMessagePrefix="user.accountType"/>
 	</div>
 </div>
 

@@ -29,9 +29,7 @@
 									<thead>
 									<tr>
 										
-										<g:sortableColumn property="accountType" title="${message(code: 'user.accountType.label', default: 'Account Type')}" />
-										
-										<g:sortableColumn property="createTime" title="${message(code: 'user.createTime.label', default: 'Create Time')}" />
+										<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
 										
 										<g:sortableColumn property="password" title="${message(code: 'user.password.label', default: 'Password')}" />
 										
@@ -39,7 +37,9 @@
 										
 										<g:sortableColumn property="supplierId" title="${message(code: 'user.supplierId.label', default: 'Supplier Id')}" />
 										
-										<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
+										<g:sortableColumn property="accountType" title="${message(code: 'user.accountType.label', default: 'Account Type')}" />
+										
+										<g:sortableColumn property="createTime" title="${message(code: 'user.createTime.label', default: 'Create Time')}" />
 										
 										<th>操作</th>
 									</tr>
@@ -48,9 +48,7 @@
 									<g:each in="${userInstanceList}" status="i" var="userInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 											
-											<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "accountType")}</g:link></td>
-											
-											<td>${fieldValue(bean: userInstance, field: "createTime")}</td>
+											<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
 											
 											<td>${fieldValue(bean: userInstance, field: "password")}</td>
 											
@@ -58,7 +56,9 @@
 											
 											<td>${fieldValue(bean: userInstance, field: "supplierId")}</td>
 											
-											<td>${fieldValue(bean: userInstance, field: "username")}</td>
+											<td>${fieldValue(bean: userInstance, field: "accountType")}</td>
+											
+											<td>${fieldValue(bean: userInstance, field: "createTime")}</td>
 											
 											<td class="center ">
 												<g:link action="show" id="${userInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">

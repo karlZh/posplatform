@@ -63,8 +63,8 @@ class CardPlatformController {
         if (version != null) {
             if (cardPlatformInstance.version > version) {
                 cardPlatformInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'cardPlatform.label', default: 'CardPlatform')] as Object[],
-                          "Another user has updated this CardPlatform while you were editing")
+                        [message(code: 'cardPlatform.label', default: 'CardPlatform')] as Object[],
+                        "Another user has updated this CardPlatform while you were editing")
                 render(view: "edit", model: [cardPlatformInstance: cardPlatformInstance])
                 return
             }

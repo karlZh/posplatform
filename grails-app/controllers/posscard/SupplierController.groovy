@@ -63,8 +63,8 @@ class SupplierController {
         if (version != null) {
             if (supplierInstance.version > version) {
                 supplierInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'supplier.label', default: 'Supplier')] as Object[],
-                          "Another user has updated this Supplier while you were editing")
+                        [message(code: 'supplier.label', default: 'Supplier')] as Object[],
+                        "Another user has updated this Supplier while you were editing")
                 render(view: "edit", model: [supplierInstance: supplierInstance])
                 return
             }

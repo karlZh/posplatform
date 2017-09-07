@@ -6,6 +6,6 @@ class CardBin {//卡bin
 
     static constraints = {
         cardPlatformId()
-        createTime()
+        createTime(display:false)
     }
 }

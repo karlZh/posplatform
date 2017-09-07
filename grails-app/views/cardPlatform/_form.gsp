@@ -2,19 +2,23 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: cardPlatformInstance, field: 'address', 'error')} ">
-	<label for="address">
-		<g:message code="cardPlatform.address.label" default="Address" />
-		
-	</label>
-	<g:textField name="address" value="${cardPlatformInstance?.address}"/>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: cardPlatformInstance, field: 'name', 'error')} ">
-	<label for="name">
+<div class="fieldcontain ${hasErrors(bean: cardPlatformInstance, field: 'name', 'error')}  form-group">
+	<label for="name" class="col-sm-2 control-label">
 		<g:message code="cardPlatform.name.label" default="Name" />
 		
 	</label>
-	<g:textField name="name" value="${cardPlatformInstance?.name}"/>
+	<div class="col-sm-10">
+	<g:textField class="form-control" name="name" value="${cardPlatformInstance?.name}"/>
+	</div>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: cardPlatformInstance, field: 'address', 'error')}  form-group">
+	<label for="address" class="col-sm-2 control-label">
+		<g:message code="cardPlatform.address.label" default="Address" />
+		
+	</label>
+	<div class="col-sm-10">
+	<g:textField class="form-control" name="address" value="${cardPlatformInstance?.address}"/>
+	</div>
 </div>
 

@@ -13,6 +13,6 @@ class TicketType {//按电影票不同的类型选择扣点数
          point() //扣点数
        accountPoint() //结算点数
        accountRatio() //结算比例
-        createTime() //创建时间
+        createTime(display:false) //创建时间
     }
 }

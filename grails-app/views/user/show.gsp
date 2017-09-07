@@ -29,24 +29,13 @@
 								<div class="message" role="status">${flash.message}</div>
 							</g:if>
 							
-							<g:if test="${userInstance?.accountType}">
+							<g:if test="${userInstance?.username}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="user.accountType.label" default="Account Type" /></label>
+									<label class="control-label"><g:message code="user.username.label" default="Username" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="accountType"/></div>
-									
-								</div>
-							</g:if>
-							
-							<g:if test="${userInstance?.createTime}">
-								<div class="row">
-									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="user.createTime.label" default="Create Time" /></label>
-									</div>
-									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="createTime"/></div>
+									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="username"/></div>
 									
 								</div>
 							</g:if>
@@ -84,13 +73,24 @@
 								</div>
 							</g:if>
 							
-							<g:if test="${userInstance?.username}">
+							<g:if test="${userInstance?.accountType}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="user.username.label" default="Username" /></label>
+									<label class="control-label"><g:message code="user.accountType.label" default="Account Type" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="username"/></div>
+									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="accountType"/></div>
+									
+								</div>
+							</g:if>
+							
+							<g:if test="${userInstance?.createTime}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="user.createTime.label" default="Create Time" /></label>
+									</div>
+									
+									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="createTime"/></div>
 									
 								</div>
 							</g:if>

@@ -3,52 +3,75 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="admin">
 		<g:set var="entityName" value="${message(code: 'cardPlatform.label', default: 'CardPlatform')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#show-cardPlatform" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+	<div class="container-fluid" id="pcont">
+		<div class="page-head">
+			<h2><g:message code="default.show.label" args="[entityName]" /></h2>
+			<ol class="breadcrumb">
+				<li><a href="${createLink(uri: '/')}">Home</a></li>
 				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>
-		<div id="show-cardPlatform" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<ol class="property-list cardPlatform">
-			
-				<g:if test="${cardPlatformInstance?.address}">
-				<li class="fieldcontain">
-					<span id="address-label" class="property-label"><g:message code="cardPlatform.address.label" default="Address" /></span>
-					
-						<span class="property-value" aria-labelledby="address-label"><g:fieldValue bean="${cardPlatformInstance}" field="address"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${cardPlatformInstance?.name}">
-				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="cardPlatform.name.label" default="Name" /></span>
-					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${cardPlatformInstance}" field="name"/></span>
-					
-				</li>
-				</g:if>
-			
+				<li class="active"><g:message code="default.show.label" args="[entityName]" /></li>
 			</ol>
-			<g:form>
-				<fieldset class="buttons">
-					<g:hiddenField name="id" value="${cardPlatformInstance?.id}" />
-					<g:link class="edit" action="edit" id="${cardPlatformInstance?.id}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
-			</g:form>
 		</div>
+		<div class="cl-mcont">
+			<div class="row">
+				<div class="col-sm-12 col-md-12">
+					<div class="block-flat">
+						<div class="header">
+							<h3><g:message code="default.show.label" args="[entityName]" /></h3>
+						</div>
+						<div class="content">
+							<g:if test="${flash.message}">
+								<div class="message" role="status">${flash.message}</div>
+							</g:if>
+							
+							<g:if test="${cardPlatformInstance?.name}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="cardPlatform.name.label" default="Name" /></label>
+									</div>
+									
+									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardPlatformInstance}" field="name"/></div>
+									
+								</div>
+							</g:if>
+							
+							<g:if test="${cardPlatformInstance?.address}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="cardPlatform.address.label" default="Address" /></label>
+									</div>
+									
+									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardPlatformInstance}" field="address"/></div>
+									
+								</div>
+							</g:if>
+							
+							<g:if test="${cardPlatformInstance?.createTime}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="cardPlatform.createTime.label" default="Create Time" /></label>
+									</div>
+									
+									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardPlatformInstance}" field="createTime"/></div>
+									
+								</div>
+							</g:if>
+							
+							<g:form>
+								<g:hiddenField name="id" value="${cardPlatformInstance?.id}" />
+								<g:link action="edit"  id="${cardPlatformInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+								<g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+							</g:form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	</body>
 </html>

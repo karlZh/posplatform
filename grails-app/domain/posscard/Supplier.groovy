@@ -11,14 +11,14 @@ class Supplier {
     Integer createTime //创建时间
 
     static constraints = {
-        name(size: 2..10,blank: false)
+        name(size: 2..10,blank: false,unique: true)
         ratio() //结算比例
         price() //结算价格
         address() //地址
         phone(matches: /\d{7,11}/,blank: false) //电话
-        remark(maxSize: 50,blank: false) //备注
+        remark(maxSize: 50,blank: true) //备注
         parentId() //父供应商id
-        createTime() //创建时间
+        createTime(display:false) //创建时间
 
     }
 }

@@ -8,6 +8,6 @@ class PosMachine {
     static constraints = {
         supplierId()
         userId()
-        createTime()
+        createTime(display:false)
     }
 }

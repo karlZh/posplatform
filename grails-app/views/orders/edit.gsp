@@ -1,9 +1,9 @@
-<%@ page import="posscard.Test" %>
+<%@ page import="posscard.Orders" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="admin">
-		<g:set var="entityName" value="${message(code: 'test.label', default: 'Test')}" />
+		<g:set var="entityName" value="${message(code: 'orders.label', default: 'Orders')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -27,16 +27,16 @@
 							<g:if test="${flash.message}">
 								<div class="message" role="status">${flash.message}</div>
 							</g:if>
-							<g:hasErrors bean="${testInstance}">
+							<g:hasErrors bean="${ordersInstance}">
 								<ul class="errors" role="alert">
-									<g:eachError bean="${testInstance}" var="error">
+									<g:eachError bean="${ordersInstance}" var="error">
 										<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 									</g:eachError>
 								</ul>
 							</g:hasErrors>
 							<g:form class="form-horizontal" role="form" action="save" >
-								<g:hiddenField name="id" value="${testInstance?.id}" />
-								<g:hiddenField name="version" value="${testInstance?.version}" />
+								<g:hiddenField name="id" value="${ordersInstance?.id}" />
+								<g:hiddenField name="version" value="${ordersInstance?.version}" />
 								<g:render template="form"/>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">

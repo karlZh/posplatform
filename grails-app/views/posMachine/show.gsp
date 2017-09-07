@@ -1,10 +1,10 @@
 
-<%@ page import="posscard.Test" %>
+<%@ page import="posscard.PosMachine" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="admin">
-		<g:set var="entityName" value="${message(code: 'test.label', default: 'Test')}" />
+		<g:set var="entityName" value="${message(code: 'posMachine.label', default: 'PosMachine')}" />
 		<title><g:message code="default.show.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -29,20 +29,42 @@
 								<div class="message" role="status">${flash.message}</div>
 							</g:if>
 							
-							<g:if test="${testInstance?.name}">
+							<g:if test="${posMachineInstance?.supplierId}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="test.name.label" default="Name" /></label>
+									<label class="control-label"><g:message code="posMachine.supplierId.label" default="Supplier Id" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${testInstance}" field="name"/></div>
+									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${posMachineInstance}" field="supplierId"/></div>
+									
+								</div>
+							</g:if>
+							
+							<g:if test="${posMachineInstance?.userId}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="posMachine.userId.label" default="User Id" /></label>
+									</div>
+									
+									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${posMachineInstance}" field="userId"/></div>
+									
+								</div>
+							</g:if>
+							
+							<g:if test="${posMachineInstance?.createTime}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="posMachine.createTime.label" default="Create Time" /></label>
+									</div>
+									
+									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${posMachineInstance}" field="createTime"/></div>
 									
 								</div>
 							</g:if>
 							
 							<g:form>
-								<g:hiddenField name="id" value="${testInstance?.id}" />
-								<g:link action="edit"  id="${testInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+								<g:hiddenField name="id" value="${posMachineInstance?.id}" />
+								<g:link action="edit"  id="${posMachineInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 								<g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 							</g:form>
 						</div>

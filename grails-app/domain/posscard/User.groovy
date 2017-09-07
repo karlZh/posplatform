@@ -14,7 +14,7 @@ class User {
         phone(matches: /\d{7,11}/,blank: false)
         supplierId(blank:false)
         accountType(blank:false,inList: ["1","2","3","4"])
-        createTime(validator: {return (it>new Date())})
+        createTime(display:false)
 
     }
 }

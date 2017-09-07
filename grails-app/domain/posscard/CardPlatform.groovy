@@ -6,8 +6,8 @@ class CardPlatform {//商户数据表
     Integer createTime //创建时间
 
     static constraints = {
-        name()
+        name(unique: true)
         address()
-        createTime()
+        createTime(display:false)
     }
 }

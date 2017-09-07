@@ -63,8 +63,8 @@ class CardBinController {
         if (version != null) {
             if (cardBinInstance.version > version) {
                 cardBinInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'cardBin.label', default: 'CardBin')] as Object[],
-                        "Another user has updated this CardBin while you were editing")
+                          [message(code: 'cardBin.label', default: 'CardBin')] as Object[],
+                          "Another user has updated this CardBin while you were editing")
                 render(view: "edit", model: [cardBinInstance: cardBinInstance])
                 return
             }

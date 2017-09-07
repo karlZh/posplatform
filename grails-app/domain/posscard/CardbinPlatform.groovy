@@ -8,6 +8,6 @@ class CardbinPlatform {//卡bin 商户表
     static constraints = {
         cardbinId()
         cardPlatformId()
-        createTime()
+        createTime(display:false)
     }
 }
