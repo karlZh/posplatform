@@ -21,6 +21,7 @@ class CardbinPlatformController {
 
     def save() {
         def cardbinPlatformInstance = new CardbinPlatform(params)
+        cardbinPlatformInstance.createTime = new Date().getTime()
         if (!cardbinPlatformInstance.save(flush: true)) {
             render(view: "create", model: [cardbinPlatformInstance: cardbinPlatformInstance])
             return

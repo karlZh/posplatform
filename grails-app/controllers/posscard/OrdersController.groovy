@@ -21,6 +21,7 @@ class OrdersController {
 
     def save() {
         def ordersInstance = new Orders(params)
+        ordersInstance.createTime = new Date().getTime()
         if (!ordersInstance.save(flush: true)) {
             render(view: "create", model: [ordersInstance: ordersInstance])
             return

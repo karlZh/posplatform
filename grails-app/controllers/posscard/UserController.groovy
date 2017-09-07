@@ -21,6 +21,7 @@ class UserController {
 
     def save() {
         def userInstance = new User(params)
+        userInstance.createTime = new Date().getTime()
         if (!userInstance.save(flush: true)) {
             render(view: "create", model: [userInstance: userInstance])
             return

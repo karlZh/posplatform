@@ -31,8 +31,6 @@
 										
 										<g:sortableColumn property="name" title="${message(code: 'ticketType.name.label', default: 'Name')}" />
 										
-										<g:sortableColumn property="supplierId" title="${message(code: 'ticketType.supplierId.label', default: 'Supplier Id')}" />
-										
 										<g:sortableColumn property="point" title="${message(code: 'ticketType.point.label', default: 'Point')}" />
 										
 										<g:sortableColumn property="accountPoint" title="${message(code: 'ticketType.accountPoint.label', default: 'Account Point')}" />
@@ -40,6 +38,8 @@
 										<g:sortableColumn property="accountRatio" title="${message(code: 'ticketType.accountRatio.label', default: 'Account Ratio')}" />
 										
 										<g:sortableColumn property="createTime" title="${message(code: 'ticketType.createTime.label', default: 'Create Time')}" />
+										
+										<th><g:message code="ticketType.supplierId.label" default="Supplier Id" /></th>
 										
 										<th>操作</th>
 									</tr>
@@ -50,8 +50,6 @@
 											
 											<td><g:link action="show" id="${ticketTypeInstance.id}">${fieldValue(bean: ticketTypeInstance, field: "name")}</g:link></td>
 											
-											<td>${fieldValue(bean: ticketTypeInstance, field: "supplierId")}</td>
-											
 											<td>${fieldValue(bean: ticketTypeInstance, field: "point")}</td>
 											
 											<td>${fieldValue(bean: ticketTypeInstance, field: "accountPoint")}</td>
@@ -59,6 +57,8 @@
 											<td>${fieldValue(bean: ticketTypeInstance, field: "accountRatio")}</td>
 											
 											<td>${fieldValue(bean: ticketTypeInstance, field: "createTime")}</td>
+											
+											<td>${fieldValue(bean: ticketTypeInstance, field: "supplierId")}</td>
 											
 											<td class="center ">
 												<g:link action="show" id="${ticketTypeInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">

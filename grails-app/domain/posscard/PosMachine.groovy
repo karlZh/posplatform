@@ -8,7 +8,9 @@ class PosMachine {
         supplierId()
         userId()
 
+
         createTime(blank:false, nullable: false, display:false)
+
 
     }
     static belongsTo = [supplierId: Supplier]

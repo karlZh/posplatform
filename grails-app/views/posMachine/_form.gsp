@@ -8,11 +8,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-10">
-<<<<<<< HEAD
-	<g:field name="supplierId" type="number" value="${posMachineInstance.supplierId}" required=""/>
-=======
 	<g:select id="supplierId" name="supplierId.id" from="${posscard.Supplier.list()}" optionKey="id" required="" value="${posMachineInstance?.supplierId?.id}" class="many-to-one"/>
->>>>>>> cb6f977e8cb707ad9d1e35fee36052ff4f7d32c9
 	</div>
 </div>
 

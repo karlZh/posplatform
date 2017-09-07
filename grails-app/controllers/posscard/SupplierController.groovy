@@ -21,6 +21,7 @@ class SupplierController {
 
     def save() {
         def supplierInstance = new Supplier(params)
+        supplierInstance.createTime = new Date().getTime()
         if (!supplierInstance.save(flush: true)) {
             render(view: "create", model: [supplierInstance: supplierInstance])
             return

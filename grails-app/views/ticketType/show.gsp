@@ -40,17 +40,6 @@
 								</div>
 							</g:if>
 							
-							<g:if test="${ticketTypeInstance?.supplierId}">
-								<div class="row">
-									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="ticketType.supplierId.label" default="Supplier Id" /></label>
-									</div>
-									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ticketTypeInstance}" field="supplierId"/></div>
-									
-								</div>
-							</g:if>
-							
 							<g:if test="${ticketTypeInstance?.point}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
@@ -91,6 +80,17 @@
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ticketTypeInstance}" field="createTime"/></div>
+									
+								</div>
+							</g:if>
+							
+							<g:if test="${ticketTypeInstance?.supplierId}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="ticketType.supplierId.label" default="Supplier Id" /></label>
+									</div>
+									
+									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${ticketTypeInstance?.supplierId?.id}">${ticketTypeInstance?.supplierId?.encodeAsHTML()}</g:link></div>
 									
 								</div>
 							</g:if>

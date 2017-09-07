@@ -64,8 +64,10 @@ class PosMachineController {
         if (version != null) {
             if (posMachineInstance.version > version) {
                 posMachineInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+
                         [message(code: 'posMachine.label', default: 'PosMachine')] as Object[],
                         "Another user has updated this PosMachine while you were editing")
+
                 render(view: "edit", model: [posMachineInstance: posMachineInstance])
                 return
             }

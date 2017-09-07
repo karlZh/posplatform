@@ -117,8 +117,6 @@
 								</div>
 							</g:if>
 							
-<<<<<<< HEAD
-=======
 							<g:if test="${supplierInstance?.posmachine}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
@@ -158,7 +156,6 @@
 								</div>
 							</g:if>
 							
->>>>>>> cb6f977e8cb707ad9d1e35fee36052ff4f7d32c9
 							<g:form>
 								<g:hiddenField name="id" value="${supplierInstance?.id}" />
 								<g:link action="edit"  id="${supplierInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>

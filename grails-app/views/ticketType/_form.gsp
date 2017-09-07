@@ -12,16 +12,6 @@
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'supplierId', 'error')} required form-group">
-	<label for="supplierId" class="col-sm-2 control-label">
-		<g:message code="ticketType.supplierId.label" default="Supplier Id" />
-		<span class="required-indicator">*</span>
-	</label>
-	<div class="col-sm-10">
-	<g:field name="supplierId" type="number" value="${ticketTypeInstance.supplierId}" required=""/>
-	</div>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'point', 'error')} required form-group">
 	<label for="point" class="col-sm-2 control-label">
 		<g:message code="ticketType.point.label" default="Point" />
@@ -49,6 +39,26 @@
 	</label>
 	<div class="col-sm-10">
 	<g:field name="accountRatio" value="${fieldValue(bean: ticketTypeInstance, field: 'accountRatio')}" required=""/>
+	</div>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'createTime', 'error')} required form-group">
+	<label for="createTime" class="col-sm-2 control-label">
+		<g:message code="ticketType.createTime.label" default="Create Time" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+	<g:field name="createTime" type="number" value="${ticketTypeInstance.createTime}" required=""/>
+	</div>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'supplierId', 'error')} required form-group">
+	<label for="supplierId" class="col-sm-2 control-label">
+		<g:message code="ticketType.supplierId.label" default="Supplier Id" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-10">
+	<g:select id="supplierId" name="supplierId.id" from="${posscard.Supplier.list()}" optionKey="id" required="" value="${ticketTypeInstance?.supplierId?.id}" class="many-to-one"/>
 	</div>
 </div>
 
