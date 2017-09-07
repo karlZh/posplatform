@@ -35,7 +35,7 @@
 										
 										<g:sortableColumn property="phone" title="${message(code: 'user.phone.label', default: 'Phone')}" />
 										
-										<g:sortableColumn property="supplierId" title="${message(code: 'user.supplierId.label', default: 'Supplier Id')}" />
+										<th><g:message code="user.supplierId.label" default="Supplier Id" /></th>
 										
 										<g:sortableColumn property="accountType" title="${message(code: 'user.accountType.label', default: 'Account Type')}" />
 										

@@ -117,6 +117,48 @@
 								</div>
 							</g:if>
 							
+<<<<<<< HEAD
+=======
+							<g:if test="${supplierInstance?.posmachine}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="supplier.posmachine.label" default="Posmachine" /></label>
+									</div>
+									
+									<g:each in="${supplierInstance.posmachine}" var="p">
+										<div class="col-sm-10 col-md-10"><g:link controller="posMachine" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></div>
+									</g:each>
+									
+								</div>
+							</g:if>
+							
+							<g:if test="${supplierInstance?.tickettype}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="supplier.tickettype.label" default="Tickettype" /></label>
+									</div>
+									
+									<g:each in="${supplierInstance.tickettype}" var="t">
+										<div class="col-sm-10 col-md-10"><g:link controller="ticketType" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></div>
+									</g:each>
+									
+								</div>
+							</g:if>
+							
+							<g:if test="${supplierInstance?.user}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="supplier.user.label" default="User" /></label>
+									</div>
+									
+									<g:each in="${supplierInstance.user}" var="u">
+										<div class="col-sm-10 col-md-10"><g:link controller="user" action="show" id="${u.id}">${u?.encodeAsHTML()}</g:link></div>
+									</g:each>
+									
+								</div>
+							</g:if>
+							
+>>>>>>> cb6f977e8cb707ad9d1e35fee36052ff4f7d32c9
 							<g:form>
 								<g:hiddenField name="id" value="${supplierInstance?.id}" />
 								<g:link action="edit"  id="${supplierInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>

@@ -21,6 +21,7 @@ class PosMachineController {
 
     def save() {
         def posMachineInstance = new PosMachine(params)
+        posMachineInstance.createTime = new Date().getTime()
         if (!posMachineInstance.save(flush: true)) {
             render(view: "create", model: [posMachineInstance: posMachineInstance])
             return

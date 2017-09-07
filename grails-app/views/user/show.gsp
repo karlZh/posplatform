@@ -68,7 +68,7 @@
 									<label class="control-label"><g:message code="user.supplierId.label" default="Supplier Id" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="supplierId"/></div>
+									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${userInstance?.supplierId?.id}">${userInstance?.supplierId?.encodeAsHTML()}</g:link></div>
 									
 								</div>
 							</g:if>

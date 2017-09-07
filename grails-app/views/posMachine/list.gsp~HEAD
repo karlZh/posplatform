@@ -29,7 +29,7 @@
 									<thead>
 									<tr>
 										
-										<th><g:message code="posMachine.supplierId.label" default="Supplier Id" /></th>
+										<g:sortableColumn property="supplierId" title="${message(code: 'posMachine.supplierId.label', default: 'Supplier Id')}" />
 										
 										<g:sortableColumn property="userId" title="${message(code: 'posMachine.userId.label', default: 'User Id')}" />
 										
