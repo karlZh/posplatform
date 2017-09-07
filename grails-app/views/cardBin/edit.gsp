@@ -1,9 +1,9 @@
-<%@ page import="posscard.User" %>
+<%@ page import="posscard.CardBin" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="admin">
-		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
+		<g:set var="entityName" value="${message(code: 'cardBin.label', default: 'CardBin')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
 	<body>
@@ -27,16 +27,16 @@
 							<g:if test="${flash.message}">
 								<div class="message" role="status">${flash.message}</div>
 							</g:if>
-							<g:hasErrors bean="${userInstance}">
+							<g:hasErrors bean="${cardBinInstance}">
 								<ul class="errors" role="alert">
-									<g:eachError bean="${userInstance}" var="error">
+									<g:eachError bean="${cardBinInstance}" var="error">
 										<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 									</g:eachError>
 								</ul>
 							</g:hasErrors>
 							<g:form class="form-horizontal" role="form" action="save" >
-								<g:hiddenField name="id" value="${userInstance?.id}" />
-								<g:hiddenField name="version" value="${userInstance?.version}" />
+								<g:hiddenField name="id" value="${cardBinInstance?.id}" />
+								<g:hiddenField name="version" value="${cardBinInstance?.version}" />
 								<g:render template="form"/>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">

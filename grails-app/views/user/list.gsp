@@ -3,60 +3,87 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta name="layout" content="main">
+		<meta name="layout" content="admin">
 		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
-		<a href="#list-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
+	<div class="container-fluid" id="pcont">
+		<div class="page-head">
+			<h2><g:message code="default.list.label" args="[entityName]" /></h2>
+			<ol class="breadcrumb">
+				<li><a href="${createLink(uri: '/')}">Home</a></li>
+				<li class="active"><g:message code="default.list.label" args="[entityName]" /></li>
+			</ol>
 		</div>
-		<div id="list-user" class="content scaffold-list" role="main">
-			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<table>
-				<thead>
-					<tr>
-					
-						<g:sortableColumn property="accountType" title="${message(code: 'user.accountType.label', default: 'Account Type')}" />
-					
-						<g:sortableColumn property="password" title="${message(code: 'user.password.label', default: 'Password')}" />
-					
-						<g:sortableColumn property="phone" title="${message(code: 'user.phone.label', default: 'Phone')}" />
-					
-						<g:sortableColumn property="supplierId" title="${message(code: 'user.supplierId.label', default: 'Supplier Id')}" />
-					
-						<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
-					
-					</tr>
-				</thead>
-				<tbody>
-				<g:each in="${userInstanceList}" status="i" var="userInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "accountType")}</g:link></td>
-					
-						<td>${fieldValue(bean: userInstance, field: "password")}</td>
-					
-						<td>${fieldValue(bean: userInstance, field: "phone")}</td>
-					
-						<td>${fieldValue(bean: userInstance, field: "supplierId")}</td>
-					
-						<td>${fieldValue(bean: userInstance, field: "username")}</td>
-					
-					</tr>
-				</g:each>
-				</tbody>
-			</table>
-			<div class="pagination">
-				<g:paginate total="${userInstanceTotal}" />
+		<div class="cl-mcont">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="block-flat">
+						<div class="header">
+							<h3><g:message code="default.list.label" args="[entityName]" /><g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
+						</div>
+						<div class="content">
+							<div>
+								<table>
+									<thead>
+									<tr>
+										
+										<g:sortableColumn property="accountType" title="${message(code: 'user.accountType.label', default: 'Account Type')}" />
+										
+										<g:sortableColumn property="createTime" title="${message(code: 'user.createTime.label', default: 'Create Time')}" />
+										
+										<g:sortableColumn property="password" title="${message(code: 'user.password.label', default: 'Password')}" />
+										
+										<g:sortableColumn property="phone" title="${message(code: 'user.phone.label', default: 'Phone')}" />
+										
+										<g:sortableColumn property="supplierId" title="${message(code: 'user.supplierId.label', default: 'Supplier Id')}" />
+										
+										<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
+										
+										<th>操作</th>
+									</tr>
+									</thead>
+									<tbody>
+									<g:each in="${userInstanceList}" status="i" var="userInstance">
+										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
+											
+											<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "accountType")}</g:link></td>
+											
+											<td>${fieldValue(bean: userInstance, field: "createTime")}</td>
+											
+											<td>${fieldValue(bean: userInstance, field: "password")}</td>
+											
+											<td>${fieldValue(bean: userInstance, field: "phone")}</td>
+											
+											<td>${fieldValue(bean: userInstance, field: "supplierId")}</td>
+											
+											<td>${fieldValue(bean: userInstance, field: "username")}</td>
+											
+											<td class="center ">
+												<g:link action="show" id="${userInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
+													<i class="fa fa-file"></i>
+												</g:link>
+												<g:link action="edit" id="${userInstance.id}" class="btn btn-primary btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip">
+													<i class="fa fa-pencil"></i>
+												</g:link>
+												<g:link action="delete" id="${userInstance.id}" class="btn btn-danger btn-xs" href="#" data-original-title="Remove" data-toggle="tooltip" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+													<i class="fa fa-times"></i>
+												</g:link>
+											</td>
+										</tr>
+									</g:each>
+									</tbody>
+								</table>
+								<div class="pagination">
+									<g:paginate total="${userInstanceTotal}" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+	</div>
 	</body>
 </html>

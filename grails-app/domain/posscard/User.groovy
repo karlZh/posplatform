@@ -4,10 +4,17 @@ class User {
     String username
     String password
     String phone
-    Integer supplierId
-    Integer accountType
+    String supplierId
+    String accountType
     Integer createTime //创建时间
 
     static constraints = {
+        username(blank: false,size: 2..10)
+       password(password:true,size: 6..20,blank: false)
+        phone(matches: /\d{7,11}/,blank: false)
+        supplierId(blank:false)
+        accountType(blank:false,inList: ["1","2","3","4"])
+        createTime(validator: {return (it>new Date())})
+
     }
 }

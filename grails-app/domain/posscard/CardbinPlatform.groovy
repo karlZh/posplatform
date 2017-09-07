@@ -6,5 +6,8 @@ class CardbinPlatform {//卡bin 商户表
     Integer createTime //创建时间
 
     static constraints = {
+        cardbinId()
+        cardPlatformId()
+        createTime()
     }
 }
