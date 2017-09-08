@@ -29,9 +29,9 @@
 									<thead>
 									<tr>
 										
-										<g:sortableColumn property="cardbinId" title="${message(code: 'cardbinPlatform.cardbinId.label', default: 'Cardbin Id')}" />
+										<th><g:message code="cardbinPlatform.cardbinId.label" default="Cardbin Id" /></th>
 										
-										<g:sortableColumn property="cardPlatformId" title="${message(code: 'cardbinPlatform.cardPlatformId.label', default: 'Card Platform Id')}" />
+										<th><g:message code="cardbinPlatform.cardPlatformId.label" default="Card Platform Id" /></th>
 										
 										<g:sortableColumn property="dateCreated" title="${message(code: 'cardbinPlatform.dateCreated.label', default: 'Date Created')}" />
 										

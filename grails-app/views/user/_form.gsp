@@ -32,13 +32,13 @@
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountType', 'error')} required form-group">
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountType', 'error')}  form-group">
 	<label for="accountType" class="col-sm-2 control-label">
 		<g:message code="user.accountType.label" default="Account Type" />
-		<span class="required-indicator">*</span>
+		
 	</label>
 	<div class="col-sm-6">
-	<g:select name="accountType" from="${userInstance.constraints.accountType.inList}" required="" value="${fieldValue(bean: userInstance, field: 'accountType')}" valueMessagePrefix="user.accountType"/>
+	<g:select name="accountType" from="${userInstance.constraints.accountType.inList}" value="${fieldValue(bean: userInstance, field: 'accountType')}" valueMessagePrefix="user.accountType" noSelection="['': '']"/>
 	</div>
 </div>
 

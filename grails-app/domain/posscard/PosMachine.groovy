@@ -7,11 +7,7 @@ class PosMachine {
     static constraints = {
         supplierId()
         userId()
-
-
         dateCreated(display:false)
-
-
     }
     static belongsTo = [supplierId: Supplier]
 }

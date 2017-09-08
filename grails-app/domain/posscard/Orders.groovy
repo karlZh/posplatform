@@ -15,18 +15,18 @@ class Orders {
     String orderSn //订单号
     String serialNum //流水号D
     static constraints = {
-         cardNum()
-         password(password:true)
-         amount() //应扣订单总金额
-         actualAmount() //实扣总金额
-         cardPlatformId() //商户id
-         supplierId() //供应商id
+        cardNum()
+        password(password:true)
+        amount() //应扣订单总金额
+        actualAmount() //实扣总金额
+        cardPlatformId() //商户id
+        supplierId() //供应商id
         dateCreated(display:false)//创建时间
-         orderType(inList: ["1","2"]) //订单类型，消费1或退款2
-         num() //张数
-         ticketTypeId() //票消费类型
-         validity() //有效期
-         orderSn() //订单号
-         serialNum() //流水号D
+        orderType(inList: ["1","2"]) //订单类型，消费1或退款2
+        num() //张数
+        ticketTypeId() //票消费类型
+        validity() //有效期
+        orderSn() //订单号
+        serialNum() //流水号D
     }
 }

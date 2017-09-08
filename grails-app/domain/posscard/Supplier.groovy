@@ -18,7 +18,6 @@ class Supplier {
         phone(matches: /\d{7,11}/,blank: false) //电话
         remark(maxSize: 50,blank: true) //备注
         parentId() //父供应商id
-
         dateCreated(display:false) //创建时间
 
     }

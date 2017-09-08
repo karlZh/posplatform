@@ -8,7 +8,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-	<g:field name="cardbinId" type="number" value="${cardbinPlatformInstance.cardbinId}" required=""/>
+	<g:select id="cardbinId" name="cardbinId.id" from="${posscard.CardBin.list()}" optionKey="id" required="" value="${cardbinPlatformInstance?.cardbinId?.id}" class="many-to-one"/>
 	</div>
 </div>
 
@@ -18,7 +18,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-	<g:field name="cardPlatformId" type="number" value="${cardbinPlatformInstance.cardPlatformId}" required=""/>
+	<g:select id="cardPlatformId" name="cardPlatformId.id" from="${posscard.CardPlatform.list()}" optionKey="id" required="" value="${cardbinPlatformInstance?.cardPlatformId?.id}" class="many-to-one"/>
 	</div>
 </div>
 
