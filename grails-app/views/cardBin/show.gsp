@@ -40,13 +40,13 @@
 								</div>
 							</g:if>
 							
-							<g:if test="${cardBinInstance?.createTime}">
+							<g:if test="${cardBinInstance?.dateCreated}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="cardBin.createTime.label" default="Create Time" /></label>
+									<label class="control-label"><g:message code="cardBin.dateCreated.label" default="Date Created" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardBinInstance}" field="createTime"/></div>
+									<div class="col-sm-10 col-md-10"><g:formatDate date="${cardBinInstance?.dateCreated}" /></div>
 									
 								</div>
 							</g:if>

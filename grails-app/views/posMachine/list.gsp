@@ -33,7 +33,7 @@
 										
 										<g:sortableColumn property="userId" title="${message(code: 'posMachine.userId.label', default: 'User Id')}" />
 										
-										<g:sortableColumn property="createTime" title="${message(code: 'posMachine.createTime.label', default: 'Create Time')}" />
+										<g:sortableColumn property="dateCreated" title="${message(code: 'posMachine.dateCreated.label', default: 'Date Created')}" />
 										
 										<th>操作</th>
 									</tr>
@@ -46,8 +46,8 @@
 											
 											<td>${fieldValue(bean: posMachineInstance, field: "userId")}</td>
 											
-											<td>${fieldValue(bean: posMachineInstance, field: "createTime")}</td>
-											
+											<td><g:formatDate date="${posMachineInstance.dateCreated}" /></td>gi
+										
 											<td class="center ">
 												<g:link action="show" id="${posMachineInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
 													<i class="fa fa-file"></i>

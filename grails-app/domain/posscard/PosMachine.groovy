@@ -2,14 +2,14 @@ package posscard
 
 class PosMachine {
     Integer userId
-    Integer createTime //创建时间
+    Date  dateCreated //创建时间
 
     static constraints = {
         supplierId()
         userId()
 
 
-        createTime(blank:false, nullable: false, display:false)
+        dateCreated(display:false)
 
 
     }

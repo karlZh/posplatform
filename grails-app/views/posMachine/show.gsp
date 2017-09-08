@@ -51,13 +51,13 @@
 								</div>
 							</g:if>
 							
-							<g:if test="${posMachineInstance?.createTime}">
+							<g:if test="${posMachineInstance?.dateCreated}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="posMachine.createTime.label" default="Create Time" /></label>
+									<label class="control-label"><g:message code="posMachine.dateCreated.label" default="Date Created" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${posMachineInstance}" field="createTime"/></div>
+									<div class="col-sm-10 col-md-10"><g:formatDate date="${posMachineInstance?.dateCreated}" /></div>
 									
 								</div>
 							</g:if>

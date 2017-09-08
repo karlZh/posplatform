@@ -7,7 +7,7 @@
 		<g:message code="posMachine.supplierId.label" default="Supplier Id" />
 		<span class="required-indicator">*</span>
 	</label>
-	<div class="col-sm-10">
+	<div class="col-sm-6">
 	<g:select id="supplierId" name="supplierId.id" from="${posscard.Supplier.list()}" optionKey="id" required="" value="${posMachineInstance?.supplierId?.id}" class="many-to-one"/>
 	</div>
 </div>
@@ -17,7 +17,7 @@
 		<g:message code="posMachine.userId.label" default="User Id" />
 		<span class="required-indicator">*</span>
 	</label>
-	<div class="col-sm-10">
+	<div class="col-sm-6">
 	<g:field name="userId" type="number" value="${posMachineInstance.userId}" required=""/>
 	</div>
 </div>
