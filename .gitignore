@@ -2,3 +2,11 @@
 .idea/
 target/
 .slcache/
+.slcache/.index
+target/classes/ApplicationResources.class
+target/classes/BuildConfig.class
+target/classes/Config.class
+target/classes/DataSource.class
+target/classes/posscard/FooterTagLib.class
+target/classes/resources.class
+target/classes/UrlMappings.class
