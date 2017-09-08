@@ -35,7 +35,7 @@
 									<label class="control-label"><g:message code="cardbinPlatform.cardbinId.label" default="Cardbin Id" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardbinPlatformInstance}" field="cardbinId"/></div>
+									<div class="col-sm-10 col-md-10"><g:link controller="cardBin" action="show" id="${cardbinPlatformInstance?.cardbinId?.id}">${cardbinPlatformInstance?.cardbinId?.encodeAsHTML()}</g:link></div>
 									
 								</div>
 							</g:if>
@@ -46,18 +46,18 @@
 									<label class="control-label"><g:message code="cardbinPlatform.cardPlatformId.label" default="Card Platform Id" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardbinPlatformInstance}" field="cardPlatformId"/></div>
+									<div class="col-sm-10 col-md-10"><g:link controller="cardPlatform" action="show" id="${cardbinPlatformInstance?.cardPlatformId?.id}">${cardbinPlatformInstance?.cardPlatformId?.encodeAsHTML()}</g:link></div>
 									
 								</div>
 							</g:if>
 							
-							<g:if test="${cardbinPlatformInstance?.createTime}">
+							<g:if test="${cardbinPlatformInstance?.dateCreated}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="cardbinPlatform.createTime.label" default="Create Time" /></label>
+									<label class="control-label"><g:message code="cardbinPlatform.dateCreated.label" default="Date Created" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardbinPlatformInstance}" field="createTime"/></div>
+									<div class="col-sm-10 col-md-10"><g:formatDate date="${cardbinPlatformInstance?.dateCreated}" /></div>
 									
 								</div>
 							</g:if>

@@ -29,11 +29,11 @@
 									<thead>
 									<tr>
 										
-										<g:sortableColumn property="cardbinId" title="${message(code: 'cardbinPlatform.cardbinId.label', default: 'Cardbin Id')}" />
+										<th><g:message code="cardbinPlatform.cardbinId.label" default="Cardbin Id" /></th>
 										
-										<g:sortableColumn property="cardPlatformId" title="${message(code: 'cardbinPlatform.cardPlatformId.label', default: 'Card Platform Id')}" />
+										<th><g:message code="cardbinPlatform.cardPlatformId.label" default="Card Platform Id" /></th>
 										
-										<g:sortableColumn property="createTime" title="${message(code: 'cardbinPlatform.createTime.label', default: 'Create Time')}" />
+										<g:sortableColumn property="dateCreated" title="${message(code: 'cardbinPlatform.dateCreated.label', default: 'Date Created')}" />
 										
 										<th>操作</th>
 									</tr>
@@ -46,8 +46,8 @@
 											
 											<td>${fieldValue(bean: cardbinPlatformInstance, field: "cardPlatformId")}</td>
 											
-											<td>${fieldValue(bean: cardbinPlatformInstance, field: "createTime")}</td>
-											
+											<td><g:formatDate date="${cardbinPlatformInstance.dateCreated}" /></td>gi
+										
 											<td class="center ">
 												<g:link action="show" id="${cardbinPlatformInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
 													<i class="fa fa-file"></i>

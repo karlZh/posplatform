@@ -21,7 +21,6 @@ class CardbinPlatformController {
 
     def save() {
         def cardbinPlatformInstance = new CardbinPlatform(params)
-        cardbinPlatformInstance.createTime = new Date().getTime()
         if (!cardbinPlatformInstance.save(flush: true)) {
             render(view: "create", model: [cardbinPlatformInstance: cardbinPlatformInstance])
             return
@@ -64,8 +63,8 @@ class CardbinPlatformController {
         if (version != null) {
             if (cardbinPlatformInstance.version > version) {
                 cardbinPlatformInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'cardbinPlatform.label', default: 'CardbinPlatform')] as Object[],
-                        "Another user has updated this CardbinPlatform while you were editing")
+                          [message(code: 'cardbinPlatform.label', default: 'CardbinPlatform')] as Object[],
+                          "Another user has updated this CardbinPlatform while you were editing")
                 render(view: "edit", model: [cardbinPlatformInstance: cardbinPlatformInstance])
                 return
             }

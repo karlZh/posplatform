@@ -17,12 +17,10 @@ class CardBinController {
 
     def create() {
         [cardBinInstance: new CardBin(params)]
-
     }
 
     def save() {
         def cardBinInstance = new CardBin(params)
-        cardBinInstance.createTime=new Date().getTime()
         if (!cardBinInstance.save(flush: true)) {
             render(view: "create", model: [cardBinInstance: cardBinInstance])
             return
