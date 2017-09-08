@@ -1,11 +1,13 @@
 package posscard
 
 class CardBin {//卡bin
-    Integer cardPlatformId //商户id（卡平台id）
-    Date  dateCreated//创建时间
+    String cardbin //卡bin,卡号前6位
+    Date dateCreated//创建时间
 
     static constraints = {
-        cardPlatformId()
-        dateCreated(display:false)
+        cardbin(blank: false, nullable: false)
+        dateCreated(display: false)
     }
+
+    static hasMany = [cardbinPlatform: CardbinPlatform]
 }

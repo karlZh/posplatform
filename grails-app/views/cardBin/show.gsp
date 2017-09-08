@@ -29,13 +29,13 @@
 								<div class="message" role="status">${flash.message}</div>
 							</g:if>
 							
-							<g:if test="${cardBinInstance?.cardPlatformId}">
+							<g:if test="${cardBinInstance?.cardbin}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="cardBin.cardPlatformId.label" default="Card Platform Id" /></label>
+									<label class="control-label"><g:message code="cardBin.cardbin.label" default="Cardbin" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardBinInstance}" field="cardPlatformId"/></div>
+									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardBinInstance}" field="cardbin"/></div>
 									
 								</div>
 							</g:if>
@@ -47,6 +47,19 @@
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:formatDate date="${cardBinInstance?.dateCreated}" /></div>
+									
+								</div>
+							</g:if>
+							
+							<g:if test="${cardBinInstance?.cardbinPlatform}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="cardBin.cardbinPlatform.label" default="Cardbin Platform" /></label>
+									</div>
+									
+									<g:each in="${cardBinInstance.cardbinPlatform}" var="c">
+										<div class="col-sm-10 col-md-10"><g:link controller="cardbinPlatform" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></div>
+									</g:each>
 									
 								</div>
 							</g:if>

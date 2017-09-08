@@ -21,12 +21,10 @@ class PosMachineController {
 
     def save() {
         def posMachineInstance = new PosMachine(params)
-       // posMachineInstance.createTime.format("yyyy-MM-dd HH:mm:ss")
         if (!posMachineInstance.save(flush: true)) {
             render(view: "create", model: [posMachineInstance: posMachineInstance])
             return
         }
-
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), posMachineInstance.id])
         redirect(action: "show", id: posMachineInstance.id)
@@ -65,10 +63,8 @@ class PosMachineController {
         if (version != null) {
             if (posMachineInstance.version > version) {
                 posMachineInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-
-                        [message(code: 'posMachine.label', default: 'PosMachine')] as Object[],
-                        "Another user has updated this PosMachine while you were editing")
-
+                          [message(code: 'posMachine.label', default: 'PosMachine')] as Object[],
+                          "Another user has updated this PosMachine while you were editing")
                 render(view: "edit", model: [posMachineInstance: posMachineInstance])
                 return
             }

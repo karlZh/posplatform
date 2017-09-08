@@ -62,6 +62,19 @@
 								</div>
 							</g:if>
 							
+							<g:if test="${cardPlatformInstance?.cardbinPlatform}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="cardPlatform.cardbinPlatform.label" default="Cardbin Platform" /></label>
+									</div>
+									
+									<g:each in="${cardPlatformInstance.cardbinPlatform}" var="c">
+										<div class="col-sm-10 col-md-10"><g:link controller="cardbinPlatform" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></div>
+									</g:each>
+									
+								</div>
+							</g:if>
+							
 							<g:form>
 								<g:hiddenField name="id" value="${cardPlatformInstance?.id}" />
 								<g:link action="edit"  id="${cardPlatformInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>

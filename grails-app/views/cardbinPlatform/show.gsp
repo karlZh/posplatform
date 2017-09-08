@@ -35,7 +35,7 @@
 									<label class="control-label"><g:message code="cardbinPlatform.cardbinId.label" default="Cardbin Id" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardbinPlatformInstance}" field="cardbinId"/></div>
+									<div class="col-sm-10 col-md-10"><g:link controller="cardBin" action="show" id="${cardbinPlatformInstance?.cardbinId?.id}">${cardbinPlatformInstance?.cardbinId?.encodeAsHTML()}</g:link></div>
 									
 								</div>
 							</g:if>
@@ -46,7 +46,7 @@
 									<label class="control-label"><g:message code="cardbinPlatform.cardPlatformId.label" default="Card Platform Id" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardbinPlatformInstance}" field="cardPlatformId"/></div>
+									<div class="col-sm-10 col-md-10"><g:link controller="cardPlatform" action="show" id="${cardbinPlatformInstance?.cardPlatformId?.id}">${cardbinPlatformInstance?.cardPlatformId?.encodeAsHTML()}</g:link></div>
 									
 								</div>
 							</g:if>

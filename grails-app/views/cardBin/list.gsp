@@ -29,7 +29,7 @@
 									<thead>
 									<tr>
 										
-										<g:sortableColumn property="cardPlatformId" title="${message(code: 'cardBin.cardPlatformId.label', default: 'Card Platform Id')}" />
+										<g:sortableColumn property="cardbin" title="${message(code: 'cardBin.cardbin.label', default: 'Cardbin')}" />
 										
 										<g:sortableColumn property="dateCreated" title="${message(code: 'cardBin.dateCreated.label', default: 'Date Created')}" />
 										
@@ -40,7 +40,7 @@
 									<g:each in="${cardBinInstanceList}" status="i" var="cardBinInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 											
-											<td><g:link action="show" id="${cardBinInstance.id}">${fieldValue(bean: cardBinInstance, field: "cardPlatformId")}</g:link></td>
+											<td><g:link action="show" id="${cardBinInstance.id}">${fieldValue(bean: cardBinInstance, field: "cardbin")}</g:link></td>
 											
 											<td><g:formatDate date="${cardBinInstance.dateCreated}" /></td>gi
 										
