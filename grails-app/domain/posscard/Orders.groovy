@@ -22,7 +22,7 @@ class Orders {
         cardPlatformId() //商户id
         supplierId() //供应商id
         dateCreated(display:false)//创建时间
-        orderType(inList: ["1","2"]) //订单类型，消费1或退款2
+        orderType(inList: [1,2]) //订单类型，消费1或退款2
         num() //张数
         ticketTypeId() //票消费类型
         validity() //有效期
