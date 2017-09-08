@@ -51,13 +51,13 @@
 								</div>
 							</g:if>
 							
-							<g:if test="${cardPlatformInstance?.createTime}">
+							<g:if test="${cardPlatformInstance?.dateCreated}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="cardPlatform.createTime.label" default="Create Time" /></label>
+									<label class="control-label"><g:message code="cardPlatform.dateCreated.label" default="Date Created" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardPlatformInstance}" field="createTime"/></div>
+									<div class="col-sm-10 col-md-10"><g:formatDate date="${cardPlatformInstance?.dateCreated}" /></div>
 									
 								</div>
 							</g:if>

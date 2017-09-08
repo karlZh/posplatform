@@ -35,11 +35,11 @@
 										
 										<g:sortableColumn property="phone" title="${message(code: 'user.phone.label', default: 'Phone')}" />
 										
-										<th><g:message code="user.supplierId.label" default="Supplier Id" /></th>
-										
 										<g:sortableColumn property="accountType" title="${message(code: 'user.accountType.label', default: 'Account Type')}" />
 										
-										<g:sortableColumn property="createTime" title="${message(code: 'user.createTime.label', default: 'Create Time')}" />
+										<g:sortableColumn property="dateCreated" title="${message(code: 'user.dateCreated.label', default: 'Date Created')}" />
+										
+										<th><g:message code="user.supplierId.label" default="Supplier Id" /></th>
 										
 										<th>操作</th>
 									</tr>
@@ -54,11 +54,11 @@
 											
 											<td>${fieldValue(bean: userInstance, field: "phone")}</td>
 											
-											<td>${fieldValue(bean: userInstance, field: "supplierId")}</td>
-											
 											<td>${fieldValue(bean: userInstance, field: "accountType")}</td>
 											
-											<td>${fieldValue(bean: userInstance, field: "createTime")}</td>
+											<td><g:formatDate date="${userInstance.dateCreated}" /></td>gi
+										
+											<td>${fieldValue(bean: userInstance, field: "supplierId")}</td>
 											
 											<td class="center ">
 												<g:link action="show" id="${userInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">

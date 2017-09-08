@@ -21,11 +21,12 @@ class PosMachineController {
 
     def save() {
         def posMachineInstance = new PosMachine(params)
-        posMachineInstance.createTime = new Date().getTime()
+       // posMachineInstance.createTime.format("yyyy-MM-dd HH:mm:ss")
         if (!posMachineInstance.save(flush: true)) {
             render(view: "create", model: [posMachineInstance: posMachineInstance])
             return
         }
+
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), posMachineInstance.id])
         redirect(action: "show", id: posMachineInstance.id)

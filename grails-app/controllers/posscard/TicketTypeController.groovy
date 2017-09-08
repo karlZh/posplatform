@@ -21,7 +21,7 @@ class TicketTypeController {
 
     def save() {
         def ticketTypeInstance = new TicketType(params)
-        ticketTypeInstance.createTime = new Date().getTime()
+       // ticketTypeInstance.createTime.format("yyyy-MM-dd HH:mm:ss")
         if (!ticketTypeInstance.save(flush: true)) {
             render(view: "create", model: [ticketTypeInstance: ticketTypeInstance])
             return

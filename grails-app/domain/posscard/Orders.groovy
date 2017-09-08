@@ -7,7 +7,7 @@ class Orders {
     Float actualAmount //实扣总金额
     Integer cardPlatformId //商户id
     Integer supplierId //供应商id
-    Integer createTime //创建时间
+    Date  dateCreated //创建时间
     Integer orderType //订单类型，消费或退款
     Integer num //张数
     Integer ticketTypeId //票消费类型
@@ -21,7 +21,7 @@ class Orders {
          actualAmount() //实扣总金额
          cardPlatformId() //商户id
          supplierId() //供应商id
-         createTime(display:false)//创建时间
+        dateCreated(display:false)//创建时间
          orderType(inList: ["1","2"]) //订单类型，消费1或退款2
          num() //张数
          ticketTypeId() //票消费类型

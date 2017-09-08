@@ -37,7 +37,7 @@
 										
 										<g:sortableColumn property="accountRatio" title="${message(code: 'ticketType.accountRatio.label', default: 'Account Ratio')}" />
 										
-										<g:sortableColumn property="createTime" title="${message(code: 'ticketType.createTime.label', default: 'Create Time')}" />
+										<g:sortableColumn property="dateCreated" title="${message(code: 'ticketType.dateCreated.label', default: 'Date Created')}" />
 										
 										<th><g:message code="ticketType.supplierId.label" default="Supplier Id" /></th>
 										
@@ -56,8 +56,8 @@
 											
 											<td>${fieldValue(bean: ticketTypeInstance, field: "accountRatio")}</td>
 											
-											<td>${fieldValue(bean: ticketTypeInstance, field: "createTime")}</td>
-											
+											<td><g:formatDate date="${ticketTypeInstance.dateCreated}" /></td>gi
+										
 											<td>${fieldValue(bean: ticketTypeInstance, field: "supplierId")}</td>
 											
 											<td class="center ">

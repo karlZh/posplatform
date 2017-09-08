@@ -33,7 +33,7 @@
 										
 										<g:sortableColumn property="address" title="${message(code: 'cardPlatform.address.label', default: 'Address')}" />
 										
-										<g:sortableColumn property="createTime" title="${message(code: 'cardPlatform.createTime.label', default: 'Create Time')}" />
+										<g:sortableColumn property="dateCreated" title="${message(code: 'cardPlatform.dateCreated.label', default: 'Date Created')}" />
 										
 										<th>操作</th>
 									</tr>
@@ -46,8 +46,8 @@
 											
 											<td>${fieldValue(bean: cardPlatformInstance, field: "address")}</td>
 											
-											<td>${fieldValue(bean: cardPlatformInstance, field: "createTime")}</td>
-											
+											<td><g:formatDate date="${cardPlatformInstance.dateCreated}" /></td>gi
+										
 											<td class="center ">
 												<g:link action="show" id="${cardPlatformInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
 													<i class="fa fa-file"></i>

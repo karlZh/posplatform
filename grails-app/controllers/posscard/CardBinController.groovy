@@ -1,6 +1,8 @@
 package posscard
 
-import org.springframework.dao.DataIntegrityViolationException
+import java.text.SimpleDateFormat
+import java.util.Date
+
 
 class CardBinController {
 
@@ -22,7 +24,11 @@ class CardBinController {
 
     def save() {
         def cardBinInstance = new CardBin(params)
-        cardBinInstance.createTime=new Date().getTime()
+
+        cardBinInstance.createTime?.format(form("yyyy-MM-dd HH:mm:ss"))
+
+      //  cardBinInstance.createTime=new Date().getTime()
+
         if (!cardBinInstance.save(flush: true)) {
             render(view: "create", model: [cardBinInstance: cardBinInstance])
             return
@@ -96,7 +102,7 @@ class CardBinController {
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'cardBin.label', default: 'CardBin'), id])
             redirect(action: "list")
         }
-        catch (DataIntegrityViolationException e) {
+        catch (Exception e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'cardBin.label', default: 'CardBin'), id])
             redirect(action: "show", id: id)
         }

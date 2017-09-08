@@ -106,13 +106,13 @@
 								</div>
 							</g:if>
 							
-							<g:if test="${supplierInstance?.createTime}">
+							<g:if test="${supplierInstance?.dateCreated}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="supplier.createTime.label" default="Create Time" /></label>
+									<label class="control-label"><g:message code="supplier.dateCreated.label" default="Date Created" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${supplierInstance}" field="createTime"/></div>
+									<div class="col-sm-10 col-md-10"><g:formatDate date="${supplierInstance?.dateCreated}" /></div>
 									
 								</div>
 							</g:if>

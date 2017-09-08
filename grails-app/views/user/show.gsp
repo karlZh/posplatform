@@ -62,17 +62,6 @@
 								</div>
 							</g:if>
 							
-							<g:if test="${userInstance?.supplierId}">
-								<div class="row">
-									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="user.supplierId.label" default="Supplier Id" /></label>
-									</div>
-									
-									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${userInstance?.supplierId?.id}">${userInstance?.supplierId?.encodeAsHTML()}</g:link></div>
-									
-								</div>
-							</g:if>
-							
 							<g:if test="${userInstance?.accountType}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
@@ -84,13 +73,24 @@
 								</div>
 							</g:if>
 							
-							<g:if test="${userInstance?.createTime}">
+							<g:if test="${userInstance?.dateCreated}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="user.createTime.label" default="Create Time" /></label>
+									<label class="control-label"><g:message code="user.dateCreated.label" default="Date Created" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="createTime"/></div>
+									<div class="col-sm-10 col-md-10"><g:formatDate date="${userInstance?.dateCreated}" /></div>
+									
+								</div>
+							</g:if>
+							
+							<g:if test="${userInstance?.supplierId}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="user.supplierId.label" default="Supplier Id" /></label>
+									</div>
+									
+									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${userInstance?.supplierId?.id}">${userInstance?.supplierId?.encodeAsHTML()}</g:link></div>
 									
 								</div>
 							</g:if>

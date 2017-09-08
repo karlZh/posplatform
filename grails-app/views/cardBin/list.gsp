@@ -31,7 +31,7 @@
 										
 										<g:sortableColumn property="cardPlatformId" title="${message(code: 'cardBin.cardPlatformId.label', default: 'Card Platform Id')}" />
 										
-										<g:sortableColumn property="createTime" title="${message(code: 'cardBin.createTime.label', default: 'Create Time')}" />
+										<g:sortableColumn property="dateCreated" title="${message(code: 'cardBin.dateCreated.label', default: 'Date Created')}" />
 										
 										<th>操作</th>
 									</tr>
@@ -42,8 +42,8 @@
 											
 											<td><g:link action="show" id="${cardBinInstance.id}">${fieldValue(bean: cardBinInstance, field: "cardPlatformId")}</g:link></td>
 											
-											<td>${fieldValue(bean: cardBinInstance, field: "createTime")}</td>
-											
+											<td><g:formatDate date="${cardBinInstance.dateCreated}" /></td>gi
+										
 											<td class="center ">
 												<g:link action="show" id="${cardBinInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
 													<i class="fa fa-file"></i>

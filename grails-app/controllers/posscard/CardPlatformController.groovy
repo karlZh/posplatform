@@ -21,7 +21,8 @@ class CardPlatformController {
 
     def save() {
         def cardPlatformInstance = new CardPlatform(params)
-        cardPlatformInstance.createTime = new Date().getTime()
+        //cardPlatformInstance.createTime = new Date().getTime()
+        //cardPlatformInstance.createTime.format("yyyy-MM-dd HH:mm:ss")
         if (!cardPlatformInstance.save(flush: true)) {
             render(view: "create", model: [cardPlatformInstance: cardPlatformInstance])
             return

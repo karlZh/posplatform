@@ -7,7 +7,7 @@
 		<g:message code="cardbinPlatform.cardbinId.label" default="Cardbin Id" />
 		<span class="required-indicator">*</span>
 	</label>
-	<div class="col-sm-10">
+	<div class="col-sm-6">
 	<g:field name="cardbinId" type="number" value="${cardbinPlatformInstance.cardbinId}" required=""/>
 	</div>
 </div>
@@ -17,7 +17,7 @@
 		<g:message code="cardbinPlatform.cardPlatformId.label" default="Card Platform Id" />
 		<span class="required-indicator">*</span>
 	</label>
-	<div class="col-sm-10">
+	<div class="col-sm-6">
 	<g:field name="cardPlatformId" type="number" value="${cardbinPlatformInstance.cardPlatformId}" required=""/>
 	</div>
 </div>
