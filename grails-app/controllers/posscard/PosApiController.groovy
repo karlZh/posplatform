@@ -1,6 +1,5 @@
 package posscard
 
-import com.sun.xml.internal.messaging.saaj.util.Base64
 import grails.converters.JSON
 import org.apache.commons.codec.digest.DigestUtils
 import org.apache.http.HttpEntity
@@ -13,17 +12,6 @@ import org.apache.http.message.BasicNameValuePair
 import org.apache.http.protocol.HTTP
 import org.apache.http.util.EntityUtils
 import org.omg.CORBA.NameValuePair
-
-import javax.crypto.BadPaddingException
-import javax.crypto.Cipher
-import javax.crypto.IllegalBlockSizeException
-import javax.crypto.KeyGenerator
-import javax.crypto.NoSuchPaddingException
-import javax.crypto.SecretKey
-import javax.crypto.spec.SecretKeySpec
-import java.security.InvalidKeyException
-import java.security.NoSuchAlgorithmException
-import java.security.SecureRandom
 
 class PosApiController {
     def userService
@@ -58,24 +46,28 @@ class PosApiController {
 //        def data
 //        render params.username
 //        return false
+        def data = [:]
+        data = params
         def result = [:]
         switch (params.act?.trim()) {
-            case 'signIn':
-                result = userService.signIn(params);
-                break
+            case "signIn":
+                result = userService.signIn(data);
+                break;
+            case "signOut":
+                result = userService.signOut();
+                break;
             default:
                 result.status = false
                 result.message = "未知错误"
         }
 
-        render session
+        render dataProcessingService.dataEncode(result)
         return false
     }
     def list(){
         def data = dataProcessingService.dataDecode(params.pos)
         render data.message
     }
-    
 //    des加密
     def posdes(String appId,String appSercert,String timestamp,String nonce){
         def list=[appId,appSercert,timestamp,nonce]

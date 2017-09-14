@@ -1,6 +1,5 @@
 package posscard
 
-import org.omg.CORBA.NameValuePair
 import org.springframework.web.context.request.RequestContextHolder
 
 class UserService {
@@ -18,6 +17,11 @@ class UserService {
         return result
     }
 
+    def signOut() {
+        getSession().user = null
+        result.message = "签出成功！"
+        return result
+    }
     //Getting the Session object
     def getSession(){
         return RequestContextHolder.currentRequestAttributes().getSessionMutex()
