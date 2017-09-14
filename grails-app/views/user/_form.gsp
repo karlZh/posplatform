@@ -7,10 +7,11 @@
 		<g:message code="user.username.label" default="Username" />
 		<span class="required-indicator">*</span>
 	</label>
-	<div class="col-sm-6">
+
+  <div class="col-sm-6">
 	<g:textField class="form-control" name="username" maxlength="10" required="" value="${userInstance?.username}"/>
 	</div>
-</div>
+  </div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required form-group">
 	<label for="password" class="col-sm-2 control-label">

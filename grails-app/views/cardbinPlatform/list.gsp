@@ -10,18 +10,19 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="default.list.label" args="[entityName]" /></h2>
+			<h2>商户&卡BIN</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li class="active"><g:message code="default.list.label" args="[entityName]" /></li>
+				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li class="active">商户&卡BIN</li>
 			</ol>
 		</div>
+
 		<div class="cl-mcont">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="default.list.label" args="[entityName]" /><g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
+							<h3>商户&卡BIN<g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
 						</div>
 						<div class="content">
 							<div>
@@ -29,11 +30,11 @@
 									<thead>
 									<tr>
 										
-										<th><g:message code="cardbinPlatform.cardbinId.label" default="Cardbin Id" /></th>
+										<th><g:message code="cardbinPlatform.cardbinId.label" default="卡 Id" /></th>
 										
-										<th><g:message code="cardbinPlatform.cardPlatformId.label" default="Card Platform Id" /></th>
+										<th><g:message code="cardbinPlatform.cardPlatformId.label" default="商户 Id" /></th>
 										
-										<g:sortableColumn property="dateCreated" title="${message(code: 'cardbinPlatform.dateCreated.label', default: 'Date Created')}" />
+										<g:sortableColumn property="dateCreated" title="${message(code: 'cardbinPlatform.dateCreated.label', default: '创建时间')}" />
 										
 										<th>操作</th>
 									</tr>
@@ -46,7 +47,7 @@
 											
 											<td>${fieldValue(bean: cardbinPlatformInstance, field: "cardPlatformId")}</td>
 											
-											<td><g:formatDate date="${cardbinPlatformInstance.dateCreated}" /></td>gi
+											<td><g:formatDate date="${cardbinPlatformInstance.dateCreated}" /></td>
 										
 											<td class="center ">
 												<g:link action="show" id="${cardbinPlatformInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
@@ -73,5 +74,6 @@
 			</div>
 		</div>
 	</div>
+
 	</body>
 </html>

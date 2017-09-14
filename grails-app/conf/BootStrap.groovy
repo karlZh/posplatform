@@ -17,25 +17,24 @@ class BootStrap {
                 name: 'juyou',
                 address: 'yuanyingguoji'
         )
-        cardplatform.save()
+                cardplatform.save()
         if (cardplatform.hasErrors()) {
             println cardplatform.errors
         }
 
         def supplier = new Supplier(
-                name: 'juyou',
-                ratio: 1,
+                name:'asdf',
+                ratio:1,
                 price: 10,
-                address: 'yuanyangguoji',
+                address: 'asdf',
                 phone: '18512345678',
-                remark: 'haode',
-                parentId: 0
+                remark :'1121312',
+                parentId:0
         )
         supplier.save()
         if (supplier.hasErrors()) {
             println supplier.errors
         }
-
     }
     def destroy = {
     }
