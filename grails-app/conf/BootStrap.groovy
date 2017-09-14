@@ -1,7 +1,6 @@
 import posscard.CardBin
 import posscard.CardPlatform
 import posscard.Supplier
-import posscard.User
 
 class BootStrap {
 

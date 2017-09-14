@@ -5,7 +5,7 @@ class Orders {
     String password
     Float amount //应扣订单总金额
     Float actualAmount //实扣总金额
-    Integer cardPlatformId //商户id
+    Integer cardPlatformId //商户id 
     Integer supplierId //供应商id
     Date  dateCreated //创建时间
     Integer orderType //订单类型，消费或退款

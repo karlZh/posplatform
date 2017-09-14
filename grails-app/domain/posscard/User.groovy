@@ -17,5 +17,5 @@ class User {
     }
 
     static belongsTo = [supplierId: Supplier]
-    static searchable = true
+
 }
