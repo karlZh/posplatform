@@ -10,3 +10,16 @@ target/classes/DataSource.class
 target/classes/posscard/FooterTagLib.class
 target/classes/resources.class
 target/classes/UrlMappings.class
+target/classes/posscard/OrdersController.class
+target/classes/posscard/OrdersController.class
+target/classes/posscard/OrdersController.class
+target/classes/posscard/PosMachine.class
+target/classes/posscard/PosMachineController.class
+target/classes/posscard/Supplier.class
+target/classes/posscard/SupplierController.class
+target/classes/posscard/TicketType.class
+target/classes/posscard/TicketTypeController.class
+target/classes/posscard/User.class
+target/classes/posscard/UserController.class
+target/classes/resources.class
+target/classes/UrlMappings.class
