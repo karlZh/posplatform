@@ -32,10 +32,10 @@ class BootStrap {
                 parentId: 0
         )
         supplier.save()
-        if(supplier.hasErrors()){
+        if (supplier.hasErrors()) {
             println supplier.errors
         }
-        
+
     }
     def destroy = {
     }

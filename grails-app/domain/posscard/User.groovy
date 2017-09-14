@@ -16,4 +16,5 @@ class User {
     }
 
     static belongsTo = [supplierId: Supplier]
+
 }
