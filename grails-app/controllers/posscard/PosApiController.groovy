@@ -16,7 +16,7 @@ import org.omg.CORBA.NameValuePair
 class PosApiController {
     def userService
     def dataProcessingService
-
+    def ordersService
     def index() {
 //        def a = 'asdf'
 //        def b = DESUtil.encode(poskey,a)
@@ -56,6 +56,8 @@ class PosApiController {
             case "signOut":
                 result = userService.signOut();
                 break;
+            case "refund":
+                result = ordersService.orderRefund(data)
             default:
                 result.status = false
                 result.message = "未知错误"
