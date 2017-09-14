@@ -10,36 +10,45 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="default.list.label" args="[entityName]" /></h2>
+			<h2>消费类型</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li class="active"><g:message code="default.list.label" args="[entityName]" /></li>
+				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li class="active">消费类型</li>
 			</ol>
 		</div>
+        <div style="padding:25px 12px">
+        <div class="text-right collapse-button" style="padding:7px 3px;">
+            <g:form controller="TicketType" action="search">
+                <input type="text" name="name" style="padding: 10px 23px " placeholder="请输入类型名称" />
+                <Button type="primary" shape="circle" style="padding: 10px">提交</Button>
+                <!-- <button id="sidebar-collapse" class="btn btn-default" style="padding: 10px 7px" name="提交"><i style="color:#fff;" class="fa fa-angle-left"></i></button>-->
+            </g:form>
+
+        </div>
 		<div class="cl-mcont">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="default.list.label" args="[entityName]" /><g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
+							<h3>消费类型<g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
 						</div>
 						<div class="content">
 							<div>
 								<table>
 									<thead>
 									<tr>
+
+										<g:sortableColumn property="name" title="${message(code: 'ticketType.name.label', default: '类型名称')}" />
 										
-										<g:sortableColumn property="name" title="${message(code: 'ticketType.name.label', default: 'Name')}" />
+										<g:sortableColumn property="point" title="${message(code: 'ticketType.point.label', default: '扣点数')}" />
 										
-										<g:sortableColumn property="point" title="${message(code: 'ticketType.point.label', default: 'Point')}" />
+										<g:sortableColumn property="accountPoint" title="${message(code: 'ticketType.accountPoint.label', default: '结算点数')}" />
 										
-										<g:sortableColumn property="accountPoint" title="${message(code: 'ticketType.accountPoint.label', default: 'Account Point')}" />
+										<g:sortableColumn property="accountRatio" title="${message(code: 'ticketType.accountRatio.label', default: '结算比例')}" />
 										
-										<g:sortableColumn property="accountRatio" title="${message(code: 'ticketType.accountRatio.label', default: 'Account Ratio')}" />
+										<g:sortableColumn property="dateCreated" title="${message(code: 'ticketType.dateCreated.label', default: '创建时间')}" />
 										
-										<g:sortableColumn property="dateCreated" title="${message(code: 'ticketType.dateCreated.label', default: 'Date Created')}" />
-										
-										<th><g:message code="ticketType.supplierId.label" default="Supplier Id" /></th>
+										<th><g:message code="ticketType.supplierId.label" default="供应商 Id" /></th>
 										
 										<th>操作</th>
 									</tr>
@@ -56,7 +65,7 @@
 											
 											<td>${fieldValue(bean: ticketTypeInstance, field: "accountRatio")}</td>
 											
-											<td><g:formatDate date="${ticketTypeInstance.dateCreated}" /></td>gi
+											<td><g:formatDate date="${ticketTypeInstance.dateCreated}" /></td>
 										
 											<td>${fieldValue(bean: ticketTypeInstance, field: "supplierId")}</td>
 											
@@ -84,6 +93,7 @@
 				</div>
 			</div>
 		</div>
+            </div>
 	</div>
 	</body>
 </html>

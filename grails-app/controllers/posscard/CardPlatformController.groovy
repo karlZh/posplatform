@@ -11,8 +11,28 @@ class CardPlatformController {
     }
 
     def list(Integer max) {
+//        def  username = params.username
+//        def results=User.findAllByUsername(username)
+//        params.max = Math.min(max ?: 10, 100)
+//
+//        def searchInstanceTotal = User.countByUsername(username)
+////            [searchResults:results, searchInstanceTotal: searchInstanceTotal]
+     //   render(view:  '/user/list',model: [userInstanceList: results, userInstanceTotal: searchInstanceTotal])
+//
+
         params.max = Math.min(max ?: 10, 100)
+
+
         [cardPlatformInstanceList: CardPlatform.list(params), cardPlatformInstanceTotal: CardPlatform.count()]
+ //
+    }
+    def search(){
+
+        def name=params.name
+        def result=CardPlatform.findAllByName(name)
+        def cardPlatformInstanceTotal=CardPlatform.countByName(name)
+
+        render (view:'list' , model: [cardPlatformInstanceList: result, cardPlatformInstanceTotal:cardPlatformInstanceTotal])
     }
 
     def create() {

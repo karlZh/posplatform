@@ -1,3 +1,4 @@
+<%@ page import="posscard.User" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,16 @@
 	<body>
 		<g:render template="/common/head-nav" />
 		<div id="cl-wrapper">
-		<g:render template="/common/sidebar" />
+
+        <g:if test="${User.get(session.user_id)?.accountType} == 2"><!-- 自己平台-->
+            <g:render template="/common/sidebar1" />
+        </g:if>
+        <g:elseif test="${User.get(session.user_id)?.accountType} == 3"><!-- 商户-->
+            <g:render template="/common/sidebar2" />
+        </g:elseif>
+        <g:elseif test="${User.get(session.user_id)?.accountType} == 4"><!-- 供应商-->
+            <g:render template="/common/sidebar3" />
+        </g:elseif>
 		<g:layoutBody/>
 		</div>
 	<script src="${resource(dir: 'js', file: 'jquery.js')}"></script>
@@ -51,7 +61,7 @@
 	<script type="text/javascript" src="${resource(dir: 'js/jquery.gritter/js', file: 'jquery.gritter.js')}"></script>
 	<script type="text/javascript" src="${resource(dir: 'js/jquery.datatables', file: 'jquery.datatables.min.js')}"></script>
 	<script type="text/javascript" src="${resource(dir: 'js/jquery.datatables/bootstrap-adapter/js', file: 'datatables.js')}"></script>
-
+<!--
 
 	<script type="text/javascript">
         //Add dataTable Functions
@@ -138,7 +148,7 @@
             //Horizontal Icons dataTable
             $('#datatable-icons').dataTable();
         });
-	</script>
+	</script> -->
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

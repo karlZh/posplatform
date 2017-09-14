@@ -14,6 +14,15 @@ class CardbinPlatformController {
         params.max = Math.min(max ?: 10, 100)
         [cardbinPlatformInstanceList: CardbinPlatform.list(params), cardbinPlatformInstanceTotal: CardbinPlatform.count()]
     }
+//    def search(){
+//
+//        def cardbinId=params.cardbinId
+//        def result=CardbinPlatform.findAllByCardbinId(cardbinId)
+//
+//        def cardbinPlatformInstanceTotal=CardbinPlatform.countByCardbinId(cardbinId)
+//
+//        render (view:'list' , model: [cardbinPlatformInstanceList: result, cardbinPlatformInstanceTotal:cardbinPlatformInstanceTotal])
+//    }
 
     def create() {
         [cardbinPlatformInstance: new CardbinPlatform(params)]

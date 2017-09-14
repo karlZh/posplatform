@@ -10,18 +10,30 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="default.list.label" args="[entityName]" /></h2>
+			<h2>用户信息表</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li class="active"><g:message code="default.list.label" args="[entityName]" /></li>
+				<li><a href="${createLink(uri: '/')}">主页面</a></li>
+				<li class="active">用户信息表</li>
 			</ol>
 		</div>
+        <div style="padding:25px 12px">
+        <div class="text-right collapse-button" style="padding:7px 3px;">
+            <g:form controller="user" action="search">
+                <input type="text" name="username" style="padding: 10px 23px " placeholder="请输入用户名" />
+
+                <Button type="primary" shape="circle" style="padding: 10px">提交</Button>
+               <!-- <button id="sidebar-collapse" class="btn btn-default" style="padding: 10px 7px" name="提交"><i style="color:#fff;" class="fa fa-angle-left"></i></button>-->
+            </g:form>
+
+            </div>
 		<div class="cl-mcont">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="default.list.label" args="[entityName]" /><g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
+
+							<h3>用户信息表
+                                <g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
 						</div>
 						<div class="content">
 							<div>
@@ -29,17 +41,17 @@
 									<thead>
 									<tr>
 										
-										<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
+										<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: '用户名')}" />
 										
-										<g:sortableColumn property="password" title="${message(code: 'user.password.label', default: 'Password')}" />
+										<g:sortableColumn property="password" title="${message(code: 'user.password.label', default: '密码')}" />
 										
-										<g:sortableColumn property="phone" title="${message(code: 'user.phone.label', default: 'Phone')}" />
+										<g:sortableColumn property="phone" title="${message(code: 'user.phone.label', default: '电话')}" />
 										
-										<g:sortableColumn property="accountType" title="${message(code: 'user.accountType.label', default: 'Account Type')}" />
+										<g:sortableColumn property="accountType" title="${message(code: 'user.accountType.label', default: '用户类型')}" />
 										
-										<g:sortableColumn property="dateCreated" title="${message(code: 'user.dateCreated.label', default: 'Date Created')}" />
+										<g:sortableColumn property="dateCreated" title="${message(code: 'user.dateCreated.label', default: '创建时间')}" />
 										
-										<th><g:message code="user.supplierId.label" default="Supplier Id" /></th>
+										<th><g:message code="user.supplierId.label" default="供应商ID" /></th>
 										
 										<th>操作</th>
 									</tr>
@@ -56,7 +68,7 @@
 											
 											<td>${fieldValue(bean: userInstance, field: "accountType")}</td>
 											
-											<td><g:formatDate date="${userInstance.dateCreated}" /></td>gi
+											<td><g:formatDate date="${userInstance.dateCreated}" /></td>
 										
 											<td>${fieldValue(bean: userInstance, field: "supplierId")}</td>
 											
@@ -84,6 +96,7 @@
 				</div>
 			</div>
 		</div>
+        </div>
 	</div>
 	</body>
 </html>

@@ -10,18 +10,27 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="default.list.label" args="[entityName]" /></h2>
+			<h2>Pos机</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li class="active"><g:message code="default.list.label" args="[entityName]" /></li>
+				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li class="active">Pos机</li>
 			</ol>
 		</div>
+        <div style="padding:25px 12px">
+            <div class="text-right collapse-button" style="padding:7px 3px;">
+                <g:form controller="posMachine" action="search">
+                    <input type="text" name="userId" style="padding: 10px 23px " placeholder="请输入用户ID" />
+                    <Button type="primary" shape="circle" style="padding: 10px">提交</Button>
+                    <!-- <button id="sidebar-collapse" class="btn btn-default" style="padding: 10px 7px" name="提交"><i style="color:#fff;" class="fa fa-angle-left"></i></button>-->
+                </g:form>
+
+            </div>
 		<div class="cl-mcont">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="default.list.label" args="[entityName]" /><g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
+							<h3>Pos机<g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
 						</div>
 						<div class="content">
 							<div>
@@ -29,11 +38,11 @@
 									<thead>
 									<tr>
 										
-										<th><g:message code="posMachine.supplierId.label" default="Supplier Id" /></th>
+										<th><g:message code="posMachine.supplierId.label" default="供应商 Id" /></th>
 										
-										<g:sortableColumn property="userId" title="${message(code: 'posMachine.userId.label', default: 'User Id')}" />
+										<g:sortableColumn property="userId" title="${message(code: 'posMachine.userId.label', default: '用户 Id')}" />
 										
-										<g:sortableColumn property="dateCreated" title="${message(code: 'posMachine.dateCreated.label', default: 'Date Created')}" />
+										<g:sortableColumn property="dateCreated" title="${message(code: 'posMachine.dateCreated.label', default: '创建时间')}" />
 										
 										<th>操作</th>
 									</tr>
@@ -46,7 +55,7 @@
 											
 											<td>${fieldValue(bean: posMachineInstance, field: "userId")}</td>
 											
-											<td><g:formatDate date="${posMachineInstance.dateCreated}" /></td>gi
+											<td><g:formatDate date="${posMachineInstance.dateCreated}" /></td>
 										
 											<td class="center ">
 												<g:link action="show" id="${posMachineInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
@@ -69,6 +78,7 @@
 							</div>
 						</div>
 					</div>
+                    </div>
 				</div>
 			</div>
 		</div>

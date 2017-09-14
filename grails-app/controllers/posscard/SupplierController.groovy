@@ -15,6 +15,16 @@ class SupplierController {
         [supplierInstanceList: Supplier.list(params), supplierInstanceTotal: Supplier.count()]
     }
 
+
+    def search(){
+
+        def name=params.name
+        def result=Supplier.findAllByName(name)
+        def supplierInstanceTotal=Supplier.countByName(name)
+
+        render (view:'list' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal])
+    }
+
     def create() {
         [supplierInstance: new Supplier(params)]
     }
