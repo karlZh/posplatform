@@ -1,6 +1,6 @@
 package posscard
 
-class LastOrderService {
+class LastOrderService {//上个订单查询
     def result=[status: 200,message: "",data:[:]]
 
     def last(data) {
