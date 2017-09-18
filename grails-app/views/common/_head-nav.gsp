@@ -6,7 +6,7 @@
             </button>
             %{--<a class="navbar-brand" href="#"><span>聚优福利</span></a>--}%
             %{--<img src="juyoufuli.png" style="width:30px;height:30px;">--}%
-            <g:img dir="resources" file="juyoufuli.png"/>
+            <g:img dir="images" file="juyoufuli.png"/>
             %{--<img src="${resource(dir: 'resources',file:'juyoufuli.png')}">--}%
         </div>
         <div class="navbar-collapse collapse">
