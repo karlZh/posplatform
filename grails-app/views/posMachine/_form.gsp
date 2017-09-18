@@ -4,7 +4,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: posMachineInstance, field: 'supplierId', 'error')} required form-group">
 	<label for="supplierId" class="col-sm-2 control-label">
-		<g:message code="posMachine.supplierId.label" default="Supplier Id" />
+		<g:message code="posMachine.supplierId.label" default="供应商ID" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -14,7 +14,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: posMachineInstance, field: 'userId', 'error')} required form-group">
 	<label for="userId" class="col-sm-2 control-label">
-		<g:message code="posMachine.userId.label" default="User Id" />
+		<g:message code="posMachine.userId.label" default="用户 Id" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">

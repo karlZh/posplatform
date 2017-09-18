@@ -10,11 +10,11 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="default.show.label" args="[entityName]" /></h2>
+			<h2>用户信息表</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li class="active"><g:message code="default.show.label" args="[entityName]" /></li>
+				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li><g:link class="list" action="list">用户信息表</g:link></li>
+				<li class="active">操作用户</li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -22,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="default.show.label" args="[entityName]" /></h3>
+							<h3>显示用户</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -32,7 +32,7 @@
 							<g:if test="${userInstance?.username}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="user.username.label" default="Username" /></label>
+									<label class="control-label"><g:message code="user.username.label" default="用户名" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="username"/></div>
@@ -43,7 +43,7 @@
 							<g:if test="${userInstance?.password}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="user.password.label" default="Password" /></label>
+									<label class="control-label"><g:message code="user.password.label" default="密码" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="password"/></div>
@@ -54,7 +54,7 @@
 							<g:if test="${userInstance?.phone}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="user.phone.label" default="Phone" /></label>
+									<label class="control-label"><g:message code="user.phone.label" default="电话" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="phone"/></div>
@@ -65,7 +65,7 @@
 							<g:if test="${userInstance?.accountType}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="user.accountType.label" default="Account Type" /></label>
+									<label class="control-label"><g:message code="user.accountType.label" default="用户类型" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="accountType"/></div>
@@ -76,7 +76,7 @@
 							<g:if test="${userInstance?.dateCreated}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="user.dateCreated.label" default="Date Created" /></label>
+									<label class="control-label"><g:message code="user.dateCreated.label" default="创建时间" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:formatDate date="${userInstance?.dateCreated}" /></div>
@@ -87,7 +87,7 @@
 							<g:if test="${userInstance?.supplierId}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="user.supplierId.label" default="Supplier Id" /></label>
+									<label class="control-label"><g:message code="user.supplierId.label" default="供应商ID" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${userInstance?.supplierId?.id}">${userInstance?.supplierId?.encodeAsHTML()}</g:link></div>

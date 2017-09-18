@@ -6,6 +6,7 @@ class UserService {
     def result = [status: 200,message: "",data:[:]]
     def signIn(data) {
         def user = User.findByUsernameAndPassword(data.username,data.password)
+        
         if(user){
             getSession().user = user
         }else{

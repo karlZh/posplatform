@@ -5,14 +5,21 @@ import org.springframework.web.context.request.RequestContextHolder
 /**
  * Created by user on 2017-09-14.
  */
+
 class OrdersService {
     def result = [status: 200,message: "",data:[:]]
-    def orderRefund(data){
-        def orderInfo = Orders.findById(data.orderid)
+    def orderSearch(data){
+        def orderInfo = Orders.findAllBySerialNum(data.serialNum)
+        if (!orderInfo){
+
+            result.status = 301
+            result.message="流水号不存在"
+            return result
+        }
+        result.message = "查询成功！"
+        result.data=orderInfo
+        return result
 
     }
-    //Getting the Session object
-    def getSession(){
-        return RequestContextHolder.currentRequestAttributes().getSessionMutex()
-    }
+
 }

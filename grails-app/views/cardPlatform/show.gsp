@@ -10,11 +10,11 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="default.show.label" args="[entityName]" /></h2>
+			<h2>商户信息表</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li class="active"><g:message code="default.show.label" args="[entityName]" /></li>
+				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li><g:link class="list" action="list">商户信息表</g:link></li>
+				<li class="active">操作商户</li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -22,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="default.show.label" args="[entityName]" /></h3>
+							<h3>显示商户信息</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -32,7 +32,7 @@
 							<g:if test="${cardPlatformInstance?.name}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="cardPlatform.name.label" default="Name" /></label>
+									<label class="control-label"><g:message code="cardPlatform.name.label" default="商户姓名" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardPlatformInstance}" field="name"/></div>
@@ -43,7 +43,7 @@
 							<g:if test="${cardPlatformInstance?.address}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="cardPlatform.address.label" default="Address" /></label>
+									<label class="control-label"><g:message code="cardPlatform.address.label" default="地址" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${cardPlatformInstance}" field="address"/></div>
@@ -54,7 +54,7 @@
 							<g:if test="${cardPlatformInstance?.dateCreated}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="cardPlatform.dateCreated.label" default="Date Created" /></label>
+									<label class="control-label"><g:message code="cardPlatform.dateCreated.label" default="创建时间" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:formatDate date="${cardPlatformInstance?.dateCreated}" /></div>

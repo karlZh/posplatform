@@ -9,11 +9,11 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="default.edit.label" args="[entityName]" /></h2>
+			<h2>订单表</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li class="active"><g:message code="default.edit.label" args="[entityName]" /></li>
+				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li><g:link class="list" action="list">订单表</g:link></li>
+				<li class="active">操作订单</li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -21,7 +21,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="default.edit.label" args="[entityName]" /></h3>
+							<h3>修改订单</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">

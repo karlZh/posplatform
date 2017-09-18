@@ -4,7 +4,10 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                 <span class="fa fa-gear"></span>
             </button>
-            <a class="navbar-brand" href="#"><span>Clean Zone</span></a>
+            %{--<a class="navbar-brand" href="#"><span>聚优福利</span></a>--}%
+            %{--<img src="juyoufuli.png" style="width:30px;height:30px;">--}%
+            <g:img dir="resources" file="juyoufuli.png"/>
+            %{--<img src="${resource(dir: 'resources',file:'juyoufuli.png')}">--}%
         </div>
         <div class="navbar-collapse collapse">
 

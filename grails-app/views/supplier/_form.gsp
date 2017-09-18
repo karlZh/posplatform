@@ -4,7 +4,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'name', 'error')} required form-group">
 	<label for="name" class="col-sm-2 control-label">
-		<g:message code="supplier.name.label" default="Name" />
+		<g:message code="supplier.name.label" default="供应商姓名" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -14,7 +14,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'ratio', 'error')} required form-group">
 	<label for="ratio" class="col-sm-2 control-label">
-		<g:message code="supplier.ratio.label" default="Ratio" />
+		<g:message code="supplier.ratio.label" default="结算比例" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -24,7 +24,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'price', 'error')} required form-group">
 	<label for="price" class="col-sm-2 control-label">
-		<g:message code="supplier.price.label" default="Price" />
+		<g:message code="supplier.price.label" default="结算价格" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -34,7 +34,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'address', 'error')}  form-group">
 	<label for="address" class="col-sm-2 control-label">
-		<g:message code="supplier.address.label" default="Address" />
+		<g:message code="supplier.address.label" default="地址" />
 		
 	</label>
 	<div class="col-sm-6">
@@ -44,7 +44,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'phone', 'error')} required form-group">
 	<label for="phone" class="col-sm-2 control-label">
-		<g:message code="supplier.phone.label" default="Phone" />
+		<g:message code="supplier.phone.label" default="电话" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -54,7 +54,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'remark', 'error')}  form-group">
 	<label for="remark" class="col-sm-2 control-label">
-		<g:message code="supplier.remark.label" default="Remark" />
+		<g:message code="supplier.remark.label" default="备注" />
 		
 	</label>
 	<div class="col-sm-6">
@@ -64,7 +64,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'parentId', 'error')} required form-group">
 	<label for="parentId" class="col-sm-2 control-label">
-		<g:message code="supplier.parentId.label" default="Parent Id" />
+		<g:message code="supplier.parentId.label" default="夫供应商 Id" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -74,7 +74,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'posmachine', 'error')}  form-group">
 	<label for="posmachine" class="col-sm-2 control-label">
-		<g:message code="supplier.posmachine.label" default="Posmachine" />
+		<g:message code="supplier.posmachine.label" default="POS机" />
 		
 	</label>
 	<div class="col-sm-6">
@@ -93,7 +93,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'tickettype', 'error')}  form-group">
 	<label for="tickettype" class="col-sm-2 control-label">
-		<g:message code="supplier.tickettype.label" default="Tickettype" />
+		<g:message code="supplier.tickettype.label" default="票类型" />
 		
 	</label>
 	<div class="col-sm-6">
@@ -112,7 +112,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'user', 'error')}  form-group">
 	<label for="user" class="col-sm-2 control-label">
-		<g:message code="supplier.user.label" default="User" />
+		<g:message code="supplier.user.label" default="用户" />
 		
 	</label>
 	<div class="col-sm-6">

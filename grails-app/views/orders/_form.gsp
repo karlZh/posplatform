@@ -4,7 +4,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'cardNum', 'error')}  form-group">
 	<label for="cardNum" class="col-sm-2 control-label">
-		<g:message code="orders.cardNum.label" default="Card Num" />
+		<g:message code="orders.cardNum.label" default="卡号" />
 		
 	</label>
 	<div class="col-sm-6">
@@ -14,7 +14,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'password', 'error')}  form-group">
 	<label for="password" class="col-sm-2 control-label">
-		<g:message code="orders.password.label" default="Password" />
+		<g:message code="orders.password.label" default="密码" />
 		
 	</label>
 	<div class="col-sm-6">
@@ -24,7 +24,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'amount', 'error')} required form-group">
 	<label for="amount" class="col-sm-2 control-label">
-		<g:message code="orders.amount.label" default="Amount" />
+		<g:message code="orders.amount.label" default="应扣订单总金额" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -34,7 +34,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'actualAmount', 'error')} required form-group">
 	<label for="actualAmount" class="col-sm-2 control-label">
-		<g:message code="orders.actualAmount.label" default="Actual Amount" />
+		<g:message code="orders.actualAmount.label" default="实扣总金额" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -44,7 +44,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'cardPlatformId', 'error')} required form-group">
 	<label for="cardPlatformId" class="col-sm-2 control-label">
-		<g:message code="orders.cardPlatformId.label" default="Card Platform Id" />
+		<g:message code="orders.cardPlatformId.label" default="商户 Id" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -54,7 +54,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'supplierId', 'error')} required form-group">
 	<label for="supplierId" class="col-sm-2 control-label">
-		<g:message code="orders.supplierId.label" default="Supplier Id" />
+		<g:message code="orders.supplierId.label" default="供应商 Id" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -64,7 +64,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'orderType', 'error')} required form-group">
 	<label for="orderType" class="col-sm-2 control-label">
-		<g:message code="orders.orderType.label" default="Order Type" />
+		<g:message code="orders.orderType.label" default="订单类型" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -74,7 +74,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'num', 'error')} required form-group">
 	<label for="num" class="col-sm-2 control-label">
-		<g:message code="orders.num.label" default="Num" />
+		<g:message code="orders.num.label" default="张数" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -84,7 +84,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'ticketTypeId', 'error')} required form-group">
 	<label for="ticketTypeId" class="col-sm-2 control-label">
-		<g:message code="orders.ticketTypeId.label" default="Ticket Type Id" />
+		<g:message code="orders.ticketTypeId.label" default="票类型id" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -94,7 +94,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'validity', 'error')} required form-group">
 	<label for="validity" class="col-sm-2 control-label">
-		<g:message code="orders.validity.label" default="Validity" />
+		<g:message code="orders.validity.label" default="有效日期" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -104,7 +104,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'orderSn', 'error')}  form-group">
 	<label for="orderSn" class="col-sm-2 control-label">
-		<g:message code="orders.orderSn.label" default="Order Sn" />
+		<g:message code="orders.orderSn.label" default="订单号" />
 		
 	</label>
 	<div class="col-sm-6">
@@ -114,7 +114,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'serialNum', 'error')}  form-group">
 	<label for="serialNum" class="col-sm-2 control-label">
-		<g:message code="orders.serialNum.label" default="Serial Num" />
+		<g:message code="orders.serialNum.label" default="流水号" />
 		
 	</label>
 	<div class="col-sm-6">
