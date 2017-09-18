@@ -65,25 +65,27 @@ class PosApiController {
             case "signIn":
                 result = userService.signIn(data);
                 break
-            case "search"://通过流水号查询
-                result = ordersService.orderSearch(data)
-            case "searchCount"://查询总记录
-                result=groupQueryService.searchCount(data)
-
-             case "orderRefund":
-                 result= refundService.orderRefund(data)
-             case "last":
-                 result=lastOrderService.last(data)
-                break;
+            case "signOut":
+                result = userService.signOut(data);
+                break
             case "checkCard":
                 result = ordersService.checkCard(data)
                 break
             case "pay":
                 result = ordersService.orderPay(data)
                 break
-            case "refund":
-                result = ordersService.orderRefund(data)
+            case "search"://通过流水号查询
+                result = ordersService.orderSearch(data)
                 break
+            case "searchCount"://查询总记录
+                result=groupQueryService.searchCount(data)
+                break
+            case "orderRefund": //订单退款
+                result= ordersService.orderRefund(data)
+                break
+            case "last":
+                result=lastOrderService.last()
+                break;
             default:
                 result.status = false
                 result.message = "未知错误"

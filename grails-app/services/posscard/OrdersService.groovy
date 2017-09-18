@@ -8,6 +8,7 @@ import org.springframework.web.context.request.RequestContextHolder
 
 class OrdersService {
     def zftPlatformService
+
     def checkCard(data){
         def result = [status: 200,message: "",data:[:]]
         if(!data.cardnum){
@@ -32,6 +33,7 @@ class OrdersService {
         result.data.ticketType = ticketType
         return result
     }
+
     def orderPay(data){
         def result = [status: 200,message: "",data:[:]]
         if(!data.cardnum){
@@ -124,23 +126,78 @@ class OrdersService {
         result.message = "支付成功"
         return result
     }
+    //退款操作
     def orderRefund(data){
         def result = [status: 200,message: "",data:[:]]
+        if(!data.tradeno){
+            result.status = 302
+            result.message = "流水号缺失"
+            return result
+        }
+        if(!data.cardnum){
+            result.status = 302
+            result.message = "卡号缺失"
+            return result
+        }
 
-
-        def orderInfo = Orders.findByOrderSn(data.tradeno)
+        def orderInfo = Orders.findByOrderSnAndCardNum(data.tradeno,data.cardnum)
         if(!orderInfo){
-            result.status = 30
+            result.status = 301
             result.message = "未找到该订单"
             return result
         }
-        
+        def date = new Date()
+        def randomStr = (int)(Math.random())*10000
+        def orderSn = date.format("yyyyMMddHHmmss") + randomStr.toString()
+        def serialNum = "100"+ orderSn
+
+        def orderInstance = new Orders(
+                orderSn: orderSn,
+                serialNum: serialNum,
+                amount: orderInfo.amount,
+                num: orderInfo.num,
+                orderType: 2,
+                supplierId: orderInfo.supplierId,
+                ticketTypeId: orderInfo.ticketTypeId,
+                cardNum: orderInfo.cardNum,
+                cardPlatformId: orderInfo.cardPlatformId,
+                validity: orderInfo.validity,
+                orderStatus: 0
+        )
+        if (!orderInstance.save(flush: true)) {
+            result.status = 303
+            result.message = "创建订单失败"
+            return result
+        }
+
+        def platRes = zftPlatformService.rollBack(data.cardnum,orderInfo.transId,serialNum)
+        if(platRes.state != 0){
+            result.status = 401
+            result.message = platRes.msg
+            return result
+        }
+        orderInstance.orderStatus = 1
+        orderInstance.transId = platRes.data.RefundTransId
+        if (!orderInstance.save(flush: true)) {
+            result.status = 303
+            result.message = "订单更新失败"
+            return result
+        }
+
+        result.message = "退款成功"
+        return result
+
     }
+    //    查询订单
     def orderSearch(data){
         def result = [status: 200, message: "", data: [:]]
-        def orderInfo = Orders.findAllBySerialNum(data.serialNum)
+        if(!data.tradeno){
+            result.status = 302
+            result.message = "输入流水号"
+            return result
+        }
+        def orderInfo = Orders.findAllByOrderSn(data.tradeno)
         if (!orderInfo) {
-
             result.status = 301
             result.message = "流水号不存在"
             return result
