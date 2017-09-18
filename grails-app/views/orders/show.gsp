@@ -10,11 +10,11 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="default.show.label" args="[entityName]" /></h2>
+			<h2>订单表</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li class="active"><g:message code="default.show.label" args="[entityName]" /></li>
+				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li><g:link class="list" action="list">订单表</g:link></li>
+				<li class="active">操作订单</li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -22,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="default.show.label" args="[entityName]" /></h3>
+							<h3>显示订单</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -32,7 +32,7 @@
 							<g:if test="${ordersInstance?.cardNum}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.cardNum.label" default="Card Num" /></label>
+									<label class="control-label"><g:message code="orders.cardNum.label" default="卡号" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="cardNum"/></div>
@@ -43,7 +43,7 @@
 							<g:if test="${ordersInstance?.password}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.password.label" default="Password" /></label>
+									<label class="control-label"><g:message code="orders.password.label" default="密码" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="password"/></div>
@@ -54,7 +54,7 @@
 							<g:if test="${ordersInstance?.amount}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.amount.label" default="Amount" /></label>
+									<label class="control-label"><g:message code="orders.amount.label" default="应扣订单总金额" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="amount"/></div>
@@ -65,7 +65,7 @@
 							<g:if test="${ordersInstance?.actualAmount}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.actualAmount.label" default="Actual Amount" /></label>
+									<label class="control-label"><g:message code="orders.actualAmount.label" default="实扣总金额" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="actualAmount"/></div>
@@ -76,7 +76,7 @@
 							<g:if test="${ordersInstance?.cardPlatformId}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.cardPlatformId.label" default="Card Platform Id" /></label>
+									<label class="control-label"><g:message code="orders.cardPlatformId.label" default="商户 Id" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="cardPlatformId"/></div>
@@ -87,7 +87,7 @@
 							<g:if test="${ordersInstance?.supplierId}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.supplierId.label" default="Supplier Id" /></label>
+									<label class="control-label"><g:message code="orders.supplierId.label" default="供应商 Id" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="supplierId"/></div>
@@ -98,7 +98,7 @@
 							<g:if test="${ordersInstance?.dateCreated}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.dateCreated.label" default="Date Created" /></label>
+									<label class="control-label"><g:message code="orders.dateCreated.label" default="创建日期" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:formatDate date="${ordersInstance?.dateCreated}" /></div>
@@ -109,7 +109,7 @@
 							<g:if test="${ordersInstance?.orderType}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.orderType.label" default="Order Type" /></label>
+									<label class="control-label"><g:message code="orders.orderType.label" default="订单类型" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="orderType"/></div>
@@ -120,7 +120,7 @@
 							<g:if test="${ordersInstance?.num}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.num.label" default="Num" /></label>
+									<label class="control-label"><g:message code="orders.num.label" default="张数" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="num"/></div>
@@ -131,7 +131,7 @@
 							<g:if test="${ordersInstance?.ticketTypeId}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.ticketTypeId.label" default="Ticket Type Id" /></label>
+									<label class="control-label"><g:message code="orders.ticketTypeId.label" default="票类型 Id" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="ticketTypeId"/></div>
@@ -142,7 +142,7 @@
 							<g:if test="${ordersInstance?.validity}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.validity.label" default="Validity" /></label>
+									<label class="control-label"><g:message code="orders.validity.label" default="有效期" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="validity"/></div>
@@ -153,7 +153,7 @@
 							<g:if test="${ordersInstance?.orderSn}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.orderSn.label" default="Order Sn" /></label>
+									<label class="control-label"><g:message code="orders.orderSn.label" default="订单号" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="orderSn"/></div>
@@ -164,7 +164,7 @@
 							<g:if test="${ordersInstance?.serialNum}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.serialNum.label" default="Serial Num" /></label>
+									<label class="control-label"><g:message code="orders.serialNum.label" default="流水号" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="serialNum"/></div>

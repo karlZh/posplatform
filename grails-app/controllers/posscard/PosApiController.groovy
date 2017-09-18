@@ -17,6 +17,8 @@ class PosApiController {
     def userService
     def dataProcessingService
     def ordersService
+    def groupQueryService
+    def refundService
     def index() {
 //        def a = 'asdf'
 //        def b = DESUtil.encode(poskey,a)
@@ -53,8 +55,14 @@ class PosApiController {
             case 'signIn':
                 result = userService.signIn(data);
                 break
-            case "refund":
-                result = ordersService.orderRefund(data)
+            case "search"://通过流水号查询
+                result = ordersService.orderSearch(data)
+            case "searchCount"://查询总记录
+                result=groupQueryService.searchCount(data)
+
+             case "orderRefund":
+                 result= refundService.orderRefund(data)
+
             default:
                 result.status = false
                 result.message = "未知错误"

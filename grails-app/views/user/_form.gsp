@@ -4,7 +4,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')} required form-group">
 	<label for="username" class="col-sm-2 control-label">
-		<g:message code="user.username.label" default="Username" />
+		<g:message code="user.username.label" default="用户名" />
 		<span class="required-indicator">*</span>
 	</label>
 
@@ -15,7 +15,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required form-group">
 	<label for="password" class="col-sm-2 control-label">
-		<g:message code="user.password.label" default="Password" />
+		<g:message code="user.password.label" default="密码" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -25,7 +25,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'phone', 'error')}  form-group">
 	<label for="phone" class="col-sm-2 control-label">
-		<g:message code="user.phone.label" default="Phone" />
+		<g:message code="user.phone.label" default="电话" />
 		
 	</label>
 	<div class="col-sm-6">
@@ -35,7 +35,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountType', 'error')}  form-group">
 	<label for="accountType" class="col-sm-2 control-label">
-		<g:message code="user.accountType.label" default="Account Type" />
+		<g:message code="user.accountType.label" default="用户类型" />
 		
 	</label>
 	<div class="col-sm-6">
@@ -45,7 +45,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'supplierId', 'error')} required form-group">
 	<label for="supplierId" class="col-sm-2 control-label">
-		<g:message code="user.supplierId.label" default="Supplier Id" />
+		<g:message code="user.supplierId.label" default="供应商ID" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">

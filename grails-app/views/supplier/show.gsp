@@ -10,11 +10,11 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="default.show.label" args="[entityName]" /></h2>
+			<h2>供应商表</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li class="active"><g:message code="default.show.label" args="[entityName]" /></li>
+				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li><g:link class="list" action="list">供应商表</g:link></li>
+				<li class="active">操作供应商</li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -22,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="default.show.label" args="[entityName]" /></h3>
+							<h3>显示供应商</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -32,7 +32,7 @@
 							<g:if test="${supplierInstance?.name}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="supplier.name.label" default="Name" /></label>
+									<label class="control-label"><g:message code="supplier.name.label" default="供应商名" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${supplierInstance}" field="name"/></div>
@@ -43,7 +43,7 @@
 							<g:if test="${supplierInstance?.ratio}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="supplier.ratio.label" default="Ratio" /></label>
+									<label class="control-label"><g:message code="supplier.ratio.label" default="结算比例" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${supplierInstance}" field="ratio"/></div>
@@ -54,7 +54,7 @@
 							<g:if test="${supplierInstance?.price}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="supplier.price.label" default="Price" /></label>
+									<label class="control-label"><g:message code="supplier.price.label" default="结算价格" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${supplierInstance}" field="price"/></div>
@@ -65,7 +65,7 @@
 							<g:if test="${supplierInstance?.address}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="supplier.address.label" default="Address" /></label>
+									<label class="control-label"><g:message code="supplier.address.label" default="地址" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${supplierInstance}" field="address"/></div>
@@ -76,7 +76,7 @@
 							<g:if test="${supplierInstance?.phone}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="supplier.phone.label" default="Phone" /></label>
+									<label class="control-label"><g:message code="supplier.phone.label" default="电话" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${supplierInstance}" field="phone"/></div>
@@ -87,7 +87,7 @@
 							<g:if test="${supplierInstance?.remark}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="supplier.remark.label" default="Remark" /></label>
+									<label class="control-label"><g:message code="supplier.remark.label" default="备注" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${supplierInstance}" field="remark"/></div>
@@ -98,7 +98,7 @@
 							<g:if test="${supplierInstance?.parentId}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="supplier.parentId.label" default="Parent Id" /></label>
+									<label class="control-label"><g:message code="supplier.parentId.label" default="夫供应商 Id" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${supplierInstance}" field="parentId"/></div>
@@ -109,7 +109,7 @@
 							<g:if test="${supplierInstance?.dateCreated}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="supplier.dateCreated.label" default="Date Created" /></label>
+									<label class="control-label"><g:message code="supplier.dateCreated.label" default="创建时间" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:formatDate date="${supplierInstance?.dateCreated}" /></div>
@@ -120,7 +120,7 @@
 							<g:if test="${supplierInstance?.posmachine}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="supplier.posmachine.label" default="Posmachine" /></label>
+									<label class="control-label"><g:message code="supplier.posmachine.label" default="POS机" /></label>
 									</div>
 									
 									<g:each in="${supplierInstance.posmachine}" var="p">
@@ -133,7 +133,7 @@
 							<g:if test="${supplierInstance?.tickettype}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="supplier.tickettype.label" default="Tickettype" /></label>
+									<label class="control-label"><g:message code="supplier.tickettype.label" default="票类型" /></label>
 									</div>
 									
 									<g:each in="${supplierInstance.tickettype}" var="t">
@@ -146,7 +146,7 @@
 							<g:if test="${supplierInstance?.user}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="supplier.user.label" default="User" /></label>
+									<label class="control-label"><g:message code="supplier.user.label" default="用户名" /></label>
 									</div>
 									
 									<g:each in="${supplierInstance.user}" var="u">

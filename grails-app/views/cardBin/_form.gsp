@@ -4,7 +4,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: cardBinInstance, field: 'cardbin', 'error')} required form-group">
 	<label for="cardbin" class="col-sm-2 control-label">
-		<g:message code="cardBin.cardbin.label" default="Cardbin" />
+		<g:message code="cardBin.cardbin.label" default="卡号前6位" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -14,7 +14,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: cardBinInstance, field: 'cardbinPlatform', 'error')}  form-group">
 	<label for="cardbinPlatform" class="col-sm-2 control-label">
-		<g:message code="cardBin.cardbinPlatform.label" default="Cardbin Platform" />
+		<g:message code="cardBin.cardbinPlatform.label" default="商户" />
 		
 	</label>
 	<div class="col-sm-6">

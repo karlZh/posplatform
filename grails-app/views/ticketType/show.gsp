@@ -10,11 +10,11 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="default.show.label" args="[entityName]" /></h2>
+			<h2>消费类型表</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li class="active"><g:message code="default.show.label" args="[entityName]" /></li>
+				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li><g:link class="list" action="list">消费类型表</g:link></li>
+				<li class="active">操作消费类型</li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -22,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="default.show.label" args="[entityName]" /></h3>
+							<h3>显示消费类型</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -32,7 +32,7 @@
 							<g:if test="${ticketTypeInstance?.name}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="ticketType.name.label" default="Name" /></label>
+									<label class="control-label"><g:message code="ticketType.name.label" default="类型名称" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ticketTypeInstance}" field="name"/></div>
@@ -43,7 +43,7 @@
 							<g:if test="${ticketTypeInstance?.point}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="ticketType.point.label" default="Point" /></label>
+									<label class="control-label"><g:message code="ticketType.point.label" default="扣点数" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ticketTypeInstance}" field="point"/></div>
@@ -54,7 +54,7 @@
 							<g:if test="${ticketTypeInstance?.accountPoint}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="ticketType.accountPoint.label" default="Account Point" /></label>
+									<label class="control-label"><g:message code="ticketType.accountPoint.label" default="结算点数" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ticketTypeInstance}" field="accountPoint"/></div>
@@ -65,7 +65,7 @@
 							<g:if test="${ticketTypeInstance?.accountRatio}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="ticketType.accountRatio.label" default="Account Ratio" /></label>
+									<label class="control-label"><g:message code="ticketType.accountRatio.label" default="结算比例" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ticketTypeInstance}" field="accountRatio"/></div>
@@ -76,7 +76,7 @@
 							<g:if test="${ticketTypeInstance?.dateCreated}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="ticketType.dateCreated.label" default="Date Created" /></label>
+									<label class="control-label"><g:message code="ticketType.dateCreated.label" default="创建日期" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:formatDate date="${ticketTypeInstance?.dateCreated}" /></div>
@@ -87,7 +87,7 @@
 							<g:if test="${ticketTypeInstance?.supplierId}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="ticketType.supplierId.label" default="Supplier Id" /></label>
+									<label class="control-label"><g:message code="ticketType.supplierId.label" default="供应商 Id" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${ticketTypeInstance?.supplierId?.id}">${ticketTypeInstance?.supplierId?.encodeAsHTML()}</g:link></div>
