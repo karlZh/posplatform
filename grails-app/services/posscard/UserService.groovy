@@ -7,6 +7,7 @@ class UserService {
     def signIn(data) {
         def result = [status: 200,message: "",data:[:]]
         def user = User.findByUsernameAndPassword(data.username,data.password)
+        
         if(user){
             if(user.accountType != 1){
                 result.status = 301

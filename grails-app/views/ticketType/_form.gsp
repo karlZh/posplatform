@@ -4,7 +4,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'name', 'error')}  form-group">
 	<label for="name" class="col-sm-2 control-label">
-		<g:message code="ticketType.name.label" default="Name" />
+		<g:message code="ticketType.name.label" default="类型名称" />
 		
 	</label>
 	<div class="col-sm-6">
@@ -14,7 +14,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'point', 'error')} required form-group">
 	<label for="point" class="col-sm-2 control-label">
-		<g:message code="ticketType.point.label" default="Point" />
+		<g:message code="ticketType.point.label" default="扣点数" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -24,7 +24,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'accountPoint', 'error')} required form-group">
 	<label for="accountPoint" class="col-sm-2 control-label">
-		<g:message code="ticketType.accountPoint.label" default="Account Point" />
+		<g:message code="ticketType.accountPoint.label" default="结算点数" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -34,7 +34,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'accountRatio', 'error')} required form-group">
 	<label for="accountRatio" class="col-sm-2 control-label">
-		<g:message code="ticketType.accountRatio.label" default="Account Ratio" />
+		<g:message code="ticketType.accountRatio.label" default="结算比例" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
@@ -42,9 +42,10 @@
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'supplier', 'error')} required form-group">
-	<label for="supplier" class="col-sm-2 control-label">
-		<g:message code="ticketType.supplier.label" default="Supplier" />
+
+<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'supplierId', 'error')} required form-group">
+	<label for="supplierId" class="col-sm-2 control-label">
+		<g:message code="ticketType.supplierId.label" default="供应商 Id" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
