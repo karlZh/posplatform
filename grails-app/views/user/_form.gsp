@@ -7,11 +7,10 @@
 		<g:message code="user.username.label" default="Username" />
 		<span class="required-indicator">*</span>
 	</label>
-
-  <div class="col-sm-6">
+	<div class="col-sm-6">
 	<g:textField class="form-control" name="username" maxlength="10" required="" value="${userInstance?.username}"/>
 	</div>
-  </div>
+</div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required form-group">
 	<label for="password" class="col-sm-2 control-label">
@@ -43,13 +42,13 @@
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'supplierId', 'error')} required form-group">
-	<label for="supplierId" class="col-sm-2 control-label">
-		<g:message code="user.supplierId.label" default="Supplier Id" />
-		<span class="required-indicator">*</span>
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'supplier', 'error')}  form-group">
+	<label for="supplier" class="col-sm-2 control-label">
+		<g:message code="user.supplier.label" default="Supplier" />
+		
 	</label>
 	<div class="col-sm-6">
-	<g:select id="supplierId" name="supplierId.id" from="${posscard.Supplier.list()}" optionKey="id" required="" value="${userInstance?.supplierId?.id}" class="many-to-one"/>
+	<g:select id="supplier" name="supplier.id" from="${posscard.Supplier.list()}" optionKey="id" value="${userInstance?.supplier?.id}" class="many-to-one" noSelection="['null': '']"/>
 	</div>
 </div>
 

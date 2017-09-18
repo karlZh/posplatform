@@ -4,9 +4,9 @@ import grails.converters.JSON
 
 class DataProcessingService {
     def poskey = "posplatformsystem"
-    def jsonMap = [status:0,message:"",data:[:]]
 
     def formatResult(data){
+        def jsonMap = [status:0,message:"",data:[:]]
         if(data.status == 200){
             jsonMap.message = data.message
             jsonMap.data = data.data

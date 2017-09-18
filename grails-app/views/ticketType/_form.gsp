@@ -42,13 +42,13 @@
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'supplierId', 'error')} required form-group">
-	<label for="supplierId" class="col-sm-2 control-label">
-		<g:message code="ticketType.supplierId.label" default="Supplier Id" />
+<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'supplier', 'error')} required form-group">
+	<label for="supplier" class="col-sm-2 control-label">
+		<g:message code="ticketType.supplier.label" default="Supplier" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-	<g:select id="supplierId" name="supplierId.id" from="${posscard.Supplier.list()}" optionKey="id" required="" value="${ticketTypeInstance?.supplierId?.id}" class="many-to-one"/>
+	<g:select id="supplier" name="supplier.id" from="${posscard.Supplier.list()}" optionKey="id" required="" value="${ticketTypeInstance?.supplier?.id}" class="many-to-one"/>
 	</div>
 </div>
 

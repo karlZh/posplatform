@@ -84,13 +84,13 @@
 								</div>
 							</g:if>
 							
-							<g:if test="${userInstance?.supplierId}">
+							<g:if test="${userInstance?.supplier}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="user.supplierId.label" default="Supplier Id" /></label>
+									<label class="control-label"><g:message code="user.supplier.label" default="Supplier" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${userInstance?.supplierId?.id}">${userInstance?.supplierId?.encodeAsHTML()}</g:link></div>
+									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${userInstance?.supplier?.id}">${userInstance?.supplier?.encodeAsHTML()}</g:link></div>
 									
 								</div>
 							</g:if>

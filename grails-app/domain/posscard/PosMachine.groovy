@@ -5,9 +5,8 @@ class PosMachine {
     Date  dateCreated //创建时间
 
     static constraints = {
-        supplierId()
         userId()
         dateCreated(display:false)
     }
-    static belongsTo = [supplierId: Supplier]
+    static belongsTo = [supplier: Supplier]
 }

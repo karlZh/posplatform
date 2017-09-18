@@ -14,8 +14,9 @@ class User {
         phone(nullable: false, matches: "0?(13|14|15|18)[0-9]{9}", minSize: 11)
         accountType(nullable: true,inList: [1,2,3,4])//1.pos机2.自己平台3.商户4.供应商
         dateCreated(display:false)
+        supplier(nullable: true)
     }
 
-    static belongsTo = [supplierId: Supplier]
+    static belongsTo = [supplier: Supplier]
 
 }

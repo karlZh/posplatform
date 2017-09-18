@@ -12,22 +12,13 @@
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: cardBinInstance, field: 'cardbinPlatform', 'error')}  form-group">
-	<label for="cardbinPlatform" class="col-sm-2 control-label">
-		<g:message code="cardBin.cardbinPlatform.label" default="Cardbin Platform" />
-		
+<div class="fieldcontain ${hasErrors(bean: cardBinInstance, field: 'cardPlatform', 'error')} required form-group">
+	<label for="cardPlatform" class="col-sm-2 control-label">
+		<g:message code="cardBin.cardPlatform.label" default="Card Platform" />
+		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-	
-<ul class="one-to-many">
-<g:each in="${cardBinInstance?.cardbinPlatform?}" var="c">
-    <li><g:link controller="cardbinPlatform" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="cardbinPlatform" action="create" params="['cardBin.id': cardBinInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'cardbinPlatform.label', default: 'CardbinPlatform')])}</g:link>
-</li>
-</ul>
-
+	<g:select id="cardPlatform" name="cardPlatform.id" from="${posscard.CardPlatform.list()}" optionKey="id" required="" value="${cardBinInstance?.cardPlatform?.id}" class="many-to-one"/>
 	</div>
 </div>
 
