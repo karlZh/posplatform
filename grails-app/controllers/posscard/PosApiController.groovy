@@ -19,6 +19,7 @@ class PosApiController {
     def ordersService
     def groupQueryService
     def refundService
+    def lastOrderService
     def index() {
 //        def a = 'asdf'
 //        def b = DESUtil.encode(poskey,a)
@@ -62,6 +63,11 @@ class PosApiController {
 
              case "orderRefund":
                  result= refundService.orderRefund(data)
+             case "last":
+                 result=lastOrderService.last(data)
+
+
+
 
             default:
                 result.status = false

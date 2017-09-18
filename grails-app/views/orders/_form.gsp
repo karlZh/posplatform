@@ -74,7 +74,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'num', 'error')} required form-group">
 	<label for="num" class="col-sm-2 control-label">
-		<g:message code="orders.num.label" default="Num" />
+		<g:message code="orders.num.label" default="张数" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">

@@ -26,7 +26,7 @@ class BondService {
 //        def book = Orders.listOrderByDateCreated()
 //        book = Orders.findByDateCreatedBetween( firstday, lastday )
         def point=Orders.findByAmountAndDateCreatedBetween( firstday, lastday )
-        if (point){
+        if (!point){
             result.status=301
             result.message="信息错误"
             return result
