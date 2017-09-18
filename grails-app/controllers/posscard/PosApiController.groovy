@@ -53,7 +53,7 @@ class PosApiController {
         data = params
         def result = [:]
         switch (params.act?.trim()) {
-            case 'signIn':
+            case "signIn":
                 result = userService.signIn(data);
                 break
             case "search"://通过流水号查询
@@ -65,23 +65,21 @@ class PosApiController {
                  result= refundService.orderRefund(data)
              case "last":
                  result=lastOrderService.last(data)
-
-
-
-
+                break;
+            case "refund":
+                result = ordersService.orderRefund(data)
             default:
                 result.status = false
                 result.message = "未知错误"
         }
 
-        render session
+        render dataProcessingService.dataEncode(result)
         return false
     }
     def list(){
         def data = dataProcessingService.dataDecode(params.pos)
         render data.message
     }
-    
 //    des加密
     def posdes(String appId,String appSercert,String timestamp,String nonce){
         def list=[appId,appSercert,timestamp,nonce]

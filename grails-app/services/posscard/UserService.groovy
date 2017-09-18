@@ -18,6 +18,11 @@ class UserService {
         return result
     }
 
+    def signOut() {
+        getSession().user = null
+        result.message = "签出成功！"
+        return result
+    }
     //Getting the Session object
     def getSession(){
         return RequestContextHolder.currentRequestAttributes().getSessionMutex()
