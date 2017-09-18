@@ -15,7 +15,7 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:mysql://localhost:3306/poscard"
 //            url = "jdbc:mysql://59.110.105.141:3306/pos_platform?useUnicode=true&characterEncoding=UTF-8"
         }
