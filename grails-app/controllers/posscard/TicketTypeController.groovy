@@ -15,15 +15,6 @@ class TicketTypeController {
         [ticketTypeInstanceList: TicketType.list(params), ticketTypeInstanceTotal: TicketType.count()]
     }
 
-    def search(){
-
-        def name=params.name
-        def result=TicketType.findAllByName(name)
-
-        def ticketTypeInstanceTotal=TicketType.countByName(name)
-
-        render (view:'list' , model: [ticketTypeInstanceList: result, ticketTypeInstanceTotal:ticketTypeInstanceTotal])
-    }
     def create() {
         [ticketTypeInstance: new TicketType(params)]
     }

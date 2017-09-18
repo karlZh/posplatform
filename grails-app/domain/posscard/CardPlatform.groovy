@@ -11,5 +11,5 @@ class CardPlatform {//商户数据表
         dateCreated(display:false)
     }
 
-    static hasMany = [cardbinPlatform: CardbinPlatform]
+    static hasMany = [cardBin: CardBin]
 }

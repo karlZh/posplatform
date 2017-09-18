@@ -51,15 +51,14 @@
 								</div>
 							</g:if>
 							
-							<g:if test="${cardBinInstance?.cardbinPlatform}">
+							<g:if test="${cardBinInstance?.cardPlatform}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
+
 									<label class="control-label"><g:message code="cardBin.cardbinPlatform.label" default="商户" /></label>
 									</div>
 									
-									<g:each in="${cardBinInstance.cardbinPlatform}" var="c">
-										<div class="col-sm-10 col-md-10"><g:link controller="cardbinPlatform" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></div>
-									</g:each>
+									<div class="col-sm-10 col-md-10"><g:link controller="cardPlatform" action="show" id="${cardBinInstance?.cardPlatform?.id}">${cardBinInstance?.cardPlatform?.encodeAsHTML()}</g:link></div>
 									
 								</div>
 							</g:if>

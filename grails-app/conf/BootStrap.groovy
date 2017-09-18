@@ -5,14 +5,6 @@ import posscard.Supplier
 class BootStrap {
 
     def init = { servletContext ->
-        def cardbin = new CardBin(
-                cardbin:'711001'
-        )
-        cardbin.save()
-        if (cardbin.hasErrors()) {
-           println cardbin.errors
-        }
-
         def cardplatform = new CardPlatform(
                 name: 'juyou',
                 address: 'yuanyingguoji'

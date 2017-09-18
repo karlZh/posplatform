@@ -52,6 +52,15 @@ class PosApiController {
         def data = [:]
         data = params
         def result = [:]
+        def signNot = ['signIn','signOut']
+        if(!signNot.contains(data.act)){
+            def res = userService.checkSign()
+            if(res.status != 200){
+                render dataProcessingService.dataEncode(res)
+                return false
+            }
+        }
+
         switch (params.act?.trim()) {
             case "signIn":
                 result = userService.signIn(data);
@@ -66,8 +75,15 @@ class PosApiController {
              case "last":
                  result=lastOrderService.last(data)
                 break;
+            case "checkCard":
+                result = ordersService.checkCard(data)
+                break
+            case "pay":
+                result = ordersService.orderPay(data)
+                break
             case "refund":
                 result = ordersService.orderRefund(data)
+                break
             default:
                 result.status = false
                 result.message = "未知错误"

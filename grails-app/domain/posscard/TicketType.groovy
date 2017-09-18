@@ -13,5 +13,5 @@ class TicketType {//按电影票不同的类型选择扣点数
         accountRatio() //结算比例
         dateCreated() //创建时间
     }
-    static belongsTo = [supplierId: Supplier]
+    static belongsTo = [supplier: Supplier]
 }

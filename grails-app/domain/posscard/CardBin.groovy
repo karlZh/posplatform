@@ -5,9 +5,9 @@ class CardBin {//卡bin
     Date dateCreated//创建时间
 
     static constraints = {
-        cardbin(blank: false, nullable: false)
+        cardbin(blank: false, nullable: false, unique: true)
         dateCreated(display: false)
     }
 
-    static hasMany = [cardbinPlatform: CardbinPlatform]
+    static belongsTo = ['cardPlatform':CardPlatform]
 }
