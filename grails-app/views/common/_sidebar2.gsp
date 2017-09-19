@@ -16,7 +16,7 @@
                 <ul class="cl-vnavigation">
 
 
-                    <li><g:link controller="orders" action="list"><span>订单</span></g:link>
+                    <li><g:link controller="orders" action="list"><span>订单信息</span></g:link>
 
 
 

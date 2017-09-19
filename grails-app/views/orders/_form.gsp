@@ -28,7 +28,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-	<g:field name="amount" value="${fieldValue(bean: ordersInstance, field: 'amount')}" required=""/>
+	<g:field type="" name="amount" value="${fieldValue(bean: ordersInstance, field: 'amount')}" required=""/>
 	</div>
 </div>
 
@@ -121,4 +121,13 @@
 	<g:textField class="form-control" name="serialNum" value="${ordersInstance?.serialNum}"/>
 	</div>
 </div>
+%{--<div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'orderStatus', 'error')}  form-group">--}%
+    %{--<label for="orderStatus" class="col-sm-2 control-label">--}%
+        %{--<g:message code="orders.orderStatus.label" default="订单状态" />--}%
+
+    %{--</label>--}%
+    %{--<div class="col-sm-6">--}%
+        %{--<g:textField class="form-control" name="orderStatus" value="${ordersInstance?.orderStatus}"/>--}%
+    %{--</div>--}%
+%{--</div>--}%
 

@@ -15,6 +15,15 @@ class UserController {
         [userInstanceList: User.list(params), userInstanceTotal: User.count()]
     }
 
+    def search(){
+
+        def name=params.name
+        def result=User.findAllByUsername(name)
+        def userInstanceTotal=User.countByUsername(name)
+
+        render (view:'list' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
+    }
+
     def create() {
         [userInstance: new User(params)]
     }

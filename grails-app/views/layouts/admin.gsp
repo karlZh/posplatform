@@ -8,8 +8,6 @@
 	<meta name="author" content="">
 	<meta name="layout" content="main">
 	<title></title>
-	<link href='http\fonts.googleapis.com\MS_5.html' rel='stylesheet' type='text/css'>
-	<link href='http\fonts.googleapis.com\MS_3.html' rel='stylesheet' type='text/css'>
 	<!-- Bootstrap core CSS -->
 	<link href="${resource(dir: 'js/bootstrap/dist/css', file: 'bootstrap.css')}" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="${resource(dir: 'js/jquery.gritter/css', file: 'jquery.gritter.css')}" />
@@ -29,7 +27,7 @@
 	<link rel="stylesheet" type="text/css" href="${resource(dir: 'js/jquery.datatables/bootstrap-adapter/css',file: 'datatables.css')}" />
 	<link href="${resource(dir: 'css',file: 'style.css')}" rel="stylesheet" />
 
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"></meta>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
     <g:layoutHead/>
 </head>
 	<body>
@@ -61,8 +59,6 @@
 	<script type="text/javascript" src="${resource(dir: 'js/jquery.gritter/js', file: 'jquery.gritter.js')}"></script>
 	<script type="text/javascript" src="${resource(dir: 'js/jquery.datatables', file: 'jquery.datatables.min.js')}"></script>
 	<script type="text/javascript" src="${resource(dir: 'js/jquery.datatables/bootstrap-adapter/js', file: 'datatables.js')}"></script>
-<!--
-
 	<script type="text/javascript">
         //Add dataTable Functions
         var functions = $('<div class="btn-group"><button class="btn btn-default btn-xs" type="button">Actions</button><button data-toggle="dropdown" class="btn btn-xs btn-primary dropdown-toggle" type="button"><span class="caret"></span><span class="sr-only">Toggle Dropdown</span></button><ul role="menu" class="dropdown-menu pull-right"><li><a href="#">Edit</a></li><li><a href="#">Copy</a></li><li><a href="#">Details</a></li><li class="divider"></li><li><a href="#">Remove</a></li></ul></div>');
@@ -148,7 +144,7 @@
             //Horizontal Icons dataTable
             $('#datatable-icons').dataTable();
         });
-	</script> -->
+	</script>
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

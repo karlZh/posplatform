@@ -128,25 +128,25 @@ class OrdersService {
         def result = [status: 200,message: "",data:[:]]
 
 
-        def orderInfo = Orders.findByOrderSn(data.tradeno)
-        if(!orderInfo){
-            result.status = 30
-            result.message = "未找到该订单"
-            return result
-        }
-        
-    }
-    def orderSearch(data){
-        def result = [status: 200, message: "", data: [:]]
-        def orderInfo = Orders.findAllBySerialNum(data.serialNum)
-        if (!orderInfo) {
+ def orderInfo = Orders.findByOrderSn(data.tradeno)
+if(!orderInfo){
+    result.status = 30
+    result.message = "未找到该订单"
+    return result
+}
 
-            result.status = 301
-            result.message = "流水号不存在"
-            return result
-        }
-        result.message = "查询成功！"
-        result.data = orderInfo
+}
+def orderSearch(data){
+    def result = [status: 200, message: "", data: [:]]
+    def orderInfo = Orders.findAllBySerialNum(data.serialNum)
+    if (!orderInfo) {
+
+        result.status = 301
+        result.message = "流水号不存在"
         return result
     }
+    result.message = "查询成功！"
+    result.data = orderInfo
+    return result
+}
 }

@@ -15,6 +15,15 @@ class CardPlatformController {
         [cardPlatformInstanceList: CardPlatform.list(params), cardPlatformInstanceTotal: CardPlatform.count()]
     }
 
+    def search(){
+
+        def name=params.name
+        def result=CardPlatform.findAllByName(name)
+        def cardPlatformInstanceTotal=CardPlatform.countByName(name)
+
+        render (view:'list' , model: [cardPlatformInstanceList: result, cardPlatformInstanceTotal:cardPlatformInstanceTotal])
+    }
+
     def create() {
         [cardPlatformInstance: new CardPlatform(params)]
     }

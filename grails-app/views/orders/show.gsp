@@ -160,15 +160,15 @@
 									
 								</div>
 							</g:if>
-							
+
 							<g:if test="${ordersInstance?.serialNum}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
 									<label class="control-label"><g:message code="orders.serialNum.label" default="流水号" /></label>
 									</div>
-									
+
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="serialNum"/></div>
-									
+
 								</div>
 							</g:if>
 							

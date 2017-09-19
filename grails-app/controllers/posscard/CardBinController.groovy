@@ -15,6 +15,15 @@ class CardBinController {
         [cardBinInstanceList: CardBin.list(params), cardBinInstanceTotal: CardBin.count()]
     }
 
+    def search(){
+
+        def name=params.name
+        def result=CardBin.findAllByCardbin(name)
+        def cardBinInstanceTotal=CardBin.countByName(name)
+
+        render (view:'list' , model: [cardBinInstanceList: result, cardBinInstanceTotal:cardBinInstanceTotal])
+    }
+
     def create() {
         [cardBinInstance: new CardBin(params)]
     }
