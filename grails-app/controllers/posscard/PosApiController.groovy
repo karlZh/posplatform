@@ -18,42 +18,35 @@ class PosApiController {
     def dataProcessingService
     def ordersService
     def groupQueryService
-    def refundService
     def lastOrderService
     def index() {
-//        def a = 'asdf'
-//        def b = DESUtil.encode(poskey,a)
-//        render(b)
-//        return false
-//        def posStr = params.pos?.trim()
-//        if(!posStr){
-//            jsonMap.status = 1
-//            jsonMap.message = "no params"
-//            render dataEcrypt(jsonMap)
-//            return false
-//        }
-//        def posParams = dataDecrypt(posStr)
-//        if(!posParams.pro||posParams.pro.trim() != 'posPlatform'){
-//            jsonMap.status = 1
-//            jsonMap.message = "无效项目名称"
-//            render dataEcrypt(jsonMap)
-//            return false
-//        }
-//        if(!posParams.ins||posParams.ins?.trim() != 'posSystem'){
-//            jsonMap.status = 1
-//            jsonMap.message = "无效指令"
-//            render dataEcrypt(jsonMap)
-//            return false
-//        }
-////        switch (posParams.act?.trim()) {
-//        def data
-//        render params.username
-//        return false
-        def data = [:]
-        data = params
         def result = [:]
+        def posStr = params.pos?.trim()
+        if(!posStr){
+            result.status = 302
+            result.message = "参数缺失"
+            render  dataProcessingService.dataEncode(result)
+            return false
+        }
+        def posParams = dataProcessingService.dataDecode(posStr)
+        if(!posParams.pro||posParams.pro.trim() != 'posPlatform'){
+            result.status = 302
+            result.message = "无效项目名称"
+            render  dataProcessingService.dataEncode(result)
+            return false
+        }
+        if(!posParams.ins||posParams.ins?.trim() != 'posSystem'){
+            result.status = 302
+            result.message = "无效指令"
+            render  dataProcessingService.dataEncode(result)
+            return false
+        }
+        def data = [:]
+//        def posParams = params
+        data = posParams.p
+//        data = params
         def signNot = ['signIn','signOut']
-        if(!signNot.contains(data.act)){
+        if(!signNot.contains(posParams.act)){
             def res = userService.checkSign()
             if(res.status != 200){
                 render dataProcessingService.dataEncode(res)
@@ -61,7 +54,7 @@ class PosApiController {
             }
         }
 
-        switch (params.act?.trim()) {
+        switch (posParams.act?.trim()) {
             case "signIn":
                 result = userService.signIn(data);
                 break
@@ -83,14 +76,14 @@ class PosApiController {
             case "orderRefund": //订单退款
                 result= ordersService.orderRefund(data)
                 break
-            case "last":
+            case "lastOrder":
                 result=lastOrderService.last()
                 break;
             default:
-                result.status = false
+                result.status = 302
                 result.message = "未知错误"
         }
-
+        def a = session
         render dataProcessingService.dataEncode(result)
         return false
     }
