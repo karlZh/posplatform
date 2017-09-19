@@ -110,5 +110,16 @@ class ZftPlatformService {
         rs = JSON.parse(result)
         return rs
     }
-
+    def rollBack(String CardNo, String TransId, String PayOrderId, String  Extendinfo = ""){
+        def sa = [:]
+        sa.CardNo = CardNo
+        sa.TransId = TransId
+        sa.PayOrderId = PayOrderId
+        sa.Extendinfo = Extendinfo
+        def data = formatParams(sa)
+        def result = httpRequest(URL+"rollback",data)
+        def rs
+        rs = JSON.parse(result)
+        return rs
+    }
 }

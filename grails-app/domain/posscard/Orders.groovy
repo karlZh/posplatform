@@ -8,7 +8,7 @@ class Orders {
     Integer cardPlatformId //商户id 
     Integer supplierId //供应商id
     Date  dateCreated //创建时间
-    Integer orderType //订单类型，消费或退款
+    Integer orderType //订单类型，消费1或退款2
     Integer num //张数
     Integer ticketTypeId //票消费类型
     Integer validity //有效期
