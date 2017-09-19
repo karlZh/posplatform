@@ -34,9 +34,5 @@ class BondService {
             result.message=""
             result.data=point
             result result
-
-
-
-
     }
 }
