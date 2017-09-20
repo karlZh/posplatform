@@ -18,4 +18,10 @@ class UserLoginController {
             }
         }
     }
+
+    def logout(){
+        session.userId = null
+        session.accountType = null
+        redirect(controller: 'userLogin',action: 'login')
+    }
 }
