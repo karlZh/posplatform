@@ -6,6 +6,7 @@ class UserLoginController {
         if(request.method == "GET"){
             session.userId = null
             session.accountType = null
+            session.uTypeId = null
         }else{
             def userInstance = User.findByUsernameAndPassword(params.username,params.password)
             if(userInstance){

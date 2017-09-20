@@ -106,7 +106,7 @@
 								</div>
 							</g:if>
 							
-
+							
 							
 							<g:if test="${ordersInstance?.num}">
 								<div class="row">
@@ -163,11 +163,11 @@
 								</div>
 							</g:if>
 							
-							<g:form>
-								<g:hiddenField name="id" value="${ordersInstance?.id}" />
-								<g:link action="edit"  id="${ordersInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-								<g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-							</g:form>
+							%{--<g:form>--}%
+								%{--<g:hiddenField name="id" value="${ordersInstance?.id}" />--}%
+								%{--<g:link action="edit"  id="${ordersInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>--}%
+								%{--<g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />--}%
+							%{--</g:form>--}%
 						</div>
 					</div>
 				</div>
