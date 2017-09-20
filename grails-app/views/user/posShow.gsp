@@ -71,13 +71,13 @@
 
 								%{--</div>--}%
 							%{--</g:if>--}%
-                            <g:if test="${userInstance?.accountType}">
+                            <g:if test="${userInstance?.uTypeId}">
                                 <div class="row">
                                     <div class="col-sm-2 col-md-2 text-right">
                                         <label class="control-label"><g:message code="user.uTypeId.label" default="用户类别" /></label>
                                     </div>
 
-                                    <div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="uTypeId"/></div>
+                                    <div class="col-sm-10 col-md-10">${posscard.PosMachine.get(userInstance.uTypeId).name}</div>
 
                                 </div>
                             </g:if>
