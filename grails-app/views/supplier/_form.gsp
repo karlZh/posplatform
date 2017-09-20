@@ -11,7 +11,24 @@
 	<g:textField class="form-control" name="name" maxlength="10" required="" value="${supplierInstance?.name}"/>
 	</div>
 </div>
-
+<div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'type', 'error')} required form-group">
+	<label for="type" class="col-sm-2 control-label">
+		<g:message code="supplier.type.label" default="供应商类型" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-6">
+		<g:select id="type" name="type" from="${supplierType}" optionKey="key" optionValue="value" value="${supplierInstance?.type}" noSelection="[0:'请选择分类']" />
+	</div>
+</div>
+<div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'parentId', 'error')} required form-group">
+	<label for="parentId" class="col-sm-2 control-label">
+		<g:message code="supplier.parentId.label" default="父供应商 Id" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-6">
+		<select  id="parentId" name="parentId"><option value='0'>顶级供应商</option></select>
+	</div>
+</div>
 <div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'ratio', 'error')} required form-group">
 	<label for="ratio" class="col-sm-2 control-label">
 		<g:message code="supplier.ratio.label" default="结算比例" />
@@ -59,73 +76,6 @@
 	</label>
 	<div class="col-sm-6">
 	<g:textField class="form-control" name="remark" maxlength="50" value="${supplierInstance?.remark}"/>
-	</div>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'parentId', 'error')} required form-group">
-	<label for="parentId" class="col-sm-2 control-label">
-		<g:message code="supplier.parentId.label" default="夫供应商 Id" />
-		<span class="required-indicator">*</span>
-	</label>
-	<div class="col-sm-6">
-	<g:field name="parentId" type="number" value="${supplierInstance.parentId}" required=""/>
-	</div>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'posmachine', 'error')}  form-group">
-	<label for="posmachine" class="col-sm-2 control-label">
-		<g:message code="supplier.posmachine.label" default="POS机" />
-		
-	</label>
-	<div class="col-sm-6">
-	
-<ul class="one-to-many">
-<g:each in="${supplierInstance?.posmachine?}" var="p">
-    <li><g:link controller="posMachine" action="show" id="${p.id}">${p?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="posMachine" action="create" params="['supplier.id': supplierInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'posMachine.label', default: 'PosMachine')])}</g:link>
-</li>
-</ul>
-
-	</div>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'tickettype', 'error')}  form-group">
-	<label for="tickettype" class="col-sm-2 control-label">
-		<g:message code="supplier.tickettype.label" default="票类型" />
-		
-	</label>
-	<div class="col-sm-6">
-	
-<ul class="one-to-many">
-<g:each in="${supplierInstance?.tickettype?}" var="t">
-    <li><g:link controller="ticketType" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="ticketType" action="create" params="['supplier.id': supplierInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'ticketType.label', default: 'TicketType')])}</g:link>
-</li>
-</ul>
-
-	</div>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'user', 'error')}  form-group">
-	<label for="user" class="col-sm-2 control-label">
-		<g:message code="supplier.user.label" default="用户" />
-		
-	</label>
-	<div class="col-sm-6">
-	
-<ul class="one-to-many">
-<g:each in="${supplierInstance?.user?}" var="u">
-    <li><g:link controller="user" action="show" id="${u.id}">${u?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="user" action="create" params="['supplier.id': supplierInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'user.label', default: 'User')])}</g:link>
-</li>
-</ul>
-
 	</div>
 </div>
 

@@ -29,28 +29,6 @@
 								<div class="message" role="status">${flash.message}</div>
 							</g:if>
 							
-							<g:if test="${posMachineInstance?.supplierId}">
-								<div class="row">
-									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="posMachine.supplierId.label" default="供应商Id" /></label>
-									</div>
-									
-									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${posMachineInstance?.supplierId?.id}">${posMachineInstance?.supplierId?.encodeAsHTML()}</g:link></div>
-									
-								</div>
-							</g:if>
-							
-							<g:if test="${posMachineInstance?.userId}">
-								<div class="row">
-									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="posMachine.userId.label" default="用户 Id" /></label>
-									</div>
-									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${posMachineInstance}" field="userId"/></div>
-									
-								</div>
-							</g:if>
-							
 							<g:if test="${posMachineInstance?.dateCreated}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
@@ -58,6 +36,17 @@
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:formatDate date="${posMachineInstance?.dateCreated}" /></div>
+									
+								</div>
+							</g:if>
+							
+							<g:if test="${posMachineInstance?.supplier}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="posMachine.supplier.label" default="供应商" /></label>
+									</div>
+									
+									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${posMachineInstance?.supplier?.id}">${posMachineInstance?.supplier?.name?.encodeAsHTML()}</g:link></div>
 									
 								</div>
 							</g:if>
@@ -73,5 +62,5 @@
 			</div>
 		</div>
 	</div>
- </body>
+	</body>
 </html>

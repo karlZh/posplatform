@@ -1,11 +1,12 @@
 package posscard
 
+import grails.converters.JSON
 import org.springframework.dao.DataIntegrityViolationException
 
 class SupplierController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-
+    def supplierType = [1:"电影",2:"蛋糕"]
     def index() {
         redirect(action: "list", params: params)
     }
@@ -26,7 +27,21 @@ class SupplierController {
     }
 
     def create() {
-        [supplierInstance: new Supplier(params)]
+        [supplierInstance: new Supplier(params),supplierType:supplierType]
+    }
+
+    def ajaxSearchSupplier(){
+        def result = [status:0,message:'',data:[:]]
+        def parents = Supplier.findAllByParentIdAndType(0,params.type)
+        if(!parents){
+            result.status = 1
+            result.message = "未找到父供应商"
+            render result as JSON
+            return
+        }
+        result.data = parents
+        render result as JSON
+        return
     }
 
     def save() {

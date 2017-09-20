@@ -1,6 +1,5 @@
 package posscard
 
-import org.bouncycastle.asn1.crmf.POPOSigningKey
 import org.springframework.dao.DataIntegrityViolationException
 
 class PosMachineController {
@@ -16,15 +15,6 @@ class PosMachineController {
         [posMachineInstanceList: PosMachine.list(params), posMachineInstanceTotal: PosMachine.count()]
     }
 
-    def search(){
-
-        def userId=params.userId
-        def result=PosMachine.findAllByUserId(userId)
-
-        def posMachineInstanceTotal=Orders.countByOrderSn(userId)
-
-        render (view:'list' , model: [posMachineInstanceList: result, posMachineInstanceTotal:posMachineInstanceTotal])
-    }
     def create() {
         [posMachineInstance: new PosMachine(params)]
     }

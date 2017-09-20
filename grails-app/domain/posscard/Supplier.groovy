@@ -2,6 +2,7 @@ package posscard
 
 class Supplier {
     String name
+    Short type = 0//供应商类型1电影，2蛋糕,0无分类
     Float ratio //结算比例
     Float price //结算价格
     String address //地址
@@ -12,6 +13,7 @@ class Supplier {
 
     static constraints = {
         name(size: 2..10,blank: false,unique: true)
+        type(nullable: false)
         ratio() //结算比例
         price() //结算价格
         address() //地址
