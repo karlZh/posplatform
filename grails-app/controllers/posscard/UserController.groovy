@@ -17,7 +17,7 @@ class UserController {
 
     def beforeInterceptor = [action: this.&auth]
     def index() {
-        redirect(action: "list", params: params)
+        redirect(action: "posList", params: params)
     }
 
     def list(Integer max) {
