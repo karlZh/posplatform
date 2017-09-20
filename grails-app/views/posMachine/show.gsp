@@ -32,33 +32,30 @@
 							<g:if test="${posMachineInstance?.name}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="posMachine.name.label" default="Name" /></label>
+									<label class="control-label"><g:message code="posMachine.name.label" default="pos机名称" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${posMachineInstance}" field="name"/></div>
 									
 								</div>
 							</g:if>
-							
-							<g:if test="${posMachineInstance?.userId}">
-								<div class="row">
-									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="posMachine.userId.label" default="User Id" /></label>
-									</div>
-									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${posMachineInstance}" field="userId"/></div>
-									
-								</div>
-							</g:if>
-							
 							<g:if test="${posMachineInstance?.dateCreated}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="posMachine.dateCreated.label" default="Date Created" /></label>
+									<label class="control-label"><g:message code="posMachine.dateCreated.label" default="创建时间" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:formatDate date="${posMachineInstance?.dateCreated}" /></div>
 									
+								</div>
+							</g:if>
+							
+							<g:if test="${posMachineInstance?.supplier}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="posMachine.supplier.label" default="供应商" /></label>
+									</div>
+									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${posMachineInstance?.supplier?.id}">${posMachineInstance?.supplier?.name?.encodeAsHTML()}</g:link></div>
 								</div>
 							</g:if>
 							

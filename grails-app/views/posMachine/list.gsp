@@ -29,13 +29,11 @@
 									<thead>
 									<tr>
 										
-										<g:sortableColumn property="name" title="${message(code: 'posMachine.name.label', default: 'Name')}" />
-										
-										<g:sortableColumn property="userId" title="${message(code: 'posMachine.userId.label', default: 'User Id')}" />
-										
-										<g:sortableColumn property="dateCreated" title="${message(code: 'posMachine.dateCreated.label', default: 'Date Created')}" />
-										
-										<th><g:message code="posMachine.supplier.label" default="Supplier" /></th>
+										<g:sortableColumn property="name" title="${message(code: 'posMachine.name.label', default: 'pos机名称')}" />
+
+										<g:sortableColumn property="dateCreated" title="${message(code: 'posMachine.dateCreated.label', default: '创建时间')}" />
+
+										<th><g:message code="posMachine.supplier.label" default="供应商" /></th>
 										
 										<th>操作</th>
 									</tr>
@@ -45,13 +43,11 @@
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 											
 											<td><g:link action="show" id="${posMachineInstance.id}">${fieldValue(bean: posMachineInstance, field: "name")}</g:link></td>
-											
-											<td>${fieldValue(bean: posMachineInstance, field: "userId")}</td>
-											
-											<td><g:formatDate date="${posMachineInstance.dateCreated}" /></td>gi
+
+											<td><g:formatDate date="${posMachineInstance.dateCreated}" /></td>
 										
-											<td>${fieldValue(bean: posMachineInstance, field: "supplier")}</td>
-											
+											<td>${fieldValue(bean: posMachineInstance, field: "supplier.name")}</td>
+
 											<td class="center ">
 												<g:link action="show" id="${posMachineInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
 													<i class="fa fa-file"></i>

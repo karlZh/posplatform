@@ -26,8 +26,8 @@
 	<link rel="stylesheet" type="text/css" href="${resource(dir: 'js/bootstrap.slider/css',file: 'slider.css')}" />
 	<link rel="stylesheet" type="text/css" href="${resource(dir: 'js/jquery.datatables/bootstrap-adapter/css',file: 'datatables.css')}" />
 	<link href="${resource(dir: 'css',file: 'style.css')}" rel="stylesheet" />
-
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<script src="${resource(dir: 'js', file: 'jquery.js')}"></script>
     <g:layoutHead/>
 </head>
 	<body>
@@ -45,7 +45,6 @@
         </g:elseif>
 		<g:layoutBody/>
 		</div>
-	<script src="${resource(dir: 'js', file: 'jquery.js')}"></script>
 	<script type="text/javascript" src="${resource(dir: 'js/jquery.nanoscroller', file: 'jquery.nanoscroller.js')}"></script>
 	<script type="text/javascript" src="${resource(dir: 'js/jquery.sparkline', file: 'jquery.sparkline.min.js')}"></script>
 	<script type="text/javascript" src="${resource(dir: 'js/jquery.easypiechart', file: 'jquery.easy-pie-chart.js')}"></script>

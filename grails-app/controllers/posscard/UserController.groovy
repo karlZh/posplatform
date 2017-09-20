@@ -5,7 +5,17 @@ import org.springframework.dao.DataIntegrityViolationException
 class UserController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    def auth(){
+        if(!session.userId){
+            def originReqParams = [controller:controllerName,action: actionName]
+            originReqParams.putAll(params)
+            session.originReqParams = originReqParams
+            redirect(controller:"userLogin",action: "login")
+            return false
+        }
+    }
 
+    def beforeInterceptor = [action: this.&auth]
     def index() {
         redirect(action: "list", params: params)
     }

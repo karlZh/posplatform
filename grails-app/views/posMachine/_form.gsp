@@ -14,7 +14,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: posMachineInstance, field: 'supplier', 'error')} required form-group">
 	<label for="supplier" class="col-sm-2 control-label">
-		<g:message code="posMachine.supplier.label" default="Supplier" />
+		<g:message code="posMachine.supplier.label" default="供应商ID" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">

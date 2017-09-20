@@ -20,7 +20,7 @@
                         <li><a href="#">Profile</a></li>
                         <li><a href="#">Messages</a></li>
                         <li class="divider"></li>
-                        <li><g:link controller="login" action="login">Sign Out</g:link></li>
+                        <li><g:link controller="userLogin" action="logout">Sign Out</g:link></li>
                     </ul>
                 </li>
             </ul>

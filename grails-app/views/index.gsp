@@ -1,3 +1,10 @@
+<%
+	response.sendRedirect(request.getContextPath()+
+
+			"/user/index"
+
+	);
+%>
 <!DOCTYPE html>
 <html>
 	<head>
