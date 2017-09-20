@@ -38,6 +38,6 @@
 
 	</label>
 	<div class="col-sm-6">
-        <g:select name="uTypeId" id="uTypeId" class="form-control" from="${category}" optionKey="id" optionValue="name"  noSelection="['0': '请选择类别']" />
+        <g:select name="uTypeId" id="uTypeId" class="form-control" from="${category}" optionKey="id" optionValue="name" value="${userInstance?.uTypeId}"  noSelection="['0': '请选择类别']" />
     </div>
 </div>

@@ -18,7 +18,7 @@
 		</div>
         <div style="padding:25px 12px">
             <div class="text-right collapse-button" style="padding:7px 3px;">
-                <g:form controller="user" action="search">
+                <g:form controller="user" action="posSearch">
                     <input type="text" name="name" style="padding: 10px 23px " placeholder="请输入用户名" />
                     <Button type="primary" shape="circle" style="padding: 10px">提交</Button>
                     <!-- <button id="sidebar-collapse" class="btn btn-default" style="padding: 10px 7px" name="提交"><i style="color:#fff;" class="fa fa-angle-left"></i></button>-->
@@ -76,7 +76,7 @@
 												<g:link action="posEdit" id="${userInstance.id}" class="btn btn-primary btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip">
 													<i class="fa fa-pencil"></i>
 												</g:link>
-												<g:link action="delete" id="${userInstance.id}" class="btn btn-danger btn-xs" href="#" data-original-title="Remove" data-toggle="tooltip" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+												<g:link action="posDelete" id="${userInstance.id}" class="btn btn-danger btn-xs" href="#" data-original-title="Remove" data-toggle="tooltip" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
 													<i class="fa fa-times"></i>
 												</g:link>
 											</td>

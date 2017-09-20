@@ -13,7 +13,7 @@
 			<h2>供应商表</h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li><g:link class="list" action="list">供应商表</g:link></li>
+				<li><g:link class="list" action="fList">供应商表</g:link></li>
 				<li class="active">操作供应商</li>
 			</ol>
 		</div>
@@ -47,7 +47,6 @@
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${supplierInstance}" field="ratio"/></div>
-									
 								</div>
 							</g:if>
 							
@@ -144,11 +143,10 @@
 							</g:if>
 							
 
-							
 							<g:form>
 								<g:hiddenField name="id" value="${supplierInstance?.id}" />
-								<g:link action="edit"  id="${supplierInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-								<g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+								<g:link action="fEdit"  id="${supplierInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+								<g:actionSubmit class="btn btn-danger" action="fDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 							</g:form>
 						</div>
 					</div>

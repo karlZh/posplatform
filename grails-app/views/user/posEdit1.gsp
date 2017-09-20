@@ -12,8 +12,8 @@
 			<h2>用户信息表</h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li><g:link class="list" action="posList">用户信息表</g:link></li>
-				<li class="active">操作用户</li>
+				<li><g:link class="list" action="posList">Pos信息表</g:link></li>
+				<li class="active">操作Pos</li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -21,7 +21,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>修改用户</h3>
+							<h3>修改Pos</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">

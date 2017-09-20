@@ -15,8 +15,6 @@ class SupplierController {
         params.max = Math.min(max ?: 10, 100)
         [supplierInstanceList: Supplier.list(params), supplierInstanceTotal: Supplier.count()]
     }
-
-
     def search(){
 
         def name=params.name
@@ -25,11 +23,9 @@ class SupplierController {
 
         render (view:'list' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal])
     }
-
     def create() {
         [supplierInstance: new Supplier(params),supplierType:supplierType]
     }
-
     def ajaxSearchSupplier(){
         def result = [status:0,message:'',data:[:]]
         def parents = Supplier.findAllByParentIdAndType(0,params.type)
@@ -43,7 +39,6 @@ class SupplierController {
         render result as JSON
         return
     }
-
     def save() {
         def supplierInstance = new Supplier(params)
         if (!supplierInstance.save(flush: true)) {
@@ -54,7 +49,6 @@ class SupplierController {
         flash.message = message(code: 'default.created.message', args: [message(code: 'supplier.label', default: 'Supplier'), supplierInstance.id])
         redirect(action: "show", id: supplierInstance.id)
     }
-
     def show(Long id) {
         def supplierInstance = Supplier.get(id)
         if (!supplierInstance) {
@@ -65,7 +59,6 @@ class SupplierController {
 
         [supplierInstance: supplierInstance]
     }
-
     def edit(Long id) {
         def supplierInstance = Supplier.get(id)
         if (!supplierInstance) {
@@ -76,7 +69,6 @@ class SupplierController {
 
         [supplierInstance: supplierInstance]
     }
-
     def update(Long id, Long version) {
         def supplierInstance = Supplier.get(id)
         if (!supplierInstance) {
@@ -105,7 +97,6 @@ class SupplierController {
         flash.message = message(code: 'default.updated.message', args: [message(code: 'supplier.label', default: 'Supplier'), supplierInstance.id])
         redirect(action: "show", id: supplierInstance.id)
     }
-
     def delete(Long id) {
         def supplierInstance = Supplier.get(id)
         if (!supplierInstance) {
@@ -124,4 +115,109 @@ class SupplierController {
             redirect(action: "show", id: id)
         }
     }
+    def fList(Integer max) {
+        def name=params.name
+        def result=Supplier.findAllByParentId(0)
+        def supplierInstanceTotal=Supplier.countByName(name)
+
+        render (view:'fList' , model:  [supplierInstanceList: result, supplierInstanceTotal: Supplier.count()])
+    }
+
+    def fSearch(){
+
+        def name=params.name
+        def result=Supplier.findAllByNameAndParentId(name,0)
+        def supplierInstanceTotal=Supplier.countByName(name)
+
+        render (view:'fList' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal])
+    }
+    def fCreate() {
+
+        [supplierInstance: new Supplier(params),supplierType:supplierType]
+    }
+    def fSave() {
+        def supplierInstance = new Supplier(params)
+        if (!supplierInstance.save(flush: true)) {
+            render(view: "fCreate", model: [supplierInstance: supplierInstance])
+            return
+        }
+
+        flash.message = message(code: 'default.created.message', args: [message(code: 'supplier.label', default: 'Supplier'), supplierInstance.id])
+        redirect(action: "fShow", id: supplierInstance.id)
+    }
+    def fShow(Long id) {
+        def supplierInstance = Supplier.get(id)
+        if (!supplierInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "fList")
+            return
+        }
+
+        [supplierInstance: supplierInstance]
+    }
+    def fEdit(Long id) {
+        def supplierInstance = Supplier.get(id)
+        if (!supplierInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "fList")
+            return
+        }
+
+        [supplierInstance: supplierInstance]
+    }
+    def fUpdate(Long id, Long version) {
+        def supplierInstance = Supplier.get(id)
+        if (!supplierInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "fList")
+            return
+        }
+
+        if (version != null) {
+            if (supplierInstance.version > version) {
+                supplierInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                        [message(code: 'supplier.label', default: 'Supplier')] as Object[],
+                        "Another user has updated this Supplier while you were editing")
+                render(view: "fEdit", model: [supplierInstance: supplierInstance])
+                return
+            }
+        }
+
+        supplierInstance.properties = params
+
+        if (!supplierInstance.save(flush: true)) {
+            render(view: "fEdit", model: [supplierInstance: supplierInstance])
+            return
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'supplier.label', default: 'Supplier'), supplierInstance.id])
+        redirect(action: "fShow", id: supplierInstance.id)
+    }
+    def fDelete(Long id) {
+        def supplierInstance = Supplier.get(id)
+        if (!supplierInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "fList")
+            return
+        }
+
+        try {
+            supplierInstance.delete(flush: true)
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "fList")
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "fShow", id: id)
+        }
+    }
+    def zgSearch(Long id){
+
+        def result=Supplier.findAllByParentId(id)
+        def supplierInstanceTotal=Supplier.countById(id)
+
+        render (view:'List' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal])
+    }
+
+
 }

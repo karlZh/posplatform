@@ -13,8 +13,8 @@
 			<h2>用户信息表</h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li><g:link class="list" action="platformList">商户信息表</g:link></li>
-				<li class="active">操作商户</li>
+				<li><g:link class="list" action="supplierList">供应商信息表</g:link></li>
+				<li class="active">供应商商户</li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -22,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>显示商户</h3>
+							<h3>显示供应商</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -97,8 +97,8 @@
 							
 							<g:form>
 								<g:hiddenField name="id" value="${userInstance?.id}" />
-								<g:link action="platformEdit"  id="${userInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-								<g:actionSubmit class="btn btn-danger" action="platformDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+								<g:link action="supplierEdit"  id="${userInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+								<g:actionSubmit class="btn btn-danger" action="supplierDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 							</g:form>
 						</div>
 					</div>

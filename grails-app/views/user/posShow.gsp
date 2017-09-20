@@ -13,7 +13,7 @@
 			<h2>用户信息表</h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li><g:link class="list" action="list">Pos信息表</g:link></li>
+				<li><g:link class="list" action="posList">Pos信息表</g:link></li>
 				<li class="active">操作Pos</li>
 			</ol>
 		</div>
@@ -95,7 +95,7 @@
 							<g:form>
 								<g:hiddenField name="id" value="${userInstance?.id}" />
 								<g:link action="posEdit"  id="${userInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-								<g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+								<g:actionSubmit class="btn btn-danger" action="posDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 							</g:form>
 						</div>
 					</div>
