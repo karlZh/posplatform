@@ -13,12 +13,12 @@
 			<h2>用户信息表</h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li class="active">商户信息表</li>
+				<li class="active">供应商信息表</li>
 			</ol>
 		</div>
         <div style="padding:25px 12px">
             <div class="text-right collapse-button" style="padding:7px 3px;">
-                <g:form controller="user" action="platformSearch">
+                <g:form controller="user" action="supplierSearch">
                     <input type="text" name="name" style="padding: 10px 23px " placeholder="请输入用户名" />
                     <Button type="primary" shape="circle" style="padding: 10px">提交</Button>
                     <!-- <button id="sidebar-collapse" class="btn btn-default" style="padding: 10px 7px" name="提交"><i style="color:#fff;" class="fa fa-angle-left"></i></button>-->
@@ -30,7 +30,7 @@
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>商户信息表<g:link action="platformCreate" id="not-primary" params="[accountType:accountType]" class="btn btn-primary pull-right">添加</g:link></h3>
+							<h3>供应商信息表<g:link action="supplierCreate" id="not-primary" params="[accountType:accountType]" class="btn btn-primary pull-right">添加</g:link></h3>
 						</div>
 						<div class="content">
 							<div>
@@ -70,13 +70,13 @@
 											%{--<td>${fieldValue(bean: userInstance, field: "supplier")}</td>--}%
 											
 											<td class="center ">
-												<g:link action="platformShow" id="${userInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
+												<g:link action="supplierShow" id="${userInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
 													<i class="fa fa-file"></i>
 												</g:link>
-												<g:link action="platformEdit" id="${userInstance.id}" class="btn btn-primary btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip">
+												<g:link action="supplierEdit" id="${userInstance.id}" class="btn btn-primary btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip">
 													<i class="fa fa-pencil"></i>
 												</g:link>
-												<g:link action="platformDelete" id="${userInstance.id}" class="btn btn-danger btn-xs" href="#" data-original-title="Remove" data-toggle="tooltip" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+												<g:link action="supplierDelete" id="${userInstance.id}" class="btn btn-danger btn-xs" href="#" data-original-title="Remove" data-toggle="tooltip" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
 													<i class="fa fa-times"></i>
 												</g:link>
 											</td>

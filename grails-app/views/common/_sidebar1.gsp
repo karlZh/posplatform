@@ -24,9 +24,8 @@
                     %{--<li><g:link controller="user" action="list"><!--<i class="fa fa-home"></i>--><span>用户信息</span></g:link> </li>--}%
                     <li class="parent open"><a href="#"><span>供应商信息</span></a>
                         <ul class="sub-menu" style="display: block;">
-                            <li><g:link controller="posMachine" action="list">父供应商1</g:link></li>
-                            <li><g:link controller="posMachine" action="list">父供应商2</g:link></li>
-                            <li><g:link controller="posMachine" action="list">父供应商3</g:link></li>
+                            <li><g:link controller="supplier" action="fList">父供应商</g:link></li>
+
                         </ul>
                     </li>
                     <li><g:link controller="cardPlatform" action="list"> <!--<i class="fa fa-smile-o"></i>--><span>商户信息</span></li></g:link>

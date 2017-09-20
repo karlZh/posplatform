@@ -1,3 +1,4 @@
+
 <%@ page import="posscard.User" %>
 <!DOCTYPE html>
 <html>
@@ -12,8 +13,8 @@
 			<h2>用户信息表</h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li><g:link class="list" action="posList">用户信息表</g:link></li>
-				<li class="active">操作用户</li>
+				<li><g:link class="list" action="supplierList">供应商信息表</g:link></li>
+				<li class="active">操作供应商</li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -21,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>修改用户</h3>
+							<h3>修改供应商</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -34,14 +35,14 @@
 									</g:eachError>
 								</ul>
 							</g:hasErrors>
-							<g:form class="form-horizontal" role="form" action="posSave" >
+							<g:form class="form-horizontal" role="form" action="supplierSave" >
 								<g:hiddenField name="id" value="${userInstance?.id}" />
 								<g:hiddenField name="version" value="${userInstance?.version}" />
 								<g:render template="form"/>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
-										<g:actionSubmit class="btn btn-primary" action="posUpdate" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-										<g:actionSubmit class="btn btn-danger" action="posDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+										<g:actionSubmit class="btn btn-primary" action="supplierUpdate" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+										<g:actionSubmit class="btn btn-danger" action="supplierDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 									</div>
 								</div>
 							</g:form>
