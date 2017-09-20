@@ -7,11 +7,11 @@ class UserLoginController {
             session.userId = null
             session.accountType = null
         }else{
-            def userInstance = User.findAllByUsernameAndPassword(params.username,params.password)
+            def userInstance = User.findByUsernameAndPassword(params.username,params.password)
             if(userInstance){
                 session.userId = userInstance.id
                 session.accountType = userInstance.accountType
-                def requestParams=session.originReqParams?session.originReqParams:[controller: 'user',action: 'index']
+                def requestParams=session.originReqParams?session.originReqParams:[controller: 'record',action: 'record']
                 redirect(requestParams)
             }else{
                 flash['message'] = "用户名或密码错误"

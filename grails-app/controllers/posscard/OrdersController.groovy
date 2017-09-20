@@ -109,4 +109,13 @@ class OrdersController {
             redirect(action: "show", id: id)
         }
     }
+    def platformList(){
+
+
+        def result=Orders.findAllByCardPlatformId(session.uType)
+
+        def ordersInstanceTotal=Orders.countByOrderSn(platform)
+
+        render (view:'platformList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
+    }
 }

@@ -33,14 +33,13 @@
 	<body>
 		<g:render template="/common/head-nav" />
 		<div id="cl-wrapper">
-
-        <g:if test="${User.get(session.user_id)?.accountType} == 2"><!-- 自己平台-->
+        <g:if test="${session?.accountType == 2}"><!-- 自己平台-->
             <g:render template="/common/sidebar1" />
         </g:if>
-        <g:elseif test="${User.get(session.user_id)?.accountType} == 3"><!-- 商户-->
+        <g:elseif test="${session?.accountType == 3}"><!-- 商户-->
             <g:render template="/common/sidebar2" />
         </g:elseif>
-        <g:elseif test="${User.get(session.user_id)?.accountType} == 4"><!-- 供应商-->
+        <g:elseif test="${session?.accountType == 4}"><!-- 供应商-->
             <g:render template="/common/sidebar3" />
         </g:elseif>
 		<g:layoutBody/>
