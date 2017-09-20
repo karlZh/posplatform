@@ -75,7 +75,7 @@
                                             <td>${fieldValue(bean: ordersInstance, field: "serialNum")}</td>
 
                                             <td class="center ">
-                                                <g:link action="show" id="${ordersInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
+                                                <g:link action="platformShow" id="${ordersInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
                                                     <i class="fa fa-file"></i>
                                                 </g:link>
 

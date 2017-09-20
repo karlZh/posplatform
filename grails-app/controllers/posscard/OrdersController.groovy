@@ -112,10 +112,20 @@ class OrdersController {
     def platformList(){
 
 
-        def result=Orders.findAllByCardPlatformId(session.uType)
+        def result=Orders.findAllByCardPlatformId(session.uTypeId)
 
-        def ordersInstanceTotal=Orders.countByOrderSn(platform)
+        def ordersInstanceTotal=Orders.countByCardPlatformId(session.uTypeId)
 
         render (view:'platformList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
+    }
+    def platformShow(Long id) {
+        def ordersInstance = Orders.get(id)
+        if (!ordersInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'orders.label', default: 'Orders'), id])
+            redirect(action: "platformShow")
+            return
+        }
+
+        [ordersInstance: ordersInstance]
     }
 }
