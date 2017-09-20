@@ -18,7 +18,5 @@ class RecordController {
         def result= params.userId
        // [userInstanceList: User.list(params), userInstanceTotal: User.count()]
         render (view:'list' , model: [recordInstanceList: result, recordInstanceTotal:User.listOrderByUTypeId()])
-
-
     }
 }

@@ -355,7 +355,7 @@ def platformSearch(){
         render (view:'supplierList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
     }
     def supplierCreate(){
-        def  category =CardPlatform.findAll()
+        def  category =Supplier.findAll()
         [userInstance: new User(params),category: category,accountType:4]
     }
     def supplierSave() {
