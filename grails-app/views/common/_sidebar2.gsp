@@ -15,11 +15,9 @@
                 </div>
                 <ul class="cl-vnavigation">
 
+                    <li><g:link controller="record" action="record"><span>操作记录</span></g:link></li>
 
-                    <li><g:link controller="orders" action="list"><span>订单信息</span></g:link>
-
-
-
+                    <li><g:link controller="orders" action="platformList"><span>订单信息</span></g:link>
                 </ul>
             </li>
             </ul>

@@ -7,7 +7,7 @@ class UserLoginController {
             session.userId = null
             session.accountType = null
         }else{
-            def userInstance = User.findAllByUsernameAndPassword(params.username,params.password)
+            def userInstance = User.findByUsernameAndPassword(params.username,params.password)
             if(userInstance){
                 session.userId = userInstance.id
                 session.accountType = userInstance.accountType

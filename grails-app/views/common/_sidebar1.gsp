@@ -14,6 +14,7 @@
                     </div>
                 </div>
                 <ul class="cl-vnavigation">
+                    <li><g:link controller="record" action="record"><span>操作记录</span></g:link></li>
                     <li class="parent open"><a href="#"><span>用户信息</span></a>
                     <ul class="sub-menu" style="display: block;">
                     <li><g:link controller="user" action="posList">Pos</g:link></li>

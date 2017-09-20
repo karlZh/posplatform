@@ -12,6 +12,7 @@
                             %{--<li><g:link controller="supplier" action="list">订单查询</g:link></li>--}%
                         %{--</ul>--}%
                     %{--</li>--}%
+                    <li><g:link controller="record" action="record"><span>操作记录</span></g:link></li>
                     <li><g:link controller="supplier" action="list">院线</g:link></li>
                     <li><g:link controller="orders" action="list"><span>影院列表</span></g:link></li>
                     <li><g:link controller="posMachine" action="list"><span>订单查询</span></g:link></li>

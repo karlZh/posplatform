@@ -1,7 +1,7 @@
 <%
 	response.sendRedirect(request.getContextPath()+
 
-			"/user/index"
+			"/record/record"
 
 	);
 %>
