@@ -10,10 +10,10 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2>卡Bin表</h2>
+			<h2><g:message code="cardBin.label" default="CardBin"/></h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li class="active">卡Bin表</li>
+				<li class="active"><g:message code="cardBin.label" default="CardBin"/></li>
 			</ol>
 		</div>
         <div style="padding:25px 12px">
@@ -30,7 +30,7 @@
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>卡Bin表<g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
+							<h3><g:message code="cardBin.label" default="CardBin"/><g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
 						</div>
 						<div class="content">
 							<div>
