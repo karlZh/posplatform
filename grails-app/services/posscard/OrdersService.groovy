@@ -90,6 +90,11 @@ class OrdersService {
         def cardbin = data.cardnum.substring(0,6)
 
         def cardbinInfo = CardBin.findByCardbin(cardbin)
+        if(!cardbinInfo){
+            result.status = 301
+            result.message = "没有对应的卡bin"
+            return result
+        }
         def orderAmount = ticketType.point.toFloat() * data.num.toFloat()
         def orderInstance = new Orders(
                 orderSn: orderSn,
