@@ -22,5 +22,5 @@ class Supplier {
 
     }
 
-    static hasMany = [user: User, posmachine: PosMachine, tickettype: TicketType]
+    static hasMany = [posmachine: PosMachine, tickettype: TicketType]
 }

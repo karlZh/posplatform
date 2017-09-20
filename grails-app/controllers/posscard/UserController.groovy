@@ -14,7 +14,22 @@ class UserController {
         params.max = Math.min(max ?: 10, 100)
         [userInstanceList: User.list(params), userInstanceTotal: User.count()]
     }
+    def posList(){
 
+        def name=params.name
+        def result=User.findAllByAccountType(1)
+        def userInstanceTotal=User.countByUsername(name)
+
+        render (view:'posList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
+    }
+    def platformList(){
+
+        def name=params.name
+        def result=User.findAllByAccountType(3)
+        def userInstanceTotal=User.countByUsername(name)
+
+        render (view:'platformList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
+    }
     def search(){
 
         def name=params.name
@@ -23,9 +38,99 @@ class UserController {
 
         render (view:'list' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
     }
+    def posCreate(){
+        def  category = PosMachine.findAll()
+        [userInstance: new User(params),category: category,accountType:1]
+    }
+    def platformCreate(){
+        def  category = PosMachine.findAll()
+        [userInstance: new User(params),category: category,accountType:3]
+    }
+    def posSave() {
+        def userInstance = new User(params)
+        userInstance.accountType=1
+        if (!userInstance.save(flush: true)) {
+            def  category = PosMachine.findAll()
+            render(view: "posCreate", model: [userInstance: userInstance,category: category])
+            return
+        }
 
+        flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+        redirect(action: "posShow", id: userInstance.id)
+    }
+    def platformSave() {
+        def userInstance = new User(params)
+        userInstance.accountType=3
+        if (!userInstance.save(flush: true)) {
+            def  category = PosMachine.findAll()
+            render(view: "platformCreate", model: [userInstance: userInstance,category: category])
+            return
+        }
+
+        flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+        redirect(action: "platformShow", id: userInstance.id)
+    }
+    def posShow(Long id) {
+        def userInstance = User.get(id)
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "posList")
+            return
+        }
+
+        [userInstance: userInstance]
+    }
+    def platformShow(Long id) {
+        def userInstance = User.get(id)
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "platformList")
+            return
+        }
+
+        [userInstance: userInstance]
+    }
+    def posEdit(Long id) {
+        def userInstance = User.get(id)
+        def category = PosMachine.findAll()
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "posEdit")
+            return
+        }
+
+        [userInstance: userInstance,category:category,accountType:1]
+//        render (view:'posEdit' , model:)
+    }
+    def platformEdit(Long id) {
+        def userInstance = User.get(id)
+        def category = PosMachine.findAll()
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "platformEdit")
+            return
+        }
+
+        [userInstance: userInstance,category:category,accountType:3]
+//        render (view:'posEdit' , model:)
+    }
     def create() {
-        [userInstance: new User(params)]
+        def category
+        switch (params.accountType){
+            case '1':
+                category = PosMachine.findAll()
+                break
+            case '2':
+                category = [:]
+                break
+            case '3':
+                category = CardPlatform.findAll()
+                break
+            case '4':
+                category = Supplier.findAll()
+                break
+        }
+        [userInstance: new User(params),category: category]
     }
 
     def save() {
@@ -52,13 +157,28 @@ class UserController {
 
     def edit(Long id) {
         def userInstance = User.get(id)
+        def category
+        switch (params.accountType){
+            case '1':
+                category = PosMachine.findAll()
+                break
+            case '2':
+                category = [:]
+                break
+            case '3':
+                category = CardPlatform.findAll()
+                break
+            case '4':
+                category = Supplier.findAll()
+                break
+        }
         if (!userInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
             redirect(action: "list")
             return
         }
 
-        [userInstance: userInstance]
+        [userInstance: userInstance,category:category]
     }
 
     def update(Long id, Long version) {

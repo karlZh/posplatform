@@ -16,9 +16,9 @@
                 <ul class="cl-vnavigation">
                     <li class="parent open"><a href="#"><span>用户信息</span></a>
                     <ul class="sub-menu" style="display: block;">
-                    <li><g:link controller="posMachine" action="list">Pos</g:link></li>
-                    <li><g:link controller="cardPlatform" action="list">商户</g:link></li>
-                    <li><g:link controller="supplier" action="list">供应商</g:link></li>
+                    <li><g:link controller="user" action="posList">Pos</g:link></li>
+                    <li><g:link controller="user" action="platformList">商户</g:link></li>
+                    <li><g:link controller="user" action="supplierList">供应商</g:link></li>
                     </ul>
                     </li>
                     %{--<li><g:link controller="user" action="list"><!--<i class="fa fa-home"></i>--><span>用户信息</span></g:link> </li>--}%

@@ -1,7 +1,7 @@
 <%@ page import="posscard.User" %>
 
 
-
+<g:hiddenField name="accountType" value="${accountType}" />
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')} required form-group">
 	<label for="username" class="col-sm-2 control-label">
 		<g:message code="user.username.label" default="用户名" />
@@ -33,23 +33,11 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountType', 'error')}  form-group">
-	<label for="accountType" class="col-sm-2 control-label">
-		<g:message code="user.accountType.label" default="用户类型" />
-		
+	<label for="uTypeId" class="col-sm-2 control-label">
+		<g:message code="user.accountType.label" default="用户类别" />
+
 	</label>
 	<div class="col-sm-6">
-	<g:select name="accountType" from="${userInstance.constraints.accountType.inList}" value="${fieldValue(bean: userInstance, field: 'accountType')}" valueMessagePrefix="user.accountType" noSelection="['': '']"/>
-	</div>
+        <g:select name="uTypeId" id="uTypeId" class="form-control" from="${category}" optionKey="id" optionValue="name"  noSelection="['0': '请选择类别']" />
+    </div>
 </div>
-
-
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'supplierId', 'error')} required form-group">
-	<label for="supplierId" class="col-sm-2 control-label">
-		<g:message code="user.supplierId.label" default="供应商ID" />
-		<span class="required-indicator">*</span>
-	</label>
-	<div class="col-sm-6">
-	<g:select id="supplier" name="supplier.id" from="${posscard.Supplier.list()}" optionKey="id" value="${userInstance?.supplier?.id}" class="many-to-one" noSelection="['null': '']"/>
-	</div>
-</div>
-

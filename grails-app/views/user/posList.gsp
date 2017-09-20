@@ -13,7 +13,7 @@
 			<h2>用户信息表</h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li class="active">用户信息表</li>
+				<li class="active">Pos信息表</li>
 			</ol>
 		</div>
         <div style="padding:25px 12px">
@@ -30,7 +30,7 @@
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>用户信息表<g:link action="create" id="not-primary" params="[accountType:accountType]" class="btn btn-primary pull-right">添加</g:link></h3>
+							<h3>Pos信息表<g:link action="posCreate" id="not-primary" params="[accountType:accountType]" class="btn btn-primary pull-right">添加</g:link></h3>
 						</div>
 						<div class="content">
 							<div>
@@ -44,11 +44,11 @@
 										
 										<g:sortableColumn property="phone" title="${message(code: 'user.phone.label', default: '电话')}" />
 										
-										<g:sortableColumn property="accountType" title="${message(code: 'user.accountType.label', default: '用户类型')}" />
+										<g:sortableColumn property="uTypeId" title="${message(code: 'user.uTypeId.label', default: '用户类别')}" />
 										
 										<g:sortableColumn property="dateCreated" title="${message(code: 'user.dateCreated.label', default: '创建时间')}" />
 										
-										<th><g:message code="user.supplier.label" default="供应商" /></th>
+										%{--<th><g:message code="user.supplier.label" default="供应商" /></th>--}%
 										
 										<th>操作</th>
 									</tr>
@@ -63,17 +63,17 @@
 											
 											<td>${fieldValue(bean: userInstance, field: "phone")}</td>
 											
-											<td>${fieldValue(bean: userInstance, field: "accountType")}</td>
+											<td>${fieldValue(bean: userInstance, field: "uTypeId")}</td>
 											
 											<td><g:formatDate date="${userInstance.dateCreated}" /></td>
 										
-											<td>${fieldValue(bean: userInstance, field: "supplier")}</td>
+											%{--<td>${fieldValue(bean: userInstance, field: "supplier")}</td>--}%
 											
 											<td class="center ">
-												<g:link action="show" id="${userInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
+												<g:link action="posShow" id="${userInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
 													<i class="fa fa-file"></i>
 												</g:link>
-												<g:link action="edit" id="${userInstance.id}" class="btn btn-primary btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip">
+												<g:link action="posEdit" id="${userInstance.id}" class="btn btn-primary btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip">
 													<i class="fa fa-pencil"></i>
 												</g:link>
 												<g:link action="delete" id="${userInstance.id}" class="btn btn-danger btn-xs" href="#" data-original-title="Remove" data-toggle="tooltip" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
