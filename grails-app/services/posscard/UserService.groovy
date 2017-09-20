@@ -15,8 +15,7 @@ class UserService {
                 return result
             }
             getSession().user = user
-            def uTypeInfo = getUTypeInfo(user.accountType.toString(),user.uTypeId)
-            def id = uTypeInfo.data.supplier.id
+            def uTypeInfo = getUTypeInfo(user.accountType,user.uTypeId)
              if (uTypeInfo.status != 200||!uTypeInfo.data.supplier.id){
                 result.status = 301
                 result.message = "未查该用户所属供应商，请联系客服！"
@@ -53,11 +52,11 @@ class UserService {
         return result
     }
 
-    def getUTypeInfo(String accountType,Integer utypeId){
+    def getUTypeInfo(Integer accountType,Integer utypeId){
         def result = [status: 200,message: "",data:[:]]
         def uTypeInfo
         switch (accountType){
-            case "1"://pos机
+            case 1://pos机
                 uTypeInfo = PosMachine.get(utypeId)
                 break
             case 2://聚优后台管理员

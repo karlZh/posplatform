@@ -42,17 +42,11 @@
 									<g:each in="${posMachineInstanceList}" status="i" var="posMachineInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 											
-<<<<<<< HEAD
 											<td><g:link action="show" id="${posMachineInstance.id}">${fieldValue(bean: posMachineInstance, field: "name")}</g:link></td>
 
-											<td><g:formatDate date="${posMachineInstance.dateCreated}" /></td>gi
-
-											<td>${fieldValue(bean: posMachineInstance, field: "supplier")}</td>
-=======
 											<td><g:formatDate date="${posMachineInstance.dateCreated}" /></td>
 										
 											<td>${fieldValue(bean: posMachineInstance, field: "supplier.name")}</td>
->>>>>>> 8bb70fdff96b58e5be03f791a23ae2da8a4ba748
 
 											<td class="center ">
 												<g:link action="show" id="${posMachineInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">

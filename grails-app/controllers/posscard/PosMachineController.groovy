@@ -25,7 +25,6 @@ class PosMachineController {
             render(view: "create", model: [posMachineInstance: posMachineInstance])
             return
         }
-
         flash.message = message(code: 'default.created.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), posMachineInstance.id])
         redirect(action: "show", id: posMachineInstance.id)
     }

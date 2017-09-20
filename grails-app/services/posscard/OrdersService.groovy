@@ -156,17 +156,16 @@ class OrdersService {
         def orderSn = date.format("yyyyMMddHHmmss") + randomStr.toString()
         def serialNum = "100"+ orderSn
 
-        def orderInstance = new Orders(
+        def orderInstance = new OrderRefund(
                 orderSn: orderSn,
+                refundOrderSn: orderInfo.orderSn,
                 serialNum: serialNum,
                 amount: orderInfo.amount,
                 num: orderInfo.num,
-                orderType: 2,
                 supplierId: orderInfo.supplierId,
                 ticketTypeId: orderInfo.ticketTypeId,
                 cardNum: orderInfo.cardNum,
                 cardPlatformId: orderInfo.cardPlatformId,
-                validity: orderInfo.validity,
                 orderStatus: 0
         )
         if (!orderInstance.save(flush: true)) {
@@ -201,14 +200,24 @@ class OrdersService {
             result.message = "输入流水号"
             return result
         }
-        def orderInfo = Orders.findAllByOrderSn(data.tradeno)
+        def orderInfo = Orders.findByOrderSn(data.tradeno)
         if (!orderInfo) {
             result.status = 301
             result.message = "流水号不存在"
             return result
         }
+        def ticketTypeInfo = TicketType.findById(orderInfo.ticketTypeId)
+        def supplierInfo = Supplier.findById(orderInfo.supplierId);
+        def ticketTypeCnbc= ticketTypeInfo.name+'影片('+ticketTypeInfo.point.toString()+')'
         result.message = "查询成功！"
-        result.data = orderInfo
+        result.data = [
+                orderSn:orderInfo.orderSn,
+                cardNum: orderInfo.cardNum,
+                ticketTypeCn: ticketTypeCnbc,
+                num: orderInfo.num,
+                supplier: supplierInfo.name,
+                dateCreated: orderInfo.dateCreated
+        ]
         return result
     }
 }

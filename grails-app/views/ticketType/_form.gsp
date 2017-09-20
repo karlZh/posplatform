@@ -44,8 +44,8 @@
 
 
 <div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'supplierId', 'error')} required form-group">
-	<label for="supplierId" class="col-sm-2 control-label">
-		<g:message code="ticketType.supplierId.label" default="供应商 Id" />
+	<label for="supplier" class="col-sm-2 control-label">
+		<g:message code="ticketType.supplier.label" default="供应商 Id" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">

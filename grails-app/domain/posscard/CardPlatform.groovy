@@ -12,4 +12,7 @@ class CardPlatform {//商户数据表
     }
 
     static hasMany = [cardBin: CardBin]
+    String toString(){
+        "${name}"
+    }
 }

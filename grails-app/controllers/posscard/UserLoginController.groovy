@@ -11,6 +11,7 @@ class UserLoginController {
             if(userInstance){
                 session.userId = userInstance.id
                 session.accountType = userInstance.accountType
+                session.uTypeId = userInstance.uTypeId
                 def requestParams=session.originReqParams?session.originReqParams:[controller: 'user',action: 'index']
                 redirect(requestParams)
             }else{
@@ -22,6 +23,7 @@ class UserLoginController {
     def logout(){
         session.userId = null
         session.accountType = null
+        session.uTypeId = null
         redirect(controller: 'userLogin',action: 'login')
     }
 }
