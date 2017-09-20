@@ -16,7 +16,14 @@ class SupplierController {
         [supplierInstanceList: Supplier.list(params), supplierInstanceTotal: Supplier.count()]
     }
 
-
+    def supplierBinSave(){
+        def supplierInstance = Supplier.get(1)
+        def cardbin = CardBin.findAll()
+//        supplierInstance.addToCardBinSupplier(new CardBinSupplier(cardbin: 1))
+//        supplierInstance.save()
+        def supplierBin = new CardBinSupplier([cardbin: cardbin,supplier: supplierInstance])
+        supplierBin.save(flush: true)
+    }
     def search(){
 
         def name=params.name

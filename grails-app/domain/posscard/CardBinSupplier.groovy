@@ -1,7 +1,7 @@
 package posscard
 
 class CardBinSupplier {
-    static hasMany = [cardbin:CardBin,supplier: Supplier]
+    static belongsTo = [cardbin:CardBin,supplier: Supplier]
     static constraints = {
     }
 }

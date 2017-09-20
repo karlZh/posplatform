@@ -10,4 +10,5 @@ class CardBin {//卡bin
     }
 
     static belongsTo = ['cardPlatform':CardPlatform]
+    static hasMany = [cardBinSupplier: CardBinSupplier]
 }
