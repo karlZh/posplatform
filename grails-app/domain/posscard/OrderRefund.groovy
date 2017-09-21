@@ -2,6 +2,7 @@ package posscard
 
 class OrderRefund {
     String cardNum
+    Integer userId //操作员id
     Float amount //退款金额
     Integer cardPlatformId //商户id
     Integer supplierId //供应商id
@@ -14,6 +15,7 @@ class OrderRefund {
     String transId = '' //卡平台流水号
     static constraints = {
         cardNum()
+        userId(nullable: false)
         amount() //应扣订单总金额
         cardPlatformId() //商户id
         supplierId() //供应商id

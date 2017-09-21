@@ -2,7 +2,7 @@ package posscard
 
 class Orders {
     String cardNum
-    String password
+    Integer userId //操作员id
     Float amount //应扣订单总金额
     Float actualAmount //实扣总金额
     Integer cardPlatformId //商户id 
@@ -18,7 +18,7 @@ class Orders {
     String transId = '' //卡平台流水号
     static constraints = {
         cardNum()
-        password(password:true, nullable: true)
+        userId(nullable: true)
         amount() //应扣订单总金额
         actualAmount(nullable: true) //实扣总金额
         cardPlatformId() //商户id
