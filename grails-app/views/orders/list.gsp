@@ -10,10 +10,10 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2>订单表</h2>
+			<h2><g:message code="orders.label" args="[entityName]" /></h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li class="active">订单表</li>
+				<li class="active"><g:message code="orders.label" args="[entityName]" /></li>
 			</ol>
 		</div>
         <div style="padding:25px 12px">
@@ -30,7 +30,7 @@
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>订单表<g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
+							<h3><g:message code="orders.label" args="[entityName]" /><g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
 						</div>
 						<div class="content">
 							<div>
@@ -46,13 +46,13 @@
 										
 										<g:sortableColumn property="actualAmount" title="${message(code: 'orders.actualAmount.label', default: '实扣总金额')}" />
 										
-										<g:sortableColumn property="cardPlatformId" title="${message(code: 'orders.cardPlatformId.label', default: '商户id')}" />
+										<g:sortableColumn property="cardPlatformId" title="${message(code: 'orders.cardPlatform.label', default: '商户id')}" />
 										
-										<g:sortableColumn property="supplierId" title="${message(code: 'orders.supplierId.label', default: '供应商id')}" />
+										<g:sortableColumn property="supplierId" title="${message(code: 'orders.supplier.label', default: '供应商id')}" />
 
                                         <g:sortableColumn property="orderSn" title="${message(code: 'orders.orderSn.label', default: '订单号')}" />
 
-                                        <g:sortableColumn property="serialNum" title="${message(code: 'orders.orderSn.label', default: '流水号')}" />
+                                        <g:sortableColumn property="serialNum" title="${message(code: 'orders.serialNum.label', default: '流水号')}" />
 										<th>操作</th>
 									</tr>
 									</thead>

@@ -88,7 +88,7 @@
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
 
-									<label class="control-label"><g:message code="ticketType.supplierId.label" default="供应商 Id" /></label>
+									<label class="control-label"><g:message code="ticketType.supplier.label" default="供应商" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${ticketTypeInstance?.supplier?.id}">${ticketTypeInstance?.supplier?.encodeAsHTML()}</g:link></div>

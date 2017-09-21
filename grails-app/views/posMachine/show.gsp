@@ -55,21 +55,10 @@
 									<div class="col-sm-2 col-md-2 text-right">
 									<label class="control-label"><g:message code="posMachine.supplier.label" default="供应商" /></label>
 									</div>
-									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${posMachineInstance?.supplier?.id}">${posMachineInstance?.supplier?.name?.encodeAsHTML()}</g:link></div>
+									<div class="col-sm-10 col-md-10">${posMachineInstance?.supplier?.name?.encodeAsHTML()}</div>
 								</div>
 							</g:if>
-							
-							<g:if test="${posMachineInstance?.supplier}">
-								<div class="row">
-									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="posMachine.supplier.label" default="Supplier" /></label>
-									</div>
-									
-									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${posMachineInstance?.supplier?.id}">${posMachineInstance?.supplier?.encodeAsHTML()}</g:link></div>
-									
-								</div>
-							</g:if>
-							
+
 							<g:form>
 								<g:hiddenField name="id" value="${posMachineInstance?.id}" />
 								<g:link action="edit"  id="${posMachineInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
