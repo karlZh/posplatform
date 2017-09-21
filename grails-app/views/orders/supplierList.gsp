@@ -1,5 +1,5 @@
 
-<%@ page import="posscard.Orders" %>
+<%@ page import="posscard.Supplier; posscard.Orders" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,12 @@
     </div>
     <div style="padding:25px 12px">
         <div class="text-right collapse-button" style="padding:7px 3px;">
-            <g:form controller="orders" action="search">
+            <div class="col-sm-6">
+              <g:select name="name" id="name" class="form-control" from="${posscard.Supplier.findByParentId( posscard.Supplier.findById( session.uTypeId).id)}" optionKey="id" optionValue="name" value=""  noSelection="['0': '请选择子供应商']" />
+              <g:link controller="orders" action="supplierformList">查询订单信息
+              </g:link>
+            </div>
+            <g:form controller="orders" action="supplierSearch">
                 <input type="text" name="orderSn" style="padding: 10px 23px " placeholder="请输入订单号" />
                 <Button type="primary" shape="circle" style="padding: 10px">提交</Button>
                 <!-- <button id="sidebar-collapse" class="btn btn-default" style="padding: 10px 7px" name="提交"><i style="color:#fff;" class="fa fa-angle-left"></i></button>-->
