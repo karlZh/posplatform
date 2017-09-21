@@ -1,3 +1,4 @@
+<%@ page import="posscard.User" %>
 <div id="head-nav" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -14,12 +15,8 @@
 
             <ul class="nav navbar-nav navbar-right user-nav">
                 <li class="dropdown profile_menu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jeff Hanneman <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">${session.username}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">My Account</a></li>
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">Messages</a></li>
-                        <li class="divider"></li>
                         <li><g:link controller="userLogin" action="logout">Sign Out</g:link></li>
                     </ul>
                 </li>
