@@ -13,7 +13,7 @@
 			<h2>订单表</h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li><g:link class="list" action="platformList">订单表</g:link></li>
+				<li><g:link class="list" action="supplierformList">订单表</g:link></li>
 				<li class="active">操作订单</li>
 			</ol>
 		</div>

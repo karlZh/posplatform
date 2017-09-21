@@ -4,7 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class  OrdersController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST"]
 
     def index() {
         redirect(action: "list", params: params)
@@ -123,6 +123,25 @@ class  OrdersController {
         if (!ordersInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'orders.label', default: 'Orders'), id])
             redirect(action: "platformShow")
+            return
+        }
+
+        [ordersInstance: ordersInstance]
+    }
+    def supplierformList(){
+
+
+        def result=Orders.findBySupplierId(session.uTypeId)
+
+        def ordersInstanceTotal=Orders.countBySupplierId(session.uTypeId)
+
+        render (view:'supplierList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
+    }
+    def supplierShow(Long id) {
+        def ordersInstance = Orders.get(id)
+        if (!ordersInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'orders.label', default: 'Orders'), id])
+            redirect(action: "supplierShow")
             return
         }
 

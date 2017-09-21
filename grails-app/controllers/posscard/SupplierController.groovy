@@ -5,7 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class SupplierController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST"]
     def supplierType = [1:"电影",2:"蛋糕"]
     def index() {
         redirect(action: "list", params: params)
@@ -222,5 +222,23 @@ class SupplierController {
         render (view:'List' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal])
     }
 
+    def yuanxianList(Integer max) {
+        def supplierInfo = Supplier.get(session.uTypeId)
+        def yuanxian
+        if(supplierInfo.parentId==0){
+            yuanxian = supplierInfo
+        }else{
+            yuanxian = Supplier.findById(supplierInfo.parentId)
+        }
+//        def result=Supplier.findAllByParentId(session.uTypeId)
+        def supplierInstanceTotal=Supplier.countById(supplierInfo.parentId)
+        render (view:'yuanxianList' , model:  [supplierInstanceList: yuanxian, supplierInstanceTotal: supplierInstanceTotal])
+    }
+    def yingyuanList(Integer max) {
+
+        def result=Supplier.findAllByParentId(session.uTypeId)
+        def supplierInstanceTotal=Supplier.countByParentId(session.uTypeId)
+        render (view:'yingyuanList' , model:  [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal])
+    }
 
 }
