@@ -5,7 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class SupplierController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    static allowedMethods = [save: "POST", update: "POST"]
     def supplierType = [1:"电影",2:"蛋糕"]
     def index() {
         redirect(action: "list", params: params)

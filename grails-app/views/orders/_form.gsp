@@ -54,7 +54,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'supplierId', 'error')} required form-group">
 	<label for="supplierId" class="col-sm-2 control-label">
-		<g:message code="orders.supplierId.label" default="供应商 Id" />
+		<g:message code="orders.supplierId.label" default="供应商 id" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
