@@ -212,6 +212,7 @@ class OrdersService {
         result.message = "查询成功！"
         result.data = [
                 orderSn:orderInfo.orderSn,
+                amount: orderInfo.amount,
                 cardNum: orderInfo.cardNum,
                 ticketTypeCn: ticketTypeCnbc,
                 num: orderInfo.num,

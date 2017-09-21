@@ -24,7 +24,7 @@ class Supplier {
 
     }
 
-    static hasMany = [posmachine: PosMachine, tickettype: TicketType,cardBinSupplier: CardBinSupplier]
+    static hasMany = [posmachine: PosMachine, tickettype: TicketType,cardbins: CardBin]
 
     String toString(){
         "${name}"
