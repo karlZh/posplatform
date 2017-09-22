@@ -38,7 +38,7 @@
 							<g:form class="form-horizontal" role="form" action="supplierSave" >
 								<g:hiddenField name="id" value="${userInstance?.id}" />
 								<g:hiddenField name="version" value="${userInstance?.version}" />
-								<g:render template="form"/>
+								<g:render template="supplierForm"/>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
 										<g:actionSubmit class="btn btn-primary" action="supplierUpdate" value="${message(code: 'default.button.update.label', default: 'Update')}" />

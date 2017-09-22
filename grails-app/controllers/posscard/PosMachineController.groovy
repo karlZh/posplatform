@@ -5,7 +5,18 @@ import org.springframework.dao.DataIntegrityViolationException
 class PosMachineController {
 
     static allowedMethods = [save: "POST", update: "POST"]
+    def supplierType = [1:"电影",2:"蛋糕"]
+    def auth(){
+        if(!session.userId){
+            def originReqParams = [controller:controllerName,action: actionName]
+            originReqParams.putAll(params)
+            session.originReqParams = originReqParams
+            redirect(controller:"userLogin",action: "login")
+            return false
+        }
+    }
 
+    def beforeInterceptor = [action: this.&auth]
     def index() {
         redirect(action: "list", params: params)
     }
@@ -16,7 +27,7 @@ class PosMachineController {
     }
 
     def create() {
-        [posMachineInstance: new PosMachine(params)]
+        [posMachineInstance: new PosMachine(params),supplierType:supplierType]
     }
 
     def save() {
@@ -47,8 +58,10 @@ class PosMachineController {
             redirect(action: "list")
             return
         }
-
-        [posMachineInstance: posMachineInstance]
+        def supplierInstance = Supplier.get(posMachineInstance.supplier.id)//供应商信息
+        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
+        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
+        [posMachineInstance: posMachineInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers]
     }
 
     def update(Long id, Long version) {

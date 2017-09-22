@@ -1,58 +1,47 @@
-<%@ page import="posscard.TicketType" %>
+<%@ page import="posscard.User" %>
 
 
+<g:hiddenField name="accountType" value="${accountType}" />
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')} required form-group">
+	<label for="username" class="col-sm-2 control-label">
+		<g:message code="user.username.label" default="用户名" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-6">
+	<g:textField class="form-control" name="username" maxlength="10" required="" value="${userInstance?.username}"/>
+	</div>
+</div>
 
-<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'name', 'error')}  form-group">
-	<label for="name" class="col-sm-2 control-label">
-		<g:message code="ticketType.name.label" default="类型名称" />
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required form-group">
+	<label for="password" class="col-sm-2 control-label">
+		<g:message code="user.password.label" default="密码" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-6">
+	<g:field type="password" class="form-control" name="password" maxlength="20" required="" value="${userInstance?.password}"/>
+	</div>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'phone', 'error')}  form-group">
+	<label for="phone" class="col-sm-2 control-label">
+		<g:message code="user.phone.label" default="电话" />
 		
 	</label>
 	<div class="col-sm-6">
-	<g:textField class="form-control" name="name" value="${ticketTypeInstance?.name}"/>
+	<g:textField class="form-control" name="phone" pattern="${userInstance.constraints.phone.matches}" value="${userInstance?.phone}"/>
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'point', 'error')} required form-group">
-	<label for="point" class="col-sm-2 control-label">
-		<g:message code="ticketType.point.label" default="扣点数" />
-		<span class="required-indicator">*</span>
-	</label>
-	<div class="col-sm-6">
-	<g:field name="point" value="${fieldValue(bean: ticketTypeInstance, field: 'point')}" required=""/>
-	</div>
-</div>
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountType', 'error')}  form-group">
+	<label for="uTypeId" class="col-sm-2 control-label">
+		<g:message code="user.accountType.label" default="用户类别" />
 
-<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'accountPoint', 'error')} required form-group">
-	<label for="accountPoint" class="col-sm-2 control-label">
-		<g:message code="ticketType.accountPoint.label" default="结算点数" />
-		<span class="required-indicator">*</span>
-	</label>
-	<div class="col-sm-6">
-	<g:field name="accountPoint" value="${fieldValue(bean: ticketTypeInstance, field: 'accountPoint')}" required=""/>
-	</div>
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'accountRatio', 'error')} required form-group">
-	<label for="accountRatio" class="col-sm-2 control-label">
-		<g:message code="ticketType.accountRatio.label" default="结算比例" />
-		<span class="required-indicator">*</span>
-	</label>
-	<div class="col-sm-6">
-	<g:field name="accountRatio" value="${fieldValue(bean: ticketTypeInstance, field: 'accountRatio')}" required=""/>
-	</div>
-</div>
-
-
-<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'supplierId', 'error')} required form-group">
-	<label for="supplier" class="col-sm-2 control-label">
-		<g:message code="ticketType.supplier.label" default="供应商 Id" />
-		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
 		<g:select id="type" name="type" from="${supplierType}" optionKey="key" optionValue="value" value="${supplierInstance?.type}" noSelection="[0:'请选择分类']" />
 		<g:select id="parentId" name="parentId" from="${psuppliers}" optionKey="id" optionValue="name" value="${supplierInstance?.parentId}" noSelection="[0:'请选择父供应商']" />
-		<g:select id="supplier" name="supplier.id" from="${csuppliers}" optionKey="id" optionValue="name" required="" value="${ticketTypeInstance?.supplier?.id}" noSelection="[0:'请选择供应商']" class="many-to-one"/>
-	</div>
+		<g:select name="uTypeId" id="supplier" from="${csuppliers}" optionKey="id" optionValue="name" value="${userInstance?.uTypeId}"  noSelection="['0': '请选择类别']" />
+    </div>
 </div>
 <script>
     $(function () {

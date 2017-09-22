@@ -5,6 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class UserController {
 
     static allowedMethods = [save: "POST", update: "POST"]
+    def supplierType = [1:"电影",2:"蛋糕"]
     def auth(){
         if(!session.userId){
             def originReqParams = [controller:controllerName,action: actionName]
@@ -365,7 +366,7 @@ def platformSearch(){
     }
     def supplierCreate(){
         def  category =Supplier.findAll()
-        [userInstance: new User(params),category: category,accountType:4]
+        [userInstance: new User(params),category: category,accountType:4,supplierType:supplierType]
     }
     def supplierSave() {
         def userInstance = new User(params)
@@ -391,14 +392,16 @@ def platformSearch(){
     }
     def supplierEdit(Long id) {
         def userInstance = User.get(id)
-        def  category =Supplier.findAll()
         if (!userInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
             redirect(action: "supplierList")
             return
         }
+        def supplierInstance = Supplier.get(userInstance.uTypeId)//供应商信息
+        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
+        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
+        [userInstance: userInstance,accountType:4,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers]
 
-        [userInstance: userInstance,category:category,accountType:3]
 //        render (view:'posEdit' , model:)
     }
     def supplierUpdate(Long id, Long version) {

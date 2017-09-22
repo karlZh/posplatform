@@ -57,7 +57,8 @@ class SupplierController {
     }
     def ajaxSearchSupplier(){
         def result = [status:0,message:'',data:[:]]
-        def parents = Supplier.findAllByParentIdAndType(0,params.type)
+        def parentId = params.parentId?params.parentId:0
+        def parents = Supplier.findAllByParentIdAndType(parentId,params.type)
         if(!parents){
             result.status = 1
             result.message = "未找到父供应商"

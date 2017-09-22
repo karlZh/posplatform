@@ -25,10 +25,6 @@
 							<h3>Pos机</h3>
 						</div>
 						<div class="content">
-							<g:if test="${flash.message}">
-								<div class="message" role="status">${flash.message}</div>
-							</g:if>
-							
 							<g:if test="${posMachineInstance?.name}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
@@ -55,7 +51,7 @@
 									<div class="col-sm-2 col-md-2 text-right">
 									<label class="control-label"><g:message code="posMachine.supplier.label" default="供应商" /></label>
 									</div>
-									<div class="col-sm-10 col-md-10">${posscard.Supplier.findById(ordersInstance.supplierId).name}</div>
+									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${posMachineInstance}" field="supplier"/></div>
 
 								</div>
 							</g:if>
@@ -71,5 +67,10 @@
 			</div>
 		</div>
 	</div>
+	<script>
+        <g:if test="${flash.message}">
+        	alert("${flash.message}")
+        </g:if>
+	</script>
 	</body>
 </html>

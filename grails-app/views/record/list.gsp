@@ -21,7 +21,7 @@
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>操作记录<g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
+							<h3>操作记录</h3>
 						</div>
 						<div class="content">
 							<div>
