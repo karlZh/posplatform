@@ -2,7 +2,7 @@ package posscard
 
 class Orders {
     String cardNum
-    Integer userId //操作员id
+    Long userId //操作员id
     Float amount //应扣订单总金额
     Float actualAmount //实扣总金额
     Integer cardPlatformId //商户id 
@@ -15,6 +15,7 @@ class Orders {
     String orderSn //订单号
     String serialNum //流水号D
     Short orderStatus //订单状态0未成功，1已成功
+    Short refundStatus //退款状态，0未退款，1已退款
     String transId = '' //卡平台流水号
     static constraints = {
         cardNum()
@@ -29,6 +30,7 @@ class Orders {
         ticketTypeId() //票消费类型
         validity() //有效期
         orderSn() //订单号
+        refundStatus()
         serialNum() //流水号D
     }
 }

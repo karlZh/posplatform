@@ -52,7 +52,7 @@ class UserService {
         return result
     }
 
-    def getUTypeInfo(Integer accountType,Integer utypeId){
+    def getUTypeInfo(Integer accountType,Long utypeId){
         def result = [status: 200,message: "",data:[:]]
         def uTypeInfo
         switch (accountType){

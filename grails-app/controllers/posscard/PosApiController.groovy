@@ -19,6 +19,7 @@ class PosApiController {
     def ordersService
     def groupQueryService
     def lastOrderService
+    def bondService
     def index() {
         def result = [:]
         def posStr = params.pos?.trim()
@@ -42,9 +43,7 @@ class PosApiController {
             return false
         }
         def data = [:]
-//        def posParams = params
         data = posParams.p
-//        data = params
         def signNot = ['signIn','signOut']
         if(!signNot.contains(posParams.act)){
             def res = userService.checkSign()
@@ -59,10 +58,13 @@ class PosApiController {
                 result = userService.signIn(data);
                 break
             case "signOut":
-                result = userService.signOut(data);
+                result = userService.signOut();
                 break
             case "checkCard":
                 result = ordersService.checkCard(data)
+                break
+            case "scanCode":
+                result = ordersService.scanCode(data)
                 break
             case "pay":
                 result = ordersService.orderPay(data)
@@ -76,9 +78,15 @@ class PosApiController {
             case "orderRefund": //订单退款
                 result= ordersService.orderRefund(data)
                 break
+            case "scanCodeRefund": //订单退款
+                result= ordersService.scanCodeRefund(data)
+                break
             case "lastOrder":
                 result=lastOrderService.last()
-                break;
+                break
+            case "settle":
+                result=bondService.settle()
+                break
             default:
                 result.status = 302
                 result.message = "未知错误"

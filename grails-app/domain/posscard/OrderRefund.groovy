@@ -2,10 +2,10 @@ package posscard
 
 class OrderRefund {
     String cardNum
-    Integer userId //操作员id
+    Long userId //操作员id
     Float amount //退款金额
     Integer cardPlatformId //商户id
-    Integer supplierId //供应商id
+    Long supplierId //供应商id
     Date  dateCreated //创建时间
     String orderSn //订单号
     Integer num //张数

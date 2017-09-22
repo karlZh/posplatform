@@ -51,5 +51,52 @@
 			</div>
 		</div>
 	</div>
+	<script>
+        $(function () {
+            TypeBind();
+            //默认绑定省
+            $("#type").change(function(){
+                TypeBind();
+            });
+            //绑定事件
+            $("#Province").change( function () {
+                CityBind();
+            });
+
+            $("#City").change(function () {
+                VillageBind();
+            })
+
+        })
+        function TypeBind() {
+            //清空下拉数据
+            var parentid = ${supplierInstance.parentId}
+            var supplierType = $("#type option:selected").val();
+            var str = "<option value='0'>顶级供应商</option>";
+            $.ajax({
+                type: "POST",
+                url: "${createLink(uri: '/Supplier/ajaxSearchSupplier')}",
+                data: { "type": supplierType },
+                dataType: "JSON",
+                async: false,
+                success: function (result) {
+                    console.log(result)
+                    //从服务器获取数据进行绑定
+                    $.each(result.data, function (i, item) {
+                        var selected = parentid==item.id&&"selected"
+                        str += "<option value=" + item.id + " "+selected+">" + item.name + "</option>";
+                    })
+                    //将数据添加到省份这个下拉框里面
+                    $("#parentId").html(str);
+                },
+                error: function () { alert("Error"); }
+            });
+
+
+
+
+        }
+	</script>
+
 	</body>
 </html>

@@ -13,4 +13,8 @@ class CardBin {//卡bin
 
     static belongsTo = [CardPlatform,Supplier]
     static hasMany = [suppliers: Supplier]
+
+    String toString(){
+        "${cardbin}"
+    }
 }

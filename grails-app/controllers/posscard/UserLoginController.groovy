@@ -16,7 +16,8 @@ class UserLoginController {
                 session.uTypeId = userInstance.uTypeId
 
                 session.username=userInstance.username
-                def requestParams=session.originReqParams?session.originReqParams:[controller: 'user',action: 'index']
+//                def requestParams=session.originReqParams?session.originReqParams:[controller: 'user',action: 'index']
+                def requestParams=[controller: 'record',action: 'index']
                 redirect(requestParams)
             }else{
                 flash['message'] = "用户名或密码错误"

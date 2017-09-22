@@ -7,13 +7,12 @@ class GroupQueryService {
     def searchCount(data) {
         def result=[status:200,message:"",data:[:]]
         def user_id = getSession().user.id
-        def count = Orders.executeQuery("select sum(a.num) as sumNum,sum(amount) as sunAmount from Orders a where a.userId="+user_id)
-        if (!count){
-            result.status=301
-            result.message="查询错误"
-            return result
+        def orderList = Orders.findAllByUserId(user_id)
+        if(!orderList){
+            result.data=[totalCount:0,totalAmount:0]
         }
-        result.data=count
+
+        result.data=[totalCount:orderList.num.sum(),totalAmount:orderList.amount.sum()]
         return result
     }
     //Getting the Session object

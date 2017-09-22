@@ -24,8 +24,25 @@ class SupplierController {
         params.max = Math.min(max ?: 10, 100)
         [supplierInstanceList: Supplier.list(params), supplierInstanceTotal: Supplier.count()]
     }
-    def supplierBinSave(){
-//        supplierInstance.save()
+    def supCardBinEdit(Long id){
+        def supplierInstance = Supplier.get(id)
+        def a = CardBin.list()
+        if (!supplierInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "list")
+            return
+        }
+        [supplierInstance: supplierInstance]
+    }
+    def supCardBinUpdate(Long id){
+        def c = params
+        def supplierInstance = Supplier.get(id)
+        for(em in params.cardbins){
+            supplierInstance.addToCardbins()
+        }
+        supplierInstance.save(flush: true)
+        def a=1
+        def b=1
     }
     def search(){
 
@@ -79,7 +96,7 @@ class SupplierController {
             return
         }
 
-        [supplierInstance: supplierInstance]
+        [supplierInstance: supplierInstance,supplierType: supplierType]
     }
     def update(Long id, Long version) {
         def supplierInstance = Supplier.get(id)

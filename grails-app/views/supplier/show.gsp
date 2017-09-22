@@ -142,9 +142,20 @@
 									
 								</div>
 							</g:if>
-							
+							<g:if test="${supplierInstance?.cardbins}">
 
-							
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+										<label class="control-label"><g:message code="supplier.cardbins.label" default="卡BIN" /></label>
+									</div>
+									<div class="col-sm-10 col-md-10">
+										<g:each in="${supplierInstance.cardbins}" var="card">
+											<span class="property-value" aria-labelledby="tags-label">${card?.encodeAsHTML()},</span>
+										</g:each>
+									</div>
+								</div>
+							</g:if>
+
 							<g:form>
 								<g:hiddenField name="id" value="${supplierInstance?.id}" />
 								<g:link action="edit"  id="${supplierInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>

@@ -5,7 +5,7 @@ class User {
     String password
     String phone = ''
     Integer accountType //用户类型pos机，商户，供应商
-    Integer uTypeId //对应用户类型的pos机，商户，供应商的id
+    Long uTypeId //对应用户类型的pos机，商户，供应商的id
     Date  dateCreated//创建时间
 
 

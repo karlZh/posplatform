@@ -1,8 +1,6 @@
 <%
 	response.sendRedirect(request.getContextPath()+
-
 			"/userLogin/login"
-
 	);
 %>
 <!DOCTYPE html>
