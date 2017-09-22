@@ -159,7 +159,7 @@ class UserController {
         userInstance.accountType=1
         if (!userInstance.save(flush: true)) {
             def  category = PosMachine.findAll()
-            render(view: "posCreate", model: [userInstance: userInstance,category: category])
+            render(view: "posEdit", model: [userInstance: userInstance,category: category])
             return
         }
 
@@ -210,7 +210,7 @@ class UserController {
         userInstance.properties = params
 
         if (!userInstance.save(flush: true)) {
-            def  category =CardPlatform.findAll()
+            def  category =PosMachine.findAll()
 
             render(view: "posEdit", model: [userInstance: userInstance,category:category])
             return
@@ -264,7 +264,7 @@ def platformSave() {
     userInstance.accountType=3
     if (!userInstance.save(flush: true)) {
         def  category = PosMachine.findAll()
-        render(view: "platformCreate", model: [userInstance: userInstance,category: category])
+        render(view: "platformEdit", model: [userInstance: userInstance,category: category])
         return
     }
 
@@ -372,7 +372,7 @@ def platformSearch(){
         userInstance.accountType=4
         if (!userInstance.save(flush: true)) {
             def  category = Supplier.findAll()
-            render(view: "platformCreate", model: [userInstance: userInstance,category: category])
+            render(view: "platformEdit", model: [userInstance: userInstance,category: category])
             return
         }
 
@@ -423,7 +423,7 @@ def platformSearch(){
         userInstance.properties = params
 
         if (!userInstance.save(flush: true)) {
-            def  category =CardPlatform.findAll()
+            def  category =Supplier.findAll()
             render(view: "platformEdit", model: [userInstance: userInstance,category:category])
             return
         }

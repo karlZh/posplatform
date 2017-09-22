@@ -79,6 +79,15 @@
 
                                     <div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="uTypeId"/></div>
 
+                                               %{--<g:if test="${session?.uTypeId == 1}">--}%
+                                                       %{--Pos机用户--}%
+                                               %{--</g:if>--}%
+                                               %{--<g:elseif test="${session?.uTypeId  == 3}">--}%
+                                                  %{--商户--}%
+                                               %{--</g:elseif>--}%
+                                               %{--<g:elseif test="${session?.uTypeId  == 4}">--}%
+                                                 %{--供应商--}%
+                                               %{--</g:elseif>--}%
                                 </div>
                             </g:if>
 

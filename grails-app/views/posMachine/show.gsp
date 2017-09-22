@@ -55,7 +55,7 @@
 									<div class="col-sm-2 col-md-2 text-right">
 									<label class="control-label"><g:message code="posMachine.supplier.label" default="供应商" /></label>
 									</div>
-									<div class="col-sm-10 col-md-10">${posscard.Supplier.findById(ordersInstance.supplierId).name}</div>
+									<div class="col-sm-10 col-md-10">${posscard.Supplier.findById(posMachineInstance.supplierId).name}</div>
 
 								</div>
 							</g:if>
