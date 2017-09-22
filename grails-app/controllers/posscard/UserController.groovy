@@ -21,7 +21,9 @@ class UserController {
     }
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [userInstanceList: User.list(params), userInstanceTotal: User.count()]
+        def result =User.findAllByIsdelete(0,[offset:params.offset,max:max])
+        def userInstanceTotal=User.countByIsdelete(0)
+        [userInstanceList: result, userInstanceTotal: userInstanceTotal]
     }
     def search(){
 

@@ -63,8 +63,8 @@ class RecordController {
         if (version != null) {
             if (recordInstance.version > version) {
                 recordInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                        [message(code: 'record.label', default: 'Record')] as Object[],
-                        "Another user has updated this Record while you were editing")
+                          [message(code: 'record.label', default: 'Record')] as Object[],
+                          "Another user has updated this Record while you were editing")
                 render(view: "edit", model: [recordInstance: recordInstance])
                 return
             }
