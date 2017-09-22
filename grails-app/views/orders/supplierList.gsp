@@ -6,6 +6,18 @@
     <meta name="layout" content="admin">
     <g:set var="entityName" value="${message(code: 'orders.label', default: 'Orders')}" />
     <title><g:message code="default.list.label" args="[entityName]" /></title>
+    <style>
+        .menu_yazhuo{
+            list-style: none;
+            width:150px;
+            margin-left:-30px;
+        }
+        .dropdown-menuyazhuo{
+            position:absolute;
+            left:44px;
+            min-width: 120px;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid" id="pcont">
@@ -19,12 +31,26 @@
     <div style="padding:25px 12px">
         <div class="text-right collapse-button" style="padding:7px 3px;">
             <div class="col-sm-6">
-              <g:select name="name" id="name" class="form-control" from="${posscard.Supplier.findByParentId( posscard.Supplier.findById( session.uTypeId).id)}" optionKey="id" optionValue="name" value=""  noSelection="['0': '请选择子供应商']" />
-              <g:link controller="orders" action="supplierformList">查询订单信息
-              </g:link>
+          %{--<g:form controller="orders" action="supplierZSearch">--}%
+              %{--<g:select name="name" id="name" class="form-control" from="${posscard.Supplier.findByParentId( posscard.Supplier.findById( session.uTypeId).id)}"--}%
+                       %{--optionKey="id" optionValue="name" value=""  noSelection="['0': '请选择子供应商']"/>--}%
+            %{--<Button type="primary" shape="circle" style="padding: 10px">查询</Button>--}%
+          %{--</g:form>--}%
+            <div class="btn-group">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    请选择子供应商  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <g:each in="${posscard.Supplier.findByParentId( posscard.Supplier.findById( session.uTypeId).id)}" status="i" var="supplier">
+                    <li><g:link controller="orders" action="supplierZSearch" id="${supplier.id}">${supplier.name}</g:link></li>
+                    </g:each>
+                </ul>
             </div>
+            </div>
+
             <g:form controller="orders" action="supplierSearch">
                 <input type="text" name="orderSn" style="padding: 10px 23px " placeholder="请输入订单号" />
+
                 <Button type="primary" shape="circle" style="padding: 10px">提交</Button>
                 <!-- <button id="sidebar-collapse" class="btn btn-default" style="padding: 10px 7px" name="提交"><i style="color:#fff;" class="fa fa-angle-left"></i></button>-->
             </g:form>
@@ -80,8 +106,8 @@
                                             <td>${fieldValue(bean: ordersInstance, field: "serialNum")}</td>
 
                                             <td class="center ">
-                                                <g:link action="platformShow" id="${ordersInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
-                                                    <i class="fa fa-file"></i>
+                                                <g:link action="platformShow" id="${ordersInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="查看详细" data-toggle="tooltip">
+                                                    查看详细
                                                 </g:link>
 
 
@@ -100,5 +126,7 @@
             </div>
         </div>
     </div>
+    </div>
+
 </body>
 </html>

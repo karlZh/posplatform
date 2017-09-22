@@ -141,13 +141,14 @@ class UserController {
             redirect(action: "show", id: id)
         }
     }
-    def posList(){
+    def posList(Integer max){
 
-        def name=params.name
-        def result=User.findAllByAccountType(1)
-        def userInstanceTotal=User.countByUsername(name)
+        def result=User.findAllByAccountType(1,[offset:params.offset,max:max])
+//        def result=User.list(params)
+//        def userInstanceTotal=User.countByAccountType(3)
+        def userInstanceTotal=User.countByAccountType(1)
 
-        render (view:'posList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
+        [userInstanceList: result, userInstanceTotal:userInstanceTotal]
     }
     def posCreate(){
         def  category = PosMachine.findAll()
@@ -244,13 +245,15 @@ class UserController {
 
         render (view:'posList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
     }
-def platformList(){
+def platformList(Integer max){
+//        params.max = Math.min(max ?: 10, 100)
+//        params.accountType = 3
+        def result=User.findAllByAccountType(3,[offset:params.offset,max:max])
+//        def result=User.list(params)
+//        def userInstanceTotal=User.countByAccountType(3)
+        def userInstanceTotal=User.countByAccountType(3)
 
-        def name=params.name
-        def result=User.findAllByAccountType(3)
-        def userInstanceTotal=User.countByUsername(name)
-
-        render (view:'platformList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
+       [userInstanceList: result, userInstanceTotal:userInstanceTotal]
     }
 def platformCreate(){
     def  category =CardPlatform.findAll()
@@ -346,13 +349,19 @@ def platformSearch(){
 
         render (view:'platformList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
     }
-    def supplierList(){
+    def supplierList(Integer max){
 
-        def name=params.name
-        def result=User.findAllByAccountType(4)
-        def userInstanceTotal=User.countByUsername(name)
+//        def name=params.name
+//        def result=User.findAllByAccountType(4)
+//        def userInstanceTotal=User.countByUsername(name)
+//
+//        render (view:'supplierList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
+        def result=User.findAllByAccountType(4,[offset:params.offset,max:max])
+//        def result=User.list(params)
+//        def userInstanceTotal=User.countByAccountType(3)
+        def userInstanceTotal=User.countByAccountType(4)
 
-        render (view:'supplierList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
+        [userInstanceList: result, userInstanceTotal:userInstanceTotal]
     }
     def supplierCreate(){
         def  category =Supplier.findAll()

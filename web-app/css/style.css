@@ -33,6 +33,9 @@ h6,
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
 }
+li{
+    list-style: none;
+}
 a {
   color: #3380FF;
   text-decoration: none;

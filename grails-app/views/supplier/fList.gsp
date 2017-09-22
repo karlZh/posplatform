@@ -71,7 +71,7 @@
 											
 											<td>${fieldValue(bean: supplierInstance, field: "remark")}</td>
 
-                                            <td><g:link action="zgSearch" id="${supplierInstance.id}">详细</g:link></td>
+                                            <td><g:link controller="orders" action="supplierZSearch" id="${supplierInstance.id}">详细</g:link></td>
 											
 											<td class="center ">
 												<g:link action="fShow" id="${supplierInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">

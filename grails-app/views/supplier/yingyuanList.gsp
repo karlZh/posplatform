@@ -29,9 +29,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="block-flat">
-						<div class="header">
-							<h3>供应商表<g:link action="fCreate" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
-						</div>
+
 						<div class="content">
 							<div>
 								<table>
@@ -71,18 +69,13 @@
 											
 											<td>${fieldValue(bean: supplierInstance, field: "remark")}</td>
 
-                                            <td><g:link action="zgSearch" id="${supplierInstance.id}">详细</g:link></td>
+                                            <td><g:link controller="orders" action="supplierZSearch" id="${supplierInstance.id}">订单详细</g:link></td>
 											
 											<td class="center ">
 												<g:link action="fShow" id="${supplierInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
-													<i class="fa fa-file"></i>
+													查看
 												</g:link>
-												<g:link action="fEdit" id="${supplierInstance.id}" class="btn btn-primary btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip">
-													<i class="fa fa-pencil"></i>
-												</g:link>
-												<g:link action="fDelete" id="${supplierInstance.id}" class="btn btn-danger btn-xs" href="#" data-original-title="Remove" data-toggle="tooltip" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
-													<i class="fa fa-times"></i>
-												</g:link>
+
 											</td>
 										</tr>
 									</g:each>

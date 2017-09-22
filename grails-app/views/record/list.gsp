@@ -1,11 +1,11 @@
 
-<%@ page import="posscard.Supplier" %>
+<%@ page import="posscard.Record" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta name="layout" content="admin">
-		<g:set var="entityName" value="${message(code: 'supplier.label', default: 'Supplier')}" />
-		<title>供应商表</title>
+		<g:set var="entityName" value="${message(code: 'record.label', default: 'Record')}" />
+		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
 	<body>
 	<div class="container-fluid" id="pcont">
@@ -16,13 +16,12 @@
 				<li class="active">操作记录</li>
 			</ol>
 		</div>
-        <div style="padding:25px 12px">
 		<div class="cl-mcont">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>操作记录</h3>
+							<h3>操作记录<g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
 						</div>
 						<div class="content">
 							<div>
@@ -30,16 +29,12 @@
 									<thead>
 									<tr>
 										
-										<g:sortableColumn property="name" title="${message(code: 'supplier.name.label', default: '序号')}" />
+										<g:sortableColumn property="user" title="${message(code: 'record.user.label', default: '用户名')}" />
 										
-										<g:sortableColumn property="ratio" title="${message(code: 'supplier.ratio.label', default: '管理员')}" />
+										<g:sortableColumn property="state" title="${message(code: 'record.state.label', default: '状态')}" />
 										
-										<g:sortableColumn property="price" title="${message(code: 'supplier.price.label', default: '当前状态')}" />
+										<g:sortableColumn property="lastTime" title="${message(code: 'record.lastTime.label', default: '最后登录时间')}" />
 										
-										<g:sortableColumn property="address" title="${message(code: 'supplier.address.label', default: '登录时间')}" />
-										
-										<g:sortableColumn property="phone" title="${message(code: 'supplier.phone.label', default: '最后一次处理')}" />
-
 										<th>操作</th>
 									</tr>
 									</thead>
@@ -47,18 +42,12 @@
 									<g:each in="${recordInstanceList}" status="i" var="recordInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 											
-											<td><g:link action="show" id="${recordInstance.id}">${fieldValue(bean: recordInstance, field: "name")}</g:link></td>
+											<td><g:link action="show" id="${recordInstance.id}">${fieldValue(bean: recordInstance, field: "user")}</g:link></td>
 											
-											<td>${fieldValue(bean: recordInstance, field: "ratio")}</td>
+											<td>${fieldValue(bean: recordInstance, field: "state")}</td>
 											
-											<td>${fieldValue(bean: recordInstance, field: "price")}</td>
-											
-											<td>${fieldValue(bean: recordInstance, field: "address")}</td>
-											
-											<td>${fieldValue(bean: recordInstance, field: "phone")}</td>
-											
-											<td>${fieldValue(bean: recordInstance, field: "remark")}</td>
-											
+											<td><g:formatDate date="${recordInstance.lastTime}" /></td>gi
+										
 											<td class="center ">
 												<g:link action="show" id="${recordInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
 													<i class="fa fa-file"></i>
@@ -79,7 +68,6 @@
 								</div>
 							</div>
 						</div>
-                        </div>
 					</div>
 				</div>
 			</div>
