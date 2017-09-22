@@ -174,7 +174,7 @@ class SupplierController {
             return
         }
 
-        [supplierInstance: supplierInstance]
+        [supplierInstance: supplierInstance,supplierType:supplierType]
     }
     def fUpdate(Long id, Long version) {
         def supplierInstance = Supplier.get(id)

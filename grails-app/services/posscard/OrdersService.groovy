@@ -98,6 +98,7 @@ class OrdersService {
         def orderAmount = ticketType.point.toFloat() * data.num.toFloat()
         def orderInstance = new Orders(
                 orderSn: orderSn,
+                userId: getSession().user.id,
                 serialNum: serialNum,
                 amount: orderAmount,
                 num: data.num,
@@ -158,6 +159,7 @@ class OrdersService {
 
         def orderInstance = new OrderRefund(
                 orderSn: orderSn,
+                userId: getSession().user.id,
                 refundOrderSn: orderInfo.orderSn,
                 serialNum: serialNum,
                 amount: orderInfo.amount,
@@ -217,8 +219,12 @@ class OrdersService {
                 ticketTypeCn: ticketTypeCnbc,
                 num: orderInfo.num,
                 supplier: supplierInfo.name,
-                dateCreated: orderInfo.dateCreated
+                dateCreated: orderInfo.dateCreated.format("yyyy-MM-dd HH:mm:ss")
         ]
         return result
+    }
+    //Getting the Session object
+    def getSession(){
+        return RequestContextHolder.currentRequestAttributes().getSessionMutex()
     }
 }

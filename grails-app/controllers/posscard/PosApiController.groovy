@@ -83,7 +83,6 @@ class PosApiController {
                 result.status = 302
                 result.message = "未知错误"
         }
-        def a = session
         render dataProcessingService.dataEncode(result)
         return false
     }

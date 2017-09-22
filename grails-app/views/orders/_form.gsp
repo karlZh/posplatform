@@ -12,16 +12,6 @@
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'password', 'error')}  form-group">
-	<label for="password" class="col-sm-2 control-label">
-		<g:message code="orders.password.label" default="密码" />
-		
-	</label>
-	<div class="col-sm-6">
-	<g:field type="password" class="form-control" name="password" value="${ordersInstance?.password}"/>
-	</div>
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: ordersInstance, field: 'amount', 'error')} required form-group">
 	<label for="amount" class="col-sm-2 control-label">
 		<g:message code="orders.amount.label" default="应扣订单总金额" />
