@@ -21,7 +21,60 @@ class OrdersService {
             result.message = "供应商id缺失"
             return result
         }
+        def supplier = Supplier.get(data.supplierid)
+        def cardb = data.cardnum.substring(0,6)
+        def cardbinList = []
+        for(cardbin in supplier.cardbins){
+            cardbinList.add(cardbin.cardbin)
+        }
+        if(!cardbinList.contains(cardb)){
+            result.status = 301
+            result.message = "不支持该卡消费"
+            return result
+        }
         def platRes = zftPlatformService.cardinfo(data.cardnum)
+        if(platRes.state != 0){
+            result.status = 401
+            result.message = platRes.msg
+            return result
+        }
+
+        def ticketType = TicketType.findAllBySupplier(Supplier.get(data.supplierid))
+        result.data.cardInfo = platRes.data
+        result.data.ticketType = ticketType
+        return result
+    }
+    def scanCode(data){
+        def result = [status: 200,message: "",data:[:]]
+        if(!data.encryptStr){
+            result.status = 302
+            result.message = "请输入卡号"
+            return result
+        }
+        if(!data.supplierid){
+            result.status = 302
+            result.message = "供应商id缺失"
+            return result
+        }
+        def channel = '07'
+        def product = '10'
+        String keyStr = '+p!ZKg$?xFZ,dynZ';
+        def urlK = data.encryptStr.decodeURL()
+        def encText = urlK.substring(urlK.indexOf(channel+product)+4)
+        String decString = CryptAES.AES_Decrypt(keyStr, encText);
+        def cardnum = decString.substring(0,decString.indexOf("="))
+        def supplier = Supplier.get(data.supplierid)
+        def cardb = cardnum.substring(0,6)
+        def cardbinList = []
+        for(cardbin in supplier.cardbins){
+            cardbinList.add(cardbin.cardbin)
+        }
+        if(!cardbinList.contains(cardb)){
+            result.status = 301
+            result.message = "不支持该卡消费"
+            return result
+        }
+        def platRes = zftPlatformService.cardinfo(cardnum)
         if(platRes.state != 0){
             result.status = 401
             result.message = platRes.msg
@@ -108,7 +161,8 @@ class OrdersService {
                 cardNum: data.cardnum,
                 cardPlatformId: cardbinInfo.cardPlatform.id,
                 validity: data.validity,
-                orderStatus: 0
+                orderStatus: 0,
+                refundStatus: 0
         )
         if (!orderInstance.save(flush: true)) {
             result.status = 303
@@ -168,7 +222,7 @@ class OrdersService {
                 ticketTypeId: orderInfo.ticketTypeId,
                 cardNum: orderInfo.cardNum,
                 cardPlatformId: orderInfo.cardPlatformId,
-                orderStatus: 0
+                orderStatus: 0,
         )
         if (!orderInstance.save(flush: true)) {
             result.status = 303
@@ -185,6 +239,86 @@ class OrdersService {
         orderInstance.orderStatus = 1
         orderInstance.transId = platRes.data.RefundTransId
         if (!orderInstance.save(flush: true)) {
+            result.status = 303
+            result.message = "订单更新失败"
+            return result
+        }
+        orderInfo.refundStatus=1
+        if (!orderInfo.save(flush: true)) {
+            result.status = 303
+            result.message = "订单更新失败"
+            return result
+        }
+
+        result.message = "退款成功"
+        return result
+
+    }
+    //退款操作
+    def scanCodeRefund(data){
+        def result = [status: 200,message: "",data:[:]]
+        if(!data.tradeno){
+            result.status = 302
+            result.message = "流水号缺失"
+            return result
+        }
+        if(!data.cardnum){
+            result.status = 302
+            result.message = "卡号缺失"
+            return result
+        }
+        def channel = '07'
+        def product = '10'
+        String keyStr = '+p!ZKg$?xFZ,dynZ';
+        def urlK = data.encryptStr.decodeURL()
+        def encText = urlK.substring(urlK.indexOf(channel+product)+4)
+        String decString = CryptAES.AES_Decrypt(keyStr, encText);
+        def cardnum = decString.substring(0,decString.indexOf("="))
+        def orderInfo = Orders.findByOrderSnAndCardNum(data.tradeno,cardnum)
+        if(!orderInfo){
+            result.status = 301
+            result.message = "未找到该订单"
+            return result
+        }
+        def date = new Date()
+        def randomStr = (int)(Math.random())*10000
+        def orderSn = date.format("yyyyMMddHHmmss") + randomStr.toString()
+        def serialNum = "100"+ orderSn
+
+        def orderInstance = new OrderRefund(
+                orderSn: orderSn,
+                userId: getSession().user.id,
+                refundOrderSn: orderInfo.orderSn,
+                serialNum: serialNum,
+                amount: orderInfo.amount,
+                num: orderInfo.num,
+                supplierId: orderInfo.supplierId,
+                ticketTypeId: orderInfo.ticketTypeId,
+                cardNum: orderInfo.cardNum,
+                cardPlatformId: orderInfo.cardPlatformId,
+                orderStatus: 0,
+        )
+        if (!orderInstance.save(flush: true)) {
+            result.status = 303
+            result.message = "创建订单失败"
+            return result
+        }
+
+        def platRes = zftPlatformService.rollBack(cardnum,orderInfo.transId,serialNum)
+        if(platRes.state != 0){
+            result.status = 401
+            result.message = platRes.msg
+            return result
+        }
+        orderInstance.orderStatus = 1
+        orderInstance.transId = platRes.data.RefundTransId
+        if (!orderInstance.save(flush: true)) {
+            result.status = 303
+            result.message = "订单更新失败"
+            return result
+        }
+        orderInfo.refundStatus=1
+        if (!orderInfo.save(flush: true)) {
             result.status = 303
             result.message = "订单更新失败"
             return result
@@ -219,7 +353,8 @@ class OrdersService {
                 ticketTypeCn: ticketTypeCnbc,
                 num: orderInfo.num,
                 supplier: supplierInfo.name,
-                dateCreated: orderInfo.dateCreated.format("yyyy-MM-dd HH:mm:ss")
+                dateCreated: orderInfo.dateCreated.format("yyyy-MM-dd HH:mm:ss"),
+                statusCn: orderInfo.refundStatus?'已退款':(orderInfo.orderStatus?"扣款成功":"扣款失败")
         ]
         return result
     }

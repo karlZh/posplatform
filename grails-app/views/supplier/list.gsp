@@ -70,7 +70,10 @@
 											<td>${fieldValue(bean: supplierInstance, field: "remark")}</td>
 											
 											<td class="center ">
-												<g:link action="show" id="${supplierInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
+												<g:link action="supCardBinEdit" id="${supplierInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="${message(code: 'cardBin.label', default: 'SupplierCardBin')}" data-toggle="tooltip">
+													<i class="fa fa-cogs fa-fw"></i>
+												</g:link>
+												<g:link action="show" id="${supplierInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="${message(code: 'supplier.show.label', default: 'Show')}" data-toggle="tooltip">
 													<i class="fa fa-file"></i>
 												</g:link>
 												<g:link action="edit" id="${supplierInstance.id}" class="btn btn-primary btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip">

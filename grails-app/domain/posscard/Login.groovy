@@ -1,7 +1,7 @@
 package posscard
 
 class Login {
-      String username
+    String username
     String password
     static constraints = {
         username(nullable: false)

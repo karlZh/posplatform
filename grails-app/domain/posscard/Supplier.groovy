@@ -8,7 +8,7 @@ class Supplier {
     String address //地址
     String phone //电话
     String remark //备注
-    Integer parentId //父供应商id
+    Long parentId //父供应商id
     Date  dateCreated
 
     static constraints = {

@@ -1,7 +1,7 @@
 package posscard
 
 class PosMachine {
-    Integer userId
+    Long userId
     String name
     Date  dateCreated //创建时间
 
