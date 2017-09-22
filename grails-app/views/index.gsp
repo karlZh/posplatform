@@ -1,7 +1,7 @@
 <%
 	response.sendRedirect(request.getContextPath()+
 
-			"/record/record"
+			"/userLogin/login"
 
 	);
 %>

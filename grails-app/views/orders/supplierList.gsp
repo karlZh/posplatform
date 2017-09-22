@@ -69,15 +69,13 @@
 
                                         <g:sortableColumn property="cardNum" title="${message(code: 'orders.cardNum.label', default: '用户名')}" />
 
-                                        <g:sortableColumn property="password" title="${message(code: 'orders.password.label', default: '密码')}" />
-
                                         <g:sortableColumn property="amount" title="${message(code: 'orders.amount.label', default: '应扣订单总金额')}" />
 
                                         <g:sortableColumn property="actualAmount" title="${message(code: 'orders.actualAmount.label', default: '实扣总金额')}" />
 
-                                        <g:sortableColumn property="cardPlatformId" title="${message(code: 'orders.cardPlatformId.label', default: '商户id')}" />
+                                        <g:sortableColumn property="cardPlatformId" title="${message(code: 'orders.cardPlatformId.label', default: '商户')}" />
 
-                                        <g:sortableColumn property="supplierId" title="${message(code: 'orders.supplierId.label', default: '供应商id')}" />
+                                        <g:sortableColumn property="supplierId" title="${message(code: 'orders.supplierId.label', default: '供应商')}" />
 
                                         <g:sortableColumn property="orderSn" title="${message(code: 'orders.orderSn.label', default: '订单号')}" />
 
@@ -90,8 +88,6 @@
                                         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
                                             <td><g:link action="show" id="${ordersInstance.id}">${fieldValue(bean: ordersInstance, field: "cardNum")}</g:link></td>
-
-                                            <td>${fieldValue(bean: ordersInstance, field: "password")}</td>
 
                                             <td>${fieldValue(bean: ordersInstance, field: "amount")}</td>
 

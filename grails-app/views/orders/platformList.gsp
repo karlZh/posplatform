@@ -38,8 +38,6 @@
 
                                         <g:sortableColumn property="cardNum" title="${message(code: 'orders.cardNum.label', default: '用户名')}" />
 
-                                        <g:sortableColumn property="password" title="${message(code: 'orders.password.label', default: '密码')}" />
-
                                         <g:sortableColumn property="amount" title="${message(code: 'orders.amount.label', default: '应扣订单总金额')}" />
 
                                         <g:sortableColumn property="actualAmount" title="${message(code: 'orders.actualAmount.label', default: '实扣总金额')}" />
@@ -59,8 +57,6 @@
                                         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
                                             <td><g:link action="show" id="${ordersInstance.id}">${fieldValue(bean: ordersInstance, field: "cardNum")}</g:link></td>
-
-                                            <td>${fieldValue(bean: ordersInstance, field: "password")}</td>
 
                                             <td>${fieldValue(bean: ordersInstance, field: "amount")}</td>
 

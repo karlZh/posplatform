@@ -243,10 +243,9 @@ class SupplierController {
         render (view:'yuanxianList' , model:  [supplierInstanceList: yuanxian, supplierInstanceTotal: supplierInstanceTotal])
     }
 
-    def yingyuanList(Integer max) {
-
-        def result=Supplier.findAllByParentId(session.uTypeId,[offset:params.offset,max:max])
-        def supplierInstanceTotal=Supplier.countByParentId(session.uTypeId)
+    def yingyuanList(Long id,Integer max) {
+        def result=Supplier.findAllByParentId(id,[offset:params.offset,max:max])
+        def supplierInstanceTotal=Supplier.countByParentId(id)
 
         render (view:'yingyuanList' , model:  [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal])
     }

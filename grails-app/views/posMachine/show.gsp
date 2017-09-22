@@ -10,11 +10,11 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="default.show.label" args="[entityName]" /></h2>
+			<h2>Pos机</h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li class="active"><g:message code="default.show.label" args="[entityName]" /></li>
+				<li>Pos机</li>
+				<li class="active">Pos机</li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -22,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="default.show.label" args="[entityName]" /></h3>
+							<h3>Pos机</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -55,7 +55,8 @@
 									<div class="col-sm-2 col-md-2 text-right">
 									<label class="control-label"><g:message code="posMachine.supplier.label" default="供应商" /></label>
 									</div>
-									<div class="col-sm-10 col-md-10">${posMachineInstance?.supplier?.name?.encodeAsHTML()}</div>
+									<div class="col-sm-10 col-md-10">${posscard.Supplier.findById(ordersInstance.supplierId).name}</div>
+
 								</div>
 							</g:if>
 

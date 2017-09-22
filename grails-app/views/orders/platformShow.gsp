@@ -40,16 +40,7 @@
 								</div>
 							</g:if>
 							
-							<g:if test="${ordersInstance?.password}">
-								<div class="row">
-									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="orders.password.label" default="密码" /></label>
-									</div>
-									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ordersInstance}" field="password"/></div>
-									
-								</div>
-							</g:if>
+
 							
 							<g:if test="${ordersInstance?.amount}">
 								<div class="row">

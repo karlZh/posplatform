@@ -17,7 +17,7 @@ class UserController {
 
     def beforeInterceptor = [action: this.&auth]
     def index() {
-        redirect(controller: "record", action: "record", params: params)
+        redirect(controller: "record", action: "list", params: params)
     }
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
