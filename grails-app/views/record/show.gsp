@@ -40,24 +40,24 @@
 								</div>
 							</g:if>
 							
-							<g:if test="${recordInstance?.state}">
+							<g:if test="${recordInstance?.loginTime}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="record.state.label" default="State" /></label>
+									<label class="control-label"><g:message code="record.loginTime.label" default="Login Time" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${recordInstance}" field="state"/></div>
+									<div class="col-sm-10 col-md-10"><g:formatDate date="${recordInstance?.loginTime}" /></div>
 									
 								</div>
 							</g:if>
 							
-							<g:if test="${recordInstance?.lastTime}">
+							<g:if test="${recordInstance?.userType}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="record.lastTime.label" default="Last Time" /></label>
+									<label class="control-label"><g:message code="record.userType.label" default="User Type" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:formatDate date="${recordInstance?.lastTime}" /></div>
+									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${recordInstance}" field="userType"/></div>
 									
 								</div>
 							</g:if>

@@ -5,29 +5,20 @@ import org.springframework.dao.DataIntegrityViolationException
 class RecordController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
-    def auth(){
-        if(!session.userId){
-            def originReqParams = [controller:controllerName,action: actionName]
-            originReqParams.putAll(params)
-            session.originReqParams = originReqParams
-            redirect(controller:"userLogin",action: "login")
-            return false
-        }
-    }
 
-    def beforeInterceptor = [action: this.&auth]
     def index() {
         redirect(action: "list", params: params)
     }
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [recordInstanceList:Record.list(params), recordInstanceTotal: Record.count]
+        [recordInstanceList: Record.list(params), recordInstanceTotal: Record.count()]
     }
 
     def create() {
         [recordInstance: new Record(params)]
     }
+
     def save() {
         def recordInstance = new Record(params)
         if (!recordInstance.save(flush: true)) {
