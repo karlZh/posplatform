@@ -79,7 +79,7 @@ class PosApiController {
                 result= ordersService.orderRefund(data)
                 break
             case "scanCodeRefund": //订单退款
-                result= ordersService.orderRefund(data)
+                result= ordersService.scanCodeRefund(data)
                 break
             case "lastOrder":
                 result=lastOrderService.last()

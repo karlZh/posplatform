@@ -64,9 +64,9 @@
 											
 											<td>${fieldValue(bean: ordersInstance, field: "actualAmount")}</td>
 											
-											<td>${posscard.CardPlatform.findById(ordersInstance.cardPlatformId).name}</td>
+											<td>${posscard.CardPlatform.findById(ordersInstance.cardPlatformId)}</td>
 											
-											<td>${posscard.Supplier.findById(ordersInstance.supplierId).name}</td>
+											<td>${posscard.Supplier.findById(ordersInstance.supplierId)?.name}</td>
 
                                             <td>${fieldValue(bean: ordersInstance, field: "orderSn")}</td>
 

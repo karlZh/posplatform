@@ -203,7 +203,7 @@ class OrdersService {
         def orderInfo = Orders.findByOrderSnAndCardNum(data.tradeno,data.cardnum)
         if(!orderInfo){
             result.status = 301
-            result.message = "未找到该订单"
+            result.message = "输入卡号不正确"
             return result
         }
         def date = new Date()
@@ -262,7 +262,7 @@ class OrdersService {
             result.message = "流水号缺失"
             return result
         }
-        if(!data.cardnum){
+        if(!data.encryptStr){
             result.status = 302
             result.message = "卡号缺失"
             return result

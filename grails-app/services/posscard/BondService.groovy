@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat
 
 class BondService {
     def settle() {
-        def result=[status:200,message:"",data:[:]]
+         def result=[status:200,message:"",data:[:]]
         Calendar cale = null;
         cale = Calendar.getInstance();
         // 获取当月第一天和最后一天
