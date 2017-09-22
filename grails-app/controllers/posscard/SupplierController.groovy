@@ -7,10 +7,19 @@ class SupplierController {
 
     static allowedMethods = [save: "POST", update: "POST"]
     def supplierType = [1:"电影",2:"蛋糕"]
+    def auth(){
+        if(!session.userId){
+            def originReqParams = [controller:controllerName,action: actionName]
+            originReqParams.putAll(params)
+            session.originReqParams = originReqParams
+            redirect(controller:"userLogin",action: "login")
+            return false
+        }
+    }
+    def beforeInterceptor = [action: this.&auth]
     def index() {
         redirect(action: "list", params: params)
     }
-
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [supplierInstanceList: Supplier.list(params), supplierInstanceTotal: Supplier.count()]
@@ -137,9 +146,8 @@ class SupplierController {
     }
     def fList(Integer max) {
         def name=params.name
-        def result=Supplier.findAllByParentId(0)
-        def supplierInstanceTotal=Supplier.countByName(name)
-
+        def result=Supplier.findAllByParentId(0,[offset:params.offset,max:max])
+        def supplierInstanceTotal=Supplier.countByParentId(0)
         render (view:'fList' , model:  [supplierInstanceList: result, supplierInstanceTotal: Supplier.count()])
     }
 
@@ -231,13 +239,13 @@ class SupplierController {
             redirect(action: "fShow", id: id)
         }
     }
-    def zgSearch(Long id){
-
-        def result=Supplier.findAllByParentId(id)
-        def supplierInstanceTotal=Supplier.countById(id)
-
-        render (view:'List' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal])
-    }
+//    def zgSearch(Long id){
+//
+//        def result=Supplier.findAllByParentId(id)
+//        def supplierInstanceTotal=Supplier.countByParentId(id)
+//
+//        render (view:'List' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal])
+//    }
 
     def yuanxianList(Integer max) {
         def supplierInfo = Supplier.get(session.uTypeId)
@@ -251,10 +259,12 @@ class SupplierController {
         def supplierInstanceTotal=Supplier.countById(supplierInfo.parentId)
         render (view:'yuanxianList' , model:  [supplierInstanceList: yuanxian, supplierInstanceTotal: supplierInstanceTotal])
     }
+
     def yingyuanList(Integer max) {
 
-        def result=Supplier.findAllByParentId(session.uTypeId)
+        def result=Supplier.findAllByParentId(session.uTypeId,[offset:params.offset,max:max])
         def supplierInstanceTotal=Supplier.countByParentId(session.uTypeId)
+
         render (view:'yingyuanList' , model:  [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal])
     }
 

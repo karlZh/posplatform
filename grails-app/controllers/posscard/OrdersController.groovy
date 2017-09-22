@@ -12,7 +12,7 @@ class  OrdersController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [ordersInstanceList: Orders.list(params), ordersInstanceTotal: Orders.count()]
+        [ordersInstanceList: Orders.list(params),ordersInstanceTotal: Orders.count()]
     }
 
     def search(){
@@ -104,10 +104,13 @@ class  OrdersController {
             redirect(action: "show", id: id)
         }
     }
-    def platformList(){
-
-
-        def result=Orders.findAllByCardPlatformId(session.uTypeId)
+    def platformList(Integer max){
+        params.max = Math.min(max ?: 10, 100)
+//        def result=User.findAllByAccountType(3,[offset:params.offset,max:max])
+////        def result=User.list(params)
+////        def userInstanceTotal=User.countByAccountType(3)
+//        def userInstanceTotal=User.countByAccountType(3)
+        def result=Orders.findAllByCardPlatformId(session.uTypeId,[offset:params.offset,max: params.max])
 
         def ordersInstanceTotal=Orders.countByCardPlatformId(session.uTypeId)
 
@@ -132,10 +135,10 @@ class  OrdersController {
 
         render (view:'platformList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
-    def supplierformList(){
+    def supplierformList(Integer max){
 
-
-        def result=Orders.findBySupplierId(session.uTypeId)
+        params.max = Math.min(max ?: 10, 100)
+        def result=Orders.findAllBySupplierId(session.uTypeId,[offset:params.offset,max:params.max])
 
         def ordersInstanceTotal=Orders.countBySupplierId(session.uTypeId)
 
@@ -151,16 +154,15 @@ class  OrdersController {
 
         [ordersInstance: ordersInstance]
     }
-    def supplierfSearch(){
+    def supplierSearch(){
         def orderSn=params.orderSn
         def result=Orders.findByOrderSnAndSupplierId(orderSn,session.uTypeId)
         def ordersInstanceTotal=Orders.countByOrderSnAndSupplierId(orderSn,session.uTypeId)
         render (view:'supplierList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
-    def supplierSearch(){
-        def orderSn=params.orderSn
-        def result=Orders.findByOrderSnAndSupplierId(orderSn,session.uTypeId)
-        def ordersInstanceTotal=Orders.countByOrderSnAndSupplierId(orderSn,session.uTypeId)
+    def supplierZSearch(Long id){
+        def result=Orders.findBySupplierId(id)
+        def ordersInstanceTotal=Orders.countBySupplierId(id)
         render (view:'supplierList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
 }

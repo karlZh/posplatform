@@ -18,7 +18,7 @@
     </div>
     <div style="padding:25px 12px">
         <div class="text-right collapse-button" style="padding:7px 3px;">
-            <g:form controller="orders" action="platformSearch">
+            <g:form controller="orders" action="search">
                 <input type="text" name="orderSn" style="padding: 10px 23px " placeholder="请输入订单号" />
                 <Button type="primary" shape="circle" style="padding: 10px">提交</Button>
                 <!-- <button id="sidebar-collapse" class="btn btn-default" style="padding: 10px 7px" name="提交"><i style="color:#fff;" class="fa fa-angle-left"></i></button>-->
@@ -44,9 +44,9 @@
 
                                         <g:sortableColumn property="actualAmount" title="${message(code: 'orders.actualAmount.label', default: '实扣总金额')}" />
 
-                                        <g:sortableColumn property="cardPlatformId" title="${message(code: 'orders.cardPlatformId.label', default: '商户id')}" />
+                                        <g:sortableColumn property="cardPlatformId" title="${message(code: 'orders.cardPlatformId.label', default: '商户')}" />
 
-                                        <g:sortableColumn property="supplierId" title="${message(code: 'orders.supplierId.label', default: '供应商id')}" />
+                                        <g:sortableColumn property="supplierId" title="${message(code: 'orders.supplierId.label', default: '供应商')}" />
 
                                         <g:sortableColumn property="orderSn" title="${message(code: 'orders.orderSn.label', default: '订单号')}" />
 
@@ -69,7 +69,6 @@
                                             <td>${posscard.CardPlatform.findById(ordersInstance.cardPlatformId).name}</td>
 
                                             <td>${posscard.Supplier.findById(ordersInstance.supplierId).name}</td>
-
 
                                             <td>${fieldValue(bean: ordersInstance, field: "orderSn")}</td>
 
@@ -95,6 +94,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 </html>
