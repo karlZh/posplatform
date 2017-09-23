@@ -12,15 +12,17 @@ class  OrdersController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [ordersInstanceList: Orders.list(params),ordersInstanceTotal: Orders.count()]
+        def result =Orders.findAllByIsdelete(0,[offset:params.offset,max:max])
+        def ordersInstanceTotal=Orders.countByIsdelete(0)
+        [ordersInstanceList: result,ordersInstanceTotal: ordersInstanceTotal]
     }
 
-    def search(){
+    def search(Integer max){
 
         def orderSn=params.orderSn
-        def result=Orders.findAllByOrderSn(orderSn)
+        def result=Orders.findAllByOrderSnAndIsdelete(orderSn,0,[offset:params.offset,max:max])
 
-        def ordersInstanceTotal=Orders.countByOrderSn(orderSn)
+        def ordersInstanceTotal=Orders.countByOrderSnAndIsdelete(orderSn,0)
 
         render (view:'list' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
@@ -95,7 +97,8 @@ class  OrdersController {
         }
 
         try {
-            ordersInstance.delete(flush: true)
+            ordersInstance.save(flush: true)
+            ordersInstance.executeUpdate("update Orders u set u.isdelete=1 where u.id=?",[id])
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'orders.label', default: 'Orders'), id])
             redirect(action: "list")
         }
@@ -110,9 +113,9 @@ class  OrdersController {
 ////        def result=User.list(params)
 ////        def userInstanceTotal=User.countByAccountType(3)
 //        def userInstanceTotal=User.countByAccountType(3)
-        def result=Orders.findAllByCardPlatformId(session.uTypeId,[offset:params.offset,max: params.max])
+        def result=Orders.findAllByCardPlatformIdAndIsdelete(session.uTypeId,0,[offset:params.offset,max: params.max])
 
-        def ordersInstanceTotal=Orders.countByCardPlatformId(session.uTypeId)
+        def ordersInstanceTotal=Orders.countByCardPlatformIdAndIsdelete(session.uTypeId,0)
 
         render (view:'platformList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
@@ -126,21 +129,21 @@ class  OrdersController {
 
         [ordersInstance: ordersInstance]
     }
-    def platformSearch(){
+    def platformSearch(Integer max) {
 
         def orderSn=params.orderSn
-        def result=Orders.findByOrderSnAndCardPlatformId(orderSn,session.uTypeId)
+        def result=Orders.findByOrderSnAndCardPlatformIdAndIsdelete(orderSn,session.uTypeId,0,[offset:params.offset,max:max])
 
-        def ordersInstanceTotal=Orders.countByOrderSnAndCardPlatformId(orderSn,session.uTypeId)
+        def ordersInstanceTotal=Orders.countByOrderSnAndCardPlatformIdAndIsdelete(orderSn,session.uTypeId,0)
 
         render (view:'platformList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
     def supplierformList(Integer max){
 
         params.max = Math.min(max ?: 10, 100)
-        def result=Orders.findAllBySupplierId(session.uTypeId,[offset:params.offset,max:params.max])
+        def result=Orders.findAllBySupplierIdAndIsdelete(session.uTypeId,0,[offset:params.offset,max:params.max])
 
-        def ordersInstanceTotal=Orders.countBySupplierId(session.uTypeId)
+        def ordersInstanceTotal=Orders.countBySupplierIdAndIsdelete(session.uTypeId,0)
 
         render (view:'supplierList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
@@ -154,15 +157,15 @@ class  OrdersController {
 
         [ordersInstance: ordersInstance]
     }
-    def supplierSearch(){
+    def supplierSearch(Integer max){
         def orderSn=params.orderSn
-        def result=Orders.findByOrderSnAndSupplierId(orderSn,session.uTypeId)
-        def ordersInstanceTotal=Orders.countByOrderSnAndSupplierId(orderSn,session.uTypeId)
+        def result=Orders.findByOrderSnAndSupplierIdAndIsdelete(orderSn,session.uTypeId,0,[offset:params.offset,max:max])
+        def ordersInstanceTotal=Orders.countByOrderSnAndSupplierIdAndIsdelete(orderSn,session.uTypeId,0)
         render (view:'supplierList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
-    def supplierZSearch(Long id){
-        def result=Orders.findBySupplierId(id)
-        def ordersInstanceTotal=Orders.countBySupplierId(id)
+    def supplierZSearch(Long id,Integer max){
+        def result=Orders.findBySupplierIdAndIsdelete(id,0,[offset:params.offset,max:max])
+        def ordersInstanceTotal=Orders.countBySupplierIdAndIsdelete(id,0)
         render (view:'supplierList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
 }

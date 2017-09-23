@@ -10,10 +10,10 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="default.list.label" args="[entityName]" /></h2>
+			<h2>操作记录</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li class="active"><g:message code="default.list.label" args="[entityName]" /></li>
+				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li class="active">操作记录</li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -21,7 +21,7 @@
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="default.list.label" args="[entityName]" /><g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
+							<h3>操作记录</h3>
 						</div>
 						<div class="content">
 							<div>
@@ -29,11 +29,11 @@
 									<thead>
 									<tr>
 										
-										<g:sortableColumn property="user" title="${message(code: 'record.user.label', default: 'User')}" />
+										<g:sortableColumn property="user" title="${message(code: 'record.user.label', default: '用户名')}" />
 										
-										<g:sortableColumn property="loginTime" title="${message(code: 'record.loginTime.label', default: 'Login Time')}" />
+										<g:sortableColumn property="loginTime" title="${message(code: 'record.loginTime.label', default: '登陆时间')}" />
 										
-										<g:sortableColumn property="userType" title="${message(code: 'record.userType.label', default: 'User Type')}" />
+										<g:sortableColumn property="userType" title="${message(code: 'record.userType.label', default: '用户类型')}" />
 										
 										<th>操作</th>
 									</tr>
@@ -44,7 +44,7 @@
 											
 											<td><g:link action="show" id="${recordInstance.id}">${fieldValue(bean: recordInstance, field: "user")}</g:link></td>
 											
-											<td><g:formatDate date="${recordInstance.loginTime}" /></td>gi
+											<td><g:formatDate date="${recordInstance.loginTime}" />${}</td>
 										
 											<td>${fieldValue(bean: recordInstance, field: "userType")}</td>
 											

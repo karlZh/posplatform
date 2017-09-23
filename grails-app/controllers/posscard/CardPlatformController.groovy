@@ -10,16 +10,18 @@ class CardPlatformController {
         redirect(action: "list", params: params)
     }
 
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [cardPlatformInstanceList: CardPlatform.list(params), cardPlatformInstanceTotal: CardPlatform.count()]
+    def list(Integer max) {//[offset:params.offset,max:max])
+
+        def result=CardPlatform.findAllByIsdelete(0,[offset:params.offset,max:max])
+        def cardPlatformInstanceTotal=CardPlatform.countByIsdelete(0)
+        [cardPlatformInstanceList:result, cardPlatformInstanceTotal:cardPlatformInstanceTotal]
     }
 
     def search(){
 
         def name=params.name
-        def result=CardPlatform.findAllByName(name)
-        def cardPlatformInstanceTotal=CardPlatform.countByName(name)
+        def result=CardPlatform.findAllByNameAndIsdelete(name,0,[offset:params.offset,max:max])
+        def cardPlatformInstanceTotal=CardPlatform.countByNameAndIsdelete(name,0)
 
         render (view:'list' , model: [cardPlatformInstanceList: result, cardPlatformInstanceTotal:cardPlatformInstanceTotal])
     }
@@ -99,7 +101,8 @@ class CardPlatformController {
         }
 
         try {
-            cardPlatformInstance.delete(flush: true)
+            cardPlatformInstance.save(flush: true)
+            cardPlatformInstance.executeUpdate("update CardPlatform u set u.isdelete=1 where u.id=?",[id])
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'cardPlatform.label', default: 'CardPlatform'), id])
             redirect(action: "list")
         }

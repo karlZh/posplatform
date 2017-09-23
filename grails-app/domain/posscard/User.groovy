@@ -6,7 +6,7 @@ class User {
     String phone = ''
     Integer accountType //用户类型pos机，商户，供应商
     Long uTypeId //对应用户类型的pos机，商户，供应商的id
-    Short isdelete = 0 //删除状态 0，未删 1：删除
+    Short   isdelete = 0 //删除状态 0，未删 1：删除
     Date  dateCreated//创建时间
 
 

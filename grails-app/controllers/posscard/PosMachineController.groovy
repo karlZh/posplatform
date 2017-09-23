@@ -12,7 +12,18 @@ class PosMachineController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [posMachineInstanceList: PosMachine.list(params), posMachineInstanceTotal: PosMachine.count()]
+        def result =PosMachine.findAllByIsdelete(0,[offset:params.offset,max:params.max])
+        def posMachineInstanceTotal=PosMachine.countByIsdelete(0)
+        [posMachineInstanceList: result, posMachineInstanceTotal: posMachineInstanceTotal]
+    }
+
+    def search(Integer max){
+
+        def name=params.name
+        def result=PosMachine.findAllByNameAndIsdelete(name,0,[offset:params.offset,max:max])
+        def posMachineInstanceTotal=PosMachine.countByNameAndIsdelete(name,0)
+
+        render (view:'list' , model: [posMachineInstanceList: result, posMachineInstanceTotal:posMachineInstanceTotal])
     }
 
     def create() {
@@ -89,7 +100,8 @@ class PosMachineController {
         }
 
         try {
-            posMachineInstance.delete(flush: true)
+            posMachineInstance.save(flush: true)
+            posMachineInstance.executeUpdate("update PosMachine u set u.isdelete=1 where u.id=?",[id])
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), id])
             redirect(action: "list")
         }

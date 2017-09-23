@@ -9,6 +9,7 @@ class Supplier {
     String phone //电话
     String remark //备注
     Long parentId //父供应商id
+    Short   isdelete = 0 //删除状态 0，未删 1：删除
     Date  dateCreated
 
     static constraints = {
@@ -19,7 +20,9 @@ class Supplier {
         address() //地址
         phone(matches: /\d{7,11}/,blank: false) //电话
         remark(maxSize: 50,blank: true) //备注
+        isdelete(nullable: false)
         parentId() //父供应商id
+
         dateCreated(display:false) //创建时间
 
     }

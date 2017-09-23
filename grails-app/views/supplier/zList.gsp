@@ -1,4 +1,5 @@
 
+
 <%@ page import="posscard.Supplier" %>
 <!DOCTYPE html>
 <html>
@@ -29,26 +30,27 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="block-flat">
-
+						<div class="header">
+							<h3>供应商表<g:link action="fCreate" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
+						</div>
 						<div class="content">
 							<div>
 								<table>
 									<thead>
 									<tr>
-
+										
 										<g:sortableColumn property="name" title="${message(code: 'supplier.name.label', default: '供应商姓名')}" />
-
+										
 										<g:sortableColumn property="ratio" title="${message(code: 'supplier.ratio.label', default: '结算比例')}" />
-
+										
 										<g:sortableColumn property="price" title="${message(code: 'supplier.price.label', default: '结算价格')}" />
-
+										
 										<g:sortableColumn property="address" title="${message(code: 'supplier.address.label', default: '地址')}" />
-
+										
 										<g:sortableColumn property="phone" title="${message(code: 'supplier.phone.label', default: '电话')}" />
-
+										
 										<g:sortableColumn property="remark" title="${message(code: 'supplier.remark.label', default: '备注')}" />
 
-                                        <g:sortableColumn property="remark" title="${message(code: 'supplier.remark.label', default: '子供应商')}" />
 
 										<th>操作</th>
 									</tr>
@@ -56,26 +58,31 @@
 									<tbody>
 									<g:each in="${supplierInstanceList}" status="i" var="supplierInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-
+											
 											<td><g:link action="show" id="${supplierInstance.id}">${fieldValue(bean: supplierInstance, field: "name")}</g:link></td>
-
+											
 											<td>${fieldValue(bean: supplierInstance, field: "ratio")}</td>
-
+											
 											<td>${fieldValue(bean: supplierInstance, field: "price")}</td>
-
+											
 											<td>${fieldValue(bean: supplierInstance, field: "address")}</td>
-
+											
 											<td>${fieldValue(bean: supplierInstance, field: "phone")}</td>
-
+											
 											<td>${fieldValue(bean: supplierInstance, field: "remark")}</td>
 
-                                            <td><g:link controller="orders" action="supplierZSearch" id="${supplierInstance.id}">订单详细</g:link></td>
 
+											
 											<td class="center ">
-												<g:link action="fShow" id="${supplierInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
-													查看
+												<g:link action="zShow" id="${supplierInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
+													<i class="fa fa-file"></i>
 												</g:link>
-
+												<g:link action="zEdit" id="${supplierInstance.id}" class="btn btn-primary btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip">
+													<i class="fa fa-pencil"></i>
+												</g:link>
+												<g:link action="zDelete" id="${supplierInstance.id}" class="btn btn-danger btn-xs" href="#" data-original-title="Remove" data-toggle="tooltip" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+													<i class="fa fa-times"></i>
+												</g:link>
 											</td>
 										</tr>
 									</g:each>

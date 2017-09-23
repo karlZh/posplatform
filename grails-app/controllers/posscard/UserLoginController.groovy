@@ -7,6 +7,7 @@ class UserLoginController {
             session.userId = null
             session.accountType = null
             session.uTypeId = null
+            session.parentId=null
 
 
         }else{
@@ -16,6 +17,7 @@ class UserLoginController {
                 session.accountType = userInstance.accountType
                 session.uTypeId = userInstance.uTypeId
                 session.username=userInstance.username
+
                 def r=new Record(user: params.username,loginTime: new Date() ,userType: session.uTypeId)
                 r.save()
 
@@ -33,6 +35,7 @@ class UserLoginController {
         session.userId = null
         session.accountType = null
         session.uTypeId = null
+        session.parentId=null
         redirect(controller: 'userLogin',action: 'login')
     }
 }

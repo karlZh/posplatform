@@ -14,6 +14,7 @@ class Orders {
     Integer validity //有效期
     String orderSn //订单号
     String serialNum //流水号D
+    Short   isdelete = 0 //删除状态 0，未删 1：删除
     Short orderStatus //订单状态0未成功，1已成功
     Short refundStatus //退款状态，0未退款，1已退款
     String transId = '' //卡平台流水号
@@ -28,9 +29,11 @@ class Orders {
         orderType(inList: [1,2]) //订单类型，消费1或退款2
         num() //张数
         ticketTypeId() //票消费类型
+        isdelete(nullable: false)
         validity() //有效期
         orderSn() //订单号
         refundStatus()
         serialNum() //流水号D
+
     }
 }
