@@ -31,9 +31,9 @@
 										
 										<g:sortableColumn property="user" title="${message(code: 'record.user.label', default: '用户名')}" />
 										
-										<g:sortableColumn property="state" title="${message(code: 'record.state.label', default: '状态')}" />
+										<g:sortableColumn property="loginTime" title="${message(code: 'record.loginTime.label', default: '登陆时间')}" />
 										
-										<g:sortableColumn property="lastTime" title="${message(code: 'record.lastTime.label', default: '最后登录时间')}" />
+										%{--<g:sortableColumn property="userType" title="${message(code: 'record.userType.label', default: '用户类型')}" />--}%
 										
 										<th>操作</th>
 									</tr>
@@ -42,12 +42,12 @@
 									<g:each in="${recordInstanceList}" status="i" var="recordInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 											
-											<td><g:link action="show" id="${recordInstance.id}">${fieldValue(bean: recordInstance, field: "user")}</g:link></td>
+											<td>${fieldValue(bean: recordInstance, field: "user")}</td>
 											
-											<td>${fieldValue(bean: recordInstance, field: "state")}</td>
-											
-											<td><g:formatDate date="${recordInstance.lastTime}" /></td>gi
+											<td><g:formatDate date="${recordInstance.loginTime}" />${}</td>
 										
+											%{--<td>${fieldValue(bean: recordInstance, field: "userType")}</td>--}%
+											
 											<td class="center ">
 												<g:link action="show" id="${recordInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
 													<i class="fa fa-file"></i>

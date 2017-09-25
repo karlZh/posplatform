@@ -56,9 +56,7 @@
 									<div class="col-sm-2 col-md-2 text-right">
 									<label class="control-label"><g:message code="posMachine.dateCreated.label" default="Date Created" /></label>
 									</div>
-									
 									<div class="col-sm-10 col-md-10"><g:formatDate date="${posMachineInstance?.dateCreated}" /></div>
-									
 								</div>
 							</g:if>
 							

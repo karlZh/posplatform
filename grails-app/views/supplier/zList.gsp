@@ -1,4 +1,5 @@
 
+
 <%@ page import="posscard.Supplier" %>
 <!DOCTYPE html>
 <html>
@@ -50,15 +51,14 @@
 										
 										<g:sortableColumn property="remark" title="${message(code: 'supplier.remark.label', default: '备注')}" />
 
-                                        <g:sortableColumn property="remark" title="${message(code: 'supplier.remark.label', default: '子供应商')}" />
-										
+
 										<th>操作</th>
 									</tr>
 									</thead>
 									<tbody>
 									<g:each in="${supplierInstanceList}" status="i" var="supplierInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                            %{--<g:link action="show" id="${supplierInstance.id}"></g:link>--}%
+											
 											<td>${fieldValue(bean: supplierInstance, field: "name")}</td>
 											
 											<td>${fieldValue(bean: supplierInstance, field: "ratio")}</td>
@@ -71,16 +71,16 @@
 											
 											<td>${fieldValue(bean: supplierInstance, field: "remark")}</td>
 
-                                            <td><g:link controller="supplier" action="zList" id="${supplierInstance.id}">详细</g:link></td>
+
 											
 											<td class="center ">
-												<g:link action="fShow" id="${supplierInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
+												<g:link action="zShow" id="${supplierInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
 													<i class="fa fa-file"></i>
 												</g:link>
-												<g:link action="fEdit" id="${supplierInstance.id}" class="btn btn-primary btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip">
+												<g:link action="zEdit" id="${supplierInstance.id}" class="btn btn-primary btn-xs" href="#" data-original-title="Edit" data-toggle="tooltip">
 													<i class="fa fa-pencil"></i>
 												</g:link>
-												<g:link action="fDelete" id="${supplierInstance.id}" class="btn btn-danger btn-xs" href="#" data-original-title="Remove" data-toggle="tooltip" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
+												<g:link action="zDelete" id="${supplierInstance.id}" class="btn btn-danger btn-xs" href="#" data-original-title="Remove" data-toggle="tooltip" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');">
 													<i class="fa fa-times"></i>
 												</g:link>
 											</td>

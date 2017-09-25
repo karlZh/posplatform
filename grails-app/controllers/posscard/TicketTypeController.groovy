@@ -22,14 +22,17 @@ class TicketTypeController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [ticketTypeInstanceList: TicketType.list(params), ticketTypeInstanceTotal: TicketType.count()]
+        def result =TicketType.findAllByIsdelete(0,[offset:params.offset,max:params.max])
+        def ticketTypeInstanceTotal=TicketType.countByIsdelete(0)
+
+        [ticketTypeInstanceList: result, ticketTypeInstanceTotal: ticketTypeInstanceTotal]
     }
 
-    def search(){
-
+    def search(Integer max){
+        params.max = Math.min(max ?: 10, 100)
         def name=params.name
-        def result=TicketType.findAllByName(name)
-        def ticketTypeInstanceTotal=TicketType.countByName(name)
+        def result=TicketType.findAllByNameAndIsdelete(name,0,[offset:params.offset,max:params.max])
+        def ticketTypeInstanceTotal=TicketType.countByName(name,0)
 
         render (view:'list' , model: [ticketTypeInstanceList: result, ticketTypeInstanceTotal:ticketTypeInstanceTotal])
     }
@@ -111,7 +114,9 @@ class TicketTypeController {
         }
 
         try {
-            ticketTypeInstance.delete(flush: true)
+            ticketTypeInstance.save(flush: true)
+
+            ticketTypeInstance.executeUpdate("update TicketType u set u.isdelete=1 where u.id=?",[id])
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'ticketType.label', default: 'TicketType'), id])
             redirect(action: "list")
         }

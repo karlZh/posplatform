@@ -25,9 +25,7 @@
 							<h3>显示订单</h3>
 						</div>
 						<div class="content">
-							<g:if test="${flash.message}">
-								<div class="message" role="status">${flash.message}</div>
-							</g:if>
+
 							
 							<g:if test="${ordersInstance?.cardNum}">
 								<div class="row">

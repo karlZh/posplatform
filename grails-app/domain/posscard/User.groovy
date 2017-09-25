@@ -6,6 +6,7 @@ class User {
     String phone = ''
     Integer accountType //用户类型pos机，商户，供应商
     Long uTypeId //对应用户类型的pos机，商户，供应商的id
+    Short   isdelete = 0 //删除状态 0，未删 1：删除
     Date  dateCreated//创建时间
 
 
@@ -15,6 +16,7 @@ class User {
         phone(nullable: false, matches: "0?(13|14|15|18)[0-9]{9}", minSize: 11)
         accountType(nullable: false)//1.pos机2.自己平台3.商户4.供应商
         uTypeId(nullable: false)
+        isdelete(nullable: false)
         dateCreated(display:false)
     }
 

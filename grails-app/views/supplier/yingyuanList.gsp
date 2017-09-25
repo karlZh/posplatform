@@ -35,42 +35,42 @@
 								<table>
 									<thead>
 									<tr>
-										
+
 										<g:sortableColumn property="name" title="${message(code: 'supplier.name.label', default: '供应商姓名')}" />
-										
+
 										<g:sortableColumn property="ratio" title="${message(code: 'supplier.ratio.label', default: '结算比例')}" />
-										
+
 										<g:sortableColumn property="price" title="${message(code: 'supplier.price.label', default: '结算价格')}" />
-										
+
 										<g:sortableColumn property="address" title="${message(code: 'supplier.address.label', default: '地址')}" />
-										
+
 										<g:sortableColumn property="phone" title="${message(code: 'supplier.phone.label', default: '电话')}" />
-										
+
 										<g:sortableColumn property="remark" title="${message(code: 'supplier.remark.label', default: '备注')}" />
 
                                         <g:sortableColumn property="remark" title="${message(code: 'supplier.remark.label', default: '子供应商')}" />
-										
+
 										<th>操作</th>
 									</tr>
 									</thead>
 									<tbody>
 									<g:each in="${supplierInstanceList}" status="i" var="supplierInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-											
-											<td><g:link action="show" id="${supplierInstance.id}">${fieldValue(bean: supplierInstance, field: "name")}</g:link></td>
-											
+                                            %{--<g:link action="show" id="${supplierInstance.id}">${fieldValue(bean: supplierInstance, field: "name")}</g:link>--}%
+											<td>${fieldValue(bean: supplierInstance, field: "name")}</td>
+
 											<td>${fieldValue(bean: supplierInstance, field: "ratio")}</td>
-											
+
 											<td>${fieldValue(bean: supplierInstance, field: "price")}</td>
-											
+
 											<td>${fieldValue(bean: supplierInstance, field: "address")}</td>
-											
+
 											<td>${fieldValue(bean: supplierInstance, field: "phone")}</td>
-											
+
 											<td>${fieldValue(bean: supplierInstance, field: "remark")}</td>
 
                                             <td><g:link controller="orders" action="supplierZSearch" id="${supplierInstance.id}">订单详细</g:link></td>
-											
+
 											<td class="center ">
 												<g:link action="fShow" id="${supplierInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
 													查看

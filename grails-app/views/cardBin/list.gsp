@@ -18,7 +18,7 @@
 		</div>
         <div style="padding:25px 12px">
             <div class="text-right collapse-button" style="padding:7px 3px;">
-                <g:form controller="cardPlatform" action="search">
+                <g:form controller="cardBin" action="search">
                     <input type="text" name="name" style="padding: 10px 23px " placeholder="请输入卡Bin" />
                     <Button type="primary" shape="circle" style="padding: 10px">提交</Button>
                     <!-- <button id="sidebar-collapse" class="btn btn-default" style="padding: 10px 7px" name="提交"><i style="color:#fff;" class="fa fa-angle-left"></i></button>-->
@@ -50,8 +50,8 @@
 									<tbody>
 									<g:each in="${cardBinInstanceList}" status="i" var="cardBinInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-											
-											<td><g:link action="show" id="${cardBinInstance.id}">${fieldValue(bean: cardBinInstance, field: "cardbin")}</g:link></td>
+                                            %{--<g:link action="show" id="${cardBinInstance.id}">${fieldValue(bean: cardBinInstance, field: "cardbin")}</g:link>--}%
+											<td>${fieldValue(bean: cardBinInstance, field: "cardbin")}</td>
 											
 											<td><g:formatDate date="${cardBinInstance.dateCreated}" /></td>
 										

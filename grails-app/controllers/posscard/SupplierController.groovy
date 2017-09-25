@@ -22,7 +22,9 @@ class SupplierController {
     }
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [supplierInstanceList: Supplier.list(params), supplierInstanceTotal: Supplier.count()]
+        def result = Supplier.findAllByIsdelete(0,[offset:params.offset,max: params.max])
+        def supplierInstanceTotal=Supplier.countByIsdelete(0)
+        [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal]
     }
     def supCardBinEdit(Long id){
         def supplierInstance = Supplier.get(id)
@@ -136,7 +138,8 @@ class SupplierController {
         }
 
         try {
-            supplierInstance.delete(flush: true)
+            supplierInstance.save(flush: true)
+            supplierInstance.executeUpdate("update Supplier u set u.isdelete=1 where u.id=?",[id])
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
             redirect(action: "list")
         }
@@ -146,17 +149,16 @@ class SupplierController {
         }
     }
     def fList(Integer max) {
-        def name=params.name
-        def result=Supplier.findAllByParentId(0,[offset:params.offset,max:max])
-        def supplierInstanceTotal=Supplier.countByParentId(0)
-        render (view:'fList' , model:  [supplierInstanceList: result, supplierInstanceTotal: Supplier.count()])
+        params.max = Math.min(max ?: 10, 100)
+        def result=Supplier.findAllByParentIdAndIsdelete(0,0,[offset:params.offset,max:params.max])
+        def supplierInstanceTotal=Supplier.countByParentIdAndIsdelete(0,0)
+        render (view:'fList' , model:  [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal])
     }
-
-    def fSearch(){
+    def fSearch(Integer max){
 
         def name=params.name
-        def result=Supplier.findAllByNameAndParentId(name,0)
-        def supplierInstanceTotal=Supplier.countByName(name)
+        def result=Supplier.findAllByNameAndParentIdAndIsdelete(name,0,0,[offset:params.offset,max:max])
+        def supplierInstanceTotal=Supplier.countByNameAndIsdelete(name,0)
 
         render (view:'fList' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal])
     }
@@ -231,7 +233,8 @@ class SupplierController {
         }
 
         try {
-            supplierInstance.delete(flush: true)
+            supplierInstance.save(flush: true)
+            supplierInstance.executeUpdate("update Supplier u set u.isdelete=1 where u.id=?",[id])
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
             redirect(action: "fList")
         }
@@ -254,18 +257,111 @@ class SupplierController {
         if(supplierInfo.parentId==0){
             yuanxian = supplierInfo
         }else{
-            yuanxian = Supplier.findById(supplierInfo.parentId)
+            yuanxian = Supplier.findByIdAndIsdelete(supplierInfo.parentId,0,[offset:params.offset,max:max])
         }
 //        def result=Supplier.findAllByParentId(session.uTypeId)
-        def supplierInstanceTotal=Supplier.countById(supplierInfo.parentId)
+        def supplierInstanceTotal=Supplier.countByIdAndIsdelete(supplierInfo.parentId,0,[offset:params.offset,max:max])
         render (view:'yuanxianList' , model:  [supplierInstanceList: yuanxian, supplierInstanceTotal: supplierInstanceTotal])
     }
 
     def yingyuanList(Long id,Integer max) {
-        def result=Supplier.findAllByParentId(id,[offset:params.offset,max:max])
-        def supplierInstanceTotal=Supplier.countByParentId(id)
+        def result=Supplier.findAllByParentIdAndIsdelete(id,0,[offset:params.offset,max:max])
+        def supplierInstanceTotal=Supplier.countByParentIdAndIsdelete(id,0)
 
         render (view:'yingyuanList' , model:  [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal])
     }
+    def zList(Integer max,Long id) {
+        def name=params.name
 
+        def result=Supplier.findAllByParentIdAndIsdelete(id,0,[offset:params.offset,max:max])
+        def supplierInstanceTotal=Supplier.countByParentIdAndIsdelete(id,0)
+        render (view:'zList' , model:  [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal])
+    }
+    def zSearch(long id,Integer max){
+
+        def name=params.name
+        def result=Supplier.findAllByNameAndParentIdAndIsdelete(name,id,0,[offset:params.offset,max:max])
+        def supplierInstanceTotal=Supplier.countByNameAndParentIdAndIsdelete(name,id,0)
+
+        render (view:'fList' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal])
+    }
+    def zCreate() {
+        [supplierInstance: new Supplier(params),supplierType:supplierType]
+    }
+    def zSave() {
+        def supplierInstance = new Supplier(params)
+        if (!supplierInstance.save(flush: true)) {
+            render(view: "zCreate", model: [supplierInstance: supplierInstance])
+            return
+        }
+        flash.message = message(code: 'default.created.message', args: [message(code: 'supplier.label', default: 'Supplier'), supplierInstance.id])
+        redirect(action: "zShow", id: supplierInstance.id)
+    }
+    def zShow(Long id) {
+        def supplierInstance = Supplier.get(id)
+        if (!supplierInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "zList")
+            return
+        }
+
+        [supplierInstance: supplierInstance]
+    }
+    def zEdit(Long id) {
+        def supplierInstance = Supplier.get(id)
+        if (!supplierInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "zList")
+            return
+        }
+
+        [supplierInstance: supplierInstance,supplierType:supplierType]
+    }
+    def zUpdate(Long id, Long version) {
+        def supplierInstance = Supplier.get(id)
+        if (!supplierInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "zList")
+            return
+        }
+
+        if (version != null) {
+            if (supplierInstance.version > version) {
+                supplierInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                        [message(code: 'supplier.label', default: 'Supplier')] as Object[],
+                        "Another user has updated this Supplier while you were editing")
+                render(view: "zEdit", model: [supplierInstance: supplierInstance])
+                return
+            }
+        }
+
+        supplierInstance.properties = params
+
+        if (!supplierInstance.save(flush: true)) {
+            render(view: "zEdit", model: [supplierInstance: supplierInstance])
+            return
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'supplier.label', default: 'Supplier'), supplierInstance.id])
+        redirect(action: "zShow", id: supplierInstance.id)
+    }
+    def zDelete(Long id) {
+        def supplierInstance = Supplier.get(id)
+        if (!supplierInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "zList")
+            return
+        }
+
+        try {
+            supplierInstance.save(flush: true)
+            supplierInstance.executeUpdate("update Supplier u set u.isdelete=1 where u.id=?",[id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "zList")
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "zShow", id: id)
+        }
+    }
 }

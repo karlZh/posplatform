@@ -22,13 +22,15 @@ class UserController {
     }
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [userInstanceList: User.list(params), userInstanceTotal: User.count()]
+        def result =User.findAllByIsdelete(0,[offset:params.offset,max:max])
+        def userInstanceTotal=User.countByIsdelete(0)
+        [userInstanceList: result, userInstanceTotal: userInstanceTotal]
     }
     def search(){
 
         def name=params.name
-        def result=User.findAllByUsername(name)
-        def userInstanceTotal=User.countByUsername(name)
+        def result=User.findAllByUsernameAndIsdelete(name,0)
+        def userInstanceTotal=User.countByUsernameAndIsdelete(name,0)
 
         render (view:'list' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
     }
@@ -102,8 +104,6 @@ class UserController {
             redirect(action: "list")
             return
         }
-
-
         if (version != null) {
             if (userInstance.version > version) {
                 userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
@@ -133,7 +133,8 @@ class UserController {
         }
 
         try {
-            userInstance.delete(flush: true)
+            userInstance.save(flush: true)
+            userInstance.executeUpdate("update User u set u.isdelete=1 where u.id=?",[id])
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
             redirect(action: "list")
         }
@@ -144,10 +145,10 @@ class UserController {
     }
     def posList(Integer max){
 
-        def result=User.findAllByAccountType(1,[offset:params.offset,max:max])
+        def result=User.findAllByAccountTypeAndIsdelete(1,0,[offset:params.offset,max:max])
 //        def result=User.list(params)
 //        def userInstanceTotal=User.countByAccountType(3)
-        def userInstanceTotal=User.countByAccountType(1)
+        def userInstanceTotal=User.countByAccountTypeAndIsdelete(1,0)
 
         [userInstanceList: result, userInstanceTotal:userInstanceTotal]
     }
@@ -160,7 +161,7 @@ class UserController {
         userInstance.accountType=1
         if (!userInstance.save(flush: true)) {
             def  category = PosMachine.findAll()
-            render(view: "posCreate", model: [userInstance: userInstance,category: category])
+            render(view: "posEdit", model: [userInstance: userInstance,category: category])
             return
         }
 
@@ -211,7 +212,7 @@ class UserController {
         userInstance.properties = params
 
         if (!userInstance.save(flush: true)) {
-            def  category =CardPlatform.findAll()
+            def  category =PosMachine.findAll()
 
             render(view: "posEdit", model: [userInstance: userInstance,category:category])
             return
@@ -229,7 +230,9 @@ class UserController {
         }
 
         try {
-            userInstance.delete(flush: true)
+            userInstance.save(flush: true)
+
+            userInstance.executeUpdate("update User u set u.isdelete=1 where u.id=?",[id])
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
             redirect(action: "posList")
         }
@@ -249,10 +252,10 @@ class UserController {
 def platformList(Integer max){
 //        params.max = Math.min(max ?: 10, 100)
 //        params.accountType = 3
-        def result=User.findAllByAccountType(3,[offset:params.offset,max:max])
+        def result=User.findAllByAccountTypeAndIsdelete(3,0,[offset:params.offset,max:max])
 //        def result=User.list(params)
 //        def userInstanceTotal=User.countByAccountType(3)
-        def userInstanceTotal=User.countByAccountType(3)
+        def userInstanceTotal=User.countByAccountTypeAndIsdelete(3,0)
 
        [userInstanceList: result, userInstanceTotal:userInstanceTotal]
     }
@@ -265,7 +268,7 @@ def platformSave() {
     userInstance.accountType=3
     if (!userInstance.save(flush: true)) {
         def  category = PosMachine.findAll()
-        render(view: "platformCreate", model: [userInstance: userInstance,category: category])
+        render(view: "platformEdit", model: [userInstance: userInstance,category: category])
         return
     }
 
@@ -333,7 +336,9 @@ def platformDelete(Long id) {
         }
 
         try {
-            userInstance.delete(flush: true)
+            userInstance.save(flush: true)
+
+            userInstance.executeUpdate("update User u set u.isdelete=1 where u.id=?",[id])
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
             redirect(action: "platformList")
         }
@@ -357,10 +362,10 @@ def platformSearch(){
 //        def userInstanceTotal=User.countByUsername(name)
 //
 //        render (view:'supplierList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
-        def result=User.findAllByAccountType(4,[offset:params.offset,max:max])
+        def result=User.findAllByAccountTypeAndIsdelete(4,0,[offset:params.offset,max:max])
 //        def result=User.list(params)
 //        def userInstanceTotal=User.countByAccountType(3)
-        def userInstanceTotal=User.countByAccountType(4)
+        def userInstanceTotal=User.countByAccountTypeAndIsdelete(4,0)
 
         [userInstanceList: result, userInstanceTotal:userInstanceTotal]
     }
@@ -373,7 +378,7 @@ def platformSearch(){
         userInstance.accountType=4
         if (!userInstance.save(flush: true)) {
             def  category = Supplier.findAll()
-            render(view: "platformCreate", model: [userInstance: userInstance,category: category])
+            render(view: "platformEdit", model: [userInstance: userInstance,category: category])
             return
         }
 
@@ -412,7 +417,6 @@ def platformSearch(){
             return
         }
 
-
         if (version != null) {
             if (userInstance.version > version) {
                 userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
@@ -426,7 +430,7 @@ def platformSearch(){
         userInstance.properties = params
 
         if (!userInstance.save(flush: true)) {
-            def  category =CardPlatform.findAll()
+            def  category =Supplier.findAll()
             render(view: "platformEdit", model: [userInstance: userInstance,category:category])
             return
         }
@@ -434,6 +438,7 @@ def platformSearch(){
         flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
         redirect(action: "platformShow", id: userInstance.id)
     }
+
     def supplierDelete(Long id) {
         def userInstance = User.get(id)
         if (!userInstance) {
@@ -443,13 +448,15 @@ def platformSearch(){
         }
 
         try {
-            userInstance.delete(flush: true)
+            userInstance.save(flush: true)
+
+           userInstance.executeUpdate("update User u set u.isdelete=1 where u.id=?",[id])
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
-            redirect(action: "platformList")
+            redirect(action: "supplierList")
         }
         catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
-            redirect(action: "platformShow", id: id)
+           flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "supplierShow", id: id)
         }
     }
     def supplierSearch(){

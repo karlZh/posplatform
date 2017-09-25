@@ -16,6 +16,15 @@
 				<li class="active"><g:message code="default.list.label" args="[entityName]" /></li>
 			</ol>
 		</div>
+        <div style="padding:25px 12px">
+            <div class="text-right collapse-button" style="padding:7px 3px;">
+                <g:form controller="PosMachine" action="Search">
+                    <input type="text" name="name" style="padding: 10px 23px " placeholder="请输入Pos机名" />
+                    <Button type="primary" shape="circle" style="padding: 10px">提交</Button>
+                    <!-- <button id="sidebar-collapse" class="btn btn-default" style="padding: 10px 7px" name="提交"><i style="color:#fff;" class="fa fa-angle-left"></i></button>-->
+                </g:form>
+
+            </div>
 		<div class="cl-mcont">
 			<div class="row">
 				<div class="col-md-12">
@@ -31,8 +40,6 @@
 										
 										<g:sortableColumn property="name" title="${message(code: 'posMachine.name.label', default: 'Name')}" />
 										
-										<g:sortableColumn property="userId" title="${message(code: 'posMachine.userId.label', default: 'User Id')}" />
-										
 										<th><g:message code="posMachine.supplier.label" default="Supplier" /></th>
 										
 										<g:sortableColumn property="dateCreated" title="${message(code: 'posMachine.dateCreated.label', default: 'Date Created')}" />
@@ -45,13 +52,11 @@
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 											
 											<td><g:link action="show" id="${posMachineInstance.id}">${fieldValue(bean: posMachineInstance, field: "name")}</g:link></td>
-											
-											<td>${fieldValue(bean: posMachineInstance, field: "userId")}</td>
-											
+
 											<td>${fieldValue(bean: posMachineInstance, field: "supplier")}</td>
 											
-											<td><g:formatDate date="${posMachineInstance.dateCreated}" /></td>gi
-										
+											<td><g:formatDate date="${posMachineInstance.dateCreated}" /></td>
+
 											<td class="center ">
 												<g:link action="show" id="${posMachineInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">
 													<i class="fa fa-file"></i>
@@ -75,6 +80,7 @@
 					</div>
 				</div>
 			</div>
+            </div>
 		</div>
 	</div>
 	</body>

@@ -21,14 +21,16 @@ class CardBinController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        [cardBinInstanceList: CardBin.list(params), cardBinInstanceTotal: CardBin.count()]
+       def result=CardBin.findAllByIsdelete(0,[offset:params.offset,max:max])
+        def cardBinInstanceTotal=CardBin.countByIsdelete(0)
+        [cardBinInstanceList: result, cardBinInstanceTotal:cardBinInstanceTotal]
     }
 
-    def search(){
+    def search(Integer max){
 
         def name=params.name
-        def result=CardBin.findAllByCardbin(name)
-        def cardBinInstanceTotal=CardBin.countByName(name)
+        def result=CardBin.findAllByCardbinAndIsdelete(name,0,[offset:params.offset,max:max])
+        def cardBinInstanceTotal=CardBin.countByCardbinAndIsdelete(name,0)
 
         render (view:'list' , model: [cardBinInstanceList: result, cardBinInstanceTotal:cardBinInstanceTotal])
     }
@@ -108,7 +110,8 @@ class CardBinController {
         }
 
         try {
-            cardBinInstance.delete(flush: true)
+            cardBinInstance.save(flush: true)
+            cardBinInstance.executeUpdate("update CardBin u set u.isdelete=1 where u.id=?",[id])
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'cardBin.label', default: 'CardBin'), id])
             redirect(action: "list")
         }

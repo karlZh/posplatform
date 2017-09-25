@@ -50,8 +50,8 @@
 									<tbody>
 									<g:each in="${cardPlatformInstanceList}" status="i" var="cardPlatformInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-											
-											<td><g:link action="show" id="${cardPlatformInstance.id}">${fieldValue(bean: cardPlatformInstance, field: "name")}</g:link></td>
+                                            %{--<g:link action="show" id="${cardPlatformInstance.id}">${fieldValue(bean: cardPlatformInstance, field: "name")}</g:link>--}%
+											<td>${fieldValue(bean: cardPlatformInstance, field: "name")}</td>
 											
 											<td>${fieldValue(bean: cardPlatformInstance, field: "address")}</td>
 											
