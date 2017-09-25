@@ -7,7 +7,7 @@ class Record {
 
 
     static constraints = {
-        user(blank:false, size: 2..10, nullable: false, unique: true)
+        user(blank:false, size: 2..10, nullable: false)
 
         loginTime()
         userType()

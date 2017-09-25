@@ -20,7 +20,7 @@
             <div class="text-right collapse-button" style="padding:7px 3px;">
                 <g:form controller="user" action="supplierSearch">
                     <input type="text" name="name" style="padding: 10px 23px " placeholder="请输入用户名" />
-                    <Button type="primary" shape="circle" style="padding: 10px">提交</Button>
+                    <Button type="primary" shape="circle" style="padding: 10px">搜索</Button>
                     <!-- <button id="sidebar-collapse" class="btn btn-default" style="padding: 10px 7px" name="提交"><i style="color:#fff;" class="fa fa-angle-left"></i></button>-->
                 </g:form>
 
@@ -63,7 +63,7 @@
 											
 											<td>${fieldValue(bean: userInstance, field: "phone")}</td>
 											
-											<td>${fieldValue(bean: userInstance, field: "uTypeId")}</td>
+											<td>${posscard.Supplier.get(userInstance?.uTypeId)?.name}</td>
 											
 											<td><g:formatDate date="${userInstance.dateCreated}" /></td>
 										
