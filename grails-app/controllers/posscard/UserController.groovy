@@ -291,13 +291,12 @@ def platformSave() {
     def userInfo = User.findAllByUsernameAndPasswordAndUTypeIdAndAccountType(params.username,params.password,params.uTypeId,params.accountType)
     if(userInfo){
         flash.message = message(code: 'user.platformname.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-        render(view: "posCreate", model: [userInstance: userInstance,accountType:1])
+        render(view: "platformCreate", model: [userInstance: userInstance,accountType:3])
         return
     }
     userInstance.accountType=3
     if (!userInstance.save(flush: true)) {
-        def  category = PosMachine.findAll()
-        render(view: "platformEdit", model: [userInstance: userInstance,category: category])
+        render(view: "platformCreate", model: [userInstance: userInstance,accountType:3])
         return
     }
 
@@ -316,18 +315,26 @@ def platformShow(Long id) {
 }
 def platformEdit(Long id) {
     def userInstance = User.get(id)
-    def  category =CardPlatform.findAll()
     if (!userInstance) {
         flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
         redirect(action: "platformList")
         return
     }
 
-    [userInstance: userInstance,category:category,accountType:3]
+    [userInstance: userInstance,accountType:3]
 //        render (view:'posEdit' , model:)
 }
 def platformUpdate(Long id, Long version) {
     def userInstance = User.get(id)
+    if(params.username!=userInstance.username){
+        def userInfo = User.findAllByUsernameAndPasswordAndUTypeIdAndAccountType(params.username,params.password,params.uTypeId,params.accountType)
+
+        if(userInfo){
+            flash.message = message(code: 'user.platformname.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+            render(view: "posEdit", model: [userInstance: userInstance,accountType:1])
+            return
+        }
+    }
     if (!userInstance) {
         flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
         redirect(action: "platformList")
@@ -340,7 +347,7 @@ def platformUpdate(Long id, Long version) {
             userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                     [message(code: 'user.label', default: 'User')] as Object[],
                     "Another user has updated this User while you were editing")
-            render(view: "platformEdit", model: [userInstance: userInstance])
+            render(view: "platformEdit", model: [userInstance: userInstance,accountType:3])
             return
         }
     }
@@ -348,8 +355,7 @@ def platformUpdate(Long id, Long version) {
     userInstance.properties = params
 
     if (!userInstance.save(flush: true)) {
-        def  category =CardPlatform.findAll()
-        render(view: "platformEdit", model: [userInstance: userInstance,category:category])
+        render(view: "platformEdit", model: [userInstance: userInstance,accountType:3])
         return
     }
 
@@ -399,15 +405,25 @@ def platformSearch(Integer max){
         [userInstanceList: result, userInstanceTotal:userInstanceTotal]
     }
     def supplierCreate(){
-        def  category =Supplier.findAll()
-        [userInstance: new User(params),category: category,accountType:4,supplierType:supplierType]
+        [userInstance: new User(params),accountType:4,supplierType:supplierType]
     }
     def supplierSave() {
         def userInstance = new User(params)
+        if(!params.uTypeId.toInteger()){
+            flash.message = message(code: 'user.uTypeId.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+            render(view: "supplierCreate", model: [userInstance: userInstance,accountType:4,supplierType:supplierType])
+            return
+        }
+
+        def userInfo = User.findAllByUsernameAndPasswordAndUTypeIdAndAccountType(params.username,params.password,params.uTypeId,params.accountType)
+        if(userInfo){
+            flash.message = message(code: 'user.suppliername.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+            render(view: "supplierCreate", model: [userInstance: userInstance,accountType:4,supplierType:supplierType])
+            return
+        }
         userInstance.accountType=4
         if (!userInstance.save(flush: true)) {
-            def  category = Supplier.findAll()
-            render(view: "platformEdit", model: [userInstance: userInstance,category: category])
+            render(view: "supplierCreate", model: [userInstance: userInstance,accountType:4,supplierType:supplierType])
             return
         }
 
@@ -440,6 +456,23 @@ def platformSearch(Integer max){
     }
     def supplierUpdate(Long id, Long version) {
         def userInstance = User.get(id)
+        if(params.username!=userInstance.username){
+            def userInfo = User.findAllByUsernameAndPasswordAndUTypeIdAndAccountType(params.username,params.password,params.uTypeId,params.accountType)
+
+            if(userInfo){
+                flash.message = message(code: 'user.suppliername.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+                render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
+                return
+            }
+        }
+        def supplierInstance = Supplier.get(userInstance.uTypeId)//供应商信息
+        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
+        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
+        if(!params.uTypeId){
+            flash.message = message(code: 'user.uTypeId.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+            render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
+            return
+        }
         if (!userInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
             redirect(action: "supplierList")
@@ -451,7 +484,7 @@ def platformSearch(Integer max){
                 userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'user.label', default: 'User')] as Object[],
                         "Another user has updated this User while you were editing")
-                render(view: "platformEdit", model: [userInstance: userInstance])
+                render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
                 return
             }
         }
@@ -459,13 +492,12 @@ def platformSearch(Integer max){
         userInstance.properties = params
 
         if (!userInstance.save(flush: true)) {
-            def  category =Supplier.findAll()
-            render(view: "platformEdit", model: [userInstance: userInstance,category:category])
+            render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
             return
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-        redirect(action: "platformShow", id: userInstance.id)
+        redirect(action: "supplierShow", id: userInstance.id)
     }
 
     def supplierDelete(Long id) {

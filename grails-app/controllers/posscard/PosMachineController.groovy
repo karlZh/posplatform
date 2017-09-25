@@ -83,13 +83,15 @@ class PosMachineController {
             redirect(action: "list")
             return
         }
-
+        def supplierInstance = Supplier.get(posMachineInstance.supplier.id)//供应商信息
+        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
+        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
         if (version != null) {
             if (posMachineInstance.version > version) {
                 posMachineInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'posMachine.label', default: 'PosMachine')] as Object[],
                           "Another user has updated this PosMachine while you were editing")
-                render(view: "edit", model: [posMachineInstance: posMachineInstance])
+                render(view: "edit", model: [posMachineInstance: posMachineInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
                 return
             }
         }
@@ -97,7 +99,7 @@ class PosMachineController {
         posMachineInstance.properties = params
 
         if (!posMachineInstance.save(flush: true)) {
-            render(view: "edit", model: [posMachineInstance: posMachineInstance])
+            render(view: "edit", model: [posMachineInstance: posMachineInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
             return
         }
 
