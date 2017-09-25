@@ -12,7 +12,7 @@
 		<div class="page-head">
 			<h2><g:message code="cardBin.label" default="CardBin"/></h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
+				<li><a href="${createLink(uri: '/')}">首页</a></li>
 				<li class="active"><g:message code="cardBin.label" default="CardBin"/></li>
 			</ol>
 		</div>
@@ -50,8 +50,8 @@
 									<tbody>
 									<g:each in="${cardBinInstanceList}" status="i" var="cardBinInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-                                            %{--<g:link action="show" id="${cardBinInstance.id}">${fieldValue(bean: cardBinInstance, field: "cardbin")}</g:link>--}%
-											<td>${fieldValue(bean: cardBinInstance, field: "cardbin")}</td>
+
+											<td><g:link action="show" id="${cardBinInstance.id}">${fieldValue(bean: cardBinInstance, field: "cardbin")}</g:link></td>
 											
 											<td><g:formatDate date="${cardBinInstance.dateCreated}" /></td>
 										

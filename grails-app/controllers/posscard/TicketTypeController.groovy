@@ -31,8 +31,8 @@ class TicketTypeController {
     def search(Integer max){
         params.max = Math.min(max ?: 10, 100)
         def name=params.name
-        def result=TicketType.findAllByNameAndIsdelete(name,0,[offset:params.offset,max:params.max])
-        def ticketTypeInstanceTotal=TicketType.countByName(name,0)
+        def result=TicketType.findAllByNameLikeAndIsdelete("%"+name+"%",0,[offset:params.offset,max:params.max])
+        def ticketTypeInstanceTotal=TicketType.countByNameLikeAndIsdelete("%"+name+"%",0)
 
         render (view:'list' , model: [ticketTypeInstanceList: result, ticketTypeInstanceTotal:ticketTypeInstanceTotal])
     }

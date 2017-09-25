@@ -17,11 +17,11 @@ class CardPlatformController {
         [cardPlatformInstanceList:result, cardPlatformInstanceTotal:cardPlatformInstanceTotal]
     }
 
-    def search(){
+    def search(Integer max){
 
         def name=params.name
-        def result=CardPlatform.findAllByNameAndIsdelete(name,0,[offset:params.offset,max:max])
-        def cardPlatformInstanceTotal=CardPlatform.countByNameAndIsdelete(name,0)
+        def result=CardPlatform.findAllByNameLikeAndIsdelete("%"+name+"%",0,[offset:params.offset,max:max])
+        def cardPlatformInstanceTotal=CardPlatform.countByNameLikeAndIsdelete("%"+name+"%",0)
 
         render (view:'list' , model: [cardPlatformInstanceList: result, cardPlatformInstanceTotal:cardPlatformInstanceTotal])
     }

@@ -10,11 +10,11 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="default.show.label" args="[entityName]" /></h2>
+			<h2>操作记录</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li class="active"><g:message code="default.show.label" args="[entityName]" /></li>
+				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li>操作记录</li>
+				<li class="active">操作记录</li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -22,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="default.show.label" args="[entityName]" /></h3>
+
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -32,7 +32,7 @@
 							<g:if test="${recordInstance?.user}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="record.user.label" default="User" /></label>
+									<label class="control-label"><g:message code="record.user.label" default="用户名" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${recordInstance}" field="user"/></div>
@@ -43,7 +43,7 @@
 							<g:if test="${recordInstance?.loginTime}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="record.loginTime.label" default="Login Time" /></label>
+									<label class="control-label"><g:message code="record.loginTime.label" default="登录时间" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:formatDate date="${recordInstance?.loginTime}" /></div>
@@ -54,7 +54,7 @@
 							<g:if test="${recordInstance?.userType}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="record.userType.label" default="User Type" /></label>
+									<label class="control-label"><g:message code="record.userType.label" default="用户类型" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${recordInstance}" field="userType"/></div>

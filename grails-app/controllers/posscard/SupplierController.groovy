@@ -27,11 +27,33 @@ class SupplierController {
         [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal]
     }
 
+    def supCardBinEdit(Long id){
+        def supplierInstance = Supplier.get(id)
+        def a = CardBin.list()
+        if (!supplierInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
+            redirect(action: "list")
+            return
+        }
+        [supplierInstance: supplierInstance]
+    }
+    def supCardBinUpdate(Long id){
+        def c = params
+        def supplierInstance = Supplier.get(id)
+        for(em in params.cardbins){
+            supplierInstance.addToCardbins()
+        }
+        supplierInstance.save(flush: true)
+        def a=1
+        def b=1
+    }
+
     def search(){
 
+
         def name=params.name
-        def result=Supplier.findAllByName(name)
-        def supplierInstanceTotal=Supplier.countByName(name)
+        def result=Supplier.findAllByNameLikeAndIsdelete("%"+name+"%",0,[offset:params.offset,max: params.max])
+        def supplierInstanceTotal=Supplier.countByNameLikeAndIsdelete("%"+name+"%",0)
 
         render (view:'list' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal])
     }
@@ -138,8 +160,8 @@ class SupplierController {
     def fSearch(Integer max){
 
         def name=params.name
-        def result=Supplier.findAllByNameAndParentIdAndIsdelete(name,0,0,[offset:params.offset,max:max])
-        def supplierInstanceTotal=Supplier.countByNameAndIsdelete(name,0)
+        def result=Supplier.findAllByNameLikeAndParentIdAndIsdelete("%"+name+"%",0,0,[offset:params.offset,max:max])
+        def supplierInstanceTotal=Supplier.countByNameLikeAndParentIdAndIsdelete("%"+name+"%",0,0)
 
         render (view:'fList' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal])
     }
@@ -245,24 +267,35 @@ class SupplierController {
         render (view:'yuanxianList' , model:  [supplierInstanceList: yuanxian, supplierInstanceTotal: supplierInstanceTotal])
     }
 
-    def yingyuanList(Long id,Integer max) {
-        def result=Supplier.findAllByParentIdAndIsdelete(id,0,[offset:params.offset,max:max])
-        def supplierInstanceTotal=Supplier.countByParentIdAndIsdelete(id,0)
+    def yingyuanList(Integer max,Long id) {
+        //def id=session.userId
+        def result=Supplier.findAllByParentIdAndIsdelete(session.uTypeId,0,[offset:params.offset,max:max])
+        def supplierInstanceTotal=Supplier.countByParentIdAndIsdelete(session.uTypeId,0)
 
         render (view:'yingyuanList' , model:  [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal])
     }
-    def zList(Integer max,Long id) {
-        def result=Supplier.findAllByParentIdAndIsdelete(id,0,[offset:params.offset,max:max])
-        def supplierInstanceTotal=Supplier.countByParentIdAndIsdelete(id,0)
-        render (view:'zList' , model:  [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal,parentId: id])
-    }
-    def zSearch(long id,Integer max){
+
+    def   yingyuanSearch(Integer max,Long id){
 
         def name=params.name
-        def result=Supplier.findAllByNameAndParentIdAndIsdelete(name,id,0,[offset:params.offset,max:max])
-        def supplierInstanceTotal=Supplier.countByNameAndParentIdAndIsdelete(name,id,0)
 
-        render (view:'fList' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal])
+        def result=Supplier.findAllByNameLikeAndParentIdAndIsdelete("%"+name+"%",session.uTypeId,0,[offset:params.offset,max:max])
+        def supplierInstanceTotal=Supplier.countByNameLikeAndParentIdAndIsdelete("%"+name+"%",session.uTypeId,0)
+
+        render (view:'yingyuanList' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal,id:id])
+    }
+    def zList(Integer max,Long id) {
+        def result = Supplier.findAllByParentIdAndIsdelete(id, 0, [offset: params.offset, max: max])
+        def supplierInstanceTotal = Supplier.countByParentIdAndIsdelete(id, 0)
+        render(view: 'zList', model: [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal, id: id])
+    }
+    def zSearch(Long id,Integer max){
+
+        def name=params.name
+        def result=Supplier.findAllByNameLikeAndParentIdAndIsdelete("%"+name+"%",id,0,[offset:params.offset,max:max])
+        def supplierInstanceTotal=Supplier.countByNameLikeAndParentIdAndIsdelete("%"+name+"%",id,0)
+
+        render (view:'zList' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal,id: id])
     }
     def zCreate() {
         def pSupplierInstance = Supplier.get(params.parentId)

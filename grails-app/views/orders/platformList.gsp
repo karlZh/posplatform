@@ -18,7 +18,7 @@
     </div>
     <div style="padding:25px 12px">
         <div class="text-right collapse-button" style="padding:7px 3px;">
-            <g:form controller="orders" action="search">
+            <g:form controller="orders" action="platformSearch">
                 <input type="text" name="orderSn" style="padding: 10px 23px " placeholder="请输入订单号" />
                 <Button type="primary" shape="circle" style="padding: 10px">提交</Button>
                 <!-- <button id="sidebar-collapse" class="btn btn-default" style="padding: 10px 7px" name="提交"><i style="color:#fff;" class="fa fa-angle-left"></i></button>-->
@@ -36,6 +36,7 @@
                                     <thead>
                                     <tr>
 
+                                        <g:sortableColumn property="orderSn" title="${message(code: 'orders.orderSn.label', default: '订单号')}" />
                                         <g:sortableColumn property="cardNum" title="${message(code: 'orders.cardNum.label', default: '用户名')}" />
 
                                         <g:sortableColumn property="amount" title="${message(code: 'orders.amount.label', default: '应扣订单总金额')}" />
@@ -46,9 +47,9 @@
 
                                         <g:sortableColumn property="supplierId" title="${message(code: 'orders.supplierId.label', default: '供应商')}" />
 
-                                        <g:sortableColumn property="orderSn" title="${message(code: 'orders.orderSn.label', default: '订单号')}" />
 
-                                        <g:sortableColumn property="serialNum" title="${message(code: 'orders.orderSn.label', default: '流水号')}" />
+
+                                        <g:sortableColumn property="serialNum" title="${message(code: 'orders.serialNum.label', default: '流水号')}" />
                                         <th>操作</th>
                                     </tr>
                                     </thead>
@@ -56,6 +57,7 @@
                                     <g:each in="${ordersInstanceList}" status="i" var="ordersInstance">
                                         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                             %{--<g:link action="show" id="${ordersInstance.id}"></g:link>--}%
+                                            <td>${fieldValue(bean: ordersInstance, field: "orderSn")}</td>
                                             <td>${fieldValue(bean: ordersInstance, field: "cardNum")}</td>
 
                                             <td>${fieldValue(bean: ordersInstance, field: "amount")}</td>
@@ -66,7 +68,7 @@
 
                                             <td>${posscard.Supplier.findById(ordersInstance.supplierId).name}</td>
 
-                                            <td>${fieldValue(bean: ordersInstance, field: "orderSn")}</td>
+
 
                                             <td>${fieldValue(bean: ordersInstance, field: "serialNum")}</td>
 

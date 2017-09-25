@@ -16,6 +16,15 @@
 				<li class="active">操作记录</li>
 			</ol>
 		</div>
+        <div style="padding:25px 12px">
+            <div class="text-right collapse-button" style="padding:7px 3px;">
+                <g:form controller="Record" action="Search">
+                    <input type="text" name="name" style="padding: 10px 23px " placeholder="请输入用户名" />
+                    <Button type="primary" shape="circle" style="padding: 10px">提交</Button>
+                    <!-- <button id="sidebar-collapse" class="btn btn-default" style="padding: 10px 7px" name="提交"><i style="color:#fff;" class="fa fa-angle-left"></i></button>-->
+                </g:form>
+
+            </div>
 		<div class="cl-mcont">
 			<div class="row">
 				<div class="col-md-12">
@@ -71,6 +80,7 @@
 					</div>
 				</div>
 			</div>
+            </div>
 		</div>
 	</div>
 	</body>
