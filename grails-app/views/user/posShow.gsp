@@ -10,11 +10,11 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2>用户信息表</h2>
+			<h2><g:message code="user.posShow.label" args="[entityName]" /></h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li><g:link class="list" action="posList">Pos信息表</g:link></li>
-				<li class="active">操作Pos</li>
+				<li><a href="${createLink(uri: '/')}"><g:message code="default.home.label" args="[entityName]" /></a></li>
+				<li><g:link class="list" action="posList"><g:message code="user.pos.label" args="[entityName]" /></g:link></li>
+				<li class="active"><g:message code="user.posShow.label" args="[entityName]" /></li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -22,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>显示Pos</h3>
+							<h3><g:message code="user.posShow.label" args="[entityName]" /></h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">

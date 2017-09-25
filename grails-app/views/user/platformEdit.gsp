@@ -38,7 +38,7 @@
 							<g:form class="form-horizontal" role="form" action="platformSave" >
 								<g:hiddenField name="id" value="${userInstance?.id}" />
 								<g:hiddenField name="version" value="${userInstance?.version}" />
-								<g:render template="form"/>
+								<g:render template="pform"/>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
 										<g:actionSubmit class="btn btn-primary" action="platformUpdate" value="${message(code: 'default.button.update.label', default: 'Update')}" />

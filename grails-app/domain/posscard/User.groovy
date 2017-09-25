@@ -11,7 +11,7 @@ class User {
 
 
     static constraints = {
-        username(blank:false, size: 2..10, nullable: false, unique: true)
+        username(blank:false, size: 2..10, nullable: false)
         password(password: true, blank:false, size: 6..20, nullable: false)
         phone(nullable: false, matches: "0?(13|14|15|18)[0-9]{9}", minSize: 11)
         accountType(nullable: false)//1.pos机2.自己平台3.商户4.供应商

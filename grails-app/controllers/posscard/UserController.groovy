@@ -153,15 +153,25 @@ class UserController {
         [userInstanceList: result, userInstanceTotal:userInstanceTotal]
     }
     def posCreate(){
-        def  category = PosMachine.findAll()
-        [userInstance: new User(params),category: category,accountType:1]
+        [userInstance: new User(params),accountType:1]
     }
     def posSave() {
         def userInstance = new User(params)
+
+        if(!(params.username =~'^[0-9]{1}[1-9]{1}$')){
+            flash.message = message(code: 'user.posname.invalid.max.size.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+            render(view: "posCreate", model: [userInstance: userInstance,accountType:1])
+            return
+        }
+        def userInfo = User.findAllByUsernameAndPasswordAndUTypeIdAndAccountType(params.username,params.password,params.uTypeId,params.accountType)
+        if(userInfo){
+            flash.message = message(code: 'user.posname.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+            render(view: "posCreate", model: [userInstance: userInstance,accountType:1])
+            return
+        }
         userInstance.accountType=1
         if (!userInstance.save(flush: true)) {
-            def  category = PosMachine.findAll()
-            render(view: "posEdit", model: [userInstance: userInstance,category: category])
+            render(view: "posCreate", model: [userInstance: userInstance,accountType:1])
             return
         }
 
@@ -179,19 +189,34 @@ class UserController {
         [userInstance: userInstance]
     }
     def posEdit(Long id) {
+
         def userInstance = User.get(id)
-        def category = PosMachine.findAll()
         if (!userInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
             redirect(action: "posList")
             return
         }
 
-        [userInstance: userInstance,category:category,accountType:1]
+        [userInstance: userInstance,accountType:1]
 //        render (view:'posEdit' , model:)
     }
     def posUpdate(Long id, Long version) {
         def userInstance = User.get(id)
+        if(!(params.username =~'^[0-9]{1}[1-9]{1}$')){
+            flash.message = message(code: 'user.posname.invalid.max.size.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+            render(view: "posEdit", model: [userInstance: userInstance,accountType:1])
+            return
+        }
+        if(params.username!=userInstance.username){
+            def userInfo = User.findAllByUsernameAndPasswordAndUTypeIdAndAccountType(params.username,params.password,params.uTypeId,params.accountType)
+
+            if(userInfo){
+                flash.message = message(code: 'user.posname.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+                render(view: "posEdit", model: [userInstance: userInstance,accountType:1])
+                return
+            }
+        }
+
         if (!userInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
             redirect(action: "posList")
@@ -204,7 +229,7 @@ class UserController {
                 userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'user.label', default: 'User')] as Object[],
                         "Another user has updated this User while you were editing")
-                render(view: "posEdit1", model: [userInstance: userInstance])
+                render(view: "posEdit", model: [userInstance: userInstance,accountType:1])
                 return
             }
         }
@@ -212,9 +237,7 @@ class UserController {
         userInstance.properties = params
 
         if (!userInstance.save(flush: true)) {
-            def  category =PosMachine.findAll()
-
-            render(view: "posEdit", model: [userInstance: userInstance,category:category])
+            render(view: "posEdit", model: [userInstance: userInstance,accountType:1])
             return
         }
 
@@ -265,6 +288,12 @@ def platformCreate(){
 }
 def platformSave() {
     def userInstance = new User(params)
+    def userInfo = User.findAllByUsernameAndPasswordAndUTypeIdAndAccountType(params.username,params.password,params.uTypeId,params.accountType)
+    if(userInfo){
+        flash.message = message(code: 'user.platformname.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+        render(view: "posCreate", model: [userInstance: userInstance,accountType:1])
+        return
+    }
     userInstance.accountType=3
     if (!userInstance.save(flush: true)) {
         def  category = PosMachine.findAll()

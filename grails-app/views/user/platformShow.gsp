@@ -77,17 +77,7 @@
                                         <label class="control-label"><g:message code="user.uTypeId.label" default="用户类别" /></label>
                                     </div>
 
-                                    <div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="uTypeId"/></div>
-
-                                               %{--<g:if test="${session?.uTypeId == 1}">--}%
-                                                       %{--Pos机用户--}%
-                                               %{--</g:if>--}%
-                                               %{--<g:elseif test="${session?.uTypeId  == 3}">--}%
-                                                  %{--商户--}%
-                                               %{--</g:elseif>--}%
-                                               %{--<g:elseif test="${session?.uTypeId  == 4}">--}%
-                                                 %{--供应商--}%
-                                               %{--</g:elseif>--}%
+                                    <div class="col-sm-10 col-md-10">${posscard.CardPlatform.get(userInstance.uTypeId).name}</div>
                                 </div>
                             </g:if>
 

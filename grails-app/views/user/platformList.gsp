@@ -10,10 +10,10 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2>用户信息表</h2>
+			<h2><g:message code="user.platform.label" args="[entityName]" /></h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li class="active">商户信息表</li>
+				<li class="active"><g:message code="user.platform.label" args="[entityName]" /></li>
 			</ol>
 		</div>
         <div style="padding:25px 12px">
@@ -30,7 +30,7 @@
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>商户信息表<g:link action="platformCreate" id="not-primary" params="[accountType:accountType]" class="btn btn-primary pull-right">添加</g:link></h3>
+							<h3><g:message code="user.platform.label" args="[entityName]" /><g:link action="platformCreate" id="not-primary" params="[accountType:accountType]" class="btn btn-primary pull-right">添加</g:link></h3>
 						</div>
 						<div class="content">
 							<div>

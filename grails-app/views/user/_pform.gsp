@@ -1,4 +1,4 @@
-<%@ page import="posscard.PosMachine; posscard.User" %>
+<%@ page import="posscard.User" %>
 
 
 <g:hiddenField name="accountType" value="${accountType}" />
@@ -38,6 +38,6 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-        <g:select name="uTypeId" id="uTypeId" class="form-control" from="${posscard.PosMachine.findAllByIsdelete(0)}" required="" optionKey="id" optionValue="name" value="${userInstance?.uTypeId}" />
+        <g:select name="uTypeId" id="uTypeId" class="form-control" from="${posscard.CardPlatform.findAllByIsdelete(0)}" required="" optionKey="id" optionValue="name" value="${userInstance?.uTypeId}" />
     </div>
 </div>
