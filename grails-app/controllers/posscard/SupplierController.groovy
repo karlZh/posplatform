@@ -287,7 +287,7 @@ class SupplierController {
     def zList(Integer max,Long id) {
         def result = Supplier.findAllByParentIdAndIsdelete(id, 0, [offset: params.offset, max: max])
         def supplierInstanceTotal = Supplier.countByParentIdAndIsdelete(id, 0)
-        render(view: 'zList', model: [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal, id: id])
+        [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal, id: id]
     }
     def zSearch(Long id,Integer max){
 

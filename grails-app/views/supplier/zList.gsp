@@ -32,7 +32,7 @@
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>子供应商表<g:link action="zCreate" params="[parentId: parentId]" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
+							<h3>子供应商表<g:link action="zCreate" params="[parentId: id]" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
 						</div>
 						<div class="content">
 							<div>
