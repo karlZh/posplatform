@@ -11,10 +11,10 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2>供应商表</h2>
+			<h2>子供应商表</h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li class="active">父供应商表</li>
+				<li class="active">子供应商表</li>
 			</ol>
 		</div>
         <div style="padding:25px 12px">
@@ -31,7 +31,7 @@
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>供应商表<g:link action="fCreate" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
+							<h3>子供应商表<g:link action="zCreate" params="[parentId: parentId]" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
 						</div>
 						<div class="content">
 							<div>
@@ -61,7 +61,7 @@
 											
 											<td>${fieldValue(bean: supplierInstance, field: "name")}</td>
 											
-											<td>${fieldValue(bean: supplierInstance, field: "ratio")}</td>
+											<td>${fieldValue(bean: supplierInstance, field: "ratio")}%</td>
 											
 											<td>${fieldValue(bean: supplierInstance, field: "price")}</td>
 											

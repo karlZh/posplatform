@@ -187,7 +187,7 @@ class OrdersService {
             result.message = "订单更新失败"
             return result
         }
-        result.data = [orderSn: orderSn,cardNum: data.cardnum,ticketType: ticketType.name, amount: orderAmount,num: data.num,cardPlatform: cardbinInfo.cardPlatform.name]
+        result.data = [orderSn: orderSn,cardNum: data.cardnum,ticketType: ticketType.name, amount: orderAmount,num: data.num,supplierCn: supplierInfo.name]
         result.message = "支付成功"
         return result
     }

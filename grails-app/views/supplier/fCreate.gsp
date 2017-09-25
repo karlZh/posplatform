@@ -39,7 +39,7 @@
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
 										<g:submitButton name="fCreate" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-										<a href="javascript:history.go(-1)" class="btn btn-default">Cancel</a>
+										<a href="javascript:history.go(-1)" class="btn btn-default"><g:message code="default.button.chancel.label" args="[entityName]" /></a>
 									</div>
 								</div>
 							</g:form>

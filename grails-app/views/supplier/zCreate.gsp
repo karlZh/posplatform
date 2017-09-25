@@ -21,7 +21,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>创建供应商</h3>
+							<h3>创建子供应商</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -35,11 +35,11 @@
 								</ul>
 							</g:hasErrors>
 							<g:form class="form-horizontal" role="form" action="zSave" >
-								<g:render template="fform"/>
+								<g:render template="form"/>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
 										<g:submitButton name="zCreate" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-										<a href="javascript:history.go(-1)" class="btn btn-default">Cancel</a>
+										<a href="javascript:history.go(-1)" class="btn btn-default"><g:message code="default.button.chancel.label" args="[entityName]" /></a>
 									</div>
 								</div>
 							</g:form>

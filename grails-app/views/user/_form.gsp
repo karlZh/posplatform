@@ -38,6 +38,6 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-        <g:select name="uTypeId" id="uTypeId" class="form-control" from="${category}" optionKey="id" optionValue="name" value="${userInstance?.uTypeId}"  noSelection="[null: '请选择类别']" />
+        <g:select name="uTypeId" id="uTypeId" class="form-control" from="${category}" required="" optionKey="id" optionValue="name" value="${userInstance?.uTypeId}" />
     </div>
 </div>

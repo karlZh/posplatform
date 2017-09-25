@@ -5,10 +5,10 @@
 <div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'name', 'error')}  form-group">
 	<label for="name" class="col-sm-2 control-label">
 		<g:message code="ticketType.name.label" default="类型名称" />
-		
+        <span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-	<g:textField class="form-control" name="name" value="${ticketTypeInstance?.name}"/>
+	<g:textField class="form-control" name="name" value="${ticketTypeInstance?.name}" required=""/>
 	</div>
 </div>
 
@@ -38,7 +38,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-	<g:field name="accountRatio" value="${fieldValue(bean: ticketTypeInstance, field: 'accountRatio')}" required=""/>
+	<g:field name="accountRatio" value="${fieldValue(bean: ticketTypeInstance, field: 'accountRatio')}" required=""/>%
 	</div>
 </div>
 

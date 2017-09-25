@@ -1,7 +1,7 @@
 <%@ page import="posscard.Supplier" %>
 
-
-
+<g:hiddenField name="type" value="${pSupplierInstance?.type}"/>
+<g:hiddenField name="parentId" value="${pSupplierInstance?.id}"/>
 <div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'name', 'error')} required form-group">
 	<label for="name" class="col-sm-2 control-label">
 		<g:message code="supplier.name.label" default="供应商姓名" />
@@ -11,31 +11,13 @@
 	<g:textField class="form-control" name="name" maxlength="10" required="" value="${supplierInstance?.name}"/>
 	</div>
 </div>
-<div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'type', 'error')} required form-group">
-	<label for="type" class="col-sm-2 control-label">
-		<g:message code="supplier.type.label" default="供应商类型" />
-		<span class="required-indicator">*</span>
-	</label>
-	<div class="col-sm-6">
-		<g:select id="type" name="type" from="${supplierType}" optionKey="key" optionValue="value" value="${supplierInstance?.type}" noSelection="[0:'请选择分类']" />
-	</div>
-</div>
-<div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'parentId', 'error')} required form-group">
-	<label for="parentId" class="col-sm-2 control-label">
-		<g:message code="supplier.parentId.label" default="父供应商 Id" />
-		<span class="required-indicator">*</span>
-	</label>
-	<div class="col-sm-6">
-		<select  id="parentId" name="parentId"><option value='0'>顶级供应商</option></select>
-	</div>
-</div>
 <div class="fieldcontain ${hasErrors(bean: supplierInstance, field: 'ratio', 'error')} required form-group">
 	<label for="ratio" class="col-sm-2 control-label">
 		<g:message code="supplier.ratio.label" default="结算比例" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-	<g:field name="ratio" value="${fieldValue(bean: supplierInstance, field: 'ratio')}" required=""/>
+	<g:field name="ratio" value="${fieldValue(bean: supplierInstance, field: 'ratio')}" required=""/>%
 	</div>
 </div>
 

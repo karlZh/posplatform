@@ -26,26 +26,7 @@ class SupplierController {
         def supplierInstanceTotal=Supplier.countByIsdelete(0)
         [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal]
     }
-    def supCardBinEdit(Long id){
-        def supplierInstance = Supplier.get(id)
-        def a = CardBin.list()
-        if (!supplierInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
-            redirect(action: "list")
-            return
-        }
-        [supplierInstance: supplierInstance]
-    }
-    def supCardBinUpdate(Long id){
-        def c = params
-        def supplierInstance = Supplier.get(id)
-        for(em in params.cardbins){
-            supplierInstance.addToCardbins()
-        }
-        supplierInstance.save(flush: true)
-        def a=1
-        def b=1
-    }
+
     def search(){
 
         def name=params.name
@@ -114,7 +95,7 @@ class SupplierController {
                 supplierInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'supplier.label', default: 'Supplier')] as Object[],
                           "Another user has updated this Supplier while you were editing")
-                render(view: "edit", model: [supplierInstance: supplierInstance])
+                render(view: "edit", model: [supplierInstance: supplierInstance,supplierType: supplierType])
                 return
             }
         }
@@ -122,7 +103,7 @@ class SupplierController {
         supplierInstance.properties = params
 
         if (!supplierInstance.save(flush: true)) {
-            render(view: "edit", model: [supplierInstance: supplierInstance])
+            render(view: "edit", model: [supplierInstance: supplierInstance,supplierType: supplierType])
             return
         }
 
@@ -169,7 +150,7 @@ class SupplierController {
     def fSave() {
         def supplierInstance = new Supplier(params)
         if (!supplierInstance.save(flush: true)) {
-            render(view: "fCreate", model: [supplierInstance: supplierInstance])
+            render(view: "fCreate", model: [supplierInstance: supplierInstance,supplierType: supplierType])
             return
         }
 
@@ -184,7 +165,7 @@ class SupplierController {
             return
         }
 
-        [supplierInstance: supplierInstance]
+        [supplierInstance: supplierInstance,supplierType:supplierType]
     }
     def fEdit(Long id) {
         def supplierInstance = Supplier.get(id)
@@ -209,7 +190,7 @@ class SupplierController {
                 supplierInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'supplier.label', default: 'Supplier')] as Object[],
                         "Another user has updated this Supplier while you were editing")
-                render(view: "fEdit", model: [supplierInstance: supplierInstance])
+                render(view: "fEdit", model: [supplierInstance: supplierInstance,supplierType: supplierType])
                 return
             }
         }
@@ -217,7 +198,7 @@ class SupplierController {
         supplierInstance.properties = params
 
         if (!supplierInstance.save(flush: true)) {
-            render(view: "fEdit", model: [supplierInstance: supplierInstance])
+            render(view: "fEdit", model: [supplierInstance: supplierInstance,supplierType: supplierType])
             return
         }
 
@@ -233,8 +214,8 @@ class SupplierController {
         }
 
         try {
+            supplierInstance.isdelete=1
             supplierInstance.save(flush: true)
-            supplierInstance.executeUpdate("update Supplier u set u.isdelete=1 where u.id=?",[id])
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
             redirect(action: "fList")
         }
@@ -271,11 +252,9 @@ class SupplierController {
         render (view:'yingyuanList' , model:  [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal])
     }
     def zList(Integer max,Long id) {
-        def name=params.name
-
         def result=Supplier.findAllByParentIdAndIsdelete(id,0,[offset:params.offset,max:max])
         def supplierInstanceTotal=Supplier.countByParentIdAndIsdelete(id,0)
-        render (view:'zList' , model:  [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal])
+        render (view:'zList' , model:  [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal,parentId: id])
     }
     def zSearch(long id,Integer max){
 
@@ -286,7 +265,8 @@ class SupplierController {
         render (view:'fList' , model: [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal])
     }
     def zCreate() {
-        [supplierInstance: new Supplier(params),supplierType:supplierType]
+        def pSupplierInstance = Supplier.get(params.parentId)
+        [supplierInstance: new Supplier(params),pSupplierInstance:pSupplierInstance]
     }
     def zSave() {
         def supplierInstance = new Supplier(params)
@@ -309,16 +289,18 @@ class SupplierController {
     }
     def zEdit(Long id) {
         def supplierInstance = Supplier.get(id)
+        def pSupplierInstance = Supplier.get(supplierInstance.parentId)
         if (!supplierInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
             redirect(action: "zList")
             return
         }
 
-        [supplierInstance: supplierInstance,supplierType:supplierType]
+        [supplierInstance: supplierInstance,pSupplierInstance:pSupplierInstance]
     }
     def zUpdate(Long id, Long version) {
         def supplierInstance = Supplier.get(id)
+        def pSupplierInstance = Supplier.get(supplierInstance.parentId)
         if (!supplierInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
             redirect(action: "zList")
@@ -330,7 +312,7 @@ class SupplierController {
                 supplierInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'supplier.label', default: 'Supplier')] as Object[],
                         "Another user has updated this Supplier while you were editing")
-                render(view: "zEdit", model: [supplierInstance: supplierInstance])
+                render(view: "zEdit", model: [supplierInstance: supplierInstance,pSupplierInstance:pSupplierInstance])
                 return
             }
         }
@@ -338,7 +320,7 @@ class SupplierController {
         supplierInstance.properties = params
 
         if (!supplierInstance.save(flush: true)) {
-            render(view: "zEdit", model: [supplierInstance: supplierInstance])
+            render(view: "zEdit", model: [supplierInstance: supplierInstance,pSupplierInstance:pSupplierInstance])
             return
         }
 
@@ -354,10 +336,10 @@ class SupplierController {
         }
 
         try {
+            supplierInstance.isdelete=1
             supplierInstance.save(flush: true)
-            supplierInstance.executeUpdate("update Supplier u set u.isdelete=1 where u.id=?",[id])
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])
-            redirect(action: "zList")
+            redirect(action: "zList",id: supplierInstance.parentId)
         }
         catch (DataIntegrityViolationException e) {
             flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'supplier.label', default: 'Supplier'), id])

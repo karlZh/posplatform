@@ -68,7 +68,7 @@
 									<label class="control-label"><g:message code="ticketType.accountRatio.label" default="结算比例" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ticketTypeInstance}" field="accountRatio"/></div>
+									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${ticketTypeInstance}" field="accountRatio"/>%</div>
 									
 								</div>
 							</g:if>
@@ -91,7 +91,7 @@
 									<label class="control-label"><g:message code="ticketType.supplier.label" default="供应商" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:link controller="supplier" action="show" id="${ticketTypeInstance?.supplier?.id}">${ticketTypeInstance?.supplier?.encodeAsHTML()}</g:link></div>
+									<div class="col-sm-10 col-md-10">${ticketTypeInstance?.supplier?.encodeAsHTML()}</div>
 									
 								</div>
 							</g:if>
