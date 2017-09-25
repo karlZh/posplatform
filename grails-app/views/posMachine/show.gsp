@@ -10,11 +10,11 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2>Pos机</h2>
+			<h2><g:message code="default.show.label" args="[entityName]" /></h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li>Pos机</li>
-				<li class="active">Pos机</li>
+				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+				<li class="active"><g:message code="default.show.label" args="[entityName]" /></li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -22,26 +22,20 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>Pos机</h3>
+							<h3><g:message code="default.show.label" args="[entityName]" /></h3>
 						</div>
 						<div class="content">
+							<g:if test="${flash.message}">
+								<div class="message" role="status">${flash.message}</div>
+							</g:if>
+							
 							<g:if test="${posMachineInstance?.name}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="posMachine.name.label" default="pos机名称" /></label>
+									<label class="control-label"><g:message code="posMachine.name.label" default="Name" /></label>
 									</div>
 									
 									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${posMachineInstance}" field="name"/></div>
-									
-								</div>
-							</g:if>
-							<g:if test="${posMachineInstance?.dateCreated}">
-								<div class="row">
-									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="posMachine.dateCreated.label" default="创建时间" /></label>
-									</div>
-									
-									<div class="col-sm-10 col-md-10"><g:formatDate date="${posMachineInstance?.dateCreated}" /></div>
 									
 								</div>
 							</g:if>
@@ -49,13 +43,25 @@
 							<g:if test="${posMachineInstance?.supplier}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="posMachine.supplier.label" default="供应商" /></label>
+									<label class="control-label"><g:message code="posMachine.supplier.label" default="Supplier" /></label>
 									</div>
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${posMachineInstance}" field="supplier"/></div>
-
+									
+									<div class="col-sm-10 col-md-10">${posMachineInstance?.supplier?.encodeAsHTML()}</div>
+									
 								</div>
 							</g:if>
-
+							
+							<g:if test="${posMachineInstance?.dateCreated}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="posMachine.dateCreated.label" default="Date Created" /></label>
+									</div>
+									
+									<div class="col-sm-10 col-md-10"><g:formatDate date="${posMachineInstance?.dateCreated}" /></div>
+									
+								</div>
+							</g:if>
+							
 							<g:form>
 								<g:hiddenField name="id" value="${posMachineInstance?.id}" />
 								<g:link action="edit"  id="${posMachineInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
@@ -67,10 +73,5 @@
 			</div>
 		</div>
 	</div>
-	<script>
-        <g:if test="${flash.message}">
-        	alert("${flash.message}")
-        </g:if>
-	</script>
 	</body>
 </html>

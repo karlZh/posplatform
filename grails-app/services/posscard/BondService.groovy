@@ -32,7 +32,7 @@ class BondService {
         }
         result.message=""
         result.data=[totalCount:orderList.num.sum(),totalAmount:orderList.amount.sum()]
-        result result
+        return result
     }
     //Getting the Session object
     def getSession(){

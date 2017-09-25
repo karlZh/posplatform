@@ -70,7 +70,8 @@
         var supplierType = $("#type option:selected").val();
         if(supplierType == "") return
         var str = "<option value='0'>请选择父供应商</option>";
-        $("#supplier").html("<option value='0'>请选择供应商</option>");
+        $("#parentId").html("");
+        $("#supplier").html("");
         $.ajax({
             type: "POST",
             url: "${createLink(uri: '/Supplier/ajaxSearchSupplier')}",
@@ -93,7 +94,7 @@
         var supplierType = $("#type option:selected").val();
         if(supplierType == '') return
         var parentId = $("#parentId option:selected").val();
-        var str = "<option>请选择供应商</option>";
+        var str = "";
         $("#supplier").html("");
         $.ajax({
             type: "POST",

@@ -35,9 +35,9 @@
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountType', 'error')}  form-group">
 	<label for="uTypeId" class="col-sm-2 control-label">
 		<g:message code="user.accountType.label" default="用户类别" />
-
+		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-        <g:select name="uTypeId" id="uTypeId" class="form-control" from="${category}" optionKey="id" optionValue="name" value="${userInstance?.uTypeId}"  noSelection="['0': '请选择类别']" />
+        <g:select name="uTypeId" id="uTypeId" class="form-control" from="${category}" optionKey="id" optionValue="name" value="${userInstance?.uTypeId}"  noSelection="[null: '请选择类别']" />
     </div>
 </div>

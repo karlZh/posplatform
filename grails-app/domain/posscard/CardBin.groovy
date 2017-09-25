@@ -6,7 +6,7 @@ class CardBin {//卡bin
     Date dateCreated//创建时间
 
     static constraints = {
-        cardbin(blank: false, nullable: false, unique: true)
+        cardbin(blank: false, maxSize: 6, nullable: false, unique: true)
         cardPlatform(nullable: false)
         dateCreated(display: false)
     }

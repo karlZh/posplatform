@@ -9,11 +9,11 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2>供应商信息</h2>
+			<h2><g:message code="posMachine.label" args="[entityName]" /></h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li><g:link class="list" action="list">供应商</g:link></li>
-				<li class="active">供应商信息</li>
+				<li><a href="${createLink(uri: '/')}">Home</a></li>
+				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
+				<li class="active"><g:message code="posMachine.label" args="[entityName]" /></li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -21,7 +21,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>供应商</h3>
+							<h3><g:message code="posMachine.label" args="[entityName]" /></h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -39,7 +39,7 @@
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
 										<g:submitButton name="create" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-										<a href="javascript:history.go(-1)" class="btn btn-default">Cancel</a>
+										<a href="javascript:history.go(-1)" class="btn btn-default"><g:message code="default.button.chancel.label" args="[entityName]" /></a>
 									</div>
 								</div>
 							</g:form>
