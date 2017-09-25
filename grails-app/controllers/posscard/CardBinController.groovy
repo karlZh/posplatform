@@ -20,8 +20,9 @@ class CardBinController {
     def search(Integer max){
 
         def name=params.name
-        def result=CardBin.findAllByCardbinAndIsdelete(name,0,[offset:params.offset,max:max])
-        def cardBinInstanceTotal=CardBin.countByCardbinAndIsdelete(name,0)
+        //def result1=CardBin.findAllByCardbinAndIsdelete(name,0,[offset:params.offset,max:max])
+        def result =CardBin.findAllByCardbinLikeAndIsdelete("%"+name+"%",0,[offset:params.offset,max:max])
+        def cardBinInstanceTotal=CardBin.countByCardbinLikeAndIsdelete("%"+name+"%",0)
 
         render (view:'list' , model: [cardBinInstanceList: result, cardBinInstanceTotal:cardBinInstanceTotal])
     }

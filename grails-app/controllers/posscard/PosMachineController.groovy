@@ -20,8 +20,8 @@ class PosMachineController {
     def search(Integer max){
 
         def name=params.name
-        def result=PosMachine.findAllByNameAndIsdelete(name,0,[offset:params.offset,max:max])
-        def posMachineInstanceTotal=PosMachine.countByNameAndIsdelete(name,0)
+        def result=PosMachine.findAllByNameLikeAndIsdelete("%"+name+"%",0,[offset:params.offset,max:max])
+        def posMachineInstanceTotal=PosMachine.countByNameLikeAndIsdelete("%"+name+"%",0)
 
         render (view:'list' , model: [posMachineInstanceList: result, posMachineInstanceTotal:posMachineInstanceTotal])
     }

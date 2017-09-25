@@ -18,6 +18,15 @@ class RecordController {
     def create() {
         [recordInstance: new Record(params)]
     }
+    def search(Integer max){
+
+        def name=params.name
+        def result=Record.findAllByUserLike("%"+name+"%",[offset:params.offset,max:max])
+        def recordInstanceTotal=Record.countByUserLike("%"+name+"%")
+
+        render (view:'list' , model: [recordInstanceList: result, recordInstanceTotal:recordInstanceTotal])
+    }
+
 
     def save() {
         def recordInstance = new Record(params)

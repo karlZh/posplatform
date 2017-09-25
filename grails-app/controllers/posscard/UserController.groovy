@@ -25,11 +25,11 @@ class UserController {
         def userInstanceTotal=User.countByIsdelete(0)
         [userInstanceList: result, userInstanceTotal: userInstanceTotal]
     }
-    def search(){
+    def search(Integer max){
 
         def name=params.name
-        def result=User.findAllByUsernameAndIsdelete(name,0)
-        def userInstanceTotal=User.countByUsernameAndIsdelete(name,0)
+        def result=User.findAllByUsernameLikeAndIsdelete("%"+name+"%",0,[offset:params.offset,max:max])
+        def userInstanceTotal=User.countByUsernameLikeAndIsdelete("%"+name+"%",0)
 
         render (view:'list' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
     }
@@ -240,11 +240,11 @@ class UserController {
             redirect(action: "posShow", id: id)
         }
     }
-    def posSearch(){
+    def posSearch(Integer max){
 
         def name=params.name
-        def result=User.findAllByUsernameAndAccountType(name,1)
-        def userInstanceTotal=User.countByUsername(name)
+        def result=User.findAllByUsernameLikeAndAccountTypeAndIsdelete("%"+name+"%",1,0,[offset: params.offset,max: max])
+        def userInstanceTotal=User.countByUsernameLikeAndAccountTypeAndIsdelete("%"+name+"%",1,0)
 
         render (view:'posList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
     }
@@ -346,11 +346,11 @@ def platformDelete(Long id) {
             redirect(action: "platformShow", id: id)
         }
     }
-def platformSearch(){
+def platformSearch(Integer max){
 
         def name=params.name
-        def result=User.findAllByUsernameAndAccountType(name,3)
-        def userInstanceTotal=User.countByUsername(name)
+        def result=User.findAllByUsernameLikeAndAccountTypeAndIsdelete("%"+name+"%",3,0,[offset: params.offset,max: max])
+        def userInstanceTotal=User.countByUsernameLikeAndAccountTypeAndIsdelete("%"+name+"%",3,0)
 
         render (view:'platformList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
     }
@@ -456,11 +456,11 @@ def platformSearch(){
             redirect(action: "supplierShow", id: id)
         }
     }
-    def supplierSearch(){
+    def supplierSearch(Integer max){
 
         def name=params.name
-        def result=User.findAllByUsernameAndAccountType(name,4)
-        def userInstanceTotal=User.countByUsername(name)
+        def result=User.findAllByUsernameLikeAndAccountTypeAndIsdelete("%"+name+"%",4,0,[offset: params.offset,max: max])
+        def userInstanceTotal=User.countByUsernameLikeAndAccountTypeAndIsdelete("%"+name+"%",4,0)
 
         render (view:'supplierList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
     }

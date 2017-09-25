@@ -18,11 +18,10 @@ class  OrdersController {
     }
 
     def search(Integer max){
+        def name =params.name
+        def result= Orders.findAllByOrderSnLikeAndIsdelete("%"+name+"%",0,[offset:params.offset,max:max])
 
-        def orderSn=params.orderSn
-        def result=Orders.findAllByOrderSnAndIsdelete(orderSn,0,[offset:params.offset,max:max])
-
-        def ordersInstanceTotal=Orders.countByOrderSnAndIsdelete(orderSn,0)
+        def ordersInstanceTotal=Orders.countByOrderSnLikeAndIsdelete("%"+name+"%",0)
 
         render (view:'list' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
@@ -132,9 +131,9 @@ class  OrdersController {
     def platformSearch(Integer max) {
 
         def orderSn=params.orderSn
-        def result=Orders.findByOrderSnAndCardPlatformIdAndIsdelete(orderSn,session.uTypeId,0,[offset:params.offset,max:max])
+        def result=Orders.findByOrderSnLikeAndCardPlatformIdAndIsdelete("%"+orderSn+"%",session.uTypeId,0,[offset:params.offset,max:max])
 
-        def ordersInstanceTotal=Orders.countByOrderSnAndCardPlatformIdAndIsdelete(orderSn,session.uTypeId,0)
+        def ordersInstanceTotal=Orders.countByOrderSnLikeAndCardPlatformIdAndIsdelete("%"+orderSn+"%",session.uTypeId,0)
 
         render (view:'platformList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
@@ -158,14 +157,20 @@ class  OrdersController {
         [ordersInstance: ordersInstance]
     }
     def supplierSearch(Integer max){
-        def orderSn=params.orderSn
-        def result=Orders.findByOrderSnAndSupplierIdAndIsdelete(orderSn,session.uTypeId,0,[offset:params.offset,max:max])
-        def ordersInstanceTotal=Orders.countByOrderSnAndSupplierIdAndIsdelete(orderSn,session.uTypeId,0)
+        def name=params.name
+        def result=Orders.findAllByOrderSnLikeAndSupplierIdAndIsdelete("%"+name+"%",session.uTypeId,0,[offset:params.offset,max:max])
+        def ordersInstanceTotal=Orders.countByOrderSnLikeAndSupplierIdAndIsdelete("%"+name+"%",session.uTypeId,0)
         render (view:'supplierList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
+    def supplierZList(Long id,Integer max){
+        def result=Orders.findAllBySupplierIdLikeAndIsdelete(id,0,[offset:params.offset,max:max])
+        def ordersInstanceTotal=Orders.countBySupplierIdLikeAndIsdelete(id,0)
+        render (view:'supplierZList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal,id: id])
+    }
     def supplierZSearch(Long id,Integer max){
-        def result=Orders.findBySupplierIdAndIsdelete(id,0,[offset:params.offset,max:max])
-        def ordersInstanceTotal=Orders.countBySupplierIdAndIsdelete(id,0)
-        render (view:'supplierList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
+        def name=params.name
+        def result=Orders.findAllByOrderSnLikeAndSupplierIdAndIsdelete("%"+name+"%",id,0,[offset:params.offset,max:max])
+        def ordersInstanceTotal=Orders.countByOrderSnLikeAndSupplierIdAndIsdelete("%"+name+"%",id,0)
+        render (view:'supplierZList' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal,id: id])
     }
 }
