@@ -1,7 +1,5 @@
 package posscard
 
-import org.springframework.dao.DataIntegrityViolationException
-
 class RecordController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -90,22 +88,4 @@ class RecordController {
         redirect(action: "show", id: recordInstance.id)
     }
 
-    def delete(Long id) {
-        def recordInstance = Record.get(id)
-        if (!recordInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'record.label', default: 'Record'), id])
-            redirect(action: "list")
-            return
-        }
-
-        try {
-            recordInstance.delete(flush: true)
-            flash.message = message(code: 'default.deleted.message', args: [message(code: 'record.label', default: 'Record'), id])
-            redirect(action: "list")
-        }
-        catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'record.label', default: 'Record'), id])
-            redirect(action: "show", id: id)
-        }
-    }
 }

@@ -7,8 +7,8 @@ class CardPlatform {//商户数据表
     Date dateCreated //创建时间
 
     static constraints = {
-        name(unique: true)
-        address()
+        name(nullable: false, unique: true,maxSize: 50)
+        address(maxSize: 255)
         isdelete(nullable: false)
         dateCreated(display:false)
     }

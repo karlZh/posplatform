@@ -1,27 +1,47 @@
-<%@ page import="posscard.PosMachine" %>
+<%@ page import="posscard.User" %>
 
 
-
-<div class="fieldcontain ${hasErrors(bean: posMachineInstance, field: 'name', 'error')} required form-group">
-	<label for="name" class="col-sm-2 control-label">
-		<g:message code="posMachine.name.label" default="Name" />
+<g:hiddenField name="accountType" value="${accountType}" />
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'username', 'error')} required form-group">
+	<label for="username" class="col-sm-2 control-label">
+		<g:message code="user.username.label" default="用户名" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-	<g:textField class="form-control" name="name" maxlength="50" required="" value="${posMachineInstance?.name}"/>
+	<g:textField class="form-control" name="username" maxlength="10" required="" value="${userInstance?.username}"/>
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: posMachineInstance, field: 'supplier', 'error')} required form-group">
-	<label for="supplier" class="col-sm-2 control-label">
-		<g:message code="posMachine.supplier.label" default="Supplier" />
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required form-group">
+	<label for="password" class="col-sm-2 control-label">
+		<g:message code="user.password.label" default="密码" />
 		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-6">
+	<g:field type="password" class="form-control" name="password" maxlength="20" required="" value="${userInstance?.password}"/>
+	</div>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'phone', 'error')}  form-group">
+	<label for="phone" class="col-sm-2 control-label">
+		<g:message code="user.phone.label" default="电话" />
+		
+	</label>
+	<div class="col-sm-6">
+	<g:textField class="form-control" name="phone" pattern="${userInstance.constraints.phone.matches}" value="${userInstance?.phone}"/>
+	</div>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountType', 'error')}  form-group">
+	<label for="uTypeId" class="col-sm-2 control-label">
+		<g:message code="user.accountType.label" default="用户类别" />
+
 	</label>
 	<div class="col-sm-6">
 		<g:select id="type" name="type" from="${supplierType}" optionKey="key" optionValue="value" value="${supplierInstance?.type}" noSelection="[0:'请选择分类']" />
 		<g:select id="parentId" name="parentId" from="${psuppliers}" optionKey="id" optionValue="name" value="${supplierInstance?.parentId}" noSelection="[0:'请选择父供应商']" />
-		<g:select id="supplier" name="supplier.id" from="${csuppliers}" optionKey="id" required="" value="${posMachineInstance?.supplier?.id}" class="many-to-one"/>
-	</div>
+		<g:select name="uTypeId" id="supplier" from="${csuppliers}" optionKey="id" optionValue="name" value="${userInstance?.uTypeId}"  noSelection="['0': '请选择类别']" />
+    </div>
 </div>
 <script>
     $(function () {
@@ -38,8 +58,8 @@
         //清空下拉数据
         var supplierType = $("#type option:selected").val();
         if(supplierType == "") return
-        $("#supplier").html("");
-        var str = "<option>请选择父供应商</option>";
+        var str = "<option value='0'>请选择父供应商</option>";
+        $("#supplier").html("<option value='0'>请选择供应商</option>");
         $.ajax({
             type: "POST",
             url: "${createLink(uri: '/Supplier/ajaxSearchSupplier')}",
@@ -62,7 +82,7 @@
         var supplierType = $("#type option:selected").val();
         if(supplierType == '') return
         var parentId = $("#parentId option:selected").val();
-        var str = "";
+        var str = "<option>请选择供应商</option>";
         $("#supplier").html("");
         $.ajax({
             type: "POST",

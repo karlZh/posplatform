@@ -22,6 +22,7 @@ class OrdersService {
             return result
         }
         def supplier = Supplier.get(data.supplierid)
+
         def cardb = data.cardnum.substring(0,6)
         def cardbinList = []
         for(cardbin in supplier.cardbins){
@@ -38,10 +39,14 @@ class OrdersService {
             result.message = platRes.msg
             return result
         }
-
-        def ticketType = TicketType.findAllBySupplier(Supplier.get(data.supplierid))
+        def ticketTypeInstance = TicketType.findAllBySupplier(supplier)
+        if(!ticketTypeInstance){
+            result.status = 301
+            result.message = "未找到相应的消费类型"
+            return result
+        }
         result.data.cardInfo = platRes.data
-        result.data.ticketType = ticketType
+        result.data.ticketType = ticketTypeInstance
         return result
     }
     def scanCode(data){
@@ -182,7 +187,7 @@ class OrdersService {
             result.message = "订单更新失败"
             return result
         }
-        result.data = [orderSn: orderSn,cardNum: data.cardnum,ticketType: ticketType.name, amount: orderAmount,num: data.num,cardPlatform: cardbinInfo.cardPlatform.name]
+        result.data = [orderSn: orderSn,cardNum: data.cardnum,ticketType: ticketType.name, amount: orderAmount,num: data.num,supplierCn: supplierInfo.name]
         result.message = "支付成功"
         return result
     }

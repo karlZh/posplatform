@@ -10,10 +10,10 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2><g:message code="posMachine.label" args="[entityName]" /></h2>
+			<h2><g:message code="default.list.label" args="[entityName]" /></h2>
 			<ol class="breadcrumb">
 				<li><a href="${createLink(uri: '/')}">Home</a></li>
-				<li class="active"><g:message code="posMachine.label" args="[entityName]" /></li>
+				<li class="active"><g:message code="default.list.label" args="[entityName]" /></li>
 			</ol>
 		</div>
         <div style="padding:25px 12px">
@@ -30,7 +30,7 @@
 				<div class="col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3><g:message code="posMachine.label" args="[entityName]" /><g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
+							<h3><g:message code="default.list.label" args="[entityName]" /><g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
 						</div>
 						<div class="content">
 							<div>
@@ -38,11 +38,11 @@
 									<thead>
 									<tr>
 										
-										<g:sortableColumn property="name" title="${message(code: 'posMachine.name.label', default: 'pos机名称')}" />
-
-										<g:sortableColumn property="dateCreated" title="${message(code: 'posMachine.dateCreated.label', default: '创建时间')}" />
-
-										<th><g:message code="posMachine.supplier.label" default="供应商" /></th>
+										<g:sortableColumn property="name" title="${message(code: 'posMachine.name.label', default: 'Name')}" />
+										
+										<th><g:message code="posMachine.supplier.label" default="Supplier" /></th>
+										
+										<g:sortableColumn property="dateCreated" title="${message(code: 'posMachine.dateCreated.label', default: 'Date Created')}" />
 										
 										<th>操作</th>
 									</tr>
@@ -51,11 +51,11 @@
 									<g:each in="${posMachineInstanceList}" status="i" var="posMachineInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 											
-											<td>${fieldValue(bean: posMachineInstance, field: "name")}</td>
+											<td><g:link action="show" id="${posMachineInstance.id}">${fieldValue(bean: posMachineInstance, field: "name")}</g:link></td>
 
+											<td>${fieldValue(bean: posMachineInstance, field: "supplier")}</td>
+											
 											<td><g:formatDate date="${posMachineInstance.dateCreated}" /></td>
-										
-											<td>${fieldValue(bean: posMachineInstance, field: "supplier.name")}</td>
 
 											<td class="center ">
 												<g:link action="show" id="${posMachineInstance.id}" class="btn btn-default btn-xs" href="#" data-original-title="Open" data-toggle="tooltip">

@@ -7,8 +7,9 @@ class PosMachine {
     Date  dateCreated //创建时间
 
     static constraints = {
-        name(nullable: false)
+        name(nullable: false,unique: true, blank: false, maxSize: 50)
         userId(nullable: true, display:false)
+        supplier(nullable: false)
         isdelete(nullable: false)
         dateCreated(display:false)
     }

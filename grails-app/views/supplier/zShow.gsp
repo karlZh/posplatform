@@ -100,7 +100,7 @@
 									<label class="control-label"><g:message code="supplier.parent.label" default="父供应商" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${supplierInstance}" field="parentId"/></div>
+									<div class="col-sm-10 col-md-10">${posscard.Supplier.get(supplierInstance.parentId)}</div>
 									
 								</div>
 							</g:if>

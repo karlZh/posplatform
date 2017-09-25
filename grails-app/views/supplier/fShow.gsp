@@ -39,7 +39,16 @@
 									
 								</div>
 							</g:if>
-							
+							<g:if test="${supplierInstance?.type}">
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+										<label class="control-label"><g:message code="supplier.type.label" default="供应商类型" /></label>
+									</div>
+
+									<div class="col-sm-10 col-md-10">${supplierType.get(supplierInstance.type.toInteger())}</div>
+
+								</div>
+							</g:if>
 							<g:if test="${supplierInstance?.ratio}">
 								<div class="row">
 									<div class="col-sm-2 col-md-2 text-right">

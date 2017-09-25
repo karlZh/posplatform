@@ -21,7 +21,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>供应商</h3>
+							<h3><g:message code="default.edit.label" args="[entityName]" /></h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">

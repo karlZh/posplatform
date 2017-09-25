@@ -35,7 +35,7 @@
 								</ul>
 							</g:hasErrors>
 							<g:form class="form-horizontal" role="form" action="supplierSave" >
-								<g:render template="form"/>
+								<g:render template="supplierForm"/>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
 										<g:submitButton name="supplierCreate" class="btn btn-primary" value="${message(code: 'default.button.create.label', default: 'Create')}" />
