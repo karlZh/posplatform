@@ -12,9 +12,10 @@ class  OrdersController {
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        def result =Orders.findAllByIsdeleteAndIsdelete(0,0,[offset:params.offset,max:params.max])
-        def ordersInstanceTotal=Orders.countByIsdeleteAndIsdelete(0,0)
-        [ordersInstanceList: result,ordersInstanceTotal: ordersInstanceTotal]
+
+        def result = Orders.findAllByIsdelete(0,[offset: params.offset,max: params.max ])
+        def ordersInstanceTotal=Orders.countByIsdelete(0)
+      render (view:'list' ,model:  [ordersInstanceList: result,ordersInstanceTotal: ordersInstanceTotal])
     }
 
     def search(Integer max){
