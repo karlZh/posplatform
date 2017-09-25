@@ -44,7 +44,7 @@ class TicketTypeController {
     def save() {
         def ticketTypeInstance = new TicketType(params)
         if (!ticketTypeInstance.save(flush: true)) {
-            render(view: "create", model: [ticketTypeInstance: ticketTypeInstance])
+            render(view: "create", model: [ticketTypeInstance: ticketTypeInstance,supplierType:supplierType])
             return
         }
 
