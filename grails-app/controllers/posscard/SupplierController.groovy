@@ -21,7 +21,8 @@ class SupplierController {
         redirect(action: "list", params: params)
     }
     def list(Integer max) {
-        def result = Supplier.findAllByIsdelete(0,[offset:params.offset,max:max])
+        params.max = Math.min(max ?: 10, 100)
+        def result = Supplier.findAllByIsdelete(0,[offset:params.offset,max: params.max])
         def supplierInstanceTotal=Supplier.countByIsdelete(0)
         [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal]
     }
@@ -147,10 +148,10 @@ class SupplierController {
         }
     }
     def fList(Integer max) {
-        def name=params.name
-        def result=Supplier.findAllByParentIdAndIsdelete(0,0,[offset:params.offset,max:max])
+        params.max = Math.min(max ?: 10, 100)
+        def result=Supplier.findAllByParentIdAndIsdelete(0,0,[offset:params.offset,max:params.max])
         def supplierInstanceTotal=Supplier.countByParentIdAndIsdelete(0,0)
-        render (view:'fList' , model:  [supplierInstanceList: result, supplierInstanceTotal: Supplier.count()])
+        render (view:'fList' , model:  [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal])
     }
     def fSearch(Integer max){
 
@@ -270,9 +271,10 @@ class SupplierController {
     }
     def zList(Integer max,Long id) {
         def name=params.name
+
         def result=Supplier.findAllByParentIdAndIsdelete(id,0,[offset:params.offset,max:max])
         def supplierInstanceTotal=Supplier.countByParentIdAndIsdelete(id,0)
-        render (view:'zList' , model:  [supplierInstanceList: result, supplierInstanceTotal: Supplier.count()])
+        render (view:'zList' , model:  [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal])
     }
     def zSearch(long id,Integer max){
 

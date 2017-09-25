@@ -29,9 +29,9 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="block-flat">
-						<div class="header">
-							<h3><g:message code="orders.label" args="[entityName]" /><g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>
-						</div>
+						%{--<div class="header">--}%
+							%{--<h3><g:message code="orders.label" args="[entityName]" /><g:link action="create" id="not-primary" class="btn btn-primary pull-right">添加</g:link></h3>--}%
+						%{--</div>--}%
 						<div class="content">
 							<div>
 								<table>
@@ -57,8 +57,8 @@
 									<tbody>
 									<g:each in="${ordersInstanceList}" status="i" var="ordersInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-											
-											<td><g:link action="show" id="${ordersInstance.id}">${fieldValue(bean: ordersInstance, field: "cardNum")}</g:link></td>
+                                            %{--<g:link action="show" id="${ordersInstance.id}">${fieldValue(bean: ordersInstance, field: "cardNum")}</g:link>--}%
+											<td>${fieldValue(bean: ordersInstance, field: "cardNum")}</td>
 											
 											<td>${fieldValue(bean: ordersInstance, field: "amount")}</td>
 											

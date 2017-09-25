@@ -58,8 +58,8 @@
 									<tbody>
 									<g:each in="${supplierInstanceList}" status="i" var="supplierInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-											
-											<td><g:link action="show" id="${supplierInstance.id}">${fieldValue(bean: supplierInstance, field: "name")}</g:link></td>
+                                            %{--<g:link action="show" id="${supplierInstance.id}"></g:link>--}%
+											<td>${fieldValue(bean: supplierInstance, field: "name")}</td>
 											
 											<td>${fieldValue(bean: supplierInstance, field: "ratio")}</td>
 											

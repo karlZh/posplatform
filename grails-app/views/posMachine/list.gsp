@@ -51,7 +51,7 @@
 									<g:each in="${posMachineInstanceList}" status="i" var="posMachineInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 											
-											<td><g:link action="show" id="${posMachineInstance.id}">${fieldValue(bean: posMachineInstance, field: "name")}</g:link></td>
+											<td>${fieldValue(bean: posMachineInstance, field: "name")}</td>
 
 											<td><g:formatDate date="${posMachineInstance.dateCreated}" /></td>
 										
