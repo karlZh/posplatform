@@ -5,6 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class SupplierController {
 
+
     static allowedMethods = [save: "POST", update: "POST"]
     def supplierType = [1:"电影",2:"蛋糕"]
     def auth(){
@@ -287,7 +288,7 @@ class SupplierController {
     def zList(Integer max,Long id) {
         def result = Supplier.findAllByParentIdAndIsdelete(id, 0, [offset: params.offset, max: max])
         def supplierInstanceTotal = Supplier.countByParentIdAndIsdelete(id, 0)
-        [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal, id: id]
+        render(view: 'zList', model: [supplierInstanceList: result, supplierInstanceTotal: supplierInstanceTotal, id: id])
     }
     def zSearch(Long id,Integer max){
 

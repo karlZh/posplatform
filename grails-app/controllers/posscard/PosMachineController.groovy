@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class PosMachineController {
 
+
     static allowedMethods = [save: "POST", update: "POST"]
     def supplierType = [1:"电影",2:"蛋糕"]
     def auth(){

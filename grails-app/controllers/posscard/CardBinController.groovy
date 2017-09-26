@@ -4,6 +4,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class CardBinController {
 
+
     static allowedMethods = [save: "POST", update: "POST"]
     def auth(){
         if(!session.userId){

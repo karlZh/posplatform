@@ -22,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-
+							<h3>操作记录</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -39,6 +39,16 @@
 									
 								</div>
 							</g:if>
+                            <g:if test="${recordInstance?.accountType}">
+                                <div class="row">
+                                    <div class="col-sm-2 col-md-2 text-right">
+                                        <label class="control-label"><g:message code="record.accountType.label" default="用户类型" /></label>
+                                    </div>
+
+                                    <div class="col-sm-10 col-md-10"><g:fieldValue bean="${recordInstance}" field="accountType"/></div>
+
+                                </div>
+                            </g:if>
 							
 							<g:if test="${recordInstance?.loginTime}">
 								<div class="row">
@@ -51,16 +61,9 @@
 								</div>
 							</g:if>
 							
-							<g:if test="${recordInstance?.userType}">
-								<div class="row">
-									<div class="col-sm-2 col-md-2 text-right">
-									<label class="control-label"><g:message code="record.userType.label" default="用户类型" /></label>
-									</div>
-									
-									<div class="col-sm-10 col-md-10"><g:fieldValue bean="${recordInstance}" field="userType"/></div>
-									
-								</div>
-							</g:if>
+
+							
+
 						</div>
 					</div>
 				</div>

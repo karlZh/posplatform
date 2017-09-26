@@ -69,7 +69,7 @@
 									</div>
 									
 									<g:each in="${cardPlatformInstance.cardBin}" var="c">
-										<div class="col-sm-10 col-md-10"><g:link controller="cardBin" action="show" id="${c.id}">${c?.encodeAsHTML()}</g:link></div>
+										${c?.encodeAsHTML()}
 									</g:each>
 									
 								</div>
