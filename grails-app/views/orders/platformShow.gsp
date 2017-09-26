@@ -12,7 +12,7 @@
 		<div class="page-head">
 			<h2>订单表</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li>首页</li>
 				<li>订单表</li>
 				<li class="active">操作订单</li>
 			</ol>

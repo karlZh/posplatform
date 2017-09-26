@@ -12,7 +12,7 @@
 		<div class="page-head">
 			<h2>操作记录</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li>首页</li>
 				<li class="active">操作记录</li>
 			</ol>
 		</div>
