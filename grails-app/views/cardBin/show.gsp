@@ -12,7 +12,7 @@
 		<div class="page-head">
 			<h2>卡BIN </h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li>首页</li>
 				<li><g:link class="list" action="list">卡BIN</g:link></li>
 				<li class="active">操作卡BIN</li>
 			</ol>

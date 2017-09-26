@@ -132,7 +132,7 @@ class  OrdersController {
     def platformSearch(Integer max) {
 
         def orderSn=params.orderSn
-        def result=Orders.findByOrderSnLikeAndCardPlatformIdAndIsdelete("%"+orderSn+"%",session.uTypeId,0,[offset:params.offset,max:max])
+        def result=Orders.findAllByOrderSnLikeAndCardPlatformIdAndIsdelete("%"+orderSn+"%",session.uTypeId,0,[offset:params.offset,max:max])
 
         def ordersInstanceTotal=Orders.countByOrderSnLikeAndCardPlatformIdAndIsdelete("%"+orderSn+"%",session.uTypeId,0)
 

@@ -52,12 +52,6 @@
                 </ul>
             </div>
         </div>
-        <div class="text-right collapse-button" style="padding:7px 9px;">
-            <g:form controller="search" action="list">
-            <input type="text" name="username" class="form-control search" placeholder="Search..." />
 
-           <button id="sidebar-collapse" class="btn btn-default" style=""><i style="color:#fff;" class="fa fa-angle-left"></i></button>
-            </g:form>
-        </div>
     </div>
 </div>
