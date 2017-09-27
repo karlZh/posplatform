@@ -19,14 +19,12 @@ class CardBinController {
     def index() {
         redirect(action: "list", params: params)
     }
-
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
        def result=CardBin.findAllByIsdelete(0,[offset:params.offset,max:max])
         def cardBinInstanceTotal=CardBin.countByIsdelete(0)
         [cardBinInstanceList: result, cardBinInstanceTotal:cardBinInstanceTotal]
     }
-
     def search(Integer max){
 
         def name=params.name
@@ -36,11 +34,9 @@ class CardBinController {
 
         render (view:'list' , model: [cardBinInstanceList: result, cardBinInstanceTotal:cardBinInstanceTotal])
     }
-
     def create() {
         [cardBinInstance: new CardBin(params)]
     }
-
     def save() {
         def cardBinInstance = new CardBin(params)
         if (!cardBinInstance.save(flush: true)) {
@@ -51,7 +47,6 @@ class CardBinController {
         flash.message = message(code: 'default.created.message', args: [message(code: 'cardBin.label', default: 'CardBin'), cardBinInstance.id])
         redirect(action: "show", id: cardBinInstance.id)
     }
-
     def show(Long id) {
         def cardBinInstance = CardBin.get(id)
         if (!cardBinInstance) {
@@ -62,7 +57,6 @@ class CardBinController {
 
         [cardBinInstance: cardBinInstance]
     }
-
     def edit(Long id) {
         def cardBinInstance = CardBin.get(id)
         if (!cardBinInstance) {
@@ -73,7 +67,6 @@ class CardBinController {
 
         [cardBinInstance: cardBinInstance]
     }
-
     def update(Long id, Long version) {
         def cardBinInstance = CardBin.get(id)
         if (!cardBinInstance) {
@@ -102,7 +95,6 @@ class CardBinController {
         flash.message = message(code: 'default.updated.message', args: [message(code: 'cardBin.label', default: 'CardBin'), cardBinInstance.id])
         redirect(action: "show", id: cardBinInstance.id)
     }
-
     def delete(Long id) {
         def cardBinInstance = CardBin.get(id)
         if (!cardBinInstance) {

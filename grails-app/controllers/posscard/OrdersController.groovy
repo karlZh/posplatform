@@ -13,13 +13,12 @@ class  OrdersController {
         }
     }
     def beforeInterceptor = [action: this.&auth]
-
     static allowedMethods = [save: "POST", update: "POST"]
+
 
     def index() {
         redirect(action: "list", params: params)
     }
-
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
 
@@ -27,7 +26,6 @@ class  OrdersController {
         def ordersInstanceTotal=Orders.countByIsdelete(0)
       render (view:'list' ,model:  [ordersInstanceList: result,ordersInstanceTotal: ordersInstanceTotal])
     }
-
     def search(Integer max){
         def name =params.name
         def result= Orders.findAllByOrderSnLikeAndIsdelete("%"+name+"%",0,[offset:params.offset,max:max])
@@ -36,7 +34,6 @@ class  OrdersController {
 
         render (view:'list' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
-
     def create() {
         [ordersInstance: new Orders(params)]
     }

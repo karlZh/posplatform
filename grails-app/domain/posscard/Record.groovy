@@ -3,7 +3,7 @@ package posscard
 class Record {
     String user
     Date loginTime//登录时间
-    String accountType//用户类型
+    Integer  accountType//用户类型
 
 
 

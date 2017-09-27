@@ -13,7 +13,6 @@ class CardPlatformController {
         }
     }
     def beforeInterceptor = [action: this.&auth]
-
     static allowedMethods = [save: "POST", update: "POST"]
 
     def index() {

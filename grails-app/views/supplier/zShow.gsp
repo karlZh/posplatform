@@ -13,7 +13,7 @@
 			<h2>供应商表</h2>
 			<ol class="breadcrumb">
 				<li>首页</li>
-				<li><g:link class="list" action="zList">供应商表</g:link></li>
+				<li>供应商表</li>
 				<li class="active">操作供应商</li>
 			</ol>
 		</div>

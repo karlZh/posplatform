@@ -47,9 +47,25 @@
 									<g:each in="${recordInstanceList}" status="i" var="recordInstance">
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 											
-											<td><g:link action="show" id="${recordInstance.id}">${fieldValue(bean: recordInstance, field: "user")}</g:link></td>
+											<td>${fieldValue(bean: recordInstance, field: "user")}</td>
 											
-											<td>${fieldValue(bean: recordInstance, field: "accountType")}</td>
+											<td>
+                                                %{--${fieldValue(bean: recordInstance, field: "accountType")}--}%
+                                              <g:if test="${recordInstance?.accountType == 1}">
+                                                  pos用户
+                                              </g:if>
+                                              <g:elseif test="${recordInstance?.accountType == 2}">
+                                                    管理员
+                                              </g:elseif>
+                                              <g:elseif test="${recordInstance?.accountType == 3}">
+                                                    商户
+                                              </g:elseif>
+                                              <g:elseif test="${recordInstance?.accountType == 4}">
+                                                供应商
+                                            </g:elseif>
+
+
+                                            </td>
 
                                             <td><g:formatDate date="${recordInstance.loginTime}" /></td>
 											
