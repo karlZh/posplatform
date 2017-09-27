@@ -194,6 +194,7 @@ class OrdersService {
     //退款操作
     def orderRefund(data){
         def result = [status: 200,message: "",data:[:]]
+
         if(!data.tradeno){
             result.status = 302
             result.message = "流水号缺失"
