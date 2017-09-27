@@ -20,6 +20,7 @@ class PosApiController {
     def groupQueryService
     def lastOrderService
     def bondService
+    def userlLeaderService
     def index() {
         def result = [:]
         def posStr = params.pos?.trim()
@@ -51,6 +52,15 @@ class PosApiController {
                 render dataProcessingService.dataEncode(res)
                 return false
             }
+
+        }
+        def signNotL = ['signInL','signOutL']
+        if(!signNotL.contains(posParams.act)) {
+            def resL = userlLeaderService.checkSignL()
+            if (resL.status != 200) {
+                render dataProcessingService.dataEncode(resL[])
+                return false
+            }
         }
 
         switch (posParams.act?.trim()) {
@@ -59,6 +69,12 @@ class PosApiController {
                 break
             case "signOut":
                 result = userService.signOut();
+                break
+            case "signInL":
+                result = userlLeaderService.signInL(data);
+                break
+            case "signOutL":
+                result = userlLeaderService.signOutL();
                 break
             case "checkCard":
                 result = ordersService.checkCard(data)
