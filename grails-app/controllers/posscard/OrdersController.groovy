@@ -3,13 +3,22 @@ package posscard
 import org.springframework.dao.DataIntegrityViolationException
 
 class  OrdersController {
-
+    def auth(){
+        if(!session.userId){
+            def originReqParams = [controller:controllerName,action: actionName]
+            originReqParams.putAll(params)
+            session.originReqParams = originReqParams
+            redirect(controller:"userLogin",action: "login")
+            return false
+        }
+    }
+    def beforeInterceptor = [action: this.&auth]
     static allowedMethods = [save: "POST", update: "POST"]
+
 
     def index() {
         redirect(action: "list", params: params)
     }
-
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
 
@@ -17,7 +26,6 @@ class  OrdersController {
         def ordersInstanceTotal=Orders.countByIsdelete(0)
       render (view:'list' ,model:  [ordersInstanceList: result,ordersInstanceTotal: ordersInstanceTotal])
     }
-
     def search(Integer max){
         def name =params.name
         def result= Orders.findAllByOrderSnLikeAndIsdelete("%"+name+"%",0,[offset:params.offset,max:max])
@@ -26,7 +34,6 @@ class  OrdersController {
 
         render (view:'list' , model: [ordersInstanceList: result, ordersInstanceTotal:ordersInstanceTotal])
     }
-
     def create() {
         [ordersInstance: new Orders(params)]
     }
@@ -132,7 +139,7 @@ class  OrdersController {
     def platformSearch(Integer max) {
 
         def orderSn=params.orderSn
-        def result=Orders.findByOrderSnLikeAndCardPlatformIdAndIsdelete("%"+orderSn+"%",session.uTypeId,0,[offset:params.offset,max:max])
+        def result=Orders.findAllByOrderSnLikeAndCardPlatformIdAndIsdelete("%"+orderSn+"%",session.uTypeId,0,[offset:params.offset,max:max])
 
         def ordersInstanceTotal=Orders.countByOrderSnLikeAndCardPlatformIdAndIsdelete("%"+orderSn+"%",session.uTypeId,0)
 

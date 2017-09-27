@@ -15,7 +15,6 @@ class UserController {
             return false
         }
     }
-
     def beforeInterceptor = [action: this.&auth]
     def index() {
         redirect(controller: "record", action: "list", params: params)
@@ -528,4 +527,5 @@ def platformSearch(Integer max){
 
         render (view:'supplierList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
     }
+
 }

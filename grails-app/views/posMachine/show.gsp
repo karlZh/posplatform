@@ -12,7 +12,7 @@
 		<div class="page-head">
 			<h2><g:message code="default.show.label" args="[entityName]" /></h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">Home</a></li>
+				<li>Home</li>
 				<li><g:link class="list" action="list"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 				<li class="active"><g:message code="default.show.label" args="[entityName]" /></li>
 			</ol>

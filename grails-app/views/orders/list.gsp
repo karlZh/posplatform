@@ -12,7 +12,7 @@
 		<div class="page-head">
 			<h2><g:message code="orders.label" args="[entityName]" /></h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">首页</a></li>
+				<li>首页</li>
 				<li class="active"><g:message code="orders.label" args="[entityName]" /></li>
 			</ol>
 		</div>

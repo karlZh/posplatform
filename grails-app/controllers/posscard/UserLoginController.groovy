@@ -22,7 +22,7 @@ class UserLoginController {
                 session.uTypeId = userInstance.uTypeId
                 session.username=userInstance.username
 
-                def r=new Record(user: params.username,loginTime: new Date() ,userType: session.accountType)
+                def r=new Record(user: params.username,loginTime: new Date() ,accountType: session.accountType )
                 r.save(flush: true)
 //                def requestParams=session.originReqParams?session.originReqParams:[controller: 'user',action: 'index']
                 def requestParams

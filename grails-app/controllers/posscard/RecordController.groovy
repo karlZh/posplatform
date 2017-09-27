@@ -1,8 +1,20 @@
 package posscard
 
+import org.springframework.dao.DataIntegrityViolationException
+
 class RecordController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    def auth(){
+        if(!session.userId){
+            def originReqParams = [controller:controllerName,action: actionName]
+            originReqParams.putAll(params)
+            session.originReqParams = originReqParams
+            redirect(controller:"userLogin",action: "login")
+            return false
+        }
+    }
+    def beforeInterceptor = [action: this.&auth]
 
     def index() {
         redirect(action: "list", params: params)
@@ -13,18 +25,20 @@ class RecordController {
         [recordInstanceList: Record.list(params), recordInstanceTotal: Record.count()]
     }
 
-    def create() {
-        [recordInstance: new Record(params)]
-    }
     def search(Integer max){
 
         def name=params.name
+
         def result=Record.findAllByUserLike("%"+name+"%",[offset:params.offset,max:max])
         def recordInstanceTotal=Record.countByUserLike("%"+name+"%")
 
         render (view:'list' , model: [recordInstanceList: result, recordInstanceTotal:recordInstanceTotal])
     }
 
+
+    def create() {
+        [recordInstance: new Record(params)]
+    }
 
     def save() {
         def recordInstance = new Record(params)
@@ -70,8 +84,8 @@ class RecordController {
         if (version != null) {
             if (recordInstance.version > version) {
                 recordInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'record.label', default: 'Record')] as Object[],
-                          "Another user has updated this Record while you were editing")
+                        [message(code: 'record.label', default: 'Record')] as Object[],
+                        "Another user has updated this Record while you were editing")
                 render(view: "edit", model: [recordInstance: recordInstance])
                 return
             }
@@ -88,4 +102,22 @@ class RecordController {
         redirect(action: "show", id: recordInstance.id)
     }
 
+    def delete(Long id) {
+        def recordInstance = Record.get(id)
+        if (!recordInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'record.label', default: 'Record'), id])
+            redirect(action: "list")
+            return
+        }
+
+        try {
+            recordInstance.delete(flush: true)
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'record.label', default: 'Record'), id])
+            redirect(action: "list")
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'record.label', default: 'Record'), id])
+            redirect(action: "show", id: id)
+        }
+    }
 }

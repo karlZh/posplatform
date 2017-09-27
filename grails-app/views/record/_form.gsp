@@ -22,13 +22,23 @@
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: recordInstance, field: 'userType', 'error')}  form-group">
-	<label for="userType" class="col-sm-2 control-label">
-		<g:message code="record.userType.label" default="User Type" />
+<div class="fieldcontain ${hasErrors(bean: recordInstance, field: 'uTypeId', 'error')}  form-group">
+	<label for="uTypeId" class="col-sm-2 control-label">
+		<g:message code="record.uTypeId.label" default="UT ype Id" />
 		
 	</label>
 	<div class="col-sm-6">
-	<g:textField class="form-control" name="userType" value="${recordInstance?.userType}"/>
+	<g:textField class="form-control" name="uTypeId" value="${recordInstance?.uTypeId}"/>
+	</div>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: recordInstance, field: 'accountType', 'error')}  form-group">
+	<label for="accountType" class="col-sm-2 control-label">
+		<g:message code="record.accountType.label" default="Account Type" />
+		
+	</label>
+	<div class="col-sm-6">
+	<g:textField class="form-control" name="accountType" value="${recordInstance?.accountType}"/>
 	</div>
 </div>
 

@@ -77,7 +77,7 @@
                                         <label class="control-label"><g:message code="user.uTypeId.label" default="用户类别" /></label>
                                     </div>
 
-                                    <div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="uTypeId"/></div>
+                                    <div class="col-sm-10 col-md-10">${posscard.Supplier.get(userInstance?.uTypeId)?.name}</div>
 
                                 </div>
                             </g:if>

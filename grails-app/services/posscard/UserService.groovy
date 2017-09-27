@@ -6,13 +6,22 @@ class UserService {
 
     def signIn(data) {
         def result = [status: 200,message: "",data:[:]]
-        def user = User.findByUsernameAndPassword(data.username,data.password)
+      // def user = User.findByUsernameAndPassword(data.username,data.password)
+       def user=User.findByIsLeaderAndUsernameAndPassword(data.isLeader,data.username,data.password)
+       def isLeader=User.findByIsLeader(data.isLeader)
         
         if(user){
             if(user.accountType != 1){
                 result.status = 301
                 result.message = "非pos机用户,请用pos机用户登录！"
                 return result
+            }
+            else {
+                if(user.isLeader==0){
+                    result.message="用户经理登陆"
+                    return result
+                }
+
             }
             getSession().user = user
             def uTypeInfo = getUTypeInfo(user.accountType,user.uTypeId)
@@ -28,9 +37,20 @@ class UserService {
             result.message = "用户不存在或密码错误！"
             return result
         }
-        result.message = "签到成功！"
+
+
+
+//
+//        if(!userLeader){
+//            result.status=302
+//            result.message="请用户经理登陆"
+//            return  result
+//        }
+
+       // result.message = "签到成功！"
         return result
     }
+
 
     def signOut() {
         def result = [status: 200,message: "",data:[:]]

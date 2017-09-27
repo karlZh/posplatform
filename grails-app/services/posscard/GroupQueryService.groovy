@@ -10,6 +10,7 @@ class GroupQueryService {
         def orderList = Orders.findAllByUserId(user_id)
         if(!orderList){
             result.data=[totalCount:0,totalAmount:0]
+            return result
         }
 
         result.data=[totalCount:orderList.num.sum(),totalAmount:orderList.amount.sum()]

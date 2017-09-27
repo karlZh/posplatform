@@ -27,6 +27,7 @@ class BondService {
         def orderList= Orders.findAllByUserIdAndOrderStatusAndDateCreatedGreaterThan(user_id,1 ,firstday)
         if (!orderList){
             result.status=301
+//            result.data=[totalCount:0,totalAmount:0]
             result.message="暂没有要打印的数据"
             return result
         }

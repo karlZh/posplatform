@@ -11,8 +11,8 @@
 		<div class="page-head">
 			<h2>供应商表</h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li><g:link class="list" action="zList">供应商表</g:link></li>
+				<li>首页</li>
+				<li>供应商表</li>
 				<li class="active">操作供应商</li>
 			</ol>
 		</div>

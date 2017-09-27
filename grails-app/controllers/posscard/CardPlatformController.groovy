@@ -3,7 +3,16 @@ package posscard
 import org.springframework.dao.DataIntegrityViolationException
 
 class CardPlatformController {
-
+    def auth(){
+        if(!session.userId){
+            def originReqParams = [controller:controllerName,action: actionName]
+            originReqParams.putAll(params)
+            session.originReqParams = originReqParams
+            redirect(controller:"userLogin",action: "login")
+            return false
+        }
+    }
+    def beforeInterceptor = [action: this.&auth]
     static allowedMethods = [save: "POST", update: "POST"]
 
     def index() {
