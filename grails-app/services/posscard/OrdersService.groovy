@@ -331,6 +331,7 @@ class OrdersService {
         }
 
         result.message = "退款成功"
+        getSession().userLeader=null
         return result
 
     }

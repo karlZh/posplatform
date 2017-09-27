@@ -2,18 +2,18 @@ package posscard
 
 import org.springframework.web.context.request.RequestContextHolder
 
-class UserService {
+class UserlLeaderService {
 
-    def signIn(data) {
+    def signInL(data) {
         def result = [status: 200,message: "",data:[:]]
       // def user = User.findByUsernameAndPassword(data.username,data.password)
-       def user=User.findByUsernameAndPassword(data.username,data.password)
+       def userLeader=User.findByIsLeaderAndUsernameAndPassword(data.isLeader,data.username,data.password)
     //   def isLeader=User.findByIsLeader(data.isLeader)
         
-        if(user){
-            if(user.accountType != 1){
+        if(userLeader){
+            if(userLeader.isLeader!=0){
                 result.status = 301
-                result.message = "非pos机用户,请用pos机用户登录！"
+                result.message = "非pos主管，不可登陆"
                 return result
             }
 //            else {
@@ -23,14 +23,14 @@ class UserService {
 //                }
 
 //            }
-            getSession().user = user
-            def uTypeInfo = getUTypeInfo(user.accountType,user.uTypeId)
+            getSession().userLeader = userLeader
+            def uTypeInfo = getUTypeInfo(userLeader.accountType,userLeader.uTypeId)
              if (uTypeInfo.status != 200||!uTypeInfo.data.supplier.id){
                 result.status = 301
                 result.message = "未查该用户所属供应商，请联系客服！"
                 return result
             }
-            result.data.userid = user.id
+            result.data.userid = userLeader.id
             result.data.supplierid = uTypeInfo.data.supplier.id
         }else{
             result.status = 301
@@ -52,18 +52,17 @@ class UserService {
     }
 
 
-    def signOut() {
+//    def signOutL() {
+//        def result = [status: 200,message: "",data:[:]]
+//        getSession().userLeader = null
+//        result.message = "签出成功！"
+//        return result
+//    }
+
+    def checkSignL(){
         def result = [status: 200,message: "",data:[:]]
 
-        getSession().user = null
-        result.message = "签出成功！"
-        return result
-    }
-
-    def checkSign(){
-        def result = [status: 200,message: "",data:[:]]
-
-        if(!getSession().user){
+        if(!getSession().userLeader){
             result.status = 301
             result.message = "未登录请重新登陆！"
             return result
