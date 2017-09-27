@@ -1,16 +1,20 @@
 package posscard
 
 class UserLoginController {
-
+    def simpleCaptchaService
     def login(){
         if(request.method == "GET"){
             session.userId = null
             session.accountType = null
             session.uTypeId = null
             session.parentId=null
-
-
         }else{
+            boolean captchaValid = simpleCaptchaService.validateCaptcha(params.captcha)
+            if(!captchaValid){
+                flash['message'] = "验证码错误"
+                render(view:'login' , model: [info: params])
+                return
+            }
             def userInstance = User.findByUsernameAndPasswordAndIsdelete(params.username,params.password,0)
             if(userInstance){
                 session.userId = userInstance.id

@@ -26,7 +26,7 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <g:textField name="username" placeholder="账号" id="username" class="form-control" />
+                                    <g:textField name="username" placeholder="账号" id="username" class="form-control" value="${info?.username}"/>
                                 </div>
                             </div>
                         </div>
@@ -34,18 +34,25 @@
                             <div class="col-sm-12">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                                    <g:passwordField name="password" placeholder="密码" id="password" class="form-control" />
+                                    <g:passwordField name="password" placeholder="密码" id="password" class="form-control" value="${info?.password}"/>
                                 </div>
                             </div>
                         </div>
-                        %{--<div class="form-group">--}%
-                            %{--<div class="col-sm-6 col-xs-6">--}%
-                                %{--<div class="input-group">--}%
-                                    %{--<span class="input-group-addon"><i class="fa fa-lock"></i></span>--}%
-                                    %{--<input type="captcha" placeholder="验证码" id="captcha" class="form-control">--}%
-                                %{--</div>--}%
-                            %{--</div><div class="col-sm-6 col-xs-6"></div>--}%
-                        %{--</div>--}%
+                        <div class="form-group">
+                            <div class="col-sm-6 col-xs-6">
+                                <div class="input-group">
+                                    <%def rn = new Random().nextInt(2245565)%>
+                                    <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                    <input type="captcha" placeholder="验证码" id="captcha" name="captcha" class="form-control">
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-xs-6">
+                                <div class="input-group">
+                                    <img style="height: 39px;" src="${createLink(controller: 'simpleCaptcha', action: 'captcha')}?${rn}" onclick="this.src='${createLink(controller: 'simpleCaptcha', action: 'captcha')}?'+Math.random()"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="foot">
 
