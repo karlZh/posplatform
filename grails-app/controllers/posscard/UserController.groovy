@@ -5,7 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException
 class UserController {
 
     static allowedMethods = [save: "POST", update: "POST"]
-    def supplierType = [1:"电影",2:"蛋糕"]
+    def isLeader = [1:"主管",0:"非主管"]
     def auth(){
         if(!session.userId){
             def originReqParams = [controller:controllerName,action: actionName]
@@ -23,7 +23,7 @@ class UserController {
         params.max = Math.min(max ?: 10, 100)
         def result =User.findAllByIsdelete(0,[offset:params.offset,max:max])
         def userInstanceTotal=User.countByIsdelete(0)
-        [userInstanceList: result, userInstanceTotal: userInstanceTotal]
+        [userInstanceList: result, userInstanceTotal: userInstanceTotal,isLeader:isLeader]
     }
     def search(Integer max){
 
@@ -149,33 +149,35 @@ class UserController {
 //        def userInstanceTotal=User.countByAccountType(3)
         def userInstanceTotal=User.countByAccountTypeAndIsdelete(1,0)
 
-        [userInstanceList: result, userInstanceTotal:userInstanceTotal]
+        [userInstanceList: result, userInstanceTotal:userInstanceTotal,isLeader:isLeader]
     }
     def posCreate(){
-        [userInstance: new User(params),accountType:1]
+        [userInstance: new User(params),accountType:1,isLeader:isLeader]
     }
     def posSave() {
         def userInstance = new User(params)
 
         if(!(params.username =~'^[0-9]{1}[1-9]{1}$')){
             flash.message = message(code: 'user.posname.invalid.max.size.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-            render(view: "posCreate", model: [userInstance: userInstance,accountType:1])
+            render(view: "posCreate", model: [userInstance: userInstance,accountType:1,isLeader:isLeader])
             return
         }
-        def userInfo = User.findAllByUsernameAndPasswordAndUTypeIdAndAccountType(params.username,params.password,params.uTypeId,params.accountType)
+        def userInfo = User.findAllByUsernameAndPasswordAndUTypeIdAndAccountTypeAndIsLeader(params.username,params.password,params.uTypeId,params.accountType,params.isLeader)
         if(userInfo){
             flash.message = message(code: 'user.posname.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-            render(view: "posCreate", model: [userInstance: userInstance,accountType:1])
+            render(view: "posCreate", model: [userInstance: userInstance,accountType:1,isLeader:isLeader])
             return
         }
         userInstance.accountType=1
+
         if (!userInstance.save(flush: true)) {
-            render(view: "posCreate", model: [userInstance: userInstance,accountType:1])
+            render(view: "posCreate", model: [userInstance: userInstance,accountType:1,isLeader:isLeader])
             return
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-        redirect(action: "posShow", id: userInstance.id)
+      //  redirect(action: "posShow", id: userInstance.id)
+        render (view:"posShow",model:[userInstance: userInstance,accountType:1,isLeader:isLeader])
     }
     def posShow(Long id) {
         def userInstance = User.get(id)
@@ -196,14 +198,14 @@ class UserController {
             return
         }
 
-        [userInstance: userInstance,accountType:1]
+        [userInstance: userInstance,accountType:1,isLeader:isLeader]
 //        render (view:'posEdit' , model:)
     }
     def posUpdate(Long id, Long version) {
         def userInstance = User.get(id)
         if(!(params.username =~'^[0-9]{1}[1-9]{1}$')){
             flash.message = message(code: 'user.posname.invalid.max.size.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-            render(view: "posEdit", model: [userInstance: userInstance,accountType:1])
+            render(view: "posEdit", model: [userInstance: userInstance,accountType:1,isLeader:isLeader])
             return
         }
         if(params.username!=userInstance.username){
@@ -211,7 +213,7 @@ class UserController {
 
             if(userInfo){
                 flash.message = message(code: 'user.posname.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-                render(view: "posEdit", model: [userInstance: userInstance,accountType:1])
+                render(view: "posEdit", model: [userInstance: userInstance,accountType:1,isLeader:isLeader])
                 return
             }
         }
@@ -228,7 +230,7 @@ class UserController {
                 userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'user.label', default: 'User')] as Object[],
                         "Another user has updated this User while you were editing")
-                render(view: "posEdit", model: [userInstance: userInstance,accountType:1])
+                render(view: "posEdit", model: [userInstance: userInstance,accountType:1,isLeader:isLeader])
                 return
             }
         }
@@ -236,7 +238,7 @@ class UserController {
         userInstance.properties = params
 
         if (!userInstance.save(flush: true)) {
-            render(view: "posEdit", model: [userInstance: userInstance,accountType:1])
+            render(view: "posEdit", model: [userInstance: userInstance,accountType:1,isLeader:isLeader])
             return
         }
 
@@ -282,6 +284,7 @@ def platformList(Integer max){
        [userInstanceList: result, userInstanceTotal:userInstanceTotal]
     }
 def platformCreate(){
+
     def  category =CardPlatform.findAll()
     [userInstance: new User(params),category: category,accountType:3]
 }
@@ -498,7 +501,6 @@ def platformSearch(Integer max){
         flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
         redirect(action: "supplierShow", id: userInstance.id)
     }
-
     def supplierDelete(Long id) {
         def userInstance = User.get(id)
         if (!userInstance) {

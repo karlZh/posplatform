@@ -26,7 +26,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-	<g:field name="ratio" value="${fieldValue(bean: supplierInstance, field: 'ratio')}" required=""/>%
+	<g:field name="ratio" value="${fieldValue(bean: supplierInstance, field: 'ratio')}" required="" />
 	</div>
 </div>
 
@@ -68,4 +68,14 @@
 	<div class="col-sm-6">
 	<g:textField class="form-control" name="remark" maxlength="50" value="${supplierInstance?.remark}"/>
 	</div>
+</div>
+
+<div class="form-group">
+    <label class="col-sm-2 control-label">
+        <g:message code="supplier.cardBin.label" default="卡BIN" />
+    </label>
+    <div class="col-sm-6">
+        <g:select name="cardbins" from="${posscard.CardBin.list()}" multiple="multiple" optionKey="id" size="5" value="${supplierInstance?.cardbins*.id}" class="many-to-many"/>
+    </div>
+
 </div>

@@ -21,14 +21,12 @@ class PosMachineController {
     def index() {
         redirect(action: "list", params: params)
     }
-
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def result =PosMachine.findAllByIsdelete(0,[offset:params.offset,max:params.max])
         def posMachineInstanceTotal=PosMachine.countByIsdelete(0)
         [posMachineInstanceList: result, posMachineInstanceTotal: posMachineInstanceTotal]
     }
-
     def search(Integer max){
 
         def name=params.name
@@ -37,11 +35,9 @@ class PosMachineController {
 
         render (view:'list' , model: [posMachineInstanceList: result, posMachineInstanceTotal:posMachineInstanceTotal])
     }
-
     def create() {
         [posMachineInstance: new PosMachine(params),supplierType:supplierType]
     }
-
     def save() {
         def posMachineInstance = new PosMachine(params)
         if (!posMachineInstance.save(flush: true)) {
@@ -52,7 +48,6 @@ class PosMachineController {
         flash.message = message(code: 'default.created.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), posMachineInstance.id])
         redirect(action: "show", id: posMachineInstance.id)
     }
-
     def show(Long id) {
         def posMachineInstance = PosMachine.get(id)
         if (!posMachineInstance) {
@@ -63,7 +58,6 @@ class PosMachineController {
 
         [posMachineInstance: posMachineInstance]
     }
-
     def edit(Long id) {
         def posMachineInstance = PosMachine.get(id)
         if (!posMachineInstance) {
@@ -76,7 +70,6 @@ class PosMachineController {
         def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
         [posMachineInstance: posMachineInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers]
     }
-
     def update(Long id, Long version) {
         def posMachineInstance = PosMachine.get(id)
         if (!posMachineInstance) {
@@ -107,7 +100,6 @@ class PosMachineController {
         flash.message = message(code: 'default.updated.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), posMachineInstance.id])
         redirect(action: "show", id: posMachineInstance.id)
     }
-
     def delete(Long id) {
         def posMachineInstance = PosMachine.get(id)
         if (!posMachineInstance) {

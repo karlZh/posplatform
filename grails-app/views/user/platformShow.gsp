@@ -98,7 +98,9 @@
 								<g:hiddenField name="id" value="${userInstance?.id}" />
 								<g:link action="platformEdit"  id="${userInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 								<g:actionSubmit class="btn btn-danger" action="platformDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-							</g:form>
+						%{--　　　　<g:link controller="cardBin" action="create"  id="${userInstance?.id}" class="btn btn-primary">添加卡BIN</g:link>--}%
+
+                            </g:form>
 						</div>
 					</div>
 				</div>

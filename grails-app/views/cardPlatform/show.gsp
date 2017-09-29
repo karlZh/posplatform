@@ -77,9 +77,15 @@
 							
 							<g:form>
 								<g:hiddenField name="id" value="${cardPlatformInstance?.id}" />
+                                %{--<g:hiddenField name="platform" value="${cardPlatform}"/>--}%
 								<g:link action="edit"  id="${cardPlatformInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-								<g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-							</g:form>
+
+                                %{--<g:hiddenField name="platformName" value="${cardPlatformInstance.name}"/>--}%
+                            <g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                                <g:link  action="platformCreate"  id="${cardPlatformInstance?.id}" class="btn btn-primary">
+                                   下一步
+                                </g:link>
+                            </g:form>
 						</div>
 					</div>
 				</div>

@@ -128,7 +128,8 @@
 								<g:hiddenField name="id" value="${supplierInstance?.id}" />
 								<g:link action="fEdit"  id="${supplierInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 								<g:actionSubmit class="btn btn-danger" action="fDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-							</g:form>
+                                <g:link action="supplierCreate"  id="${supplierInstance?.id}"  class="btn btn-primary">创建供应商用户</g:link>
+                            </g:form>
 						</div>
 					</div>
 				</div>

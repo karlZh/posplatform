@@ -380,4 +380,235 @@ class SupplierController {
             redirect(action: "zShow", id: id)
         }
     }
+
+    //常见供应商用户
+    def supplierList(Integer max){
+
+//        def name=params.name
+//        def result=User.findAllByAccountType(4)
+//        def userInstanceTotal=User.countByUsername(name)
+//
+//        render (view:'supplierList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
+        def result=User.findAllByAccountTypeAndIsdelete(4,0,[offset:params.offset,max:max])
+//        def result=User.list(params)
+//        def userInstanceTotal=User.countByAccountType(3)
+        def userInstanceTotal=User.countByAccountTypeAndIsdelete(4,0)
+
+        [userInstanceList: result, userInstanceTotal:userInstanceTotal]
+    }
+    def supplierCreate(Long id){
+        [userInstance: new User(params),accountType:4,uTypeId:id]
+    }
+    def supplierSave() {
+        def userInstance = new User(params)
+        def q=params.uTypeId
+        if(!params.uTypeId.toInteger()){
+            flash.message = message(code: 'user.uTypeId.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+            render(view: "supplierCreate", model: [userInstance: userInstance,accountType:4,uTypeId:params.uTypeId])
+            return
+        }
+
+        def userInfo = User.findAllByUsernameAndPasswordAndUTypeIdAndAccountType(params.username,params.password,params.uTypeId,params.accountType)
+        if(userInfo){
+            flash.message = message(code: 'user.suppliername.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+            render(view: "supplierCreate", model: [userInstance: userInstance,accountType:4,supplierType:supplierType])
+            return
+        }
+        userInstance.accountType=4
+        if (!userInstance.save(flush: true)) {
+            render(view: "supplierCreate", model: [userInstance: userInstance,accountType:4,supplierType:supplierType])
+            return
+        }
+
+        flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+        redirect(action: "supplierShow", id: userInstance.id)
+    }
+    def supplierShow(Long id) {
+        def userInstance = User.get(id)
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "supplierList",uTypeId:userInstance.uTypeId)
+            return
+        }
+
+        [userInstance: userInstance,uTypeId:userInstance.uTypeId]
+    }
+    def supplierEdit(Long id) {
+        def userInstance = User.get(id)
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "supplierList")
+            return
+        }
+        def supplierInstance = Supplier.get(userInstance.uTypeId)//供应商信息
+//        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
+//        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
+        [userInstance: userInstance,accountType:4,uTypeId: userInstance.uTypeId,supplierInstance: supplierInstance]
+    }
+    def supplierUpdate(Long id, Long version) {
+        def userInstance = User.get(id)
+        def a=params
+        if(params.username!=userInstance.username){
+            def userInfo = User.findAllByUsernameAndPasswordAndUTypeIdAndAccountType(params.username,params.password,params.uTypeId,params.accountType)
+
+            if(userInfo){
+                flash.message = message(code: 'user.suppliername.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+                render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,supplierType: supplierType])
+                return
+            }
+        }
+        def supplierInstance = Supplier.get(userInstance.uTypeId)//供应商信息
+        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
+        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
+        if(!params.uTypeId){
+            flash.message = message(code: 'user.uTypeId.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+            render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
+            return
+        }
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "supplierList")
+            return
+        }
+
+        if (version != null) {
+            if (userInstance.version > version) {
+                userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                        [message(code: 'user.label', default: 'User')] as Object[],
+                        "Another user has updated this User while you were editing")
+                render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
+                return
+            }
+        }
+
+        userInstance.properties = params
+
+        if (!userInstance.save(flush: true)) {
+            render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
+            return
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+        redirect(action: "supplierShow", id: userInstance.id)
+    }
+    def supplierDelete(Long id) {
+        def userInstance = User.get(id)
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "supplierList")
+            return
+        }
+
+        try {
+            userInstance.save(flush: true)
+
+            userInstance.executeUpdate("update User u set u.isdelete=1 where u.id=?",[id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "supplierList")
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "supplierShow", id: id)
+        }
+    }
+    def supplierSearch(Integer max){
+
+        def name=params.name
+        def result=User.findAllByUsernameLikeAndAccountTypeAndIsdelete("%"+name+"%",4,0,[offset: params.offset,max: max])
+        def userInstanceTotal=User.countByUsernameLikeAndAccountTypeAndIsdelete("%"+name+"%",4,0)
+
+        render (view:'supplierList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
+    }
+    //创建pos机
+    def pList(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        def result =PosMachine.findAllByIsdelete(0,[offset:params.offset,max:params.max])
+        def posMachineInstanceTotal=PosMachine.countByIsdelete(0)
+        [posMachineInstanceList: result, posMachineInstanceTotal: posMachineInstanceTotal]
+    }
+    def pCreate(Long id) {
+        [posMachineInstance: new PosMachine(params),supplierType:id]
+    }
+    def pSave(Long id) {
+        def posMachineInstance = new PosMachine(params)
+        if (!posMachineInstance.save(flush: true)) {
+            render(view: "pCreate", model: [posMachineInstance: posMachineInstance,supplierType:id])
+            return
+        }
+
+        flash.message = message(code: 'default.created.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), posMachineInstance.id])
+        redirect(action: "pShow", id: posMachineInstance.id)
+    }
+    def pShow(Long id) {
+        def posMachineInstance = PosMachine.get(id)
+        if (!posMachineInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), id])
+            redirect(action: "pList" ,id:id,supplierType:supplierType)
+            return
+        }
+
+        [posMachineInstance: posMachineInstance]
+    }
+    def pEdit(Long id) {
+        def posMachineInstance = PosMachine.get(id)
+        if (!posMachineInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), id])
+            redirect(action: "pList")
+            return
+        }
+        def supplierInstance = Supplier.get(posMachineInstance.supplier.id)//供应商信息
+        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
+        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
+        [posMachineInstance: posMachineInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers]
+    }
+    def pUpdate(Long id, Long version) {
+        def posMachineInstance = PosMachine.get(id)
+        if (!posMachineInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), id])
+            redirect(action: "pList")
+            return
+        }
+        def supplierInstance = Supplier.get(posMachineInstance.supplier.id)//供应商信息
+        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
+        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
+        if (version != null) {
+            if (posMachineInstance.version > version) {
+                posMachineInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                        [message(code: 'posMachine.label', default: 'PosMachine')] as Object[],
+                        "Another user has updated this PosMachine while you were editing")
+                render(view: "pEdit", model: [posMachineInstance: posMachineInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
+                return
+            }
+        }
+
+        posMachineInstance.properties = params
+
+        if (!posMachineInstance.save(flush: true)) {
+            render(view: "edit", model: [posMachineInstance: posMachineInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
+            return
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), posMachineInstance.id])
+        redirect(action: "show", id: posMachineInstance.id)
+    }
+    def pDelete(Long id) {
+        def posMachineInstance = PosMachine.get(id)
+        if (!posMachineInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), id])
+            redirect(action: "pList")
+            return
+        }
+
+        try {
+            posMachineInstance.save(flush: true)
+            posMachineInstance.executeUpdate("update PosMachine u set u.isdelete=1 where u.id=?",[id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), id])
+            redirect(action: "pList")
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), id])
+            redirect(action: "pShow", id: id)
+        }
+    }
+
 }

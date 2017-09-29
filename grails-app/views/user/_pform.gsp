@@ -32,7 +32,7 @@
 	</div>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'accountType', 'error')}  form-group">
+<div class="fieldcontain ${hasErrors(bean: accountType, field: 'accountType', 'error')}  form-group">
 	<label for="uTypeId" class="col-sm-2 control-label">
 		<g:message code="user.accountType.label" default="用户类别" />
 		<span class="required-indicator">*</span>

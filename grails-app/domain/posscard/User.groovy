@@ -8,7 +8,7 @@ class User {
     Long uTypeId //对应用户类型的pos机，商户，供应商的id
     Short   isdelete = 0 //删除状态 0，未删 1：删除
     Date  dateCreated//创建时间
-    String isLeader=0//是否是主管登陆是 1，是 0.不是
+    Integer isLeader=0//是否是主管登陆是 1，是 0.不是
 
 
     static constraints = {
@@ -19,7 +19,7 @@ class User {
         uTypeId(nullable: false)
         isdelete(nullable: false)
         dateCreated(display:false)
-        isLeader(nullable: false)
+        isLeader(nullable: false,inList: [1,0])
     }
 
 }

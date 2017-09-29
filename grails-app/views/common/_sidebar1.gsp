@@ -15,16 +15,16 @@
                 </div>
                 <ul class="cl-vnavigation">
                     <li><g:link controller="record" action="list"><span>操作记录</span></g:link></li>
-                    <li class="parent open"><a href="#"><span>用户信息</span></a>
-                    <ul class="sub-menu" style="display: block;">
+                    <li class="parent"><a href="#"><span>用户信息</span></a>
+                    <ul class="sub-menu" style="display: none;">
                     <li><g:link controller="user" action="posList">Pos</g:link></li>
                     <li><g:link controller="user" action="platformList">商户</g:link></li>
                     <li><g:link controller="user" action="supplierList">供应商</g:link></li>
                     </ul>
                     </li>
                     %{--<li><g:link controller="user" action="list"><!--<i class="fa fa-home"></i>--><span>用户信息</span></g:link> </li>--}%
-                    <li class="parent open"><a href="#"><span>供应商信息</span></a>
-                        <ul class="sub-menu" style="display: block;">
+                    <li class="parent"><a href="#"><span>供应商信息</span></a>
+                        <ul class="sub-menu" style="display: none;">
                             <li><g:link controller="supplier" action="fList">父供应商</g:link></li>
 
                         </ul>
@@ -39,7 +39,8 @@
 
                     </li>
 
-                    <li><g:link controller="posMachine" action="list"><span>Pos机</span></g:link>
+                    <li><g:link controller="posMachine"
+                                  action="list"><span>Pos机</span></g:link>
                     </li>
                     <li><g:link controller="ticketType" action="list"><span>消费类型</span></g:link></li>
                     <!--<li><a href="typography.html"><span>Pos机</span></a>

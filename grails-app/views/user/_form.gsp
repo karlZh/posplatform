@@ -41,3 +41,16 @@
         <g:select name="uTypeId" id="uTypeId" class="form-control" from="${posscard.PosMachine.findAllByIsdelete(0)}" required="" optionKey="id" optionValue="name" value="${userInstance?.uTypeId}" />
     </div>
 </div>
+
+
+
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'isLeader', 'error')} required form-group">
+    <label for="orderType" class="col-sm-2 control-label">
+        <g:message code="user.isLeader.label" default="主管" />
+        <span class="required-indicator">*</span>
+    </label>
+    <div class="col-sm-6">
+        %{--<g:select name="orderType"  class="form-control"  from="${userInstance.constraints.isLeader.inList}" required="" value="${fieldValue(bean: userInstance, field: 'isLeader')}" valueMessagePrefix="user.isLeader"/>--}%
+        <g:select id="isLeader" name="isLeader" from="${isLeader}" optionKey="key" optionValue="value" required="" value="${userInstance?.isLeader}" />
+    </div>
+</div>
