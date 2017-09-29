@@ -92,15 +92,12 @@
 									
 								</div>
 							</g:if>
-							
-
-							
 							<g:form>
 								<g:hiddenField name="id" value="${userInstance?.id}" />
-                                <g:hiddenField name="uTypeId" value="${uTypeId}"/>
+                                <g:hiddenField name="uTypeId" value="${userInstance?.uTypeId}"/>
 								<g:link action="supplierEdit"  id="${userInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 								<g:actionSubmit class="btn btn-danger" action="supplierDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                                <g:link action="pCreate"  id="${userInstance?.id}" class="btn btn-primary">创建pos机</g:link>
+                                <g:link action="pCreate"  id="${userInstance?.uTypeId}" class="btn btn-primary">创建pos机</g:link>
 
                             </g:form>
 						</div>
