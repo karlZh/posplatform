@@ -15,7 +15,7 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
+            dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
             url = "jdbc:mysql://localhost:3306/poscard?useUnicode=true&characterEncoding=UTF-8"
 //            url = "jdbc:mysql://59.110.105.141:3306/pos_platform?useUnicode=true&characterEncoding=UTF-8"
         }
@@ -29,7 +29,7 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:mysql://59.110.105.141:3306/pos_platform?useUnicode=true&characterEncoding=UTF-8"
             pooled = true
             properties {
                maxActive = -1

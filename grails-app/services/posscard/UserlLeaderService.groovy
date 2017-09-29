@@ -6,23 +6,15 @@ class UserlLeaderService {
 
     def signInL(data) {
         def result = [status: 200,message: "",data:[:]]
-      // def user = User.findByUsernameAndPassword(data.username,data.password)
        def userLeader=User.findByIsLeaderAndUsernameAndPassword(data.isLeader,data.username,data.password)
-    //   def isLeader=User.findByIsLeader(data.isLeader)
-        
+
         if(userLeader){
-            if(userLeader.isLeader!=0){
+            if(userLeader.isLeader!="1"){
                 result.status = 301
                 result.message = "非pos主管，不可登陆"
                 return result
             }
-//            else {
-//                if(user.isLeader==0){
-//                    result.message="用户经理登陆"
-//                    return result
-//                }
-
-//            }
+            def a = getSession().user
             getSession().userLeader = userLeader
             def uTypeInfo = getUTypeInfo(userLeader.accountType,userLeader.uTypeId)
              if (uTypeInfo.status != 200||!uTypeInfo.data.supplier.id){
@@ -37,27 +29,17 @@ class UserlLeaderService {
             result.message = "用户不存在或密码错误！"
             return result
         }
-
-
-
-//
-//        if(!userLeader){
-//            result.status=302
-//            result.message="请用户经理登陆"
-//            return  result
-//        }
-
        result.message = "签到成功！"
         return result
     }
 
 
-//    def signOutL() {
-//        def result = [status: 200,message: "",data:[:]]
-//        getSession().userLeader = null
-//        result.message = "签出成功！"
-//        return result
-//    }
+    def signOutL() {
+        def result = [status: 200,message: "",data:[:]]
+        getSession().userLeader = null
+        result.message = "签出成功！"
+        return result
+    }
 
     def checkSignL(){
         def result = [status: 200,message: "",data:[:]]
