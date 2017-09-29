@@ -29,7 +29,7 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
+            url = "jdbc:mysql://59.110.105.141:3306/pos_platform?useUnicode=true&characterEncoding=UTF-8"
             pooled = true
             properties {
                maxActive = -1

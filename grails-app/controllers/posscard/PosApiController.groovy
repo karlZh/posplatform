@@ -45,7 +45,8 @@ class PosApiController {
         }
         def data = [:]
         data = posParams.p
-        def signNot = ['signIn','signOut']
+        def a = session
+        def signNot = ['signIn','signOut','signInL','signOutL']
         if(!signNot.contains(posParams.act)){
             def res = userService.checkSign()
             if(res.status != 200){
@@ -53,14 +54,6 @@ class PosApiController {
                 return false
             }
 
-        }
-        def signNotL = ['signInL','signOutL']
-        if(!signNotL.contains(posParams.act)) {
-            def resL = userlLeaderService.checkSignL()
-            if (resL.status != 200) {
-                render dataProcessingService.dataEncode(resL[])
-                return false
-            }
         }
 
         switch (posParams.act?.trim()) {
