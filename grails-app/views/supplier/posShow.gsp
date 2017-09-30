@@ -10,11 +10,11 @@
 	<body>
 	<div class="container-fluid" id="pcont">
 		<div class="page-head">
-			<h2>用户信息表</h2>
+			<h2><g:message code="user.posShow.label" args="[entityName]" /></h2>
 			<ol class="breadcrumb">
-				<li><a href="${createLink(uri: '/')}">首页</a></li>
-				<li><g:link class="list" action="supplierList">供应商信息表</g:link></li>
-				<li class="active">供应商商户</li>
+				<li><a href="${createLink(uri: '/')}"><g:message code="default.home.label" args="[entityName]" /></a></li>
+				<li><g:link class="list" action="posList"><g:message code="user.pos.label" args="[entityName]" /></g:link></li>
+				<li class="active"><g:message code="user.posShow.label" args="[entityName]" /></li>
 			</ol>
 		</div>
 		<div class="cl-mcont">
@@ -22,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>显示供应商</h3>
+							<h3><g:message code="user.posShow.label" args="[entityName]" /></h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -61,23 +61,31 @@
 									
 								</div>
 							</g:if>
-                            %{--<g:if test="${userInstance?.uTypeId}">--}%
-								%{--<div class="row">--}%
-									%{--<div class="col-sm-2 col-md-2 text-right">--}%
-									%{--<label class="control-label"><g:message code="user.uTypeId.label" default="电话" /></label>--}%
-									%{--</div>--}%
 
-									%{--<div class="col-sm-10 col-md-10"><g:fieldValue bean="${userInstance}" field="phone"/></div>--}%
+								<div class="row">
+									<div class="col-sm-2 col-md-2 text-right">
+									<label class="control-label"><g:message code="user.isLeader.label" default="主管用户" /></label>
+									</div>
 
-								%{--</div>--}%
-							%{--</g:if>--}%
-                            <g:if test="${userInstance?.accountType}">
+									<div class="col-sm-10 col-md-10">
+                                        %{--<g:fieldValue bean="${userInstance}" field="isLeader"/>--}%
+                                        <g:if test="${userInstance.isLeader==0}">
+                                              非主管
+                                         </g:if>
+                                        <g:elseif test="${userInstance.isLeader==1}">
+                                              主管
+                                        </g:elseif>
+                                    </div>
+
+								</div>
+
+                            <g:if test="${userInstance?.uTypeId}">
                                 <div class="row">
                                     <div class="col-sm-2 col-md-2 text-right">
                                         <label class="control-label"><g:message code="user.uTypeId.label" default="用户类别" /></label>
                                     </div>
 
-                                    <div class="col-sm-10 col-md-10">${posscard.Supplier.get(userInstance?.uTypeId)?.name}</div>
+                                    <div class="col-sm-10 col-md-10">${posscard.PosMachine.get(userInstance.uTypeId).name}</div>
 
                                 </div>
                             </g:if>
@@ -94,13 +102,10 @@
 							</g:if>
 							<g:form>
 								<g:hiddenField name="id" value="${userInstance?.id}" />
-                                <g:hiddenField name="uTypeId" value="${userInstance?.uTypeId}"/>
-								<g:link action="supplierEdit"  id="${userInstance?.id}"  params="[uTypeId:uTypeId]" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-								<g:actionSubmit class="btn btn-danger" action="supplierDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-
-                                <g:link action="tCreate" params="[uTypeId:uTypeId]" class="btn btn-primary">创建消费类型</g:link>
-
-                            </g:form>
+								<g:link action="posEdit"  id="${userInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+								<g:actionSubmit class="btn btn-danger" action="posDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+                                <g:link action="fList"  id="${userInstance?.id}" class="btn btn-primary">完成</g:link>
+							</g:form>
 						</div>
 					</div>
 				</div>

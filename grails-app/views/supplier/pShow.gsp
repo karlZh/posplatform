@@ -62,9 +62,12 @@
 							
 							<g:form>
 								<g:hiddenField name="id" value="${posMachineInstance?.id}" />
-								<g:link action="edit"  id="${posMachineInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+                                <g:hiddenField name="uTypeId" value="${uTypeId}"/>
+								<g:link action="pEdit"  id="${posMachineInstance?.id}" params="[uTypeId:uTypeId]" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 								<g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-							</g:form>
+                                <g:link action="posCreate"  id="${posMachineInstance?.id}" params="[uTypeId:uTypeId]" class="btn btn-primary">添加pos机用户</g:link>
+
+                            </g:form>
 						</div>
 					</div>
 				</div>

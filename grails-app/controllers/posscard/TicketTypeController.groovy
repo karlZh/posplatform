@@ -19,7 +19,6 @@ class TicketTypeController {
     def index() {
         redirect(action: "list", params: params)
     }
-
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         def result =TicketType.findAllByIsdelete(0,[offset:params.offset,max:params.max])
@@ -27,7 +26,6 @@ class TicketTypeController {
 
         [ticketTypeInstanceList: result, ticketTypeInstanceTotal: ticketTypeInstanceTotal]
     }
-
     def search(Integer max){
         params.max = Math.min(max ?: 10, 100)
         def name=params.name
@@ -36,11 +34,9 @@ class TicketTypeController {
 
         render (view:'list' , model: [ticketTypeInstanceList: result, ticketTypeInstanceTotal:ticketTypeInstanceTotal])
     }
-
     def create() {
         [ticketTypeInstance: new TicketType(params),supplierType:supplierType]
     }
-
     def save() {
         def ticketTypeInstance = new TicketType(params)
         if (!ticketTypeInstance.save(flush: true)) {
@@ -51,7 +47,6 @@ class TicketTypeController {
         flash.message = message(code: 'default.created.message', args: [message(code: 'ticketType.label', default: 'TicketType'), ticketTypeInstance.id])
         redirect(action: "show", id: ticketTypeInstance.id)
     }
-
     def show(Long id) {
         def ticketTypeInstance = TicketType.get(id)
         if (!ticketTypeInstance) {
@@ -62,7 +57,6 @@ class TicketTypeController {
 
         [ticketTypeInstance: ticketTypeInstance]
     }
-
     def edit(Long id) {
         def ticketTypeInstance = TicketType.get(id)
         if (!ticketTypeInstance) {
@@ -75,7 +69,6 @@ class TicketTypeController {
         def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
         [ticketTypeInstance: ticketTypeInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers]
     }
-
     def update(Long id, Long version) {
         def ticketTypeInstance = TicketType.get(id)
         if (!ticketTypeInstance) {
@@ -107,7 +100,6 @@ class TicketTypeController {
         flash.message = message(code: 'default.updated.message', args: [message(code: 'ticketType.label', default: 'TicketType'), ticketTypeInstance.id])
         redirect(action: "show", id: ticketTypeInstance.id)
     }
-
     def delete(Long id) {
         def ticketTypeInstance = TicketType.get(id)
         if (!ticketTypeInstance) {
