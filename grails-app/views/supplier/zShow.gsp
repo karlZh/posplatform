@@ -117,9 +117,11 @@
 							</g:if>
 							<g:form>
 								<g:hiddenField name="id" value="${supplierInstance?.id}" />
+                                <g:hiddenField name="uTypeId" value="${uTypeId}"/>
 								<g:link action="zEdit"  id="${supplierInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 								<g:actionSubmit class="btn btn-danger" action="zDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-							</g:form>
+                                <g:link action="tCreate" params="[uTypeId:uTypeId]" class="btn btn-primary">创建消费类型</g:link>
+                            </g:form>
 						</div>
 					</div>
 				</div>

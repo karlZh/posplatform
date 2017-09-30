@@ -34,14 +34,15 @@
 									</g:eachError>
 								</ul>
 							</g:hasErrors>
-							<g:form class="form-horizontal" role="form" action="save" >
+							<g:form class="form-horizontal" role="form" action="pSave" >
 								<g:hiddenField name="id" value="${posMachineInstance?.id}" />
 								<g:hiddenField name="version" value="${posMachineInstance?.version}" />
-								<g:render template="form"/>
+                                <g:hiddenField name="uTypeId" value="${uTypeId}"/>
+								<g:render template="pform"/>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
-										<g:actionSubmit class="btn btn-primary" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-										<g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
+										<g:actionSubmit class="btn btn-primary" action="pUpdate" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+										<g:actionSubmit class="btn btn-danger" action="pDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 									</div>
 								</div>
 							</g:form>

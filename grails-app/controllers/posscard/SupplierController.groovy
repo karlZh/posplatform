@@ -5,7 +5,7 @@ import org.springframework.dao.DataIntegrityViolationException
 
 class SupplierController {
 
-
+    def isLeader = [1:"主管",0:"非主管"]
     static allowedMethods = [save: "POST", update: "POST"]
     def supplierType = [1:"电影",2:"蛋糕"]
     def auth(){
@@ -27,7 +27,6 @@ class SupplierController {
         def supplierInstanceTotal=Supplier.countByIsdelete(0)
         [supplierInstanceList: result, supplierInstanceTotal:supplierInstanceTotal]
     }
-
     def supCardBinEdit(Long id){
         def supplierInstance = Supplier.get(id)
         def a = CardBin.list()
@@ -48,7 +47,6 @@ class SupplierController {
         def a=1
         def b=1
     }
-
     def search(){
 
 
@@ -319,7 +317,7 @@ class SupplierController {
             return
         }
 
-        [supplierInstance: supplierInstance]
+        [supplierInstance: supplierInstance,uTypeId: supplierInstance.id]
     }
     def zEdit(Long id) {
         def supplierInstance = Supplier.get(id)
@@ -411,17 +409,17 @@ class SupplierController {
         def userInfo = User.findAllByUsernameAndPasswordAndUTypeIdAndAccountType(params.username,params.password,params.uTypeId,params.accountType)
         if(userInfo){
             flash.message = message(code: 'user.suppliername.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-            render(view: "supplierCreate", model: [userInstance: userInstance,accountType:4,supplierType:supplierType])
+            render(view: "supplierCreate", model: [userInstance: userInstance,accountType:4,uTypeId:params.uTypeId])
             return
         }
         userInstance.accountType=4
         if (!userInstance.save(flush: true)) {
-            render(view: "supplierCreate", model: [userInstance: userInstance,accountType:4,supplierType:supplierType])
+            render(view: "supplierCreate", model: [userInstance: userInstance,accountType:4,uTypeId:params.uTypeId])
             return
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-        redirect(action: "supplierShow", id: userInstance.id)
+        redirect(action: "supplierShow", id: userInstance.id,params: [uTypeId:params.uTypeId])
     }
     def supplierShow(Long id) {
         def userInstance = User.get(id)
@@ -431,7 +429,7 @@ class SupplierController {
             return
         }
 
-        [userInstance: userInstance,uTypeId:userInstance.uTypeId]
+        [userInstance: userInstance,id: userInstance.id, uTypeId:userInstance.uTypeId]
     }
     def supplierEdit(Long id) {
         def userInstance = User.get(id)
@@ -453,16 +451,15 @@ class SupplierController {
 
             if(userInfo){
                 flash.message = message(code: 'user.suppliername.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-                render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,supplierType: supplierType])
+                render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,uTypeId:params.uTypeId])
                 return
             }
         }
         def supplierInstance = Supplier.get(userInstance.uTypeId)//供应商信息
-        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
-        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
+
         if(!params.uTypeId){
             flash.message = message(code: 'user.uTypeId.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-            render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
+            render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,uTypeId:params.uTypeId,supplierInstance: supplierInstance])
             return
         }
         if (!userInstance) {
@@ -476,7 +473,7 @@ class SupplierController {
                 userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'user.label', default: 'User')] as Object[],
                         "Another user has updated this User while you were editing")
-                render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
+                render(view: "supplierEdit", model: [userInstance: userInstance,accountType:4,uTypeId:params.uTypeId,supplierInstance: supplierInstance])
                 return
             }
         }
@@ -489,7 +486,7 @@ class SupplierController {
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-        redirect(action: "supplierShow", id: userInstance.id)
+        redirect(action: "supplierShow", id: userInstance.id,uTypeId:params.uTypeId)
     }
     def supplierDelete(Long id) {
         def userInstance = User.get(id)
@@ -519,6 +516,102 @@ class SupplierController {
 
         render (view:'supplierList' , model: [userInstanceList: result, userInstanceTotal:userInstanceTotal])
     }
+
+
+    //创建消费类型
+
+    def tList(Integer max) {
+        params.max = Math.min(max ?: 10, 100)
+        def result =TicketType.findAllByIsdelete(0,[offset:params.offset,max:params.max])
+        def ticketTypeInstanceTotal=TicketType.countByIsdelete(0)
+
+        [ticketTypeInstanceList: result, ticketTypeInstanceTotal: ticketTypeInstanceTotal,uTypeId: params.uTypeId]
+    }
+    def tCreate() {
+        [ticketTypeInstance: new TicketType(params),uTypeId: params.uTypeId]
+    }
+    def tSave() {
+        def ticketTypeInstance = new TicketType(params)
+        if (!ticketTypeInstance.save(flush: true)) {
+            render(view: "tCreate", model: [ticketTypeInstance: ticketTypeInstance,uTypeId: params.supplier.id])
+            return
+        }
+
+        flash.message = message(code: 'default.created.message', args: [message(code: 'ticketType.label', default: 'TicketType'), ticketTypeInstance.id])
+        redirect(action: "tShow", id: ticketTypeInstance.id,params: [ uTypeId:params.supplier.id])
+    }
+    def tShow(Long id) {
+        def ticketTypeInstance = TicketType.get(id)
+        if (!ticketTypeInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ticketType.label', default: 'TicketType'), id])
+            redirect(action: "tList")
+            return
+        }
+
+        [ticketTypeInstance: ticketTypeInstance,uTypeId: params.uTypeId]
+    }
+    def tEdit(Long id) {
+        def ticketTypeInstance = TicketType.get(id)
+        if (!ticketTypeInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ticketType.label', default: 'TicketType'), id])
+            redirect(action: "tList")
+            return
+        }
+        def supplierInstance = Supplier.get(ticketTypeInstance.supplier.id)//供应商信息
+
+        [ticketTypeInstance: ticketTypeInstance,uTypeId: params.uTypeId,supplierInstance: supplierInstance]
+    }
+    def tUpdate(Long id, Long version) {
+        def ticketTypeInstance = TicketType.get(id)
+        if (!ticketTypeInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ticketType.label', default: 'TicketType'), id])
+            redirect(action: "tList")
+            return
+        }
+        def supplierInstance = Supplier.get(ticketTypeInstance.supplier.id)//供应商信息
+
+        if (version != null) {
+            if (ticketTypeInstance.version > version) {
+                ticketTypeInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                        [message(code: 'ticketType.label', default: 'TicketType')] as Object[],
+                        "Another user has updated this TicketType while you were editing")
+                render(view: "tEdit", model: [ticketTypeInstance: ticketTypeInstance,id:  ticketTypeInstance.id,uTypeId: params.uTypeId,supplierInstance: supplierInstance])
+                return
+            }
+        }
+
+        ticketTypeInstance.properties = params
+
+        if (!ticketTypeInstance.save(flush: true)) {
+            render(view: "tEdit", model: [ticketTypeInstance: ticketTypeInstance,id:  ticketTypeInstance.id,uTypeId: params.uTypeId])
+            return
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'ticketType.label', default: 'TicketType'), ticketTypeInstance.id])
+        redirect(action: "tShow", id: ticketTypeInstance.id,params: [ uTypeId: params.uTypeId])
+    }
+    def tDelete(Long id) {
+        def ticketTypeInstance = TicketType.get(id)
+        if (!ticketTypeInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'ticketType.label', default: 'TicketType'), id])
+            redirect(action: "tList")
+            return
+        }
+
+        try {
+            ticketTypeInstance.save(flush: true)
+
+            ticketTypeInstance.executeUpdate("update TicketType u set u.isdelete=1 where u.id=?",[id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'ticketType.label', default: 'TicketType'), id])
+            redirect(action: "tList")
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'ticketType.label', default: 'TicketType'), id])
+            redirect(action: "tShow", id: id,params: [uTypeId: params.uTypeId])
+        }
+    }
+
+
     //创建pos机
     def pList(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -526,70 +619,71 @@ class SupplierController {
         def posMachineInstanceTotal=PosMachine.countByIsdelete(0)
         [posMachineInstanceList: result, posMachineInstanceTotal: posMachineInstanceTotal]
     }
-    def pCreate(Long id) {
-        [posMachineInstance: new PosMachine(params),supplierType:id]
+    def pCreate() {
+        [posMachineInstance: new PosMachine(params),uTypeId: params.uTypeId]
     }
     def pSave(Long id) {
+        def a = params
         def posMachineInstance = new PosMachine(params)
         if (!posMachineInstance.save(flush: true)) {
-            render(view: "pCreate", model: [posMachineInstance: posMachineInstance,supplierType:id])
+            render(view: "pCreate", model: [posMachineInstance: posMachineInstance,uTypeId:params.supplier.id])
             return
         }
 
         flash.message = message(code: 'default.created.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), posMachineInstance.id])
-        redirect(action: "pShow", id: posMachineInstance.id)
+        redirect(action: "pShow", id: posMachineInstance.id,params: [uTypeId:params.supplier.id])
     }
     def pShow(Long id) {
         def posMachineInstance = PosMachine.get(id)
+
         if (!posMachineInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), id])
-            redirect(action: "pList" ,id:id,supplierType:supplierType)
+            redirect(action: "pList" ,id:id,params: [uTypeId:params.uTypeId])
             return
         }
 
-        [posMachineInstance: posMachineInstance]
+        [posMachineInstance: posMachineInstance,uTypeId:params.uTypeId]
     }
     def pEdit(Long id) {
         def posMachineInstance = PosMachine.get(id)
         if (!posMachineInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), id])
-            redirect(action: "pList")
+            redirect(action: "pList", params: [uTypeId:params.uTypeId])
             return
         }
         def supplierInstance = Supplier.get(posMachineInstance.supplier.id)//供应商信息
-        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
-        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
-        [posMachineInstance: posMachineInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers]
+//        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
+//        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
+        [posMachineInstance: posMachineInstance,uTypeId:params.uTypeId,supplierInstance: supplierInstance]
     }
     def pUpdate(Long id, Long version) {
         def posMachineInstance = PosMachine.get(id)
         if (!posMachineInstance) {
             flash.message = message(code: 'default.not.found.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), id])
-            redirect(action: "pList")
+            redirect(action: "pList",params: [uTypeId:params.supplier.id])
             return
         }
         def supplierInstance = Supplier.get(posMachineInstance.supplier.id)//供应商信息
-        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
-        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
+//        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
+//        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
         if (version != null) {
             if (posMachineInstance.version > version) {
                 posMachineInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'posMachine.label', default: 'PosMachine')] as Object[],
                         "Another user has updated this PosMachine while you were editing")
-                render(view: "pEdit", model: [posMachineInstance: posMachineInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
+                render(view: "pEdit", model: [posMachineInstance: posMachineInstance,uTypeId:params.supplier.id])
                 return
             }
         }
-
         posMachineInstance.properties = params
 
         if (!posMachineInstance.save(flush: true)) {
-            render(view: "edit", model: [posMachineInstance: posMachineInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
+            render(view: "edit", model: [posMachineInstance: posMachineInstance,uTypeId:params.supplier.id])
             return
         }
 
         flash.message = message(code: 'default.updated.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), posMachineInstance.id])
-        redirect(action: "show", id: posMachineInstance.id)
+        redirect(action: "pShow", id: posMachineInstance.id ,params: [uTypeId:params.supplier.id])
     }
     def pDelete(Long id) {
         def posMachineInstance = PosMachine.get(id)
@@ -611,4 +705,129 @@ class SupplierController {
         }
     }
 
+//创建pos机用户
+
+    def posList(Integer max){
+
+        def result=User.findAllByAccountTypeAndIsdelete(1,0,[offset:params.offset,max:max])
+//        def result=User.list(params)
+//        def userInstanceTotal=User.countByAccountType(3)
+        def userInstanceTotal=User.countByAccountTypeAndIsdelete(1,0)
+
+        [userInstanceList: result, userInstanceTotal:userInstanceTotal,isLeader:isLeader]
+    }
+    def posCreate(){
+        [userInstance: new User(params),accountType:1,isLeader:isLeader,uTypeId: params.uTypeId]
+    }
+    def posSave() {
+        def userInstance = new User(params)
+
+        if(!(params.username =~'^[0-9]{1}[1-9]{1}$')){
+            flash.message = message(code: 'user.posname.invalid.max.size.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+            render(view: "posCreate", model: [userInstance: userInstance,accountType:1,isLeader:isLeader,uTypeId: params.uTypeId])
+            return
+        }
+        def userInfo = User.findAllByUsernameAndUTypeIdAndAccountTypeAndIsLeader(params.username,params.uTypeId,params.accountType,params.isLeader)
+        if(userInfo){
+            flash.message = message(code: 'user.posname.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+            render(view: "posCreate", model: [userInstance: userInstance,accountType:1,isLeader:isLeader,uTypeId: params.uTypeId])
+            return
+        }
+        userInstance.accountType=1
+
+        if (!userInstance.save(flush: true)) {
+            render(view: "posCreate", model: [userInstance: userInstance,accountType:1,isLeader:isLeader,uTypeId: params.uTypeId])
+            return
+        }
+
+        flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+        //  redirect(action: "posShow", id: userInstance.id)
+        render (view:"posShow",model:[userInstance: userInstance,accountType:1,isLeader:isLeader,uTypeId: params.uTypeId])
+    }
+    def posShow(Long id) {
+        def userInstance = User.get(id)
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "posList")
+            return
+        }
+
+        [userInstance: userInstance]
+    }
+    def posEdit(Long id) {
+
+        def userInstance = User.get(id)
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "posList")
+            return
+        }
+
+        [userInstance: userInstance,accountType:1,isLeader:isLeader,uTypeId: userInstance.uTypeId]
+//        render (view:'posEdit' , model:)
+    }
+    def posUpdate(Long id, Long version) {
+        def userInstance = User.get(id)
+        if(!(params.username =~'^[0-9]{1}[1-9]{1}$')){
+            flash.message = message(code: 'user.posname.invalid.max.size.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+            render(view: "posEdit", model: [userInstance: userInstance,accountType:1,isLeader:isLeader,uTypeId: userInstance.uTypeId])
+            return
+        }
+        if(params.username!=userInstance.username){
+            def userInfo = User.findAllByUsernameAndUTypeIdAndAccountType(params.username,params.uTypeId,params.accountType)
+
+            if(userInfo){
+                flash.message = message(code: 'user.posname.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+                render(view: "posEdit", model: [userInstance: userInstance,accountType:1,isLeader:isLeader,uTypeId: userInstance.uTypeId])
+                return
+            }
+        }
+
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "posList")
+            return
+        }
+
+
+        if (version != null) {
+            if (userInstance.version > version) {
+                userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+                        [message(code: 'user.label', default: 'User')] as Object[],
+                        "Another user has updated this User while you were editing")
+                render(view: "posEdit", model: [userInstance: userInstance,accountType:1,isLeader:isLeader,uTypeId: userInstance.uTypeId])
+                return
+            }
+        }
+
+        userInstance.properties = params
+
+        if (!userInstance.save(flush: true)) {
+            render(view: "posEdit", model: [userInstance: userInstance,accountType:1,isLeader:isLeader])
+            return
+        }
+
+        flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+        redirect(action: "posShow", id: userInstance.id)
+    }
+    def posDelete(Long id) {
+        def userInstance = User.get(id)
+        if (!userInstance) {
+            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "posList")
+            return
+        }
+
+        try {
+            userInstance.save(flush: true)
+
+            userInstance.executeUpdate("update User u set u.isdelete=1 where u.id=?",[id])
+            flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "posList")
+        }
+        catch (DataIntegrityViolationException e) {
+            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
+            redirect(action: "posShow", id: id)
+        }
+    }
 }

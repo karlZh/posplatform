@@ -1,27 +1,57 @@
-<%@ page import="posscard.PosMachine" %>
+<%@ page import="posscard.TicketType" %>
 
 
 
-<div class="fieldcontain ${hasErrors(bean: posMachineInstance, field: 'name', 'error')} required form-group">
+<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'name', 'error')}  form-group">
 	<label for="name" class="col-sm-2 control-label">
-		<g:message code="posMachine.name.label" default="Name" />
+		<g:message code="ticketType.name.label" default="类型名称" />
+        <span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-6">
+	<g:textField class="form-control" name="name" value="${ticketTypeInstance?.name}" required=""/>
+	</div>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'point', 'error')} required form-group">
+	<label for="point" class="col-sm-2 control-label">
+		<g:message code="ticketType.point.label" default="扣点数" />
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
-	<g:textField class="form-control" name="name" maxlength="50" required="" value="${posMachineInstance?.name}"/>
+	<g:field name="point" value="${fieldValue(bean: ticketTypeInstance, field: 'point')}" required=""/>
+	</div>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'accountPoint', 'error')} required form-group">
+	<label for="accountPoint" class="col-sm-2 control-label">
+		<g:message code="ticketType.accountPoint.label" default="结算点数" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-6">
+	<g:field name="accountPoint" value="${fieldValue(bean: ticketTypeInstance, field: 'accountPoint')}" required=""/>
+	</div>
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'accountRatio', 'error')} required form-group">
+	<label for="accountRatio" class="col-sm-2 control-label">
+		<g:message code="ticketType.accountRatio.label" default="结算比例" />
+		<span class="required-indicator">*</span>
+	</label>
+	<div class="col-sm-6">
+	<g:field name="accountRatio" value="${fieldValue(bean: ticketTypeInstance, field: 'accountRatio')}" required=""/>%
 	</div>
 </div>
 
 <g:hiddenField name="supplier.id" value="${uTypeId}" class="many-to-one"/>
-%{--<div class="fieldcontain ${hasErrors(bean: posMachineInstance, field: 'supplier', 'error')} required form-group">--}%
+%{--<div class="fieldcontain ${hasErrors(bean: ticketTypeInstance, field: 'supplierId', 'error')} required form-group">--}%
 	%{--<label for="supplier" class="col-sm-2 control-label">--}%
-		%{--<g:message code="posMachine.supplier.label" default="Supplier" />--}%
+		%{--<g:message code="ticketType.supplier.label" default="供应商 Id" />--}%
 		%{--<span class="required-indicator">*</span>--}%
 	%{--</label>--}%
 	%{--<div class="col-sm-6">--}%
 		%{--<g:select id="type" name="type" from="${supplierType}" optionKey="key" optionValue="value" value="${supplierInstance?.type}" noSelection="[0:'请选择分类']" />--}%
 		%{--<g:select id="parentId" name="parentId" from="${psuppliers}" optionKey="id" optionValue="name" value="${supplierInstance?.parentId}" noSelection="[0:'请选择父供应商']" />--}%
-		%{--<g:select id="supplier" name="supplier.id" from="${csuppliers}" optionKey="id" required="" value="${posMachineInstance?.supplier?.id}" class="many-to-one"/>--}%
+		%{--<g:select id="supplier" name="supplier.id" from="${csuppliers}" optionKey="id" optionValue="name" required="" value="${ticketTypeInstance?.supplier?.id}" noSelection="[0:'请选择供应商']" class="many-to-one"/>--}%
 	%{--</div>--}%
 %{--</div>--}%
 <script>
@@ -39,8 +69,9 @@
         //清空下拉数据
         var supplierType = $("#type option:selected").val();
         if(supplierType == "") return
+        var str = "<option value='0'>请选择父供应商</option>";
+        $("#parentId").html("");
         $("#supplier").html("");
-        var str = "<option>请选择父供应商</option>";
         $.ajax({
             type: "POST",
             url: "${createLink(uri: '/Supplier/ajaxSearchSupplier')}",
