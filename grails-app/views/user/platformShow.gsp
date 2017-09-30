@@ -22,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>显示商户</h3>
+							<h3>商户用户详情</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">

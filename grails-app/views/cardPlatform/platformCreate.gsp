@@ -21,7 +21,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>创建商户</h3>
+							<h3>商户用户创建</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">

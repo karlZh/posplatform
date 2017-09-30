@@ -1,4 +1,3 @@
-
 <%@ page import="posscard.User" %>
 <!DOCTYPE html>
 <html>
@@ -22,28 +21,27 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>修改商户</h3>
+							<h3>商户用户修改</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
 								<div class="message" role="status">${flash.message}</div>
 							</g:if>
-							<g:hasErrors bean="${userInstance}">
+							<g:hasErrors bean="${cardPlatformInstance}">
 								<ul class="errors" role="alert">
-									<g:eachError bean="${userInstance}" var="error">
+									<g:eachError bean="${cardPlatformInstance}" var="error">
 										<li <g:if test="${error in org.springframework.validation.FieldError}">data-field-id="${error.field}"</g:if>><g:message error="${error}"/></li>
 									</g:eachError>
 								</ul>
 							</g:hasErrors>
 							<g:form class="form-horizontal" role="form" action="platformSave" >
-								<g:hiddenField name="id" value="${userInstance?.id}" />
-								<g:hiddenField name="version" value="${userInstance?.version}" />
+								<g:hiddenField name="id" value="${cardPlatformInstance?.id}" />
+								<g:hiddenField name="version" value="${cardPlatformInstance?.version}" />
 								<g:render template="pform"/>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
 										<g:actionSubmit class="btn btn-primary" action="platformUpdate" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-										%{--<g:actionSubmit class="btn btn-danger" action="platformDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />--}%
-									</div>
+										<a href="javascript:history.go(-1)" class="btn btn-default"><g:message code="default.button.chancel.label" args="[entityName]" /></a>									</div>
 								</div>
 							</g:form>
 						</div>

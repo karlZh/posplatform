@@ -53,7 +53,7 @@
                                             %{--<g:link action="show" id="${cardPlatformInstance.id}">${fieldValue(bean: cardPlatformInstance, field: "name")}</g:link>--}%
 											<td>${fieldValue(bean: cardPlatformInstance, field: "name")}</td>
 											
-											<td>${fieldValue(bean: cardPlatformInstance, field: "address")}</td>
+											<td>${fieldValue(bean: cardPlatformInstance, field: "address")} </td>
 											
 											<td><g:formatDate date="${cardPlatformInstance.dateCreated}" /></td>
 										

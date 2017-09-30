@@ -5,7 +5,16 @@ import org.springframework.dao.DataIntegrityViolationException
 class CardPlatformController {
 
     static allowedMethods = [save: "POST", update: "POST"]
-
+    def auth(){
+        if(!session.userId){
+            def originReqParams = [controller:controllerName,action: actionName]
+            originReqParams.putAll(params)
+            session.originReqParams = originReqParams
+            redirect(controller:"userLogin",action: "login")
+            return false
+        }
+    }
+    def beforeInterceptor = [action: this.&auth]
     def index() {
         redirect(action: "list", params: params)
     }
@@ -110,15 +119,15 @@ class CardPlatformController {
     }
     def platformSave() {
         def userInstance = new User(params)
-        def userInfo = User.findAllByUsernameAndPasswordAndUTypeIdAndAccountType(params.username,params.password,params.uTypeId,params.accountType)
+        def userInfo = User.findAllByUsernameAndUTypeIdAndAccountType(params.username,params.uTypeId,params.accountType)
         if(userInfo){
             flash.message = message(code: 'user.platformname.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-            render(view: "platformCreate", model: [userInstance: userInstance,accountType:3,uTypeId: params.uTypeId])
+            render(view: "platformCreate", model: [cardPlatformInstance: userInstance,accountType:3,uTypeId: params.uTypeId])
             return
         }
         userInstance.accountType=3
         if (!userInstance.save(flush: true)) {
-            render(view: "platformCreate", model: [userInstance: userInstance,accountType:3,uTypeId: params.uTypeId])
+            render(view: "platformCreate", model: [cardPlatformInstance: userInstance,accountType:3,uTypeId: params.uTypeId])
             return
         }
 
@@ -132,7 +141,7 @@ class CardPlatformController {
             redirect(action: "platformList")
             return
         }
-   render (view: "platformShow", model:   [userInstance: userInstance, uTypeId: params.uTypeId])
+        [userInstance: userInstance, uTypeId: params.uTypeId]
 
     }
 
@@ -145,7 +154,7 @@ class CardPlatformController {
             return
         }
 
-        [userInstance: userInstance,accountType:3,uTypeId: params.uTypeId]
+        [cardPlatformInstance: userInstance,accountType:3,uTypeId: params.uTypeId]
 
     }
     def platformUpdate(Long id, Long version) {
@@ -155,7 +164,7 @@ class CardPlatformController {
 
             if(userInfo){
                 flash.message = message(code: 'user.platformname.not.unique.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-                render(view: "platformEdit", model: [userInstance: userInstance,accountType:1])
+                render(view: "platformEdit", model: [cardPlatformInstance: userInstance,accountType:1])
                 return
             }
         }
@@ -171,16 +180,15 @@ class CardPlatformController {
                 userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                         [message(code: 'user.label', default: 'User')] as Object[],
                         "Another user has updated this User while you were editing")
-                render(view: "platformEdit", model: [userInstance: userInstance,accountType:3,uTypeId: params.uTypeId])
+                render(view: "platformEdit", model: [cardPlatformInstance: userInstance,accountType:3,uTypeId: params.uTypeId])
                 return
             }
         }
 
         userInstance.properties = params
 
-        def a=params
         if (!userInstance.save(flush: true)) {
-            render(view: "platformEdit", model: [userInstance: userInstance,accountType:3,uTypeId: params.uTypeId])
+            render(view: "platformEdit", model: [cardPlatformInstance: userInstance,accountType:3,uTypeId: params.uTypeId])
             return
         }
 

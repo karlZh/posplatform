@@ -22,7 +22,7 @@
 				<div class="col-sm-12 col-md-12">
 					<div class="block-flat">
 						<div class="header">
-							<h3>显示商户</h3>
+							<h3>商户用户详情</h3>
 						</div>
 						<div class="content">
 							<g:if test="${flash.message}">
@@ -78,23 +78,13 @@
 									<div class="col-sm-2 col-md-2 text-right">
 									<label class="control-label"><g:message code="user.dateCreated.label" default="创建时间" /></label>
 									</div>
-									
 									<div class="col-sm-10 col-md-10"><g:formatDate date="${userInstance?.dateCreated}" /></div>
-									
 								</div>
 							</g:if>
-
-
-
                             <g:hiddenField name="uTypeId" value="${uTypeId}"/>
-							
 							<g:form>
-
-
 								<g:link action="platformEdit"  id="${userInstance?.id}" params="[uTypeId:uTypeId]" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-								%{--<g:actionSubmit class="btn btn-danger" action="platformDelete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />--}%
-						　　　　<g:link action="kcreate"  id="${uTypeId}" class="btn btn-primary">下一步</g:link>
-
+								<g:link action="kcreate"  id="${uTypeId}" class="btn btn-primary">下一步</g:link>
                             </g:form>
 						</div>
 					</div>

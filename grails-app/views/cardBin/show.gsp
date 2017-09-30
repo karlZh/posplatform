@@ -58,7 +58,7 @@
 									<label class="control-label"><g:message code="cardBin.cardbinPlatform.label" default="商户" /></label>
 									</div>
 									
-									<div class="col-sm-10 col-md-10"><g:link controller="cardPlatform" action="show" id="${cardBinInstance?.cardPlatform?.id}">${cardBinInstance?.cardPlatform?.encodeAsHTML()}</g:link></div>
+									<div class="col-sm-10 col-md-10">${cardBinInstance?.cardPlatform?.encodeAsHTML()}</div>
 									
 								</div>
 							</g:if>
@@ -67,9 +67,6 @@
 								<g:hiddenField name="id" value="${cardBinInstance?.id}" />
 								<g:link action="edit"  id="${cardBinInstance?.id}" class="btn btn-primary"><g:message code="default.button.edit.label" default="Edit" /></g:link>
 								<g:actionSubmit class="btn btn-danger" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-                                <Icon type="arrow-return-left"></Icon>
-                                <g:link action="create"  id="${cardBinInstance?.id}" class="btn btn-primary">继续添加卡BIN</g:link>
-
                             </g:form>
 						</div>
 					</div>
