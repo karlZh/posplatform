@@ -5,6 +5,7 @@ class PosMachine {
     String name
     Short  isdelete = 0 //删除状态 0，未删 1：删除
     Date  dateCreated //创建时间
+    Supplier supplier
 
     static constraints = {
         name(nullable: false,unique: true, blank: false, maxSize: 50)
@@ -12,6 +13,7 @@ class PosMachine {
         supplier(nullable: false)
         isdelete(nullable: false)
         dateCreated(display:false)
+        supplier(nullable: false)
     }
     static belongsTo = [supplier: Supplier]
 }

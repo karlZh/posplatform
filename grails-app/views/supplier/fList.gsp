@@ -60,9 +60,9 @@
 										<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
                                             %{--<g:link action="show" id="${supplierInstance.id}"></g:link>--}%
 											<td>${fieldValue(bean: supplierInstance, field: "name")}</td>
-											
+
 											<td>${fieldValue(bean: supplierInstance, field: "ratio")}%</td>
-											
+
 											<td>${fieldValue(bean: supplierInstance, field: "price")}</td>
 											
 											<td>${fieldValue(bean: supplierInstance, field: "address")}</td>

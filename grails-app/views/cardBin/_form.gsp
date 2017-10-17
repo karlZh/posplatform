@@ -16,6 +16,7 @@
 <div class="fieldcontain ${hasErrors(bean: cardBinInstance, field: 'cardbinPlatform', 'error')}  form-group">
 	<label for="cardbinPlatform" class="col-sm-2 control-label">
 		<g:message code="cardBin.cardbinPlatform.label" default="商户" />
+        <span class="required-indicator">*</span>
 	</label>
 	<div class="col-sm-6">
 	<g:select id="cardPlatform" name="cardPlatform.id" from="${posscard.CardPlatform.list()}" optionKey="id" required="" value="${cardBinInstance?.cardPlatform?.id}" class="many-to-one"/>

@@ -3,10 +3,10 @@ package posscard
 import org.springframework.dao.DataIntegrityViolationException
 
 class PosMachineController {
-
-
     static allowedMethods = [save: "POST", update: "POST"]
-    def supplierType = [1:"电影",2:"蛋糕"]
+    def supplierList=new String[1000][1000]
+
+//    def supplierType = [1:"电影",2:"蛋糕"]
     def auth(){
         if(!session.userId){
             def originReqParams = [controller:controllerName,action: actionName]
@@ -16,7 +16,6 @@ class PosMachineController {
             return false
         }
     }
-
     def beforeInterceptor = [action: this.&auth]
     def index() {
         redirect(action: "list", params: params)
@@ -36,7 +35,7 @@ class PosMachineController {
         render (view:'list' , model: [posMachineInstanceList: result, posMachineInstanceTotal:posMachineInstanceTotal])
     }
     def create() {
-        [posMachineInstance: new PosMachine(params),supplierType:supplierType]
+        [posMachineInstance: new PosMachine(params)]
     }
     def save() {
         def posMachineInstance = new PosMachine(params)
@@ -44,7 +43,6 @@ class PosMachineController {
             render(view: "create", model: [posMachineInstance: posMachineInstance])
             return
         }
-
         flash.message = message(code: 'default.created.message', args: [message(code: 'posMachine.label', default: 'PosMachine'), posMachineInstance.id])
         redirect(action: "show", id: posMachineInstance.id)
     }
@@ -66,9 +64,8 @@ class PosMachineController {
             return
         }
         def supplierInstance = Supplier.get(posMachineInstance.supplier.id)//供应商信息
-        def psuppliers = Supplier.findAllByParentIdAndType(0,supplierInstance.type)//分类对应的父供应商列表
-        def csuppliers = Supplier.findAllByParentIdAndType(supplierInstance.parentId,supplierInstance.type)//跟供应商同级的其他供应商
-        [posMachineInstance: posMachineInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers]
+
+        [posMachineInstance: posMachineInstance,supplierInstance: supplierInstance]
     }
     def update(Long id, Long version) {
         def posMachineInstance = PosMachine.get(id)
@@ -85,7 +82,7 @@ class PosMachineController {
                 posMachineInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
                           [message(code: 'posMachine.label', default: 'PosMachine')] as Object[],
                           "Another user has updated this PosMachine while you were editing")
-                render(view: "edit", model: [posMachineInstance: posMachineInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
+                render(view: "edit", model: [posMachineInstance: posMachineInstance,supplierInstance: supplierInstance])
                 return
             }
         }
@@ -93,7 +90,7 @@ class PosMachineController {
         posMachineInstance.properties = params
 
         if (!posMachineInstance.save(flush: true)) {
-            render(view: "edit", model: [posMachineInstance: posMachineInstance,supplierType: supplierType,supplierInstance: supplierInstance,psuppliers: psuppliers,csuppliers: csuppliers])
+            render(view: "edit", model: [posMachineInstance: posMachineInstance,supplierInstance: supplierInstance])
             return
         }
 
@@ -119,4 +116,24 @@ class PosMachineController {
             redirect(action: "show", id: id)
         }
     }
+//    def supplierList(Integer max){
+//        def i
+//        def j
+//
+//        def fSupplier=Supplier.findAllByParentIdAndIsdelete(0,0,[offset:params.offset,max:max])
+//        def zSupplier=Supplier.findAllByParentIdAndIsdelete(fSupplier.parentId,0,[offset:params.offset,max:max])
+//        String [][] list
+//
+//        for( i=0 ;i<=fSupplier.size();i++){
+//            for( j=0;j<=zSupplier.size();j++){
+//          list[i][0]=fSupplier
+//
+//            }
+//        }
+//        list.each {
+//            [SupplierList :list[][]]
+//        }
+
+//
+//    }
 }

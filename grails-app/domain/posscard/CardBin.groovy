@@ -1,7 +1,7 @@
 package posscard
 
 class CardBin {//卡bin
-    String cardbin //卡bin,卡号前6位
+    String cardbin //卡bin
     CardPlatform cardPlatform
     Short   isdelete = 0 //删除状态 0，未删 1：删除
     Date dateCreated//创建时间
